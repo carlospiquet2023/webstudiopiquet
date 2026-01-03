@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <!-- ============================================== -->
+    <!-- META TAGS E CONFIGURAÇÕES BÁSICAS -->
+    <!-- ============================================== -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Studio Micropigmentação - Beleza Permanente</title>
+
+    <meta property="og:title" content="Studio Micropigmentação - Beleza Permanente">
+    <meta property="og:description" content="Micropigmentação de sobrancelhas, lábios e olhos • Técnicas avançadas">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1200">
+    <meta property="og:url" content="https://carlospiquet2023.github.io/webstudiopiquet/micropigmentacao.html">
+    <meta property="og:type" content="website">
+
+    <!-- BIBLIOTECAS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- ============================================== -->
+    <!-- CONFIGURAÇÃO TAILWIND -->
+    <!-- ============================================== -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#9D6B53",    /* Terracota rosado */
+              secondary: "#FDF8F5",  /* Off-white quente */
+              accent: "#7C4A3D",     /* Marrom escuro */
+              dark: "#3D2B24",       /* Marrom profundo */
+              blush: "#E8C4B8",      /* Rosa nude */
+              nude: "#D4A99A",       /* Nude médio */
+              rose: "#C19A8A",       /* Rosa antigo */
+            },
+            fontFamily: {
+              display: ['"Cormorant Garamond"', "serif"],
+              sans: ['"Montserrat"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- ============================================== -->
+    <!-- ESTILOS CSS -->
+    <!-- ============================================== -->
+    <style>
+      html { scroll-behavior: smooth; }
+
+      /* LOADER */
+      #page-loader {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #9D6B53 0%, #7C4A3D 100%);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      
+      .loader-pen {
+        width: 4px;
+        height: 40px;
+        background: linear-gradient(180deg, #FDF8F5, #E8C4B8);
+        border-radius: 2px;
+        animation: pen-draw 1.5s ease-in-out infinite;
+        transform-origin: bottom;
+      }
+      @keyframes pen-draw {
+        0%, 100% { transform: rotate(-15deg); }
+        50% { transform: rotate(15deg); }
+      }
+      .loader-pen::before {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 8px;
+        background: #FDF8F5;
+        border-radius: 50%;
+      }
+
+      /* CURSOR */
+      .custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #9D6B53;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 99998;
+        transition: transform 0.15s ease;
+        mix-blend-mode: difference;
+      }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(157, 107, 83, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+
+      /* SCROLL PROGRESS */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #9D6B53, #E8C4B8, #9D6B53);
+        z-index: 99999;
+      }
+
+      /* GLASS */
+      .glass-nav {
+        background: rgba(253, 248, 245, 0.95);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(157, 107, 83, 0.2);
+      }
+
+      /* CARDS */
+      .card-3d {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-3d:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px -12px rgba(157, 107, 83, 0.3);
+      }
+
+      /* ELEGANT TEXT */
+      .elegant-text {
+        background: linear-gradient(90deg, #9D6B53 0%, #E8C4B8 50%, #9D6B53 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 3s linear infinite;
+      }
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+
+      /* BOTÃO */
+      .btn-animated {
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-animated::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s ease;
+      }
+      .btn-animated:hover::before { left: 100%; }
+
+      /* BACK TO TOP */
+      #back-to-top {
+        position: fixed;
+        bottom: 100px;
+        right: 24px;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #9D6B53, #7C4A3D);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 50;
+      }
+      #back-to-top.visible { opacity: 1; visibility: visible; }
+
+      /* HERO */
+      .hero-overlay {
+        background: linear-gradient(180deg, rgba(61,43,36,0.3) 0%, rgba(61,43,36,0.8) 100%);
+      }
+
+      /* MENU MOBILE */
+      .z-mobile-menu { z-index: 9999; }
+      body.menu-open { overflow: hidden; }
+
+      /* TIME SLOTS */
+      .time-slot {
+        border: 2px solid #9D6B53;
+        color: #9D6B53;
+        transition: all 0.3s ease;
+      }
+      .time-slot:hover { background: linear-gradient(135deg, #9D6B53, #7C4A3D); color: white; border-color: #7C4A3D; }
+      .time-slot.selected { background: linear-gradient(135deg, #9D6B53, #7C4A3D); color: white; }
+
+      /* CALENDAR */
+      .calendar-day {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .calendar-day:hover:not(.disabled) { background-color: #E8C4B8; color: #7C4A3D; transform: scale(1.1); }
+      .calendar-day.selected { background: linear-gradient(135deg, #9D6B53, #7C4A3D); color: white; }
+      .calendar-day.disabled { color: #ccc; cursor: not-allowed; }
+
+      /* BEFORE/AFTER */
+      .comparison-slider {
+        position: relative;
+        overflow: hidden;
+      }
+      .comparison-slider img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* FEATURE TABS */
+      .tab-btn {
+        transition: all 0.3s ease;
+        border-bottom: 3px solid transparent;
+      }
+      .tab-btn.active {
+        color: #9D6B53;
+        border-bottom-color: #9D6B53;
+      }
+    </style>
+  </head>
+
+  <body class="font-sans text-dark bg-secondary selection:bg-primary selection:text-white">
+    
+    <!-- LOADER -->
+    <div id="page-loader">
+      <div class="relative">
+        <div class="loader-pen"></div>
+      </div>
+      <p class="text-white mt-8 font-display text-3xl italic tracking-wide">Carregando...</p>
+    </div>
+
+    <!-- CURSOR -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+
+    <!-- SCROLL PROGRESS -->
+    <div id="scroll-progress"></div>
+
+    <!-- BACK TO TOP -->
+    <button id="back-to-top" aria-label="Voltar ao topo">
+      <i data-lucide="chevron-up" class="w-6 h-6"></i>
+    </button>
+
+    <!-- ============================================== -->
+    <!-- NAVBAR -->
+    <!-- ============================================== -->
+    <header class="fixed w-full top-0 z-50 glass-nav" id="navbar">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-3xl font-display text-accent italic">
+          Micropig<span class="text-primary">mentação</span>
+        </a>
+        
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-dark hover:text-primary transition font-medium">Início</a>
+          <a href="#sobre" class="text-dark hover:text-primary transition font-medium">Sobre</a>
+          <a href="#servicos" class="text-dark hover:text-primary transition font-medium">Serviços</a>
+          <a href="#portfolio" class="text-dark hover:text-primary transition font-medium">Portfólio</a>
+          <a href="#agendamento" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-accent transition shadow-md">Agendar</a>
+        </nav>
+
+        <button id="mobile-menu-btn" class="md:hidden text-dark p-2" aria-label="Menu">
+          <i data-lucide="menu" class="w-8 h-8"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- MENU MOBILE -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-64 h-screen bg-white z-mobile-menu flex flex-col items-center justify-center space-y-8 transform -translate-x-full transition-transform duration-300">
+      <button onclick="toggleMenu()" class="absolute top-4 right-4 text-dark" aria-label="Fechar">
+        <i data-lucide="x" class="w-8 h-8"></i>
+      </button>
+      <a href="#home" class="text-2xl text-dark hover:text-primary font-display italic" onclick="toggleMenu()">Início</a>
+      <a href="#sobre" class="text-2xl text-dark hover:text-primary font-display italic" onclick="toggleMenu()">Sobre</a>
+      <a href="#servicos" class="text-2xl text-dark hover:text-primary font-display italic" onclick="toggleMenu()">Serviços</a>
+      <a href="#portfolio" class="text-2xl text-dark hover:text-primary font-display italic" onclick="toggleMenu()">Portfólio</a>
+      <a href="#agendamento" class="text-2xl font-bold text-primary font-display italic" onclick="toggleMenu()">Agendar</a>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- HERO -->
+    <!-- ============================================== -->
+    <section id="home" class="relative h-screen flex items-center justify-center -mt-20">
+      <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920" alt="Micropigmentação" class="w-full h-full object-cover" />
+        <div class="hero-overlay absolute inset-0"></div>
+      </div>
+      
+      <div class="container mx-auto px-6 relative z-10 text-center text-white">
+        <div data-aos="fade-up" data-aos-delay="300">
+          <span class="inline-block px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-sm mb-6 border border-white/20">
+            ✨ Beleza Permanente & Natural
+          </span>
+        </div>
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-display mb-4 italic" data-aos="fade-up" data-aos-delay="400">
+          <span class="elegant-text">Micropigmentação</span>
+        </h1>
+        <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="500">
+          Sobrancelhas • Lábios • Olhos • Técnicas Exclusivas
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="600">
+          <a href="#agendamento" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg flex items-center justify-center gap-2 hover:scale-105 transition">
+            <i data-lucide="calendar"></i> Agendar Avaliação
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Ver trabalhos no Instagram" class="bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-lg font-medium transition flex items-center justify-center gap-2">
+            <i data-lucide="instagram"></i> Ver Trabalhos
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SOBRE -->
+    <!-- ============================================== -->
+    <section id="sobre" class="py-20 bg-white relative overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="w-full md:w-1/2" data-aos="fade-right">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800" alt="Profissional" class="w-full h-[500px] object-cover rounded-2xl shadow-2xl" />
+              <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-primary to-accent text-white p-6 rounded-2xl shadow-xl">
+                <div class="text-4xl font-display italic">8+</div>
+                <p class="text-sm">Anos de experiência</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="w-full md:w-1/2" data-aos="fade-left">
+            <span class="inline-block px-4 py-1 bg-blush text-accent rounded-full text-sm font-bold uppercase mb-4">Sobre</span>
+            <h2 class="text-3xl md:text-5xl font-display mb-6 text-dark italic">
+              Arte em <span class="text-primary">Micropigmentação</span>
+            </h2>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Especialista em micropigmentação com técnicas avançadas que realçam sua beleza natural. Cada procedimento é personalizado para harmonizar com suas características únicas, garantindo resultados sofisticados e duradouros.
+            </p>
+            <p class="text-gray-600 mb-8 leading-relaxed">
+              Utilizo pigmentos de alta qualidade e equipamentos modernos, sempre priorizando a segurança e o conforto das minhas clientes.
+            </p>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex items-center gap-3 p-4 bg-secondary rounded-xl">
+                <div class="bg-primary/10 p-3 rounded-full text-primary"><i data-lucide="award" class="w-6 h-6"></i></div>
+                <span class="font-medium">Certificada</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-secondary rounded-xl">
+                <div class="bg-primary/10 p-3 rounded-full text-primary"><i data-lucide="sparkles" class="w-6 h-6"></i></div>
+                <span class="font-medium">Técnicas Atuais</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-secondary rounded-xl">
+                <div class="bg-primary/10 p-3 rounded-full text-primary"><i data-lucide="heart" class="w-6 h-6"></i></div>
+                <span class="font-medium">Resultado Natural</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-secondary rounded-xl">
+                <div class="bg-primary/10 p-3 rounded-full text-primary"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+                <span class="font-medium">Biossegurança</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- ESTATÍSTICAS -->
+    <!-- ============================================== -->
+    <section class="py-16 bg-gradient-to-r from-dark via-accent to-dark">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+          <div data-aos="fade-up" data-aos-delay="100">
+            <div class="text-4xl md:text-5xl font-display italic mb-2">2500+</div>
+            <p class="text-white/80">Procedimentos</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="200">
+            <div class="text-4xl md:text-5xl font-display italic mb-2">8</div>
+            <p class="text-white/80">Anos de Experiência</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="300">
+            <div class="text-4xl md:text-5xl font-display italic mb-2">15+</div>
+            <p class="text-white/80">Certificações</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="400">
+            <div class="text-4xl md:text-5xl font-display italic mb-2">100%</div>
+            <p class="text-white/80">Satisfação</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SERVIÇOS -->
+    <!-- ============================================== -->
+    <section id="servicos" class="py-20 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-1 bg-white text-primary rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Serviços</span>
+          <h2 class="text-3xl md:text-5xl font-display text-dark italic" data-aos="fade-up" data-aos-delay="100">
+            Nossos <span class="elegant-text">Procedimentos</span>
+          </h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Sobrancelhas Fio a Fio -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
+              <i data-lucide="eye" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-xl font-display mb-3 italic">Sobrancelha Fio a Fio</h3>
+            <p class="text-gray-600 mb-4">Técnica realista que imita os fios naturais para um resultado perfeito.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 350</span>
+              <span class="text-sm text-gray-500">2-3h</span>
+            </div>
+            <button onclick="preSelectService('Sobrancelha Fio a Fio')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+
+          <!-- Sobrancelhas Shadow -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+            <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">POPULAR</div>
+            <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
+              <i data-lucide="sparkle" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-xl font-display mb-3 italic">Sobrancelha Shadow</h3>
+            <p class="text-gray-600 mb-4">Efeito esfumado que dá volume e preenchimento natural.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 400</span>
+              <span class="text-sm text-gray-500">2-3h</span>
+            </div>
+            <button onclick="preSelectService('Sobrancelha Shadow')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+
+          <!-- Lábios Neutralização -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
+              <i data-lucide="heart" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-xl font-display mb-3 italic">Lábios Neutralização</h3>
+            <p class="text-gray-600 mb-4">Corrige a coloração escura dos lábios, uniformizando o tom.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 500</span>
+              <span class="text-sm text-gray-500">2-3h</span>
+            </div>
+            <button onclick="preSelectService('Lábios Neutralização')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+
+          <!-- Lábios Aquarela -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
+              <i data-lucide="palette" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-xl font-display mb-3 italic">Lábios Aquarela</h3>
+            <p class="text-gray-600 mb-4">Efeito suave e natural de lábios corados e saudáveis.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 550</span>
+              <span class="text-sm text-gray-500">2-3h</span>
+            </div>
+            <button onclick="preSelectService('Lábios Aquarela')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+
+          <!-- Olhos Delineado -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="500">
+            <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
+              <i data-lucide="pen-tool" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-xl font-display mb-3 italic">Delineado Permanente</h3>
+            <p class="text-gray-600 mb-4">Olhar marcante e definido todos os dias, sem esforço.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 450</span>
+              <span class="text-sm text-gray-500">1-2h</span>
+            </div>
+            <button onclick="preSelectService('Delineado Permanente')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+
+          <!-- Retoque -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="600">
+            <div class="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
+              <i data-lucide="refresh-cw" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-xl font-display mb-3 italic">Retoque / Manutenção</h3>
+            <p class="text-gray-600 mb-4">Manutenção após 30 dias para fixação perfeita do pigmento.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 150</span>
+              <span class="text-sm text-gray-500">1-2h</span>
+            </div>
+            <button onclick="preSelectService('Retoque Micropigmentação')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- PORTFÓLIO -->
+    <!-- ============================================== -->
+    <section id="portfolio" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1 bg-blush text-accent rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Portfólio</span>
+          <h2 class="text-3xl md:text-5xl font-display text-dark italic" data-aos="fade-up" data-aos-delay="100">
+            Resultados <span class="text-primary">Reais</span>
+          </h2>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="100">
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Sobrancelha" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-display italic">Fio a Fio</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="200">
+            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Lábios" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-display italic">Lábios Aquarela</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="300">
+            <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Shadow" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-display italic">Shadow</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="400">
+            <img src="https://images.unsplash.com/photo-1515688594390-b649af70d282?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Delineado" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-display italic">Delineado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- DEPOIMENTOS -->
+    <!-- ============================================== -->
+    <section class="py-20 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1 bg-white text-primary rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Depoimentos</span>
+          <h2 class="text-3xl md:text-5xl font-display text-dark italic" data-aos="fade-up" data-aos-delay="100">
+            Clientes <span class="text-primary">Felizes</span>
+          </h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="glass-card p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex text-primary mb-4 gap-1">
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"Minhas sobrancelhas ficaram perfeitas! Muito naturais e simétricas. Profissional incrível!"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">MP</div>
+              <div>
+                <h5 class="font-bold text-dark">Mariana Pereira</h5>
+                <p class="text-sm text-gray-500">Sobrancelha Fio a Fio</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex text-primary mb-4 gap-1">
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"Fiz a neutralização labial e estou apaixonada! Meus lábios ficaram lindos e uniformes."</p>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">RA</div>
+              <div>
+                <h5 class="font-bold text-dark">Roberta Alves</h5>
+                <p class="text-sm text-gray-500">Neutralização Labial</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+            <div class="flex text-primary mb-4 gap-1">
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"O delineado mudou meu olhar! Acordar já maquiada é maravilhoso. Super recomendo!"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">JC</div>
+              <div>
+                <h5 class="font-bold text-dark">Juliana Costa</h5>
+                <p class="text-sm text-gray-500">Delineado Permanente</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- AGENDAMENTO -->
+    <!-- ============================================== -->
+    <section id="agendamento" class="py-20 bg-gradient-to-br from-primary/10 via-white to-accent/10">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1 bg-primary text-white rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Agende</span>
+          <h2 class="text-3xl md:text-5xl font-display text-dark italic" data-aos="fade-up" data-aos-delay="100">
+            Marque sua <span class="elegant-text">Avaliação</span>
+          </h2>
+        </div>
+        
+        <div class="max-w-4xl mx-auto">
+          <div class="glass-card rounded-3xl shadow-2xl overflow-hidden">
+            <div class="grid md:grid-cols-2">
+              <!-- Calendário -->
+              <div class="p-8 bg-gradient-to-br from-primary to-accent text-white">
+                <h3 class="text-2xl font-display mb-6 italic">Escolha a Data</h3>
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-4">
+                  <div class="flex justify-between items-center mb-4">
+                    <button onclick="prevMonth()" aria-label="Mês anterior" class="p-2 hover:bg-white/20 rounded-full transition">
+                      <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <span id="currentMonth" class="font-bold text-lg"></span>
+                    <button onclick="nextMonth()" aria-label="Próximo mês" class="p-2 hover:bg-white/20 rounded-full transition">
+                      <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                  </div>
+                  <div class="grid grid-cols-7 gap-1 text-center text-sm mb-2">
+                    <span class="font-bold">D</span><span class="font-bold">S</span><span class="font-bold">T</span>
+                    <span class="font-bold">Q</span><span class="font-bold">Q</span><span class="font-bold">S</span><span class="font-bold">S</span>
+                  </div>
+                  <div id="calendarDays" class="grid grid-cols-7 gap-1"></div>
+                </div>
+              </div>
+
+              <!-- Formulário -->
+              <div class="p-8">
+                <div class="mb-6">
+                  <label class="block text-sm font-bold text-dark mb-2" for="serviceSelect">Procedimento</label>
+                  <select id="serviceSelect" aria-label="Selecione o procedimento" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-primary outline-none transition">
+                    <option value="">Selecione o procedimento</option>
+                    <option value="Sobrancelha Fio a Fio">Sobrancelha Fio a Fio - R$ 350</option>
+                    <option value="Sobrancelha Shadow">Sobrancelha Shadow - R$ 400</option>
+                    <option value="Lábios Neutralização">Lábios Neutralização - R$ 500</option>
+                    <option value="Lábios Aquarela">Lábios Aquarela - R$ 550</option>
+                    <option value="Delineado Permanente">Delineado Permanente - R$ 450</option>
+                    <option value="Retoque Micropigmentação">Retoque - R$ 150</option>
+                  </select>
+                </div>
+
+                <div class="mb-6">
+                  <label class="block text-sm font-bold text-dark mb-2">Horário para <span id="selectedDateDisplay" class="text-primary">...</span></label>
+                  <div id="timeSlotsContainer" class="grid grid-cols-3 gap-2"></div>
+                </div>
+
+                <div class="mb-6">
+                  <label class="block text-sm font-bold text-dark mb-2">Seu Nome</label>
+                  <input type="text" id="clientName" placeholder="Digite seu nome" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-primary outline-none transition">
+                </div>
+
+                <button onclick="finalizeBooking()" id="btnAgendar" disabled class="btn-animated w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-4 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-3">
+                  <i data-lucide="message-circle" class="w-6 h-6"></i> Confirmar via WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- FOOTER -->
+    <!-- ============================================== -->
+    <footer class="bg-dark text-gray-400 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div class="text-center md:text-left">
+            <div class="text-2xl font-display text-white mb-4 italic">
+              Micropig<span class="text-primary">mentação</span>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">Beleza permanente com técnicas avançadas e resultados naturais.</p>
+            <div class="flex justify-center md:justify-start gap-4">
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition">
+                <i data-lucide="instagram" class="w-5 h-5"></i>
+              </a>
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-green-500 transition">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="text-center">
+            <h4 class="font-bold text-white mb-4">Links</h4>
+            <nav class="flex flex-col gap-2">
+              <a href="#home" class="hover:text-primary transition">Início</a>
+              <a href="#sobre" class="hover:text-primary transition">Sobre</a>
+              <a href="#servicos" class="hover:text-primary transition">Serviços</a>
+              <a href="#agendamento" class="hover:text-primary transition">Agendar</a>
+            </nav>
+          </div>
+          
+          <div class="text-center md:text-right">
+            <h4 class="font-bold text-white mb-4">Contato</h4>
+            <div class="flex flex-col gap-2 text-sm">
+              <p class="flex items-center justify-center md:justify-end gap-2">
+                <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>
+                Seu Bairro - Cidade
+              </p>
+              <p class="flex items-center justify-center md:justify-end gap-2">
+                <i data-lucide="phone" class="w-4 h-4 text-primary"></i>
+                (21) 97743-4614
+              </p>
+              <p class="flex items-center justify-center md:justify-end gap-2">
+                <i data-lucide="clock" class="w-4 h-4 text-primary"></i>
+                Seg-Sáb: 09h - 18h
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-800 pt-8 text-center">
+          <p class="text-sm text-gray-500">© 2026 Studio Micropigmentação. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING -->
+    <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition z-50">
+      <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <!-- ============================================== -->
+    <!-- SCRIPTS -->
+    <!-- ============================================== -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+        AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true });
+        setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 1500);
+        initCustomCursor();
+        initScrollProgress();
+        initBackToTop();
+        initCalendar();
+      });
+
+      function initCustomCursor() {
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', e => {
+          cursor.style.left = e.clientX - 10 + 'px';
+          cursor.style.top = e.clientY - 10 + 'px';
+        });
+        document.querySelectorAll('a, button').forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+      }
+
+      function initScrollProgress() {
+        window.addEventListener('scroll', () => {
+          const progress = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
+          document.getElementById('scroll-progress').style.width = progress + '%';
+        });
+      }
+
+      function initBackToTop() {
+        const btn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 500));
+        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      }
+
+      function toggleMenu() {
+        document.getElementById('mobile-menu').classList.toggle('-translate-x-full');
+        document.body.classList.toggle('menu-open');
+      }
+      document.getElementById('mobile-menu-btn').addEventListener('click', toggleMenu);
+
+      let currentDate = new Date();
+      let selectedDate = null;
+      let selectedTime = null;
+
+      function initCalendar() { renderCalendar(); }
+
+      function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+        let html = '';
+        for (let i = 0; i < firstDay; i++) html += '<div></div>';
+        for (let day = 1; day <= daysInMonth; day++) {
+          const date = new Date(year, month, day);
+          const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+          const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+          html += `<div class="calendar-day rounded-lg ${isPast ? 'disabled' : ''} ${isSelected ? 'selected' : ''}" onclick="${isPast ? '' : `selectDate(${year}, ${month}, ${day})`}">${day}</div>`;
+        }
+        document.getElementById('calendarDays').innerHTML = html;
+      }
+
+      function prevMonth() { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); }
+      function nextMonth() { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); }
+
+      function selectDate(year, month, day) {
+        selectedDate = new Date(year, month, day);
+        renderCalendar();
+        document.getElementById('selectedDateDisplay').textContent = selectedDate.toLocaleDateString('pt-BR');
+        renderTimeSlots();
+        checkFormValidity();
+      }
+
+      function renderTimeSlots() {
+        const times = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
+        document.getElementById('timeSlotsContainer').innerHTML = times.map(time => 
+          `<button type="button" class="time-slot p-3 rounded-lg text-center" onclick="selectTime('${time}', this)"><span>${time}</span></button>`
+        ).join('');
+      }
+
+      function selectTime(time, element) {
+        document.querySelectorAll('.time-slot').forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+        selectedTime = time;
+        checkFormValidity();
+      }
+
+      function preSelectService(serviceName) {
+        document.getElementById('serviceSelect').value = serviceName;
+        document.getElementById('agendamento').scrollIntoView({ behavior: 'smooth' });
+        checkFormValidity();
+      }
+
+      document.getElementById('serviceSelect').addEventListener('change', checkFormValidity);
+      document.getElementById('clientName').addEventListener('input', checkFormValidity);
+
+      function checkFormValidity() {
+        const service = document.getElementById('serviceSelect').value;
+        const name = document.getElementById('clientName').value;
+        document.getElementById('btnAgendar').disabled = !(service && selectedDate && selectedTime && name.trim());
+      }
+
+      function finalizeBooking() {
+        const service = document.getElementById('serviceSelect').value;
+        const name = document.getElementById('clientName').value;
+        const dateStr = selectedDate.toLocaleDateString('pt-BR');
+        const message = `Olá! ✨ Gostaria de agendar uma avaliação.%0A%0A*👤 Nome:* ${name}%0A*💄 Procedimento:* ${service}%0A*📅 Data:* ${dateStr}%0A*⏰ Horário:* ${selectedTime}%0A%0AAguardo confirmação! 💕`;
+        window.open(`https://wa.me/5521977434614?text=${message}`, '_blank');
+      }
+    </script>
+  </body>
+</html>

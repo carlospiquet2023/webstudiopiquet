@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <!-- ============================================== -->
+    <!-- META TAGS E CONFIGURAÇÕES BÁSICAS -->
+    <!-- Altere aqui: título, descrição e imagens de compartilhamento -->
+    <!-- ============================================== -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- TÍTULO DA PÁGINA - Aparece na aba do navegador -->
+    <title>Studio Massoterapia - Bem-estar e Relaxamento</title>
+
+    <!-- OPEN GRAPH - Configurações para compartilhamento em redes sociais -->
+    <meta property="og:title" content="Studio Massoterapia - Bem-estar e Relaxamento">
+    <meta property="og:description" content="Massagens terapêuticas e relaxantes • Alívio do estresse e dores">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1200">
+    <meta property="og:url" content="https://carlospiquet2023.github.io/webstudiopiquet/massoterapia.html">
+    <meta property="og:type" content="website">
+
+    <!-- ============================================== -->
+    <!-- BIBLIOTECAS EXTERNAS (CDN) -->
+    <!-- ============================================== -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FONTES DO GOOGLE -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- LUCIDE ICONS -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- AOS - Animate On Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- ============================================== -->
+    <!-- CONFIGURAÇÃO DO TAILWIND CSS -->
+    <!-- ============================================== -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            /* ========================================= */
+            /* PALETA DE CORES - ALTERE AQUI AS CORES   */
+            /* ========================================= */
+            colors: {
+              primary: "#7C9A92",    /* Verde sálvia - cor principal */
+              secondary: "#F5F1EB",  /* Bege claro - fundos */
+              accent: "#4A6670",     /* Azul petróleo - destaques */
+              dark: "#2D3436",       /* Cinza escuro - textos */
+              cream: "#FDF9F3",      /* Creme - backgrounds */
+              sage: "#B4C4BC",       /* Verde claro - elementos suaves */
+              stone: "#9A8C7B",      /* Marrom pedra - detalhes */
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Raleway"', "sans-serif"],
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-slow': 'pulse 3s ease-in-out infinite',
+              'shimmer': 'shimmer 2s linear infinite',
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- ============================================== -->
+    <!-- ESTILOS CSS PERSONALIZADOS -->
+    <!-- ============================================== -->
+    <style>
+      html { scroll-behavior: smooth; }
+
+      /* ===== LOADER ===== */
+      #page-loader {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #7C9A92 0%, #4A6670 100%);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      #page-loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .loader-hands {
+        width: 80px;
+        height: 80px;
+        position: relative;
+      }
+      .loader-hands::before,
+      .loader-hands::after {
+        content: '🤲';
+        position: absolute;
+        font-size: 2.5rem;
+        animation: hands-massage 1.5s ease-in-out infinite;
+      }
+      .loader-hands::before { left: 0; animation-delay: 0s; }
+      .loader-hands::after { right: 0; animation-delay: 0.5s; }
+      @keyframes hands-massage {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-10px) scale(1.1); }
+      }
+
+      /* ===== CURSOR PERSONALIZADO ===== */
+      .custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #7C9A92;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 99998;
+        transition: transform 0.15s ease, background 0.15s ease;
+        mix-blend-mode: difference;
+      }
+      .custom-cursor.hover {
+        transform: scale(1.5);
+        background: rgba(124, 154, 146, 0.3);
+      }
+      @media (max-width: 768px) {
+        .custom-cursor { display: none; }
+      }
+
+      /* ===== PARTÍCULAS ===== */
+      #particles-container {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+      }
+      .leaf {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #7C9A92;
+        border-radius: 0 50% 50% 50%;
+        transform: rotate(45deg);
+        animation: leaf-fall 10s linear infinite;
+        opacity: 0;
+      }
+      @keyframes leaf-fall {
+        0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+        10% { opacity: 0.6; }
+        90% { opacity: 0.6; }
+        100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+      }
+
+      /* ===== SCROLL PROGRESS BAR ===== */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #7C9A92, #4A6670, #B4C4BC);
+        z-index: 99999;
+        transition: width 0.1s ease;
+      }
+
+      /* ===== GLASS MORPHISM ===== */
+      .glass-nav {
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(124, 154, 146, 0.2);
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(124, 154, 146, 0.2);
+      }
+
+      /* ===== EFEITOS DE HOVER ===== */
+      .card-3d {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+      }
+      .card-3d:hover {
+        transform: translateY(-10px) rotateX(5deg);
+        box-shadow: 0 25px 50px -12px rgba(124, 154, 146, 0.25);
+      }
+
+      /* ===== TEXTO COM SHIMMER ===== */
+      .shimmer-text {
+        background: linear-gradient(90deg, #7C9A92 0%, #B4C4BC 50%, #7C9A92 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 3s linear infinite;
+      }
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+
+      /* ===== BOTÃO ANIMADO ===== */
+      .btn-animated {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .btn-animated::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s ease;
+      }
+      .btn-animated:hover::before {
+        left: 100%;
+      }
+
+      /* ===== BACK TO TOP ===== */
+      #back-to-top {
+        position: fixed;
+        bottom: 100px;
+        right: 24px;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #7C9A92, #4A6670);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        z-index: 50;
+        box-shadow: 0 4px 15px rgba(124, 154, 146, 0.4);
+      }
+      #back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      /* ===== HERO OVERLAY ===== */
+      .hero-overlay {
+        background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+      }
+
+      /* ===== MENU MOBILE ===== */
+      .z-mobile-menu { z-index: 9999; }
+      body.menu-open { overflow: hidden; }
+
+      /* ===== SERVIÇOS CARDS ===== */
+      .service-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #7C9A92, #4A6670);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 10px 30px rgba(124, 154, 146, 0.3);
+        transition: all 0.3s ease;
+      }
+      .card-3d:hover .service-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      /* ===== TIME SLOTS ===== */
+      .time-slot {
+        border: 2px solid #7C9A92;
+        color: #7C9A92;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .time-slot::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, #7C9A92, #4A6670);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      .time-slot:hover::before { transform: translateX(0); }
+      .time-slot:hover { color: white; border-color: #4A6670; }
+      .time-slot span { position: relative; z-index: 1; }
+      .time-slot.selected {
+        background: linear-gradient(135deg, #7C9A92, #4A6670);
+        color: white;
+        border-color: transparent;
+      }
+
+      /* ===== CALENDAR ===== */
+      .calendar-day {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .calendar-day:hover:not(.disabled) {
+        background-color: #B4C4BC;
+        color: white;
+        transform: scale(1.1);
+      }
+      .calendar-day.selected {
+        background: linear-gradient(135deg, #7C9A92, #4A6670);
+        color: white;
+        transform: scale(1.1);
+      }
+      .calendar-day.disabled {
+        color: #ccc;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+
+  <!-- ============================================== -->
+  <!-- INÍCIO DO CORPO DA PÁGINA -->
+  <!-- ============================================== -->
+  <body class="font-sans text-dark bg-cream selection:bg-primary selection:text-white">
+    
+    <!-- LOADER -->
+    <div id="page-loader">
+      <div class="loader-hands"></div>
+      <p class="text-white mt-6 font-serif text-xl tracking-widest">Preparando seu momento...</p>
+    </div>
+
+    <!-- CURSOR PERSONALIZADO -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div id="scroll-progress"></div>
+
+    <!-- PARTÍCULAS (folhas) -->
+    <div id="particles-container"></div>
+
+    <!-- BACK TO TOP -->
+    <button id="back-to-top" aria-label="Voltar ao topo">
+      <i data-lucide="chevron-up" class="w-6 h-6"></i>
+    </button>
+
+    <!-- ============================================== -->
+    <!-- NAVBAR -->
+    <!-- ============================================== -->
+    <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300" id="navbar">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl md:text-3xl font-serif font-bold text-accent tracking-wide">
+          Studio<span class="text-primary">Zen</span>
+        </a>
+        
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-dark hover:text-primary transition font-medium">Início</a>
+          <a href="#sobre" class="text-dark hover:text-primary transition font-medium">Sobre</a>
+          <a href="#servicos" class="text-dark hover:text-primary transition font-medium">Tratamentos</a>
+          <a href="#galeria" class="text-dark hover:text-primary transition font-medium">Galeria</a>
+          <a href="#agendamento" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-accent transition transform hover:scale-105 shadow-md">Agendar</a>
+        </nav>
+
+        <button id="mobile-menu-btn" class="md:hidden text-dark p-2" aria-label="Menu">
+          <i data-lucide="menu" class="w-8 h-8"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- MENU MOBILE -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-64 h-screen bg-white z-mobile-menu flex flex-col items-center justify-center space-y-8 transform -translate-x-full transition-transform duration-300">
+      <button onclick="toggleMenu()" class="absolute top-4 right-4 text-dark" aria-label="Fechar">
+        <i data-lucide="x" class="w-8 h-8"></i>
+      </button>
+      <a href="#home" class="text-2xl text-dark hover:text-primary font-serif" onclick="toggleMenu()">Início</a>
+      <a href="#sobre" class="text-2xl text-dark hover:text-primary font-serif" onclick="toggleMenu()">Sobre</a>
+      <a href="#servicos" class="text-2xl text-dark hover:text-primary font-serif" onclick="toggleMenu()">Tratamentos</a>
+      <a href="#galeria" class="text-2xl text-dark hover:text-primary font-serif" onclick="toggleMenu()">Galeria</a>
+      <a href="#agendamento" class="text-2xl font-bold text-primary font-serif" onclick="toggleMenu()">Agendar</a>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- HERO SECTION -->
+    <!-- ============================================== -->
+    <section id="home" class="relative h-[90vh] md:h-screen flex items-center justify-center -mt-20">
+      <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1920" alt="Massagem relaxante" class="w-full h-full object-cover" />
+        <div class="hero-overlay absolute inset-0"></div>
+      </div>
+      
+      <div class="container mx-auto px-6 relative z-10 text-center text-white">
+        <div data-aos="fade-up" data-aos-delay="300">
+          <span class="inline-block px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-sm mb-6 border border-white/20">
+            🧘 Bem-estar e Equilíbrio
+          </span>
+        </div>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-4" data-aos="fade-up" data-aos-delay="400">
+          <span class="shimmer-text">Studio Zen</span>
+        </h1>
+        <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="500">
+          Massoterapia Profissional • Relaxamento e Alívio do Estresse
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="600">
+          <a href="#agendamento" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-full text-lg font-medium shadow-lg flex items-center justify-center gap-2 hover:scale-105 transition">
+            <i data-lucide="calendar"></i> Agendar Sessão
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-lg font-medium transition flex items-center justify-center gap-2">
+            <i data-lucide="instagram"></i> Instagram
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 hidden md:block" data-aos="fade-up" data-aos-delay="800">
+        <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+          <div class="w-1.5 h-3 bg-white rounded-full mt-2 animate-bounce"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO SOBRE -->
+    <!-- ============================================== -->
+    <section id="sobre" class="py-20 bg-white relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-x-1/2"></div>
+      
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="w-full md:w-1/2" data-aos="fade-right">
+            <div class="relative">
+              <div class="absolute top-6 -left-6 w-full h-full border-2 border-primary rounded-2xl hidden md:block"></div>
+              <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=800" alt="Terapeuta" class="relative z-10 w-full h-[400px] object-cover rounded-2xl shadow-2xl" />
+            </div>
+          </div>
+          
+          <div class="w-full md:w-1/2" data-aos="fade-left">
+            <span class="inline-block px-4 py-1 bg-sage/50 text-accent rounded-full text-sm font-bold uppercase mb-4">Sobre Nós</span>
+            <h2 class="text-3xl md:text-5xl font-serif font-bold mb-6 text-dark">
+              Cuidando do seu <span class="text-primary">bem-estar</span>
+            </h2>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Com mais de 8 anos de experiência em massoterapia, oferecemos tratamentos personalizados para aliviar dores, reduzir o estresse e promover o equilíbrio entre corpo e mente.
+            </p>
+            <p class="text-gray-600 mb-8 leading-relaxed">
+              Utilizamos técnicas consagradas como Massagem Relaxante, Shiatsu, Pedras Quentes e Drenagem Linfática, sempre com produtos de alta qualidade e ambiente acolhedor.
+            </p>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex items-center gap-3 p-4 bg-cream rounded-xl">
+                <div class="bg-primary/10 p-3 rounded-full text-primary"><i data-lucide="award" class="w-6 h-6"></i></div>
+                <span class="font-medium">Certificada</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-cream rounded-xl">
+                <div class="bg-primary/10 p-3 rounded-full text-primary"><i data-lucide="heart" class="w-6 h-6"></i></div>
+                <span class="font-medium">Ambiente Zen</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-cream rounded-xl">
+                <div class="bg-primary/10 p-3 rounded-full text-primary"><i data-lucide="sparkles" class="w-6 h-6"></i></div>
+                <span class="font-medium">Óleos Premium</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-cream rounded-xl">
+                <div class="bg-primary/10 p-3 rounded-full text-primary"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+                <span class="font-medium">Higiene Total</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- ESTATÍSTICAS -->
+    <!-- ============================================== -->
+    <section class="py-16 bg-gradient-to-r from-accent via-primary to-accent relative overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+          <div data-aos="fade-up" data-aos-delay="100">
+            <div class="text-4xl md:text-5xl font-bold mb-2">2000+</div>
+            <p class="text-white/80">Sessões Realizadas</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="200">
+            <div class="text-4xl md:text-5xl font-bold mb-2">8</div>
+            <p class="text-white/80">Anos de Experiência</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="300">
+            <div class="text-4xl md:text-5xl font-bold mb-2">6</div>
+            <p class="text-white/80">Técnicas Especializadas</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="400">
+            <div class="text-4xl md:text-5xl font-bold mb-2">100%</div>
+            <p class="text-white/80">Satisfação</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SEÇÃO SERVIÇOS/TRATAMENTOS -->
+    <!-- ============================================== -->
+    <section id="servicos" class="py-20 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-1 bg-white text-primary rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Tratamentos</span>
+          <h2 class="text-3xl md:text-5xl font-serif font-bold text-dark" data-aos="fade-up" data-aos-delay="100">
+            Nossos <span class="shimmer-text">Serviços</span>
+          </h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Massagem Relaxante -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-icon mx-auto">
+              <i data-lucide="hand" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-serif font-bold mb-3">Massagem Relaxante</h3>
+            <p class="text-gray-600 mb-4">Técnicas suaves para aliviar tensões e promover relaxamento profundo.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 120</span>
+              <span class="text-sm text-gray-500">60 min</span>
+            </div>
+            <button onclick="preSelectService('Massagem Relaxante')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+
+          <!-- Shiatsu -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-icon mx-auto">
+              <i data-lucide="target" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-serif font-bold mb-3">Shiatsu</h3>
+            <p class="text-gray-600 mb-4">Pressão em pontos específicos para equilibrar a energia vital do corpo.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 140</span>
+              <span class="text-sm text-gray-500">60 min</span>
+            </div>
+            <button onclick="preSelectService('Shiatsu')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+
+          <!-- Pedras Quentes -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-icon mx-auto">
+              <i data-lucide="flame" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-serif font-bold mb-3">Pedras Quentes</h3>
+            <p class="text-gray-600 mb-4">Pedras vulcânicas aquecidas para relaxamento muscular profundo.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 160</span>
+              <span class="text-sm text-gray-500">75 min</span>
+            </div>
+            <button onclick="preSelectService('Pedras Quentes')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+
+          <!-- Drenagem Linfática -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-icon mx-auto">
+              <i data-lucide="droplets" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-serif font-bold mb-3">Drenagem Linfática</h3>
+            <p class="text-gray-600 mb-4">Elimina toxinas e reduz inchaço com movimentos suaves e ritmados.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 130</span>
+              <span class="text-sm text-gray-500">60 min</span>
+            </div>
+            <button onclick="preSelectService('Drenagem Linfática')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+
+          <!-- Massagem Desportiva -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-icon mx-auto">
+              <i data-lucide="dumbbell" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-serif font-bold mb-3">Massagem Desportiva</h3>
+            <p class="text-gray-600 mb-4">Para atletas e praticantes de atividade física, recuperação muscular.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 150</span>
+              <span class="text-sm text-gray-500">60 min</span>
+            </div>
+            <button onclick="preSelectService('Massagem Desportiva')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+
+          <!-- Reflexologia -->
+          <div class="card-3d glass-card p-8 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-icon mx-auto">
+              <i data-lucide="footprints" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-serif font-bold mb-3">Reflexologia Podal</h3>
+            <p class="text-gray-600 mb-4">Estímulo de pontos nos pés que refletem em todo o organismo.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+              <span class="text-2xl font-bold text-primary">R$ 100</span>
+              <span class="text-sm text-gray-500">45 min</span>
+            </div>
+            <button onclick="preSelectService('Reflexologia Podal')" class="btn-animated w-full mt-4 bg-gradient-to-r from-primary to-accent text-white py-3 rounded-full font-bold">
+              Agendar
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- GALERIA -->
+    <!-- ============================================== -->
+    <section id="galeria" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1 bg-sage/50 text-accent rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Ambiente</span>
+          <h2 class="text-3xl md:text-5xl font-serif font-bold text-dark" data-aos="fade-up" data-aos-delay="100">
+            Nosso <span class="text-primary">Espaço</span>
+          </h2>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="100">
+            <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Ambiente" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-medium">Sala de Massagem</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="200">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Pedras" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-medium">Pedras Quentes</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="300">
+            <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Óleos" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-medium">Óleos Essenciais</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="400">
+            <img src="https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Recepção" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-medium">Ambiente Zen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- DEPOIMENTOS -->
+    <!-- ============================================== -->
+    <section class="py-20 bg-cream">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1 bg-white text-primary rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Depoimentos</span>
+          <h2 class="text-3xl md:text-5xl font-serif font-bold text-dark" data-aos="fade-up" data-aos-delay="100">
+            O que dizem nossos <span class="text-primary">clientes</span>
+          </h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="glass-card p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex text-yellow-400 mb-4 gap-1">
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"Ambiente maravilhoso e atendimento impecável. A massagem relaxante me renovou completamente!"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">RS</div>
+              <div>
+                <h5 class="font-bold text-dark">Renata Silva</h5>
+                <p class="text-sm text-gray-500">Cliente há 2 anos</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex text-yellow-400 mb-4 gap-1">
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"Sofria com dores nas costas há anos. Depois de algumas sessões de Shiatsu, minha vida mudou!"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">MA</div>
+              <div>
+                <h5 class="font-bold text-dark">Marcos Almeida</h5>
+                <p class="text-sm text-gray-500">Cliente há 1 ano</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+            <div class="flex text-yellow-400 mb-4 gap-1">
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"A drenagem linfática me ajudou muito na retenção de líquidos. Recomendo muito!"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">JC</div>
+              <div>
+                <h5 class="font-bold text-dark">Juliana Costa</h5>
+                <p class="text-sm text-gray-500">Cliente há 6 meses</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- AGENDAMENTO -->
+    <!-- ============================================== -->
+    <section id="agendamento" class="py-20 bg-gradient-to-br from-primary/10 via-white to-accent/10">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1 bg-primary text-white rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Agende Online</span>
+          <h2 class="text-3xl md:text-5xl font-serif font-bold text-dark" data-aos="fade-up" data-aos-delay="100">
+            Reserve sua <span class="shimmer-text">Sessão</span>
+          </h2>
+        </div>
+        
+        <div class="max-w-4xl mx-auto">
+          <div class="glass-card rounded-3xl shadow-2xl overflow-hidden">
+            <div class="grid md:grid-cols-2">
+              <!-- Calendário -->
+              <div class="p-8 bg-gradient-to-br from-primary to-accent text-white">
+                <h3 class="text-2xl font-serif font-bold mb-6">Escolha a Data</h3>
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-4">
+                  <div class="flex justify-between items-center mb-4">
+                    <button onclick="prevMonth()" aria-label="Mês anterior" class="p-2 hover:bg-white/20 rounded-full transition">
+                      <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <span id="currentMonth" class="font-bold text-lg"></span>
+                    <button onclick="nextMonth()" aria-label="Próximo mês" class="p-2 hover:bg-white/20 rounded-full transition">
+                      <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                  </div>
+                  <div class="grid grid-cols-7 gap-1 text-center text-sm mb-2">
+                    <span class="font-bold">D</span>
+                    <span class="font-bold">S</span>
+                    <span class="font-bold">T</span>
+                    <span class="font-bold">Q</span>
+                    <span class="font-bold">Q</span>
+                    <span class="font-bold">S</span>
+                    <span class="font-bold">S</span>
+                  </div>
+                  <div id="calendarDays" class="grid grid-cols-7 gap-1"></div>
+                </div>
+              </div>
+
+              <!-- Formulário -->
+              <div class="p-8">
+                <div class="mb-6">
+                  <label class="block text-sm font-bold text-dark mb-2" for="serviceSelect">Tratamento</label>
+                  <select id="serviceSelect" aria-label="Selecione o tratamento" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-primary outline-none transition">
+                    <option value="">Selecione o tratamento</option>
+                    <option value="Massagem Relaxante">Massagem Relaxante - R$ 120</option>
+                    <option value="Shiatsu">Shiatsu - R$ 140</option>
+                    <option value="Pedras Quentes">Pedras Quentes - R$ 160</option>
+                    <option value="Drenagem Linfática">Drenagem Linfática - R$ 130</option>
+                    <option value="Massagem Desportiva">Massagem Desportiva - R$ 150</option>
+                    <option value="Reflexologia Podal">Reflexologia Podal - R$ 100</option>
+                  </select>
+                </div>
+
+                <div class="mb-6">
+                  <label class="block text-sm font-bold text-dark mb-2">Horário para <span id="selectedDateDisplay" class="text-primary">...</span></label>
+                  <div id="timeSlotsContainer" class="grid grid-cols-3 gap-2"></div>
+                </div>
+
+                <div class="mb-6">
+                  <label class="block text-sm font-bold text-dark mb-2">Seu Nome</label>
+                  <input type="text" id="clientName" placeholder="Digite seu nome" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-primary outline-none transition">
+                </div>
+
+                <button onclick="finalizeBooking()" id="btnAgendar" disabled class="btn-animated w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-4 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-3">
+                  <i data-lucide="message-circle" class="w-6 h-6"></i> Confirmar via WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- FOOTER -->
+    <!-- ============================================== -->
+    <footer class="bg-dark text-gray-400 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div class="text-center md:text-left">
+            <div class="text-2xl font-serif font-bold text-white mb-4">
+              Studio<span class="text-primary">Zen</span>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">Cuidando do seu bem-estar com técnicas profissionais de massoterapia.</p>
+            <div class="flex justify-center md:justify-start gap-4">
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition">
+                <i data-lucide="instagram" class="w-5 h-5"></i>
+              </a>
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-green-500 transition">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="text-center">
+            <h4 class="font-bold text-white mb-4">Links</h4>
+            <nav class="flex flex-col gap-2">
+              <a href="#home" class="hover:text-primary transition">Início</a>
+              <a href="#sobre" class="hover:text-primary transition">Sobre</a>
+              <a href="#servicos" class="hover:text-primary transition">Tratamentos</a>
+              <a href="#agendamento" class="hover:text-primary transition">Agendar</a>
+            </nav>
+          </div>
+          
+          <div class="text-center md:text-right">
+            <h4 class="font-bold text-white mb-4">Contato</h4>
+            <div class="flex flex-col gap-2 text-sm">
+              <p class="flex items-center justify-center md:justify-end gap-2">
+                <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>
+                Seu Bairro - Cidade
+              </p>
+              <p class="flex items-center justify-center md:justify-end gap-2">
+                <i data-lucide="phone" class="w-4 h-4 text-primary"></i>
+                (21) 97743-4614
+              </p>
+              <p class="flex items-center justify-center md:justify-end gap-2">
+                <i data-lucide="clock" class="w-4 h-4 text-primary"></i>
+                Seg-Sáb: 09h - 20h
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-800 pt-8 text-center">
+          <p class="text-sm text-gray-500">© 2026 Studio Zen Massoterapia. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING -->
+    <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition z-50">
+      <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <!-- ============================================== -->
+    <!-- SCRIPTS -->
+    <!-- ============================================== -->
+    <script>
+      // Inicialização
+      document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+        AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true });
+        
+        setTimeout(() => {
+          document.getElementById('page-loader').classList.add('hidden');
+        }, 1500);
+        
+        createParticles();
+        initCustomCursor();
+        initScrollProgress();
+        initBackToTop();
+        initCalendar();
+      });
+
+      // Partículas (folhas)
+      function createParticles() {
+        const container = document.getElementById('particles-container');
+        for (let i = 0; i < 15; i++) {
+          const leaf = document.createElement('div');
+          leaf.className = 'leaf';
+          leaf.style.left = Math.random() * 100 + '%';
+          leaf.style.animationDelay = Math.random() * 10 + 's';
+          leaf.style.animationDuration = (8 + Math.random() * 4) + 's';
+          container.appendChild(leaf);
+        }
+      }
+
+      // Cursor personalizado
+      function initCustomCursor() {
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', e => {
+          cursor.style.left = e.clientX - 10 + 'px';
+          cursor.style.top = e.clientY - 10 + 'px';
+        });
+        document.querySelectorAll('a, button').forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+      }
+
+      // Scroll Progress
+      function initScrollProgress() {
+        window.addEventListener('scroll', () => {
+          const scrollTop = document.documentElement.scrollTop;
+          const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const progress = (scrollTop / scrollHeight) * 100;
+          document.getElementById('scroll-progress').style.width = progress + '%';
+        });
+      }
+
+      // Back to Top
+      function initBackToTop() {
+        const btn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+          btn.classList.toggle('visible', window.scrollY > 500);
+        });
+        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      }
+
+      // Menu Mobile
+      function toggleMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('-translate-x-full');
+        document.body.classList.toggle('menu-open');
+      }
+      document.getElementById('mobile-menu-btn').addEventListener('click', toggleMenu);
+
+      // Calendário
+      let currentDate = new Date();
+      let selectedDate = null;
+      let selectedTime = null;
+
+      function initCalendar() {
+        renderCalendar();
+      }
+
+      function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        
+        document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+        
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+        
+        let html = '';
+        for (let i = 0; i < firstDay; i++) {
+          html += '<div></div>';
+        }
+        
+        for (let day = 1; day <= daysInMonth; day++) {
+          const date = new Date(year, month, day);
+          const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+          const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+          
+          html += `<div class="calendar-day rounded-lg ${isPast ? 'disabled' : ''} ${isSelected ? 'selected' : ''}" 
+                   onclick="${isPast ? '' : `selectDate(${year}, ${month}, ${day})`}">${day}</div>`;
+        }
+        
+        document.getElementById('calendarDays').innerHTML = html;
+      }
+
+      function prevMonth() {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+      }
+
+      function nextMonth() {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+      }
+
+      function selectDate(year, month, day) {
+        selectedDate = new Date(year, month, day);
+        renderCalendar();
+        document.getElementById('selectedDateDisplay').textContent = selectedDate.toLocaleDateString('pt-BR');
+        renderTimeSlots();
+        checkFormValidity();
+      }
+
+      function renderTimeSlots() {
+        const times = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+        const container = document.getElementById('timeSlotsContainer');
+        container.innerHTML = times.map(time => 
+          `<button type="button" class="time-slot p-3 rounded-lg text-center" onclick="selectTime('${time}', this)">
+            <span>${time}</span>
+          </button>`
+        ).join('');
+      }
+
+      function selectTime(time, element) {
+        document.querySelectorAll('.time-slot').forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+        selectedTime = time;
+        checkFormValidity();
+      }
+
+      function preSelectService(serviceName) {
+        document.getElementById('serviceSelect').value = serviceName;
+        document.getElementById('agendamento').scrollIntoView({ behavior: 'smooth' });
+        checkFormValidity();
+      }
+
+      document.getElementById('serviceSelect').addEventListener('change', checkFormValidity);
+      document.getElementById('clientName').addEventListener('input', checkFormValidity);
+
+      function checkFormValidity() {
+        const service = document.getElementById('serviceSelect').value;
+        const name = document.getElementById('clientName').value;
+        const btn = document.getElementById('btnAgendar');
+        btn.disabled = !(service && selectedDate && selectedTime && name.trim());
+      }
+
+      function finalizeBooking() {
+        const service = document.getElementById('serviceSelect').value;
+        const name = document.getElementById('clientName').value;
+        const dateStr = selectedDate.toLocaleDateString('pt-BR');
+        
+        const message = `Olá! 🧘 Gostaria de agendar uma sessão.%0A%0A*👤 Nome:* ${name}%0A*💆 Tratamento:* ${service}%0A*📅 Data:* ${dateStr}%0A*⏰ Horário:* ${selectedTime}%0A%0AAguardo confirmação! 🙏`;
+        
+        window.open(`https://wa.me/5521977434614?text=${message}`, '_blank');
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <!-- ============================================== -->
+    <!-- META TAGS E CONFIGURAÇÕES -->
+    <!-- ============================================== -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Motorista Particular Premium - Transporte executivo, viagens e eventos com conforto e segurança" />
+    <title>Motorista Particular Premium | Transporte Executivo</title>
+    
+    <!-- ============================================== -->
+    <!-- FAVICON -->
+    <!-- ============================================== -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚗%3C/text%3E%3C/svg%3E" />
+    
+    <!-- ============================================== -->
+    <!-- FONTES GOOGLE -->
+    <!-- ============================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- ============================================== -->
+    <!-- TAILWIND CSS CDN -->
+    <!-- ============================================== -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- ============================================== -->
+    <!-- CONFIGURAÇÃO TAILWIND - CORES PERSONALIZADAS -->
+    <!-- Paleta: Azul escuro elegante (#1a365d primary, #0f172a accent) -->
+    <!-- ============================================== -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#1a365d',
+              secondary: '#f8fafc',
+              accent: '#0f172a',
+              dark: '#1e293b',
+              gold: '#d4af37',
+            },
+            fontFamily: {
+              display: ['Playfair Display', 'serif'],
+              body: ['Poppins', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    
+    <!-- ============================================== -->
+    <!-- BIBLIOTECA DE ÍCONES LUCIDE -->
+    <!-- ============================================== -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- ============================================== -->
+    <!-- BIBLIOTECA DE ANIMAÇÕES AOS (ANIMATE ON SCROLL) -->
+    <!-- ============================================== -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- ============================================== -->
+    <!-- ESTILOS CUSTOMIZADOS -->
+    <!-- ============================================== -->
+    <style>
+      /* RESET E BASE */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+      
+      /* LOADER PREMIUM */
+      #loader {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #1a365d, #0f172a);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      #loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-car {
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(212, 175, 55, 0.3);
+        border-top-color: #d4af37;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      /* CURSOR PERSONALIZADO */
+      .custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #1a365d;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 99998;
+        transition: transform 0.15s ease;
+        mix-blend-mode: difference;
+      }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(212, 175, 55, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+
+      /* SCROLL PROGRESS */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #1a365d, #d4af37, #0f172a);
+        z-index: 99999;
+      }
+
+      /* GLASS */
+      .glass-nav {
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(26, 54, 93, 0.2);
+      }
+
+      /* CARDS */
+      .card-3d {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-3d:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px -12px rgba(26, 54, 93, 0.3);
+      }
+
+      /* SHIMMER */
+      .shimmer-text {
+        background: linear-gradient(90deg, #1a365d 0%, #d4af37 50%, #1a365d 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 3s linear infinite;
+      }
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+
+      /* BOTÃO */
+      .btn-animated {
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-animated::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s ease;
+      }
+      .btn-animated:hover::before { left: 100%; }
+
+      /* PARTÍCULAS */
+      .particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: rgba(212, 175, 55, 0.4);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+        50% { transform: translateY(-30px) rotate(180deg); opacity: 0.8; }
+      }
+
+      /* TIME SLOT */
+      .time-slot { cursor: pointer; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 0.75rem; transition: all 0.3s; text-align: center; }
+      .time-slot:hover { border-color: #1a365d; background: #f8fafc; }
+      .time-slot.selected { border-color: #1a365d; background: #1a365d; color: white; }
+
+      /* CALENDÁRIO */
+      .calendar-day { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; font-size: 0.875rem; }
+      .calendar-day:hover { background: rgba(212, 175, 55, 0.3); }
+      .calendar-day.selected { background: #d4af37; color: #0f172a; font-weight: bold; }
+      .calendar-day.disabled { opacity: 0.3; cursor: not-allowed; }
+
+      /* SCROLL SUAVE */
+      html { scroll-behavior: smooth; }
+    </style>
+  </head>
+  
+  <body class="font-body bg-secondary text-dark">
+    <!-- ============================================== -->
+    <!-- LOADER - ANIMAÇÃO DE CARREGAMENTO -->
+    <!-- ============================================== -->
+    <div id="loader">
+      <div class="text-center">
+        <div class="loader-car mx-auto mb-4"></div>
+        <p class="text-gold font-display text-xl tracking-wider">MOTORISTA PREMIUM</p>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- BARRA DE PROGRESSO DO SCROLL -->
+    <!-- ============================================== -->
+    <div id="scroll-progress"></div>
+
+    <!-- ============================================== -->
+    <!-- CURSOR PERSONALIZADO -->
+    <!-- ============================================== -->
+    <div class="custom-cursor"></div>
+
+    <!-- ============================================== -->
+    <!-- NAVEGAÇÃO PRINCIPAL -->
+    <!-- ============================================== -->
+    <nav class="glass-nav fixed w-full z-50 py-4">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <!-- LOGO -->
+        <a href="#home" class="text-2xl font-display font-bold text-dark">
+          DRIVER<span class="text-primary">PREMIUM</span>
+        </a>
+        
+        <!-- MENU DESKTOP -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#home" class="hover:text-primary transition font-medium">Início</a>
+          <a href="#sobre" class="hover:text-primary transition font-medium">Sobre</a>
+          <a href="#servicos" class="hover:text-primary transition font-medium">Serviços</a>
+          <a href="#frota" class="hover:text-primary transition font-medium">Frota</a>
+          <a href="#agendamento" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-full font-semibold hover:scale-105 transition">
+            Agendar
+          </a>
+        </div>
+        
+        <!-- MENU MOBILE -->
+        <button id="menuBtn" aria-label="Abrir menu" class="md:hidden text-dark">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+      
+      <!-- MENU MOBILE EXPANDIDO -->
+      <div id="mobileMenu" class="hidden md:hidden bg-white border-t mt-4">
+        <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+          <a href="#home" class="hover:text-primary transition">Início</a>
+          <a href="#sobre" class="hover:text-primary transition">Sobre</a>
+          <a href="#servicos" class="hover:text-primary transition">Serviços</a>
+          <a href="#frota" class="hover:text-primary transition">Frota</a>
+          <a href="#agendamento" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-6 py-3 rounded-full font-semibold text-center">Agendar</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ============================================== -->
+    <!-- HERO SECTION - BANNER PRINCIPAL -->
+    <!-- ============================================== -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-accent via-primary to-dark">
+      <!-- PARTÍCULAS DECORATIVAS -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="top: 60%; left: 20%; animation-delay: 1s;"></div>
+        <div class="particle" style="top: 30%; left: 70%; animation-delay: 2s;"></div>
+        <div class="particle" style="top: 70%; left: 80%; animation-delay: 0.5s;"></div>
+        <div class="particle" style="top: 40%; left: 50%; animation-delay: 1.5s;"></div>
+        <div class="particle" style="top: 80%; left: 40%; animation-delay: 2.5s;"></div>
+      </div>
+      
+      <!-- CONTEÚDO DO HERO -->
+      <div class="container mx-auto px-6 text-center relative z-10">
+        <span class="inline-block px-4 py-1 bg-gold/20 border border-gold/50 text-gold rounded-full text-sm font-bold uppercase tracking-widest mb-6" data-aos="fade-down">
+          Transporte Executivo
+        </span>
+        
+        <h1 class="text-4xl md:text-7xl font-display font-bold text-white mb-6" data-aos="fade-up">
+          Viaje com <span class="shimmer-text">Classe</span>
+          <br />e Sofisticação
+        </h1>
+        
+        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="200">
+          Motorista particular para executivos, viagens, eventos e translados.
+          <strong class="text-gold">Pontualidade, discrição e conforto</strong> em cada trajeto.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="600">
+          <a href="#agendamento" class="btn-animated bg-gradient-to-r from-gold to-yellow-600 text-accent px-8 py-4 rounded-full text-lg font-semibold shadow-lg flex items-center justify-center gap-2 hover:scale-105 transition">
+            <i data-lucide="calendar"></i> Solicitar Viagem
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-lg font-medium transition flex items-center justify-center gap-2">
+            <i data-lucide="instagram"></i> Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SOBRE -->
+    <!-- ============================================== -->
+    <section id="sobre" class="py-20 bg-white relative overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <!-- IMAGEM -->
+          <div class="md:w-1/2" data-aos="fade-right">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600" class="rounded-3xl shadow-2xl w-full" alt="Motorista profissional" />
+              <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-primary to-accent text-white p-6 rounded-2xl shadow-xl">
+                <div class="text-4xl font-display font-bold">15+</div>
+                <div class="text-sm opacity-80">Anos de Experiência</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- TEXTO -->
+          <div class="md:w-1/2" data-aos="fade-left">
+            <span class="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-bold uppercase mb-4">Nossa História</span>
+            <h2 class="text-3xl md:text-5xl font-display text-dark mb-6">
+              Transporte <span class="text-primary">Premium</span>
+            </h2>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Oferecemos serviço de motorista particular com a mais alta qualidade. Nossos profissionais são treinados para garantir sua segurança, conforto e pontualidade em todos os trajetos.
+            </p>
+            <p class="text-gray-600 mb-8 leading-relaxed">
+              Seja para reuniões de negócios, viagens, casamentos ou aeroporto, estamos prontos para proporcionar uma experiência de transporte inesquecível.
+            </p>
+            
+            <!-- STATS -->
+            <div class="grid grid-cols-3 gap-4">
+              <div class="text-center p-4 bg-secondary rounded-xl">
+                <div class="text-2xl font-display font-bold text-primary">5000+</div>
+                <div class="text-xs text-gray-500">Viagens</div>
+              </div>
+              <div class="text-center p-4 bg-secondary rounded-xl">
+                <div class="text-2xl font-display font-bold text-primary">100%</div>
+                <div class="text-xs text-gray-500">Pontualidade</div>
+              </div>
+              <div class="text-center p-4 bg-secondary rounded-xl">
+                <div class="text-2xl font-display font-bold text-primary">24/7</div>
+                <div class="text-xs text-gray-500">Disponível</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SERVIÇOS -->
+    <!-- ============================================== -->
+    <section id="servicos" class="py-20 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Nossos Serviços</span>
+          <h2 class="text-3xl md:text-5xl font-display text-dark" data-aos="fade-up" data-aos-delay="100">
+            Transporte para <span class="text-primary">Todas</span> Ocasiões
+          </h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- SERVIÇO 1 -->
+          <div class="glass-card card-3d rounded-3xl overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
+            <div class="h-48 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+              <i data-lucide="briefcase" class="w-20 h-20 text-primary group-hover:scale-110 transition"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-display font-bold text-dark mb-2">Transfer Executivo</h3>
+              <p class="text-gray-600 text-sm mb-4">Transporte para reuniões, eventos corporativos e compromissos de negócios.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary font-bold text-lg">A partir de R$ 150</span>
+                <button onclick="preSelectService('Transfer Executivo')" class="bg-primary text-white px-4 py-2 rounded-full text-sm hover:bg-accent transition">Agendar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SERVIÇO 2 -->
+          <div class="glass-card card-3d rounded-3xl overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+            <div class="h-48 bg-gradient-to-br from-gold/20 to-yellow-600/20 flex items-center justify-center">
+              <i data-lucide="plane" class="w-20 h-20 text-gold group-hover:scale-110 transition"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-display font-bold text-dark mb-2">Aeroporto</h3>
+              <p class="text-gray-600 text-sm mb-4">Translado para aeroportos com monitoramento de voos e pontualidade garantida.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary font-bold text-lg">A partir de R$ 180</span>
+                <button onclick="preSelectService('Aeroporto')" class="bg-primary text-white px-4 py-2 rounded-full text-sm hover:bg-accent transition">Agendar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SERVIÇO 3 -->
+          <div class="glass-card card-3d rounded-3xl overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
+            <div class="h-48 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+              <i data-lucide="heart" class="w-20 h-20 text-primary group-hover:scale-110 transition"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-display font-bold text-dark mb-2">Casamentos</h3>
+              <p class="text-gray-600 text-sm mb-4">Transporte elegante para noivos, padrinhos e convidados especiais.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary font-bold text-lg">A partir de R$ 500</span>
+                <button onclick="preSelectService('Casamentos')" class="bg-primary text-white px-4 py-2 rounded-full text-sm hover:bg-accent transition">Agendar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SERVIÇO 4 -->
+          <div class="glass-card card-3d rounded-3xl overflow-hidden group" data-aos="fade-up" data-aos-delay="400">
+            <div class="h-48 bg-gradient-to-br from-gold/20 to-yellow-600/20 flex items-center justify-center">
+              <i data-lucide="map-pin" class="w-20 h-20 text-gold group-hover:scale-110 transition"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-display font-bold text-dark mb-2">Viagens</h3>
+              <p class="text-gray-600 text-sm mb-4">Viagens intermunicipais e interestaduais com conforto e segurança.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary font-bold text-lg">Sob consulta</span>
+                <button onclick="preSelectService('Viagens')" class="bg-primary text-white px-4 py-2 rounded-full text-sm hover:bg-accent transition">Agendar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SERVIÇO 5 -->
+          <div class="glass-card card-3d rounded-3xl overflow-hidden group" data-aos="fade-up" data-aos-delay="500">
+            <div class="h-48 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+              <i data-lucide="clock" class="w-20 h-20 text-primary group-hover:scale-110 transition"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-display font-bold text-dark mb-2">Diária</h3>
+              <p class="text-gray-600 text-sm mb-4">Motorista à disposição por dia inteiro para múltiplos compromissos.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary font-bold text-lg">R$ 600/dia</span>
+                <button onclick="preSelectService('Diária')" class="bg-primary text-white px-4 py-2 rounded-full text-sm hover:bg-accent transition">Agendar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SERVIÇO 6 -->
+          <div class="glass-card card-3d rounded-3xl overflow-hidden group" data-aos="fade-up" data-aos-delay="600">
+            <div class="h-48 bg-gradient-to-br from-gold/20 to-yellow-600/20 flex items-center justify-center">
+              <i data-lucide="calendar-days" class="w-20 h-20 text-gold group-hover:scale-110 transition"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-display font-bold text-dark mb-2">Eventos</h3>
+              <p class="text-gray-600 text-sm mb-4">Transporte para formaturas, festas, shows e eventos especiais.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary font-bold text-lg">A partir de R$ 250</span>
+                <button onclick="preSelectService('Eventos')" class="bg-primary text-white px-4 py-2 rounded-full text-sm hover:bg-accent transition">Agendar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- FROTA -->
+    <!-- ============================================== -->
+    <section id="frota" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Nossa Frota</span>
+          <h2 class="text-3xl md:text-5xl font-display text-dark" data-aos="fade-up" data-aos-delay="100">
+            Veículos de <span class="text-primary">Alta Qualidade</span>
+          </h2>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="100">
+            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Sedan Executivo" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-display tracking-wide">SEDAN EXECUTIVO</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="200">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="SUV Premium" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-display tracking-wide">SUV PREMIUM</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="300">
+            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Van Executiva" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-display tracking-wide">VAN EXECUTIVA</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-2xl aspect-square" data-aos="zoom-in" data-aos-delay="400">
+            <img src="https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?w=400" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Blindado" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-4">
+              <span class="text-white font-display tracking-wide">BLINDADO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- DEPOIMENTOS -->
+    <!-- ============================================== -->
+    <section class="py-20 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1 bg-white text-primary rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Depoimentos</span>
+          <h2 class="text-3xl md:text-5xl font-display text-dark" data-aos="fade-up" data-aos-delay="100">
+            CLIENTES <span class="text-primary">SATISFEITOS</span>
+          </h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="glass-card p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex text-gold mb-4 gap-1">
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"Excelente serviço! Sempre pontual e muito profissional. Uso para todas as minhas viagens de negócios."</p>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">RC</div>
+              <div>
+                <h5 class="font-bold text-dark">Ricardo Costa</h5>
+                <p class="text-sm text-gray-500">CEO - Tech Solutions</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex text-gold mb-4 gap-1">
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"Contratei para o transporte do meu casamento. Tudo perfeito! Carro impecável e motorista muito educado."</p>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">AM</div>
+              <div>
+                <h5 class="font-bold text-dark">Amanda Martins</h5>
+                <p class="text-sm text-gray-500">Noiva feliz</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+            <div class="flex text-gold mb-4 gap-1">
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+              <i data-lucide="star" class="fill-current w-5 h-5"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"Uso semanalmente para ir ao aeroporto. Nunca perdi um voo! Serviço impecável e preço justo."</p>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">PS</div>
+              <div>
+                <h5 class="font-bold text-dark">Paulo Santos</h5>
+                <p class="text-sm text-gray-500">Empresário</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- AGENDAMENTO -->
+    <!-- ============================================== -->
+    <section id="agendamento" class="py-20 bg-gradient-to-br from-primary/10 via-white to-accent/10">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1 bg-primary text-white rounded-full text-sm font-bold uppercase mb-4" data-aos="fade-up">Solicite</span>
+          <h2 class="text-3xl md:text-5xl font-display text-dark" data-aos="fade-up" data-aos-delay="100">
+            AGENDE SUA <span class="shimmer-text">VIAGEM</span>
+          </h2>
+        </div>
+        
+        <div class="max-w-4xl mx-auto">
+          <div class="glass-card rounded-3xl shadow-2xl overflow-hidden">
+            <div class="grid md:grid-cols-2">
+              <!-- Calendário -->
+              <div class="p-8 bg-gradient-to-br from-primary to-accent text-white">
+                <h3 class="text-2xl font-display mb-6">Escolha a Data</h3>
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-4">
+                  <div class="flex justify-between items-center mb-4">
+                    <button onclick="prevMonth()" aria-label="Mês anterior" class="p-2 hover:bg-white/20 rounded-full transition">
+                      <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <span id="currentMonth" class="font-bold text-lg"></span>
+                    <button onclick="nextMonth()" aria-label="Próximo mês" class="p-2 hover:bg-white/20 rounded-full transition">
+                      <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                  </div>
+                  <div class="grid grid-cols-7 gap-1 text-center text-sm mb-2">
+                    <span class="font-bold">D</span><span class="font-bold">S</span><span class="font-bold">T</span>
+                    <span class="font-bold">Q</span><span class="font-bold">Q</span><span class="font-bold">S</span><span class="font-bold">S</span>
+                  </div>
+                  <div id="calendarDays" class="grid grid-cols-7 gap-1"></div>
+                </div>
+              </div>
+
+              <!-- Formulário -->
+              <div class="p-8">
+                <div class="mb-6">
+                  <label class="block text-sm font-bold text-dark mb-2" for="serviceSelect">Serviço</label>
+                  <select id="serviceSelect" aria-label="Selecione o serviço" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-primary outline-none transition">
+                    <option value="">Selecione o serviço</option>
+                    <option value="Transfer Executivo">Transfer Executivo - R$ 150</option>
+                    <option value="Aeroporto">Aeroporto - R$ 180</option>
+                    <option value="Casamentos">Casamentos - R$ 500</option>
+                    <option value="Viagens">Viagens - Sob consulta</option>
+                    <option value="Diária">Diária - R$ 600</option>
+                    <option value="Eventos">Eventos - R$ 250</option>
+                  </select>
+                </div>
+
+                <div class="mb-6">
+                  <label class="block text-sm font-bold text-dark mb-2">Horário para <span id="selectedDateDisplay" class="text-primary">...</span></label>
+                  <div id="timeSlotsContainer" class="grid grid-cols-3 gap-2"></div>
+                </div>
+
+                <div class="mb-6">
+                  <label class="block text-sm font-bold text-dark mb-2">Seu Nome</label>
+                  <input type="text" id="clientName" placeholder="Digite seu nome" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-primary outline-none transition">
+                </div>
+
+                <button onclick="finalizeBooking()" id="btnAgendar" disabled class="btn-animated w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-4 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-3">
+                  <i data-lucide="message-circle" class="w-6 h-6"></i> Confirmar via WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- FOOTER -->
+    <!-- ============================================== -->
+    <footer class="bg-dark text-gray-400 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div class="text-center md:text-left">
+            <div class="text-2xl font-display text-white mb-4">
+              DRIVER<span class="text-gold">PREMIUM</span>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">Transporte executivo com excelência, pontualidade e conforto.</p>
+            <div class="flex justify-center md:justify-start gap-4">
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition">
+                <i data-lucide="instagram" class="w-5 h-5"></i>
+              </a>
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-green-500 transition">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="text-center">
+            <h4 class="font-bold text-white mb-4">Links</h4>
+            <nav class="flex flex-col gap-2">
+              <a href="#home" class="hover:text-primary transition">Início</a>
+              <a href="#sobre" class="hover:text-primary transition">Sobre</a>
+              <a href="#servicos" class="hover:text-primary transition">Serviços</a>
+              <a href="#agendamento" class="hover:text-primary transition">Agendar</a>
+            </nav>
+          </div>
+          
+          <div class="text-center md:text-right">
+            <h4 class="font-bold text-white mb-4">Contato</h4>
+            <div class="flex flex-col gap-2 text-sm">
+              <span class="flex items-center justify-center md:justify-end gap-2">
+                <i data-lucide="phone" class="w-4 h-4"></i> (21) 97743-4614
+              </span>
+              <span class="flex items-center justify-center md:justify-end gap-2">
+                <i data-lucide="mail" class="w-4 h-4"></i> contato@driverpremium.com
+              </span>
+              <span class="flex items-center justify-center md:justify-end gap-2">
+                <i data-lucide="map-pin" class="w-4 h-4"></i> Rio de Janeiro, RJ
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-800 pt-8 text-center text-sm">
+          <p>&copy; 2025 Driver Premium. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============================================== -->
+    <!-- BOTÃO FLUTUANTE WHATSAPP -->
+    <!-- ============================================== -->
+    <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition z-50">
+      <i data-lucide="message-circle" class="w-6 h-6"></i>
+    </a>
+
+    <!-- ============================================== -->
+    <!-- BOTÃO VOLTAR AO TOPO -->
+    <!-- ============================================== -->
+    <button id="backToTop" aria-label="Voltar ao topo" class="fixed bottom-6 left-6 bg-primary text-white p-3 rounded-full shadow-xl opacity-0 invisible transition z-50 hover:bg-accent">
+      <i data-lucide="chevron-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- ============================================== -->
+    <!-- SCRIPTS -->
+    <!-- ============================================== -->
+    <script>
+      // INICIALIZAÇÃO
+      lucide.createIcons();
+      AOS.init({ duration: 800, once: true, offset: 50 });
+
+      // LOADER
+      window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('loader').classList.add('hidden'), 800);
+      });
+
+      // MENU MOBILE
+      document.getElementById('menuBtn').addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.toggle('hidden');
+      });
+
+      // CURSOR PERSONALIZADO
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+      });
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+
+      // SCROLL PROGRESS
+      window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = (scrollTop / scrollHeight) * 100;
+        document.getElementById('scroll-progress').style.width = progress + '%';
+      });
+
+      // BACK TO TOP
+      const backBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          backBtn.classList.remove('opacity-0', 'invisible');
+          backBtn.classList.add('opacity-100', 'visible');
+        } else {
+          backBtn.classList.add('opacity-0', 'invisible');
+          backBtn.classList.remove('opacity-100', 'visible');
+        }
+      });
+      backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // CALENDÁRIO
+      let currentDate = new Date();
+      let selectedDate = null;
+      let selectedTime = null;
+      const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+      function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        document.getElementById('currentMonth').textContent = `${months[month]} ${year}`;
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+        
+        let html = '';
+        for (let i = 0; i < firstDay; i++) html += '<div></div>';
+        for (let d = 1; d <= daysInMonth; d++) {
+          const date = new Date(year, month, d);
+          const isPast = date < today.setHours(0,0,0,0);
+          const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+          html += `<div class="calendar-day ${isPast ? 'disabled' : ''} ${isSelected ? 'selected' : ''}" onclick="${isPast ? '' : `selectDate(${year}, ${month}, ${d})`}">${d}</div>`;
+        }
+        document.getElementById('calendarDays').innerHTML = html;
+      }
+
+      function prevMonth() { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); }
+      function nextMonth() { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); }
+
+      function selectDate(year, month, day) {
+        selectedDate = new Date(year, month, day);
+        renderCalendar();
+        document.getElementById('selectedDateDisplay').textContent = selectedDate.toLocaleDateString('pt-BR');
+        renderTimeSlots();
+        checkFormValidity();
+      }
+
+      function renderTimeSlots() {
+        const times = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+        let html = times.map(t => `<div class="time-slot" onclick="selectTime('${t}', this)">${t}</div>`).join('');
+        document.getElementById('timeSlotsContainer').innerHTML = html;
+      }
+
+      renderCalendar();
+
+      function selectTime(time, element) {
+        document.querySelectorAll('.time-slot').forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+        selectedTime = time;
+        checkFormValidity();
+      }
+
+      function preSelectService(serviceName) {
+        document.getElementById('serviceSelect').value = serviceName;
+        document.getElementById('agendamento').scrollIntoView({ behavior: 'smooth' });
+        checkFormValidity();
+      }
+
+      document.getElementById('serviceSelect').addEventListener('change', checkFormValidity);
+      document.getElementById('clientName').addEventListener('input', checkFormValidity);
+
+      function checkFormValidity() {
+        const service = document.getElementById('serviceSelect').value;
+        const name = document.getElementById('clientName').value;
+        document.getElementById('btnAgendar').disabled = !(service && selectedDate && selectedTime && name.trim());
+      }
+
+      function finalizeBooking() {
+        const service = document.getElementById('serviceSelect').value;
+        const name = document.getElementById('clientName').value;
+        const dateStr = selectedDate.toLocaleDateString('pt-BR');
+        const message = `Olá! 🚗 Gostaria de agendar um serviço de motorista.%0A%0A*👤 Nome:* ${name}%0A*🎯 Serviço:* ${service}%0A*📅 Data:* ${dateStr}%0A*⏰ Horário:* ${selectedTime}%0A%0AAguardo confirmação! ✨`;
+        window.open(`https://wa.me/5521977434614?text=${message}`, '_blank');
+      }
+    </script>
+  </body>
+</html>
