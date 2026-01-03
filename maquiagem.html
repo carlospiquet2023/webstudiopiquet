@@ -171,26 +171,27 @@
     </header>
 
     <!-- Hero -->
-    <section id="home" class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div class="absolute inset-0 opacity-20">
-        <div class="absolute top-20 left-20 w-72 h-72 bg-accent rounded-full blur-3xl"></div>
-        <div class="absolute bottom-20 right-20 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <!-- IMAGEM DE CAPA -->
+      <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1920" alt="Maquiagem Profissional" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/60 to-dark/90"></div>
       </div>
       <div class="container mx-auto px-6 text-center relative z-10">
-        <span class="inline-block px-6 py-2 border border-accent text-accent text-sm mb-6 tracking-widest" data-aos="fade-up">
+        <span class="inline-block px-6 py-2 border border-accent text-white bg-accent/30 backdrop-blur text-sm mb-6 tracking-widest" data-aos="fade-up">
           💄 MAQUIADORA PROFISSIONAL
         </span>
-        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif mb-6" data-aos="fade-up" data-aos-delay="100">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif mb-6 text-white" data-aos="fade-up" data-aos-delay="100">
           Realce Sua<br/><span class="red-gradient">Beleza Natural</span>
         </h1>
-        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="200">
+        <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="200">
           Maquiagem profissional para noivas, festas, ensaios fotográficos e ocasiões especiais.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="300">
           <a href="#contato" class="bg-accent text-white px-10 py-4 font-semibold hover:bg-primary transition">
             <i data-lucide="calendar" class="inline w-5 h-5 mr-2"></i>AGENDAR
           </a>
-          <a href="#galeria" class="border-2 border-accent text-accent px-10 py-4 font-semibold hover:bg-accent hover:text-white transition">
+          <a href="#galeria" class="border-2 border-white text-white px-10 py-4 font-semibold hover:bg-white/10 transition">
             VER PORTFÓLIO
           </a>
         </div>
