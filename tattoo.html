@@ -126,6 +126,15 @@
       }
       #back-to-top.visible { opacity: 1; visibility: visible; }
       #back-to-top:hover { transform: scale(1.1); }
+      /* Calendar Styles */
+      .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+      .calendar-day { padding: 8px; text-align: center; border-radius: 8px; cursor: pointer; transition: all 0.2s; background: #1a1a1a; color: #fff; }
+      .calendar-day:hover:not(.disabled) { background: #EF4444; color: white; }
+      .calendar-day.selected { background: #EF4444; color: white; }
+      .calendar-day.disabled { opacity: 0.3; cursor: not-allowed; }
+      .time-slot { padding: 10px; text-align: center; border-radius: 8px; cursor: pointer; transition: all 0.2s; background: #1a1a1a; color: #fff; border: 2px solid #333; }
+      .time-slot:hover { border-color: #EF4444; }
+      .time-slot.selected { background: #EF4444; color: white; border-color: #EF4444; }
     </style>
   </head>
   <body class="font-sans text-light bg-dark">
@@ -353,28 +362,88 @@
     <!-- Contato -->
     <section id="contato" class="py-20 bg-gradient-to-br from-primary to-accent text-white">
       <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-4xl md:text-5xl font-display tracking-wider mb-6" data-aos="fade-up">FAÇA SEU ORÇAMENTO</h2>
-          <p class="text-xl text-white/80 mb-8" data-aos="fade-up" data-aos-delay="100">
-            Transforme sua ideia em arte! Envie sua referência e receba um orçamento. 🔥
-          </p>
-          <div class="grid md:grid-cols-3 gap-6 mb-10" data-aos="fade-up" data-aos-delay="200">
-            <div class="bg-black/20 backdrop-blur p-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-10">
+            <h2 class="text-4xl md:text-5xl font-display tracking-wider mb-6" data-aos="fade-up">FAÇA SEU ORÇAMENTO</h2>
+            <p class="text-xl text-white/80" data-aos="fade-up" data-aos-delay="100">
+              Transforme sua ideia em arte! Envie sua referência e receba um orçamento. 🔥
+            </p>
+          </div>
+          
+          <!-- Widget de Agendamento -->
+          <div class="bg-dark rounded-lg p-8 shadow-2xl" data-aos="fade-up" data-aos-delay="200">
+            <div class="grid md:grid-cols-2 gap-8">
+              <!-- Calendário -->
+              <div>
+                <h3 class="text-xl font-display mb-4 text-primary tracking-wider">ESCOLHA A DATA</h3>
+                <div class="bg-secondary rounded-lg p-4">
+                  <div class="flex justify-between items-center mb-4">
+                    <button aria-label="Mês anterior" onclick="changeMonth(-1)" class="p-2 hover:bg-primary hover:text-white rounded transition">
+                      <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <span id="currentMonth" class="font-display text-lg tracking-wider"></span>
+                    <button aria-label="Próximo mês" onclick="changeMonth(1)" class="p-2 hover:bg-primary hover:text-white rounded transition">
+                      <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                  </div>
+                  <div class="calendar-grid text-sm font-medium text-gray-500 mb-2">
+                    <div class="p-2">Dom</div><div class="p-2">Seg</div><div class="p-2">Ter</div>
+                    <div class="p-2">Qua</div><div class="p-2">Qui</div><div class="p-2">Sex</div><div class="p-2">Sáb</div>
+                  </div>
+                  <div id="calendarDays" class="calendar-grid"></div>
+                </div>
+              </div>
+              
+              <!-- Serviço e Horário -->
+              <div>
+                <h3 class="text-xl font-display mb-4 text-primary tracking-wider">DETALHES</h3>
+                
+                <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-400 mb-2">Seu Nome</label>
+                  <input type="text" id="clientName" placeholder="Digite seu nome" class="w-full p-3 bg-secondary border-2 border-gray-700 rounded focus:border-primary focus:outline-none transition text-white" />
+                </div>
+                
+                <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-400 mb-2">Tipo de Serviço</label>
+                  <select id="serviceSelect" aria-label="Selecione o serviço" class="w-full p-3 bg-secondary border-2 border-gray-700 rounded focus:border-primary focus:outline-none transition text-white">
+                    <option value="">Selecione um serviço</option>
+                    <option value="Tattoo Pequena (até 5cm) - A partir de R$150">Tattoo Pequena (até 5cm) - A partir de R$150</option>
+                    <option value="Tattoo Média (5-15cm) - A partir de R$350">Tattoo Média (5-15cm) - A partir de R$350</option>
+                    <option value="Tattoo Grande (15-30cm) - A partir de R$700">Tattoo Grande (15-30cm) - A partir de R$700</option>
+                    <option value="Cobertura/Cover Up - A partir de R$500">Cobertura/Cover Up - A partir de R$500</option>
+                    <option value="Piercing - R$80">Piercing - R$80</option>
+                    <option value="Sessão Fechamento (4h) - R$1200">Sessão Fechamento (4h) - R$1200</option>
+                  </select>
+                </div>
+                
+                <div class="mb-6">
+                  <label class="block text-sm font-medium text-gray-400 mb-2">Horário</label>
+                  <div id="timeSlots" class="grid grid-cols-3 gap-2"></div>
+                </div>
+                
+                <button id="bookingBtn" onclick="finalizeBooking()" disabled class="w-full bg-primary text-white py-4 font-display text-lg tracking-wider hover:bg-accent transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                  <i data-lucide="message-circle" class="w-5 h-5"></i>
+                  ENVIAR PELO WHATSAPP
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Info Cards -->
+          <div class="grid md:grid-cols-3 gap-6 mt-10" data-aos="fade-up" data-aos-delay="300">
+            <div class="bg-black/20 backdrop-blur p-6 text-center">
               <i data-lucide="map-pin" class="w-8 h-8 mx-auto mb-3"></i>
               <p>Rua da Tinta, 666<br/>Vila Madalena - SP</p>
             </div>
-            <div class="bg-black/20 backdrop-blur p-6">
+            <div class="bg-black/20 backdrop-blur p-6 text-center">
               <i data-lucide="clock" class="w-8 h-8 mx-auto mb-3"></i>
               <p>Ter - Sáb<br/>12h às 20h</p>
             </div>
-            <div class="bg-black/20 backdrop-blur p-6">
+            <div class="bg-black/20 backdrop-blur p-6 text-center">
               <i data-lucide="phone" class="w-8 h-8 mx-auto mb-3"></i>
-              <p>(11) 91111-1111</p>
+              <p>(21) 97743-4614</p>
             </div>
           </div>
-          <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-dark text-primary px-10 py-4 font-display text-xl tracking-wider hover:bg-secondary transition" data-aos="fade-up" data-aos-delay="300">
-            <i data-lucide="message-circle" class="w-6 h-6"></i>ORÇAMENTO WHATSAPP
-          </a>
         </div>
       </div>
     </section>
@@ -435,6 +504,90 @@
         el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
       });
+
+      // Calendar System
+      let currentDate = new Date();
+      let selectedDate = null;
+      let selectedTime = null;
+      const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+      function initCalendar() {
+        renderCalendar();
+        renderTimeSlots();
+      }
+
+      function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        document.getElementById('currentMonth').textContent = `${months[month]} ${year}`;
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+        let html = '';
+        for (let i = 0; i < firstDay; i++) html += '<div class="calendar-day disabled"></div>';
+        for (let day = 1; day <= daysInMonth; day++) {
+          const date = new Date(year, month, day);
+          const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+          const isSunday = date.getDay() === 0;
+          const isMonday = date.getDay() === 1;
+          const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+          let classes = 'calendar-day';
+          if (isPast || isSunday || isMonday) classes += ' disabled';
+          if (isSelected) classes += ' selected';
+          html += `<div class="${classes}" onclick="selectDate(${year}, ${month}, ${day})">${day}</div>`;
+        }
+        document.getElementById('calendarDays').innerHTML = html;
+      }
+
+      function changeMonth(delta) {
+        currentDate.setMonth(currentDate.getMonth() + delta);
+        renderCalendar();
+      }
+
+      function selectDate(year, month, day) {
+        const date = new Date(year, month, day);
+        const today = new Date();
+        if (date < new Date(today.getFullYear(), today.getMonth(), today.getDate()) || date.getDay() === 0 || date.getDay() === 1) return;
+        selectedDate = date;
+        renderCalendar();
+        checkFormValidity();
+      }
+
+      function renderTimeSlots() {
+        const times = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+        let html = '';
+        times.forEach(time => {
+          const isSelected = selectedTime === time;
+          html += `<div class="time-slot${isSelected ? ' selected' : ''}" onclick="selectTime('${time}')">${time}</div>`;
+        });
+        document.getElementById('timeSlots').innerHTML = html;
+      }
+
+      function selectTime(time) {
+        selectedTime = time;
+        renderTimeSlots();
+        checkFormValidity();
+      }
+
+      function checkFormValidity() {
+        const name = document.getElementById('clientName').value.trim();
+        const service = document.getElementById('serviceSelect').value;
+        const btn = document.getElementById('bookingBtn');
+        btn.disabled = !(name && service && selectedDate && selectedTime);
+      }
+
+      document.getElementById('clientName').addEventListener('input', checkFormValidity);
+      document.getElementById('serviceSelect').addEventListener('change', checkFormValidity);
+
+      function finalizeBooking() {
+        const name = document.getElementById('clientName').value.trim();
+        const service = document.getElementById('serviceSelect').value;
+        const dateStr = selectedDate.toLocaleDateString('pt-BR');
+        const message = `Olá! 🔥 Gostaria de agendar um horário no Ink Soul Tattoo.%0A%0A👤 *Nome:* ${name}%0A🎨 *Serviço:* ${service}%0A📅 *Data:* ${dateStr}%0A⏰ *Horário:* ${selectedTime}%0A%0AAguardo confirmação!`;
+        window.open(`https://wa.me/5521977434614?text=${message}`, '_blank');
+      }
+
+      initCalendar();
     </script>
   </body>
 </html>

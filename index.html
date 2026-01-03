@@ -457,7 +457,7 @@
         <nav class="hidden md:flex space-x-8 items-center">
           <a href="#home" class="text-gray-300 hover:text-white transition font-medium">Início</a>
           <a href="#catalogo" class="text-gray-300 hover:text-white transition font-medium">Catálogo</a>
-          <a href="#stats" class="text-gray-300 hover:text-white transition font-medium">Resultados</a>
+          <a href="#planos" class="text-gray-300 hover:text-white transition font-medium">Planos</a>
           <a href="#contato" class="bg-gradient-to-r from-primary to-accent text-white px-6 py-2.5 rounded-full hover:opacity-90 transition font-semibold shadow-lg">
             Contato
           </a>
@@ -474,7 +474,7 @@
       <div class="flex flex-col items-center justify-center h-full space-y-8">
         <a href="#home" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Início</a>
         <a href="#catalogo" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Catálogo</a>
-        <a href="#stats" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Resultados</a>
+        <a href="#planos" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Planos</a>
         <a href="#contato" class="bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full text-xl" onclick="closeMobileMenu()">Contato</a>
         <button onclick="closeMobileMenu()" aria-label="Fechar menu" class="absolute top-6 right-6 text-white">
           <i data-lucide="x" class="w-8 h-8"></i>
@@ -1016,6 +1016,189 @@
       </div>
     </section>
     <!-- FIM DA SEÇÃO FEATURES -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO PLANOS E PREÇOS
+         ═══════════════════════════════════════════════════════════════════
+    -->
+    <section id="planos" class="py-24 bg-secondary relative overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm" data-aos="fade-up">Invista no seu Negócio</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3" data-aos="fade-up" data-aos-delay="100">
+            Escolha seu <span class="shimmer-text">Plano</span>
+          </h2>
+          <p class="text-gray-600 mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Sites profissionais que transformam visitantes em clientes. Um investimento que se paga rapidamente!
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          
+          <!-- Plano 1: Modelo Pronto -->
+          <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2" data-aos="fade-up">
+            <div class="text-center mb-8">
+              <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="layout-template" class="w-8 h-8 text-primary"></i>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Modelo Pronto</h3>
+              <p class="text-gray-500 text-sm">Personalização completa</p>
+            </div>
+            <div class="text-center mb-8">
+              <span class="text-5xl font-bold text-dark">R$ 99</span>
+              <span class="text-gray-500">/único</span>
+            </div>
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Escolha do modelo do catálogo</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Personalização de cores</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Suas fotos e imagens</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Seus textos e serviços</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>WhatsApp configurado</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Instagram integrado</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Publicação no GitHub</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/5521977434614?text=Olá!%20Tenho%20interesse%20no%20plano%20Modelo%20Pronto%20por%20R$99!" target="_blank" rel="noopener" class="block w-full text-center bg-gradient-to-r from-primary to-accent text-white py-4 rounded-xl font-bold hover:opacity-90 transition">
+              <i data-lucide="sparkles" class="inline w-5 h-5 mr-2"></i>Quero Esse!
+            </a>
+            <p class="text-center text-sm text-gray-400 mt-4">✨ Melhor custo-benefício</p>
+          </div>
+
+          <!-- Plano 2: Modelo + Manutenção (DESTAQUE) -->
+          <div class="bg-gradient-to-br from-primary to-accent rounded-3xl p-8 shadow-2xl hover:shadow-3xl transition-all hover:-translate-y-3 relative" data-aos="fade-up" data-aos-delay="100">
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-dark px-6 py-2 rounded-full text-sm font-bold">
+              ⭐ MAIS POPULAR
+            </div>
+            <div class="text-center mb-8 text-white">
+              <div class="w-16 h-16 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="crown" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Modelo + Suporte</h3>
+              <p class="text-white/80 text-sm">Tudo incluso + manutenção</p>
+            </div>
+            <div class="text-center mb-8 text-white">
+              <span class="text-5xl font-bold">R$ 99</span>
+              <span class="text-white/80">+ R$ 50/mês</span>
+            </div>
+            <ul class="space-y-4 mb-8 text-white">
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Tudo do plano anterior</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Atualizações mensais</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Alterações de conteúdo</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Novos recursos e melhorias</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Suporte prioritário</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Backup garantido</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Consultoria de marketing</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/5521977434614?text=Olá!%20Tenho%20interesse%20no%20plano%20Modelo%20+%20Suporte%20com%20manutenção%20mensal!" target="_blank" rel="noopener" class="block w-full text-center bg-white text-primary py-4 rounded-xl font-bold hover:bg-gray-100 transition">
+              <i data-lucide="rocket" class="inline w-5 h-5 mr-2"></i>Começar Agora
+            </a>
+            <p class="text-center text-sm text-white/80 mt-4">🔥 Ideal para quem quer crescer</p>
+          </div>
+
+          <!-- Plano 3: Construção Personalizada -->
+          <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-dashed border-gray-200" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-center mb-8">
+              <div class="w-16 h-16 bg-gradient-to-br from-rose/20 to-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="code-2" class="w-8 h-8 text-rose"></i>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Sob Medida</h3>
+              <p class="text-gray-500 text-sm">Projeto exclusivo do zero</p>
+            </div>
+            <div class="text-center mb-8">
+              <span class="text-3xl font-bold text-dark">Sob Consulta</span>
+              <p class="text-gray-500 text-sm mt-2">Cada projeto é único</p>
+            </div>
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Design 100% exclusivo</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Funcionalidades personalizadas</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Integração com sistemas</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>E-commerce/Agendamento</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Domínio próprio</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Hospedagem profissional</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Reunião de briefing</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/5521977434614?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20um%20site%20personalizado!" target="_blank" rel="noopener" class="block w-full text-center bg-dark text-white py-4 rounded-xl font-bold hover:bg-gray-800 transition">
+              <i data-lucide="message-square" class="inline w-5 h-5 mr-2"></i>Falar com o Time
+            </a>
+            <p class="text-center text-sm text-gray-400 mt-4">💎 Para projetos especiais</p>
+          </div>
+        </div>
+
+        <!-- Garantia -->
+        <div class="mt-16 text-center" data-aos="fade-up">
+          <div class="inline-flex items-center gap-4 bg-emerald/10 px-8 py-4 rounded-2xl">
+            <i data-lucide="shield-check" class="w-10 h-10 text-emerald"></i>
+            <div class="text-left">
+              <p class="font-bold text-dark">Garantia de Satisfação</p>
+              <p class="text-gray-600 text-sm">Se não gostar, devolvemos seu dinheiro em até 7 dias</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO PLANOS -->
 
     <!-- ═══════════════════════════════════════════════════════════════════
          SEÇÃO CTA (Call To Action) - CONTATO

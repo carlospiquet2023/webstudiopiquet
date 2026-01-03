@@ -1639,8 +1639,8 @@
                             <span id="currentMonthYear">Outubro 2024</span>
                         </h3>
                         <div class="flex gap-2">
-                            <button onclick="changeMonth(-1)" aria-label="Mês anterior" class="p-2 hover:bg-primary/10 rounded-full text-dark transition hover:text-primary"><i data-lucide="chevron-left"></i></button>
-                            <button onclick="changeMonth(1)" aria-label="Próximo mês" class="p-2 hover:bg-primary/10 rounded-full text-dark transition hover:text-primary"><i data-lucide="chevron-right"></i></button>
+                            <button aria-label="Mês anterior" onclick="changeMonth(-1)" aria-label="Mês anterior" class="p-2 hover:bg-primary/10 rounded-full text-dark transition hover:text-primary"><i data-lucide="chevron-left"></i></button>
+                            <button aria-label="Próximo mês" onclick="changeMonth(1)" aria-label="Próximo mês" class="p-2 hover:bg-primary/10 rounded-full text-dark transition hover:text-primary"><i data-lucide="chevron-right"></i></button>
                         </div>
                     </div>
                     
@@ -1667,7 +1667,7 @@
                             <span class="w-6 h-6 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-xs">1</span>
                             Qual procedimento?
                         </label>
-                        <select id="serviceSelect" aria-label="Selecionar serviço" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary bg-white text-base transition hover:border-primary/50">
+                        <select id="serviceSelect" aria-label="Selecione o serviço" aria-label="Selecionar serviço" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary bg-white text-base transition hover:border-primary/50">
                             <option value="">Selecione um serviço...</option>
                             <option value="Fio a Fio Clássico">Fio a Fio Clássico - R$ 110,00</option>
                             <option value="Volume Brasileiro">Volume Brasileiro - R$ 120,00</option>

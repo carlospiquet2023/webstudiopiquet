@@ -183,6 +183,22 @@
       #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
       #back-to-top:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(233, 30, 99, 0.5); }
 
+      /* ===== CALENDÁRIO ===== */
+      .calendar-day {
+        width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+        border-radius: 50%; cursor: pointer; transition: all 0.3s ease;
+        background: white/10; color: white;
+      }
+      .calendar-day:hover:not(.disabled) { background: rgba(255,255,255,0.3); transform: scale(1.1); }
+      .calendar-day.selected { background: white; color: #E91E63; font-weight: bold; }
+      .calendar-day.disabled { opacity: 0.3; cursor: not-allowed; }
+      .time-slot {
+        background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3);
+        color: white; cursor: pointer; transition: all 0.3s ease;
+      }
+      .time-slot:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+      .time-slot.selected { background: white; color: #E91E63; border-color: white; }
+
       /* ===== NÚMEROS/ESTATÍSTICAS =====
          Cores: Gradiente rosa para dourado */
       .counter-number {
@@ -487,44 +503,94 @@
       </div>
     </section>
 
-    <!-- ========================================
-         CONTATO - INFORMAÇÕES E WHATSAPP
-         Altere endereço, horário, telefone e link do WhatsApp
-         ======================================== -->
+    <!-- Contato -->
     <section id="contato" class="py-20 hero-gradient text-white">
       <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6" data-aos="fade-up">
-            Agende Seu Horário
-          </h2>
-          <p class="text-xl text-white/80 mb-8" data-aos="fade-up" data-aos-delay="100">
-            Entre em contato conosco e marque sua transformação!
-          </p>
+        <div class="max-w-5xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4" data-aos="fade-up">Agende Seu Horário</h2>
+            <p class="text-xl text-white/80" data-aos="fade-up" data-aos-delay="100">Entre em contato e marque sua transformação! ✨</p>
+          </div>
           
-          <!-- Cards de informação -->
-          <div class="grid md:grid-cols-3 gap-6 mb-10" data-aos="fade-up" data-aos-delay="200">
-            <!-- ENDEREÇO -->
-            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
+          <div class="grid lg:grid-cols-2 gap-10">
+            <!-- Calendário -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8" data-aos="fade-right">
+              <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <i data-lucide="calendar" class="w-6 h-6"></i> Escolha a Data
+              </h3>
+              <div class="flex items-center justify-between mb-6">
+                <button aria-label="Mês anterior" onclick="changeMonth(-1)" class="p-2 hover:bg-white/20 rounded-full transition">
+                  <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+                <span id="currentMonthYear" class="text-xl font-bold"></span>
+                <button aria-label="Próximo mês" onclick="changeMonth(1)" class="p-2 hover:bg-white/20 rounded-full transition">
+                  <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
+              </div>
+              <div class="grid grid-cols-7 gap-2 text-center mb-4">
+                <span class="text-white/60 text-sm font-medium">Dom</span>
+                <span class="text-white/60 text-sm font-medium">Seg</span>
+                <span class="text-white/60 text-sm font-medium">Ter</span>
+                <span class="text-white/60 text-sm font-medium">Qua</span>
+                <span class="text-white/60 text-sm font-medium">Qui</span>
+                <span class="text-white/60 text-sm font-medium">Sex</span>
+                <span class="text-white/60 text-sm font-medium">Sáb</span>
+              </div>
+              <div id="calendar-grid" class="grid grid-cols-7 gap-2 justify-items-center"></div>
+            </div>
+            
+            <!-- Formulário -->
+            <div class="space-y-6" data-aos="fade-left">
+              <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
+                <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <i data-lucide="scissors" class="w-6 h-6"></i> Serviço
+                </h3>
+                <select id="serviceSelect" aria-label="Selecione o serviço" class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50">
+                  <option value="" class="text-gray-800">Selecione o serviço...</option>
+                  <option value="Corte Feminino - R$ 80" class="text-gray-800">Corte Feminino - R$ 80</option>
+                  <option value="Coloração - R$ 150" class="text-gray-800">Coloração - R$ 150</option>
+                  <option value="Luzes e Mechas - R$ 250" class="text-gray-800">Luzes e Mechas - R$ 250</option>
+                  <option value="Escova e Penteado - R$ 60" class="text-gray-800">Escova e Penteado - R$ 60</option>
+                  <option value="Hidratação Profunda - R$ 90" class="text-gray-800">Hidratação Profunda - R$ 90</option>
+                  <option value="Dia da Noiva - R$ 500" class="text-gray-800">Dia da Noiva - R$ 500</option>
+                </select>
+              </div>
+              
+              <div id="timeSection" class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 opacity-50 pointer-events-none transition-all">
+                <h3 class="text-2xl font-bold mb-2 flex items-center gap-3">
+                  <i data-lucide="clock" class="w-6 h-6"></i> Horário
+                </h3>
+                <p class="text-white/60 mb-4">Data selecionada: <span id="selectedDateDisplay">--</span></p>
+                <div id="timeSlotsContainer" class="grid grid-cols-4 gap-3"></div>
+              </div>
+              
+              <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
+                <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <i data-lucide="user" class="w-6 h-6"></i> Seus Dados
+                </h3>
+                <input type="text" id="clientName" placeholder="Seu nome completo" class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50">
+              </div>
+              
+              <button id="btnAgendar" onclick="finalizeBooking()" disabled class="w-full py-5 bg-white text-primary rounded-2xl font-bold text-lg hover:bg-pink-100 transition shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3">
+                <i data-lucide="message-circle" class="w-6 h-6"></i> Confirmar Agendamento via WhatsApp
+              </button>
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-3 gap-6 mt-12" data-aos="fade-up">
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl text-center">
               <i data-lucide="map-pin" class="w-8 h-8 mx-auto mb-3"></i>
               <p>Rua das Flores, 123<br/>Centro - São Paulo</p>
             </div>
-            <!-- HORÁRIO DE FUNCIONAMENTO -->
-            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl text-center">
               <i data-lucide="clock" class="w-8 h-8 mx-auto mb-3"></i>
               <p>Seg - Sáb<br/>09h às 20h</p>
             </div>
-            <!-- TELEFONE -->
-            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl text-center">
               <i data-lucide="phone" class="w-8 h-8 mx-auto mb-3"></i>
-              <p>(11) 99999-9999</p> <!-- TELEFONE -->
+              <p>(21) 97743-4614</p>
             </div>
           </div>
-
-          <!-- BOTÃO WHATSAPP - Altere o número no link (5511999999999 = +55 11 99999-9999) -->
-          <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-white text-primary px-10 py-4 rounded-full font-bold text-lg hover:bg-pink-100 transition shadow-xl" data-aos="fade-up" data-aos-delay="300">
-            <i data-lucide="message-circle" class="w-6 h-6"></i>
-            Agendar pelo WhatsApp
-          </a>
         </div>
       </div>
     </section>
@@ -626,6 +692,121 @@
         document.getElementById('mobile-menu').classList.remove('flex');
         document.body.classList.remove('menu-open');
       }
+
+      // ===== SISTEMA DE AGENDAMENTO =====
+      let currentDate = new Date();
+      let selectedDate = null;
+      let selectedTime = null;
+      const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+      const availableTimes = ["09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
+
+      function initCalendar() { renderCalendar(); }
+
+      function changeMonth(step) {
+        currentDate.setMonth(currentDate.getMonth() + step);
+        renderCalendar();
+      }
+
+      function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        document.getElementById("currentMonthYear").innerText = `${monthNames[month]} ${year}`;
+        
+        const firstDayIndex = new Date(year, month, 1).getDay();
+        const lastDay = new Date(year, month + 1, 0).getDate();
+        const grid = document.getElementById("calendar-grid");
+        grid.innerHTML = "";
+        
+        for (let i = 0; i < firstDayIndex; i++) {
+          grid.appendChild(document.createElement("div"));
+        }
+        
+        const today = new Date();
+        today.setHours(0,0,0,0);
+
+        for (let i = 1; i <= lastDay; i++) {
+          const date = new Date(year, month, i);
+          const dayDiv = document.createElement("div");
+          dayDiv.innerText = i;
+          dayDiv.classList.add("calendar-day", "text-sm");
+          
+          const isWorkDay = date.getDay() !== 0;
+
+          if (date < today || !isWorkDay) {
+            dayDiv.classList.add("disabled");
+          } else {
+            dayDiv.onclick = () => selectDate(date, dayDiv);
+            if (selectedDate && date.getTime() === selectedDate.getTime()) {
+              dayDiv.classList.add("selected");
+            }
+          }
+          grid.appendChild(dayDiv);
+        }
+      }
+
+      function selectDate(date, element) {
+        document.querySelectorAll(".calendar-day").forEach(el => el.classList.remove("selected"));
+        selectedDate = date;
+        element.classList.add("selected");
+        
+        const timeSection = document.getElementById("timeSection");
+        timeSection.classList.remove("opacity-50", "pointer-events-none");
+        
+        const dateStr = date.toLocaleDateString('pt-BR', { weekday: 'short', day: 'numeric', month: 'short' });
+        document.getElementById("selectedDateDisplay").innerText = dateStr;
+        
+        renderTimeSlots();
+        checkFormValidity();
+      }
+
+      function renderTimeSlots() {
+        const container = document.getElementById("timeSlotsContainer");
+        container.innerHTML = "";
+        selectedTime = null;
+        
+        availableTimes.forEach(time => {
+          const btn = document.createElement("button");
+          btn.innerHTML = `<span>${time}</span>`;
+          btn.classList.add("time-slot", "py-3", "rounded-xl", "text-sm", "font-bold");
+          btn.onclick = () => selectTime(time, btn);
+          container.appendChild(btn);
+        });
+        checkFormValidity();
+      }
+
+      function selectTime(time, element) {
+        document.querySelectorAll(".time-slot").forEach(el => el.classList.remove("selected"));
+        element.classList.add("selected");
+        selectedTime = time;
+        checkFormValidity();
+      }
+
+      document.getElementById("serviceSelect").addEventListener("change", checkFormValidity);
+      document.getElementById("clientName").addEventListener("input", checkFormValidity);
+
+      function checkFormValidity() {
+        const service = document.getElementById("serviceSelect").value;
+        const name = document.getElementById("clientName").value;
+        const btn = document.getElementById("btnAgendar");
+        
+        if (service && selectedDate && selectedTime && name.trim() !== "") {
+          btn.disabled = false;
+        } else {
+          btn.disabled = true;
+        }
+      }
+
+      function finalizeBooking() {
+        const service = document.getElementById("serviceSelect").value;
+        const name = document.getElementById("clientName").value;
+        const dateStr = selectedDate.toLocaleDateString('pt-BR');
+        
+        const message = `Olá! 💇‍♀️ Gostaria de agendar um horário no Studio Beauty.%0A%0A*👤 Cliente:* ${name}%0A*✨ Serviço:* ${service}%0A*📅 Data:* ${dateStr}%0A*⏰ Horário:* ${selectedTime}%0A%0AAguardo confirmação! 💖`;
+        
+        window.open(`https://wa.me/5521977434614?text=${message}`, '_blank');
+      }
+
+      initCalendar();
     </script>
   </body>
 </html>
