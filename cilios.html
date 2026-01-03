@@ -1,64 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
+    <!-- ============================================== -->
+    <!-- META TAGS E CONFIGURAÇÕES BÁSICAS -->
+    <!-- Altere aqui: título, descrição e imagens de compartilhamento -->
+    <!-- ============================================== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paloma Designer de Cílios - Agendamento</title>
+    
+    <!-- TÍTULO DA PÁGINA - Aparece na aba do navegador -->
+    <title>Fernanda e Ana Designer de Cílios - Agendamento</title>
 
-    <meta property="og:title" content="Paloma Designer de Cílios">
+    <!-- OPEN GRAPH - Configurações para compartilhamento em redes sociais -->
+    <!-- og:title = Título ao compartilhar no Facebook/WhatsApp -->
+    <meta property="og:title" content="Fernanda e Ana Designer de Cílios">
+    <!-- og:description = Descrição ao compartilhar -->
     <meta property="og:description" content="Alongamento de cílios • Beleza e autoestima">
-    <meta property="og:image" content="https://i.imgur.com/A9Yq1PM.jpeg">
-    <meta property="og:url" content="https://company2002.github.io/palomaoliveiracilios/">
+    <!-- og:image = Imagem de preview ao compartilhar (recomendado: 1200x630px) -->
+    <meta property="og:image" content="https://i.imgur.com/1Ms9yRH.jpeg">
+    <!-- og:url = URL canônica do site -->
+    <meta property="og:url" content="https://carlospiquet2023.github.io/webstudiopiquet/cilios.html">
     <meta property="og:type" content="website">
 
-    <!-- Tailwind CSS -->
+    <!-- ============================================== -->
+    <!-- BIBLIOTECAS EXTERNAS (CDN) -->
+    <!-- ============================================== -->
+    
+    <!-- Tailwind CSS - Framework de estilos -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts -->
+    <!-- ============================================== -->
+    <!-- FONTES DO GOOGLE -->
+    <!-- Cormorant Garamond = Fonte serifada elegante (títulos) -->
+    <!-- Lato = Fonte sans-serif moderna (textos) -->
+    <!-- Para trocar fontes: https://fonts.google.com -->
+    <!-- ============================================== -->
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Lucide Icons -->
+    <!-- LUCIDE ICONS - Biblioteca de ícones -->
+    <!-- Catálogo: https://lucide.dev/icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- AOS Animation Library -->
+    <!-- AOS - Animate On Scroll (animações ao rolar) -->
+    <!-- Documentação: https://michalsnik.github.io/aos/ -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+    <!-- ============================================== -->
+    <!-- CONFIGURAÇÃO DO TAILWIND CSS -->
+    <!-- ============================================== -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
+            /* ========================================= */
+            /* PALETA DE CORES - ALTERE AQUI AS CORES   */
+            /* Use: https://coolors.co para criar paletas */
+            /* ========================================= */
             colors: {
-              primary: "#D4A373",
-              secondary: "#FAEuE1",
-              accent: "#BC6C25",
-              dark: "#2C1810",
-              rose: "#FCE7F3",
-              bglight: "#FFFCF9",
-              gold: "#FFD700",
+              primary: "#D4A373",    /* Cor principal (dourado/caramelo) - botões, destaques */
+              secondary: "#FAEDE1",  /* Cor secundária (bege claro) - fundos */
+              accent: "#BC6C25",     /* Cor de destaque (marrom) - hover, gradientes */
+              dark: "#2C1810",       /* Cor escura (marrom escuro) - textos, footer */
+              rose: "#FCE7F3",       /* Rosa claro - backgrounds suaves */
+              bglight: "#FFFCF9",    /* Fundo claro - seções alternadas */
+              gold: "#FFD700",       /* Dourado - efeitos shimmer */
             },
+            /* FONTES PERSONALIZADAS */
             fontFamily: {
-              serif: ['"Cormorant Garamond"', "serif"],
-              sans: ['"Lato"', "sans-serif"],
+              serif: ['"Cormorant Garamond"', "serif"],  /* Títulos elegantes */
+              sans: ['"Lato"', "sans-serif"],           /* Textos do corpo */
             },
+            /* ANIMAÇÕES PERSONALIZADAS */
             animation: {
-              'float': 'float 6s ease-in-out infinite',
-              'pulse-slow': 'pulse 3s ease-in-out infinite',
-              'shimmer': 'shimmer 2s linear infinite',
-              'bounce-slow': 'bounce 3s infinite',
+              'float': 'float 6s ease-in-out infinite',       /* Flutuação suave */
+              'pulse-slow': 'pulse 3s ease-in-out infinite',  /* Pulsação lenta */
+              'shimmer': 'shimmer 2s linear infinite',        /* Brilho nos textos */
+              'bounce-slow': 'bounce 3s infinite',            /* Quique lento */
             },
           },
         },
       };
     </script>
 
+    <!-- ============================================== -->
+    <!-- ESTILOS CSS PERSONALIZADOS -->
+    <!-- ============================================== -->
     <style>
+      /* Scroll suave ao clicar em links de âncora */
       html { scroll-behavior: smooth; }
 
-      /* ===== LOADER ===== */
+      /* ============================================== */
+      /* LOADER - Tela de carregamento inicial          */
+      /* Altere background para mudar cor de fundo      */
+      /* ============================================== */
       #page-loader {
         position: fixed;
         inset: 0;
@@ -839,30 +877,36 @@
       }
     </style>
   </head>
+  <!-- ============================================== -->
+  <!-- INÍCIO DO CORPO DA PÁGINA -->
+  <!-- ============================================== -->
   <body class="font-sans text-dark bg-secondary selection:bg-primary selection:text-white">
     
-    <!-- Page Loader -->
+    <!-- ============================================== -->
+    <!-- LOADER - Tela de carregamento -->
+    <!-- Remove a classe 'hidden' para testar -->
+    <!-- ============================================== -->
     <div id="page-loader">
       <div class="loader-lash"></div>
       <div class="loader-eye"></div>
       <p class="text-primary mt-6 font-serif text-xl tracking-widest">Carregando beleza...</p>
     </div>
 
-    <!-- Custom Cursor -->
+    <!-- CURSOR PERSONALIZADO - Só aparece em desktop -->
     <div class="custom-cursor" id="custom-cursor"></div>
 
-    <!-- Scroll Progress Bar -->
+    <!-- BARRA DE PROGRESSO DO SCROLL - Topo da página -->
     <div id="scroll-progress"></div>
 
-    <!-- Sparkle Particles -->
+    <!-- PARTÍCULAS DE BRILHO - Efeito decorativo -->
     <div id="particles-container"></div>
 
-    <!-- Back to Top Button -->
+    <!-- BOTÃO VOLTAR AO TOPO -->
     <button id="back-to-top" aria-label="Voltar ao topo">
       <i data-lucide="chevron-up" class="w-6 h-6"></i>
     </button>
 
-    <!-- Reading Guide (para acessibilidade) -->
+    <!-- GUIA DE LEITURA - Recurso de acessibilidade -->
     <div id="reading-guide"></div>
 
     <!-- Widget de Acessibilidade -->
@@ -1033,14 +1077,18 @@
       </div>
     </div>
 
-    <!-- Navbar -->
+    <!-- ============================================== -->
+    <!-- NAVBAR - Menu de navegação -->
+    <!-- Altere os links href="#secao" para navegar -->
+    <!-- ============================================== -->
     <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300" id="navbar">
       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <!-- LOGO - Altere o nome da marca aqui -->
         <a href="#" class="text-2xl md:text-3xl font-serif font-bold text-accent tracking-wide z-50 relative">
-          Paloma<span class="text-primary">Cílios</span>
+          Fernanda & Ana<span class="text-primary">Cílios</span>
         </a>
         
-        <!-- Desktop Menu -->
+        <!-- MENU DESKTOP - Links de navegação -->
         <nav class="hidden md:flex space-x-8 items-center">
           <a href="#home" class="text-dark hover:text-primary transition font-medium">Início</a>
           <a href="#sobre" class="text-dark hover:text-primary transition font-medium">Sobre</a>
@@ -1077,11 +1125,20 @@
 </div>
 
 
-    <!-- Hero Section -->
+    <!-- ============================================== -->
+    <!-- HERO SECTION - Seção principal com vídeo de fundo -->
+    <!-- Altere: vídeo, textos e botões -->
+    <!-- ============================================== -->
     <section id="home" class="relative h-[85vh] md:h-screen flex items-center justify-center -mt-20 parallax-hero">
+      <!-- Container do vídeo de fundo -->
       <div class="absolute inset-0 z-0">
+        <!-- ============================================== -->
+        <!-- VÍDEO DE CAPA - Altere o src para trocar o vídeo -->
+        <!-- Formatos aceitos: MP4, WebM -->
+        <!-- Tamanho recomendado: 1920x1080 ou maior -->
+        <!-- ============================================== -->
         <video class="w-full h-full object-cover opacity-90 md:opacity-80 transition-all duration-500 hero-section-video" autoplay muted loop playsinline>
-          <source src="https://i.imgur.com/11RlyEb.mp4" type="video/mp4">
+          <source src="https://i.imgur.com/TSAxIjw.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay absolute inset-0"></div>
         <!-- Animated Gradient Overlay -->
@@ -1096,7 +1153,7 @@
           </span>
         </div>
         <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-4" data-aos="fade-up" data-aos-delay="400">
-          <span class="shimmer-text">Paloma Oliveira</span>
+          <span class="shimmer-text">Fernanda e Ana</span>
         </h1>
         <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="500">
           Designer de Cílios • Realçando sua beleza natural
@@ -1108,12 +1165,13 @@
         <a href="#agendamento-online" class="btn-animated w-full sm:w-auto bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-full text-lg font-medium transition shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 hover:shadow-2xl glow-effect">
           <i data-lucide="calendar"></i> Agendar Horário
         </a>
-        <a href="https://www.instagram.com/paloma_cilioslash" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-lg font-medium transition shadow-lg flex items-center justify-center gap-2 hover:scale-105">
+        <!-- BOTÃO INSTAGRAM - Altere o href para seu @ -->
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-lg font-medium transition shadow-lg flex items-center justify-center gap-2 hover:scale-105">
             <i data-lucide="instagram"></i> Instagram
         </a>
       </div>
 
-      <!-- Scroll Indicator -->
+      <!-- Indicador de scroll - seta animada -->
       <div class="absolute bottom-24 md:bottom-28 left-1/2 transform -translate-x-1/2 z-20 hidden md:block" data-aos="fade-up" data-aos-delay="800">
         <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
           <div class="w-1.5 h-3 bg-white rounded-full mt-2 animate-bounce"></div>
@@ -1121,9 +1179,12 @@
       </div>
     </section>
 
-    <!-- Sobre Mim -->
+    <!-- ============================================== -->
+    <!-- SEÇÃO SOBRE NÓS -->
+    <!-- Altere: imagem, textos e diferenciais -->
+    <!-- ============================================== -->
     <section id="sobre" class="py-16 md:py-24 bg-white relative overflow-hidden">
-      <!-- Decorative Elements -->
+      <!-- Elementos decorativos de fundo -->
       <div class="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
       <div class="absolute bottom-0 right-0 w-96 h-96 bg-rose/50 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
       
@@ -1132,7 +1193,7 @@
           <div class="w-full md:w-1/2 relative order-2 md:order-1" data-aos="fade-right">
             <div class="absolute top-6 -left-6 w-full h-full border-2 border-primary rounded-2xl z-0 hidden md:block"></div>
             <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-primary to-accent rounded-full blur-xl opacity-50 hidden md:block"></div>
-            <img src="https://i.imgur.com/CkOdEvw.jpeg" onerror="this.src='https://placehold.co/800x600/D4A373/FFF?text=Sobre+a+Profissional'" alt="Lash Designer" class="relative z-10 w-full h-72 md:h-[500px] object-cover rounded-2xl shadow-2xl bg-gray-100 hover:shadow-3xl transition-shadow duration-500" />
+            <img src="https://i.imgur.com/1Ms9yRH.jpeg" onerror="this.src='https://placehold.co/800x600/D4A373/FFF?text=Sobre+a+Profissional'" alt="Lash Designer" class="relative z-10 w-full h-72 md:h-[500px] object-cover rounded-2xl shadow-2xl bg-gray-100 hover:shadow-3xl transition-shadow duration-500" />
             
             <!-- Floating Badge -->
             <div class="absolute -bottom-4 -right-4 md:bottom-8 md:right-8 bg-white px-6 py-4 rounded-xl shadow-xl z-20 hidden md:flex items-center gap-3" data-aos="fade-up" data-aos-delay="300">
@@ -1147,12 +1208,12 @@
           </div>
           
           <div class="w-full md:w-1/2 order-1 md:order-2" data-aos="fade-left">
-            <span class="inline-block px-4 py-1 bg-rose text-primary rounded-full text-sm font-bold tracking-wider uppercase mb-4">Sobre Mim</span>
+            <span class="inline-block px-4 py-1 bg-rose text-primary rounded-full text-sm font-bold tracking-wider uppercase mb-4">Sobre Nós</span>
             <h2 class="text-3xl md:text-5xl font-serif font-bold mb-6 text-dark leading-tight">
-              Dedicada à arte de <span class="text-primary">realçar olhares</span>
+              Dedicadas à arte de <span class="text-primary">realçar olhares</span>
             </h2>
             <p class="text-gray-600 mb-8 leading-relaxed text-base md:text-lg">
-              Olá! Sou Paloma, Lash Designer certificada com mais de 5 anos de experiência. Minha missão vai além de apenas aplicar fios; eu estudo a simetria do seu rosto (visagismo) para criar um design único que valorize sua beleza natural.
+              Olá! Somos Fernanda e Ana, Lash Designers certificadas com mais de 5 anos de experiência. Nossa missão vai além de apenas aplicar fios; estudamos a simetria do seu rosto (visagismo) para criar um design único que valorize sua beleza natural.
             </p>
             
             <div class="grid grid-cols-2 gap-4 md:gap-6 mb-8">
@@ -1178,7 +1239,10 @@
       </div>
     </section>
 
-    <!-- Estatísticas -->
+    <!-- ============================================== -->
+    <!-- SEÇÃO DE ESTATÍSTICAS -->
+    <!-- Altere os valores em data-target="" -->
+    <!-- ============================================== -->
     <section class="py-12 md:py-16 bg-gradient-to-r from-dark via-dark to-dark relative overflow-hidden">
       <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 left-1/4 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
@@ -1186,6 +1250,7 @@
       </div>
       
       <div class="container mx-auto px-6 relative z-10">
+        <!-- CONTADORES - Altere data-target para mudar os números -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div data-aos="fade-up" data-aos-delay="100">
             <div class="counter-number" data-target="1500">0</div>
@@ -1207,9 +1272,12 @@
       </div>
     </section>
 
-    <!-- Serviços -->
+    <!-- ============================================== -->
+    <!-- SEÇÃO DE SERVIÇOS/PREÇOS -->
+    <!-- Adicione/remova cards e altere preços -->
+    <!-- ============================================== -->
     <section id="servicos" class="py-16 md:py-24 bg-secondary relative overflow-hidden">
-      <!-- Background Decoration -->
+      <!-- Decoração de fundo -->
       <div class="absolute top-1/2 left-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
       
       <div class="container mx-auto px-6 relative z-10">
@@ -1343,7 +1411,7 @@
         <div class="text-center mb-10 md:mb-16">
           <span class="inline-block px-4 py-1 bg-rose text-primary rounded-full text-sm font-bold tracking-wider uppercase mb-4" data-aos="fade-up">Portfólio</span>
           <h2 class="text-3xl md:text-5xl font-serif font-bold text-dark mb-4" data-aos="fade-up" data-aos-delay="100">
-            <span class="decorated-title">Paloma Oliveira</span>
+            <span class="decorated-title">Fernanda e Ana</span>
           </h2>
           <p class="text-gray-600 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="200">Toque na imagem e descubra o tipo de cílios. Cada trabalho é único!</p>
         </div>
@@ -1380,8 +1448,9 @@
         </div>
         
         <!-- CTA da Galeria -->
+        <!-- LINK INSTAGRAM DA GALERIA - Altere o href para seu @ -->
         <div class="text-center mt-10" data-aos="fade-up">
-          <a href="https://www.instagram.com/paloma_cilioslash" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-primary hover:text-accent transition font-medium">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-primary hover:text-accent transition font-medium">
             <i data-lucide="instagram" class="w-5 h-5"></i>
             Ver mais no Instagram
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -1390,9 +1459,12 @@
       </div>
     </section>
 
-    <!-- Depoimentos -->
+    <!-- ============================================== -->
+    <!-- SEÇÃO DE DEPOIMENTOS -->
+    <!-- Altere nomes, textos e iniciais dos clientes -->
+    <!-- ============================================== -->
     <section class="py-16 md:py-24 bg-gradient-to-br from-rose via-white to-rose relative overflow-hidden">
-        <!-- Decorative Elements -->
+        <!-- Aspas decorativas -->
         <div class="absolute top-10 left-10 text-8xl text-primary/10 font-serif">"</div>
         <div class="absolute bottom-10 right-10 text-8xl text-primary/10 font-serif rotate-180">"</div>
         
@@ -1401,6 +1473,7 @@
             <h2 class="text-3xl md:text-5xl font-serif font-bold text-dark mb-4" data-aos="fade-up" data-aos-delay="100">O que dizem as <span class="text-primary">clientes</span></h2>
             <p class="text-gray-600 max-w-xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="200">Histórias reais de transformação e satisfação</p>
             
+            <!-- CARDS DE DEPOIMENTOS - Adicione ou remova conforme necessário -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 <!-- Depoimento 1 -->
                 <div class="glass-card p-8 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
@@ -1639,21 +1712,29 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ============================================== -->
+    <!-- FOOTER - Rodapé do site -->
+    <!-- Altere: logo, links, endereço e horário -->
+    <!-- ============================================== -->
     <footer class="bg-gradient-to-b from-dark to-black text-gray-400 py-12 border-t border-gray-800">
       <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <!-- Logo e Descrição -->
+          
+          <!-- COLUNA 1: Logo e Redes Sociais -->
           <div class="text-center md:text-left">
+            <!-- NOME/LOGO DO FOOTER -->
             <div class="text-2xl font-serif font-bold text-white mb-4">
-              Paloma Oliveira<span class="text-primary">CíliosSlash</span>
+              Fernanda e Ana<span class="text-primary">Cílios</span>
             </div>
             <p class="text-sm text-gray-500 mb-4">Transformando olhares e elevando autoestima há mais de 5 anos.</p>
+            <!-- REDES SOCIAIS DO FOOTER - Altere os links abaixo -->
             <div class="flex justify-center md:justify-start gap-4">
-              <a href="https://www.instagram.com/paloma_cilioslash" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+              <!-- INSTAGRAM - Coloque seu @ após instagram.com/ -->
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
                 <i data-lucide="instagram" class="w-5 h-5"></i>
               </a>
-              <a href="https://wa.me/5521994374107" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-green-500 hover:text-white transition">
+              <!-- WHATSAPP - Número: +55 21 97743-4614 -->
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-green-500 hover:text-white transition">
                 <i data-lucide="message-circle" class="w-5 h-5"></i>
               </a>
             </div>
@@ -1679,9 +1760,10 @@
                 <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>
                 Inhaúma - RJ
               </p>
+              <!-- TELEFONE DE CONTATO - Altere o número aqui -->
               <p class="flex items-center justify-center md:justify-end gap-2">
                 <i data-lucide="phone" class="w-4 h-4 text-primary"></i>
-                (21) 99437-4107
+                (21) 97743-4614
               </p>
               <p class="flex items-center justify-center md:justify-end gap-2">
                 <i data-lucide="clock" class="w-4 h-4 text-primary"></i>
@@ -1692,36 +1774,45 @@
         </div>
         
         <div class="border-t border-gray-800 pt-8 text-center">
-          <p class="text-sm text-gray-500">© 2024 Paloma Designer de Cílios. Todos os direitos reservados.</p>
+          <p class="text-sm text-gray-500">© 2026 Fernanda e Ana Designer de Cílios. Todos os direitos reservados.</p>
           <p class="text-xs text-gray-600 mt-2">Feito com <span class="text-primary">♥</span> para realçar sua beleza</p>
         </div>
       </div>
     </footer>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/5521994374107" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white p-3 md:p-4 rounded-full shadow-2xl hover:from-green-600 hover:to-green-700 transition-all z-50 flex items-center justify-center transform hover:scale-110 group">
+    <!-- ============================================== -->
+    <!-- BOTÃO FLUTUANTE WHATSAPP -->
+    <!-- Altere o número após wa.me/ -->
+    <!-- Formato: 55 + DDD + número (sem espaços ou traços) -->
+    <!-- ============================================== -->
+    <a href="https://wa.me/5521977434614" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white p-3 md:p-4 rounded-full shadow-2xl hover:from-green-600 hover:to-green-700 transition-all z-50 flex items-center justify-center transform hover:scale-110 group">
       <i data-lucide="message-circle" class="w-6 h-6 md:w-8 md:h-8"></i>
       <span class="absolute right-full mr-3 bg-white text-dark px-4 py-2 rounded-lg shadow-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden md:block">
         Fale conosco!
       </span>
     </a>
 
-    <!-- Scripts -->
+    <!-- ============================================== -->
+    <!-- SCRIPTS JAVASCRIPT -->
+    <!-- Funções interativas da página -->
+    <!-- ============================================== -->
     <script>
-      // ===== INICIALIZAÇÃO =====
+      /* ================================================
+         INICIALIZAÇÃO - Carrega quando a página abre
+         ================================================ */
       document.addEventListener('DOMContentLoaded', function() {
-        // Inicializa Lucide Icons
+        // Inicializa Lucide Icons (biblioteca de ícones)
         lucide.createIcons();
         
-        // Inicializa AOS (Animate On Scroll)
+        // Inicializa AOS (Animate On Scroll) - animações ao rolar
         AOS.init({
-          duration: 800,
+          duration: 800,        // Duração da animação em ms
           easing: 'ease-out-cubic',
-          once: true,
-          offset: 50
+          once: true,           // Anima só uma vez
+          offset: 50            // Distância para iniciar
         });
         
-        // Page Loader
+        // Esconde o loader após 1.5 segundos
         setTimeout(() => {
           document.getElementById('page-loader').classList.add('hidden');
         }, 1500);
@@ -2037,9 +2128,10 @@
         const name = document.getElementById("clientName").value;
         const dateStr = selectedDate.toLocaleDateString('pt-BR');
         
-        const message = `Olá Paloma! ✨ Gostaria de confirmar um agendamento.%0A%0A*👤 Cliente:* ${name}%0A*💅 Serviço:* ${service}%0A*📅 Data:* ${dateStr}%0A*⏰ Horário:* ${selectedTime}%0A%0AAguardo confirmação! 💕`;
+        const message = `Olá! ✨ Gostaria de confirmar um agendamento.%0A%0A*👤 Cliente:* ${name}%0A*💅 Serviço:* ${service}%0A*📅 Data:* ${dateStr}%0A*⏰ Horário:* ${selectedTime}%0A%0AAguardo confirmação! 💕`;
         
-        window.open(`https://wa.me/5521994374107?text=${message}`, '_blank');
+        /* WHATSAPP DO AGENDAMENTO - Altere o número abaixo */
+        window.open(`https://wa.me/5521977434614?text=${message}`, '_blank');
       }
 
       // ===== WIDGET DE ACESSIBILIDADE =====
