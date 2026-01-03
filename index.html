@@ -16,6 +16,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
+    <meta charset="UTF-8" />
     <!-- ===============================================================
          SEÇÃO HEAD - CONFIGURAÇÕES INICIAIS E META TAGS
          - charset: Define codificação UTF-8 para caracteres especiais
@@ -23,7 +24,6 @@
          - title: Título exibido na aba do navegador
          - og:tags: Meta tags para compartilhamento em redes sociais
     ================================================================ -->
-    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebStudio Premium - Catálogo de Sites Profissionais</title>
 
@@ -265,6 +265,7 @@
         background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
         opacity: 0;
         transition: opacity 0.5s ease;
+        pointer-events: none; /* Permite cliques através do overlay */
       }
       .card-3d:hover::before {
         opacity: 1;
@@ -312,6 +313,8 @@
       }
       .niche-card .niche-btn {
         background: linear-gradient(135deg, var(--niche-color), var(--niche-accent));
+        position: relative;
+        z-index: 10; /* Garante que o botão fique acima dos overlays */
       }
       .niche-card .niche-btn:hover {
         transform: scale(1.05);
