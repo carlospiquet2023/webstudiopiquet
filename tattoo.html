@@ -1,0 +1,439 @@
+<!-- 
+╔══════════════════════════════════════════════════════════════════════════════╗
+║               INK SOUL TATTOO - ESTÚDIO DE TATUAGEM                          ║
+║══════════════════════════════════════════════════════════════════════════════║
+║  Template premium para estúdios de tatuagem e tatuadores artísticos          ║
+║  especializados em tatuagens exclusivas e personalizadas                     ║
+║                                                                              ║
+║  Desenvolvido por: Carlos Antonio de Oliveira Piquet                         ║
+║  Email: carlospiquet.projetos@gmail.com                                      ║
+║  WhatsApp: +55 21 97743-4614                                                 ║
+║                                                                              ║
+║  © 2026 - Todos os direitos reservados                                       ║
+║  Protegido por Lei de Direitos Autorais - Lei nº 9.610/1998                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ink Soul Tattoo - Estúdio de Tatuagem</title>
+    <meta property="og:title" content="Ink Soul Tattoo Studio">
+    <meta property="og:description" content="Tatuagens artísticas e exclusivas">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#EF4444",
+              secondary: "#1F1F1F",
+              accent: "#F97316",
+              dark: "#0A0A0A",
+              light: "#FAFAFA",
+              gray: "#2D2D2D",
+            },
+            fontFamily: {
+              display: ['"Oswald"', "sans-serif"],
+              sans: ['"Barlow"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      #page-loader {
+        position: fixed; inset: 0;
+        background: linear-gradient(135deg, #0A0A0A 0%, #1F1F1F 100%);
+        z-index: 99999; display: flex; align-items: center; justify-content: center; flex-direction: column;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-ink {
+        width: 60px; height: 60px;
+        border: 4px solid #2D2D2D;
+        border-top-color: #EF4444;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .glass-nav {
+        background: rgba(10, 10, 10, 0.95);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+      }
+      .hero-gradient {
+        background: linear-gradient(135deg, #0A0A0A 0%, #1F1F1F 50%, #2D2D2D 100%);
+      }
+      .fire-gradient {
+        background: linear-gradient(135deg, #EF4444 0%, #F97316 50%, #EF4444 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 3s linear infinite;
+      }
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(239, 68, 68, 0.1);
+      }
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px -12px rgba(239, 68, 68, 0.3);
+        border-color: rgba(239, 68, 68, 0.5);
+      }
+      .floating { animation: floating 3s ease-in-out infinite; }
+      @keyframes floating {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      .neon-glow {
+        text-shadow: 0 0 10px #EF4444, 0 0 20px #EF4444, 0 0 30px #EF4444;
+      }
+      /* Scroll Progress */
+      #scroll-progress {
+        position: fixed; top: 0; left: 0; height: 4px; z-index: 99998;
+        background: linear-gradient(90deg, #EF4444, #F97316, #EF4444);
+        width: 0%; transition: width 0.1s linear;
+      }
+      /* Custom Cursor */
+      .custom-cursor {
+        width: 20px; height: 20px; border: 2px solid #EF4444;
+        border-radius: 50%; position: fixed; pointer-events: none;
+        z-index: 99999; transition: transform 0.15s ease, background 0.15s ease;
+      }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(239, 68, 68, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+      /* Back to Top */
+      #back-to-top {
+        position: fixed; bottom: 100px; right: 24px; width: 50px; height: 50px;
+        background: linear-gradient(135deg, #EF4444, #F97316); color: white;
+        border: none; border-radius: 50%; cursor: pointer; z-index: 9999;
+        opacity: 0; visibility: hidden; transition: all 0.3s ease;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+      }
+      #back-to-top.visible { opacity: 1; visibility: visible; }
+      #back-to-top:hover { transform: scale(1.1); }
+    </style>
+  </head>
+  <body class="font-sans text-light bg-dark">
+    <!-- Loader -->
+    <div id="page-loader">
+      <div class="loader-ink"></div>
+      <p class="text-primary mt-6 font-display text-3xl tracking-wider">INK SOUL</p>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Navbar -->
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl md:text-3xl font-display tracking-wider">
+          <span class="text-primary">INK</span><span class="text-white">SOUL</span>
+        </a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-gray-300 hover:text-primary transition font-medium">Início</a>
+          <a href="#sobre" class="text-gray-300 hover:text-primary transition font-medium">Sobre</a>
+          <a href="#estilos" class="text-gray-300 hover:text-primary transition font-medium">Estilos</a>
+          <a href="#galeria" class="text-gray-300 hover:text-primary transition font-medium">Portfólio</a>
+          <a href="#contato" class="bg-primary text-white px-6 py-2 hover:bg-accent transition font-bold">Orçamento</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-primary rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 text-center relative z-10">
+        <span class="inline-block px-6 py-2 border border-primary text-primary text-sm mb-6 tracking-widest" data-aos="fade-up">
+          🔥 TATTOO STUDIO
+        </span>
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-display mb-6 tracking-wider" data-aos="fade-up" data-aos-delay="100">
+          ARTE NA <span class="fire-gradient">PELE</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="200">
+          Transformamos suas ideias em arte permanente. Tatuagens exclusivas com qualidade e segurança.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="300">
+          <a href="#contato" class="bg-primary text-white px-10 py-4 font-display tracking-wider hover:bg-accent transition">
+            <i data-lucide="pen-tool" class="inline w-5 h-5 mr-2"></i>FAZER ORÇAMENTO
+          </a>
+          <a href="#galeria" class="border-2 border-primary text-primary px-10 py-4 font-display tracking-wider hover:bg-primary hover:text-white transition">
+            VER PORTFÓLIO
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-16 bg-secondary border-y border-primary/20">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up">
+            <p class="text-4xl md:text-5xl font-display text-primary">5000+</p>
+            <p class="text-gray-400 mt-2">Tatuagens Feitas</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="100">
+            <p class="text-4xl md:text-5xl font-display text-primary">12</p>
+            <p class="text-gray-400 mt-2">Anos de Experiência</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="200">
+            <p class="text-4xl md:text-5xl font-display text-primary">8</p>
+            <p class="text-gray-400 mt-2">Estilos Diferentes</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="300">
+            <p class="text-4xl md:text-5xl font-display text-primary">100%</p>
+            <p class="text-gray-400 mt-2">Biossegurança</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="py-20 bg-dark">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="relative" data-aos="fade-right">
+            <div class="absolute -top-4 -left-4 w-full h-full border-2 border-primary"></div>
+            <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=600" alt="Tattoo Studio" class="relative w-full h-96 object-cover grayscale hover:grayscale-0 transition duration-500"/>
+            <div class="absolute -bottom-6 -right-6 bg-primary text-white p-6 floating">
+              <p class="text-4xl font-display">12+</p>
+              <p class="text-sm font-bold">ANOS</p>
+            </div>
+          </div>
+          <div data-aos="fade-left">
+            <span class="text-primary font-bold tracking-widest">SOBRE O ESTÚDIO</span>
+            <h2 class="text-4xl md:text-5xl font-display mt-2 mb-6 tracking-wider">
+              PAIXÃO PELA <span class="fire-gradient">ARTE</span>
+            </h2>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+              O Ink Soul nasceu da paixão pela arte da tatuagem. Nosso estúdio oferece um ambiente seguro, higienizado e confortável, com tatuadores especializados em diversos estilos para criar sua tattoo dos sonhos.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex items-center gap-3 p-4 bg-secondary border border-primary/20">
+                <i data-lucide="shield-check" class="w-8 h-8 text-primary"></i>
+                <span>100% Esterilizado</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-secondary border border-primary/20">
+                <i data-lucide="palette" class="w-8 h-8 text-primary"></i>
+                <span>Arte Exclusiva</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Estilos -->
+    <section id="estilos" class="py-20 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-bold tracking-widest" data-aos="fade-up">ESTILOS</span>
+          <h2 class="text-4xl md:text-5xl font-display mt-2 tracking-wider" data-aos="fade-up">
+            NOSSOS <span class="fire-gradient">ESTILOS</span>
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-dark p-6 card-hover text-center" data-aos="fade-up">
+            <div class="w-16 h-16 bg-primary mx-auto flex items-center justify-center text-white mb-4">
+              <i data-lucide="pen-tool" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-display mb-2">REALISMO</h3>
+            <p class="text-gray-400 text-sm">Retratos e imagens hiper-realistas</p>
+          </div>
+          <div class="bg-dark p-6 card-hover text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-primary mx-auto flex items-center justify-center text-white mb-4">
+              <i data-lucide="palette" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-display mb-2">AQUARELA</h3>
+            <p class="text-gray-400 text-sm">Cores vibrantes e efeito pintura</p>
+          </div>
+          <div class="bg-dark p-6 card-hover text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-primary mx-auto flex items-center justify-center text-white mb-4">
+              <i data-lucide="hexagon" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-display mb-2">GEOMÉTRICO</h3>
+            <p class="text-gray-400 text-sm">Formas e padrões simétricos</p>
+          </div>
+          <div class="bg-dark p-6 card-hover text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-primary mx-auto flex items-center justify-center text-white mb-4">
+              <i data-lucide="feather" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-display mb-2">FINE LINE</h3>
+            <p class="text-gray-400 text-sm">Traços finos e delicados</p>
+          </div>
+          <div class="bg-dark p-6 card-hover text-center" data-aos="fade-up" data-aos-delay="350">
+            <div class="w-16 h-16 bg-primary mx-auto flex items-center justify-center text-white mb-4">
+              <i data-lucide="anchor" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-display mb-2">OLD SCHOOL</h3>
+            <p class="text-gray-400 text-sm">Estilo tradicional americano</p>
+          </div>
+          <div class="bg-dark p-6 card-hover text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="w-16 h-16 bg-primary mx-auto flex items-center justify-center text-white mb-4">
+              <i data-lucide="skull" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-display mb-2">BLACKWORK</h3>
+            <p class="text-gray-400 text-sm">Preto sólido e pontilhismo</p>
+          </div>
+          <div class="bg-dark p-6 card-hover text-center" data-aos="fade-up" data-aos-delay="450">
+            <div class="w-16 h-16 bg-primary mx-auto flex items-center justify-center text-white mb-4">
+              <i data-lucide="flower-2" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-display mb-2">ORIENTAL</h3>
+            <p class="text-gray-400 text-sm">Arte japonesa tradicional</p>
+          </div>
+          <div class="bg-dark p-6 card-hover text-center" data-aos="fade-up" data-aos-delay="500">
+            <div class="w-16 h-16 bg-primary mx-auto flex items-center justify-center text-white mb-4">
+              <i data-lucide="type" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-display mb-2">LETTERING</h3>
+            <p class="text-gray-400 text-sm">Tipografia e caligrafia</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galeria -->
+    <section id="galeria" class="py-20 bg-dark">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-bold tracking-widest" data-aos="fade-up">PORTFÓLIO</span>
+          <h2 class="text-4xl md:text-5xl font-display mt-2 tracking-wider" data-aos="fade-up">NOSSOS <span class="fire-gradient">TRABALHOS</span></h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="relative group overflow-hidden aspect-square" data-aos="zoom-in">
+            <img src="https://images.unsplash.com/photo-1590246814883-57764ecdfc43?w=400" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500 group-hover:scale-110" alt="Tattoo"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+              <span class="text-white font-display">REALISMO</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden aspect-square" data-aos="zoom-in" data-aos-delay="100">
+            <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=400" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500 group-hover:scale-110" alt="Tattoo"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+              <span class="text-white font-display">BLACKWORK</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden aspect-square" data-aos="zoom-in" data-aos-delay="200">
+            <img src="https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?w=400" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500 group-hover:scale-110" alt="Tattoo"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+              <span class="text-white font-display">FINE LINE</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden aspect-square" data-aos="zoom-in" data-aos-delay="300">
+            <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=400" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500 group-hover:scale-110" alt="Tattoo"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+              <span class="text-white font-display">GEOMÉTRICO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="py-20 bg-gradient-to-br from-primary to-accent text-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-5xl font-display tracking-wider mb-6" data-aos="fade-up">FAÇA SEU ORÇAMENTO</h2>
+          <p class="text-xl text-white/80 mb-8" data-aos="fade-up" data-aos-delay="100">
+            Transforme sua ideia em arte! Envie sua referência e receba um orçamento. 🔥
+          </p>
+          <div class="grid md:grid-cols-3 gap-6 mb-10" data-aos="fade-up" data-aos-delay="200">
+            <div class="bg-black/20 backdrop-blur p-6">
+              <i data-lucide="map-pin" class="w-8 h-8 mx-auto mb-3"></i>
+              <p>Rua da Tinta, 666<br/>Vila Madalena - SP</p>
+            </div>
+            <div class="bg-black/20 backdrop-blur p-6">
+              <i data-lucide="clock" class="w-8 h-8 mx-auto mb-3"></i>
+              <p>Ter - Sáb<br/>12h às 20h</p>
+            </div>
+            <div class="bg-black/20 backdrop-blur p-6">
+              <i data-lucide="phone" class="w-8 h-8 mx-auto mb-3"></i>
+              <p>(11) 91111-1111</p>
+            </div>
+          </div>
+          <a href="https://wa.me/5511911111111" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-dark text-primary px-10 py-4 font-display text-xl tracking-wider hover:bg-secondary transition" data-aos="fade-up" data-aos-delay="300">
+            <i data-lucide="message-circle" class="w-6 h-6"></i>ORÇAMENTO WHATSAPP
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark border-t border-primary/20 py-10">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-3xl font-display tracking-wider mb-4"><span class="text-primary">INK</span>SOUL</p>
+        <p class="text-gray-500">© 2026 Ink Soul Tattoo Studio. Todos os direitos reservados.</p>
+        <div class="flex justify-center gap-4 mt-6">
+          <a href="#" aria-label="Instagram" class="w-10 h-10 bg-primary text-white flex items-center justify-center hover:bg-accent transition">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+          </a>
+          <a href="#" aria-label="Facebook" class="w-10 h-10 bg-primary text-white flex items-center justify-center hover:bg-accent transition">
+            <i data-lucide="facebook" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="back-to-top"><i data-lucide="chevron-up" class="w-6 h-6"></i></button>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/5511911111111" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition z-50 hover:scale-110">
+      <i data-lucide="message-circle" class="w-7 h-7"></i>
+    </a>
+
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 1000);
+      });
+      lucide.createIcons();
+      AOS.init({ duration: 800, once: true });
+
+      // Scroll Progress
+      window.addEventListener('scroll', () => {
+        const progress = document.getElementById('scroll-progress');
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = (scrollTop / docHeight) * 100 + '%';
+      });
+
+      // Back to Top
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 500);
+      });
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Custom Cursor
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+      });
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+    </script>
+  </body>
+</html>

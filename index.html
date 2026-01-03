@@ -1,24 +1,48 @@
+<!-- 
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                      WEBSTUDIO PREMIUM - CATÁLOGO                            ║
+║══════════════════════════════════════════════════════════════════════════════║
+║  Página principal do catálogo de sites premium para profissionais de beleza  ║
+║                                                                              ║
+║  Desenvolvido por: Carlos Antonio de Oliveira Piquet                         ║
+║  Email: carlospiquet.projetos@gmail.com                                      ║
+║  WhatsApp: +55 21 97743-4614                                                 ║
+║                                                                              ║
+║  © 2026 - Todos os direitos reservados                                       ║
+║  Protegido por Lei de Direitos Autorais - Lei nº 9.610/1998                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
+    <!-- ===============================================================
+         SEÇÃO HEAD - CONFIGURAÇÕES INICIAIS E META TAGS
+         - charset: Define codificação UTF-8 para caracteres especiais
+         - viewport: Responsividade em dispositivos móveis
+         - title: Título exibido na aba do navegador
+         - og:tags: Meta tags para compartilhamento em redes sociais
+    ================================================================ -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paloma Designer de Cílios - Agendamento</title>
+    <title>WebStudio Premium - Catálogo de Sites Profissionais</title>
 
-    <meta property="og:title" content="Paloma Designer de Cílios">
-    <meta property="og:description" content="Alongamento de cílios • Beleza e autoestima">
-    <meta property="og:image" content="https://i.imgur.com/mUSAf6v.jpeg">
-    <meta property="og:url" content="https://company2002.github.io/palomaoliveiracilios/">
+    <meta property="og:title" content="WebStudio Premium - Sites Profissionais">
+    <meta property="og:description" content="Demonstração de sites premium para nichos de beleza e estética">
     <meta property="og:type" content="website">
 
+    <!-- ===============================================================
+         BIBLIOTECAS EXTERNAS
+         - Tailwind CSS: Framework CSS utilitário
+         - Google Fonts: Fontes Playfair Display e Inter
+         - Lucide Icons: Biblioteca de ícones
+         - AOS: Animate On Scroll - Animações de entrada
+    ================================================================ -->
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -27,92 +51,107 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+    <!-- ===============================================================
+         CONFIGURAÇÃO DO TAILWIND
+         PALETA DE CORES DO CATÁLOGO:
+         - primary: #6366F1 (Índigo) - Cor principal
+         - secondary: #F8FAFC (Cinza claro) - Fundos
+         - accent: #8B5CF6 (Violeta) - Destaques
+         - dark: #0F172A (Azul escuro) - Textos e fundos escuros
+         - light: #F1F5F9 (Cinza) - Fundos claros
+         - gold: #F59E0B (Dourado) - Destaques especiais
+         - rose: #EC4899 (Rosa) - Acentos femininos
+         - emerald: #10B981 (Verde) - Sucesso/Natureza
+         - cyan: #06B6D4 (Ciano) - Informação
+         
+         Para alterar cores: modifique os valores HEX abaixo
+    ================================================================ -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              primary: "#D4A373",
-              secondary: "#FAEuE1",
-              accent: "#BC6C25",
-              dark: "#2C1810",
-              rose: "#FCE7F3",
-              bglight: "#FFFCF9",
-              gold: "#FFD700",
+              primary: "#6366F1",
+              secondary: "#F8FAFC",
+              accent: "#8B5CF6",
+              dark: "#0F172A",
+              light: "#F1F5F9",
+              gold: "#F59E0B",
+              rose: "#EC4899",
+              emerald: "#10B981",
+              cyan: "#06B6D4",
             },
             fontFamily: {
-              serif: ['"Cormorant Garamond"', "serif"],
-              sans: ['"Lato"', "sans-serif"],
-            },
-            animation: {
-              'float': 'float 6s ease-in-out infinite',
-              'pulse-slow': 'pulse 3s ease-in-out infinite',
-              'shimmer': 'shimmer 2s linear infinite',
-              'bounce-slow': 'bounce 3s infinite',
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Inter"', "sans-serif"],
             },
           },
         },
       };
     </script>
 
+    <!-- ===============================================================
+         ESTILOS CSS PERSONALIZADOS
+         Inclui: Loader, Cursor, Scroll Progress, Cards, etc.
+    ================================================================ -->
     <style>
       html { scroll-behavior: smooth; }
 
-      /* ===== LOADER ===== */
+      /* ===== LOADER PREMIUM ===== 
+         Animação de carregamento inicial da página
+         Para alterar duração: modifique o setTimeout no JS (linha ~880)
+      */
       #page-loader {
         position: fixed;
         inset: 0;
-        background: linear-gradient(135deg, #2C1810 0%, #1a0f0a 100%);
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
         z-index: 99999;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
       }
       #page-loader.hidden {
         opacity: 0;
         visibility: hidden;
       }
-      .loader-lash {
-        width: 60px;
-        height: 60px;
+      .loader-ring {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
         position: relative;
       }
-      .loader-lash::before,
-      .loader-lash::after {
+      .loader-ring::before,
+      .loader-ring::after {
         content: '';
         position: absolute;
-        width: 3px;
-        height: 30px;
-        background: #D4A373;
+        inset: 0;
         border-radius: 50%;
-        animation: lash-blink 1.5s ease-in-out infinite;
+        border: 3px solid transparent;
       }
-      .loader-lash::before { left: 15px; animation-delay: 0s; }
-      .loader-lash::after { right: 15px; animation-delay: 0.2s; }
-      @keyframes lash-blink {
-        0%, 100% { transform: scaleY(1) rotate(-15deg); }
-        50% { transform: scaleY(0.3) rotate(-15deg); }
+      .loader-ring::before {
+        border-top-color: #6366F1;
+        border-right-color: #8B5CF6;
+        animation: spin 1.2s linear infinite;
       }
-      .loader-eye {
-        width: 40px;
-        height: 20px;
-        border: 3px solid #D4A373;
-        border-radius: 50%;
-        margin-top: 10px;
-        animation: eye-blink 1.5s ease-in-out infinite;
+      .loader-ring::after {
+        border-bottom-color: #EC4899;
+        border-left-color: #F59E0B;
+        animation: spin 1.8s linear infinite reverse;
       }
-      @keyframes eye-blink {
-        0%, 100% { transform: scaleY(1); }
-        50% { transform: scaleY(0.1); }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
       }
 
-      /* ===== CURSOR PERSONALIZADO ===== */
+      /* ===== CURSOR PERSONALIZADO =====
+         Cursor decorativo que segue o mouse
+         Para desativar: remova o elemento .custom-cursor do HTML
+      */
       .custom-cursor {
         width: 20px;
         height: 20px;
-        border: 2px solid #D4A373;
+        border: 2px solid #6366F1;
         border-radius: 50%;
         position: fixed;
         pointer-events: none;
@@ -122,13 +161,13 @@
       }
       .custom-cursor.hover {
         transform: scale(1.5);
-        background: rgba(212, 163, 115, 0.3);
+        background: rgba(99, 102, 241, 0.3);
       }
       @media (max-width: 768px) {
         .custom-cursor { display: none; }
       }
 
-      /* ===== PARTÍCULAS DE BRILHO ===== */
+      /* ===== PARTÍCULAS ===== */
       #particles-container {
         position: fixed;
         inset: 0;
@@ -136,131 +175,157 @@
         z-index: 1;
         overflow: hidden;
       }
-      .sparkle {
+      .particle {
         position: absolute;
         width: 4px;
         height: 4px;
-        background: #D4A373;
+        background: linear-gradient(135deg, #6366F1, #EC4899);
         border-radius: 50%;
-        animation: sparkle-float 8s linear infinite;
+        animation: particle-float 15s linear infinite;
         opacity: 0;
       }
-      @keyframes sparkle-float {
+      @keyframes particle-float {
         0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-        10% { opacity: 0.8; }
-        90% { opacity: 0.8; }
+        10% { opacity: 0.6; }
+        90% { opacity: 0.6; }
         100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
       }
 
-      /* ===== ANIMAÇÕES GERAIS ===== */
-      .fade-in-up {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .fade-in-up.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
-      }
-
-      @keyframes shimmer {
-        0% { background-position: -200% 0; }
-        100% { background-position: 200% 0; }
-      }
-
-      .shimmer-text {
-        background: linear-gradient(90deg, #D4A373 0%, #FFD700 50%, #D4A373 100%);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: shimmer 3s linear infinite;
-      }
-
-      .glow-effect {
-        box-shadow: 0 0 20px rgba(212, 163, 115, 0.3), 0 0 40px rgba(212, 163, 115, 0.1);
-      }
-
-      .hero-overlay {
-        background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
-      }
-
-      /* ===== HERO PARALLAX ===== */
-      .parallax-hero {
-        transform-style: preserve-3d;
-        perspective: 1000px;
+      /* ===== SCROLL PROGRESS ===== */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #6366F1, #8B5CF6, #EC4899, #F59E0B);
+        z-index: 99999;
+        transition: width 0.1s ease;
       }
 
       /* ===== GLASS MORPHISM ===== */
       .glass-nav {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(15, 23, 42, 0.85);
         -webkit-backdrop-filter: blur(20px);
         backdrop-filter: blur(20px);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid rgba(212, 163, 115, 0.2);
+        border-bottom: 1px solid rgba(99, 102, 241, 0.2);
       }
 
       .glass-card {
         background: rgba(255, 255, 255, 0.95);
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(212, 163, 115, 0.2);
+        border: 1px solid rgba(99, 102, 241, 0.1);
       }
 
-      /* ===== CARDS COM EFEITO 3D ===== */
+      /* ===== HERO GRADIENT ===== */
+      .hero-gradient {
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-gradient::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+        animation: rotate-bg 30s linear infinite;
+      }
+      @keyframes rotate-bg {
+        to { transform: rotate(360deg); }
+      }
+
+      /* ===== TEXT SHIMMER ===== */
+      .shimmer-text {
+        background: linear-gradient(90deg, #6366F1 0%, #EC4899 25%, #F59E0B 50%, #EC4899 75%, #6366F1 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 4s linear infinite;
+      }
+      @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      /* ===== CARD 3D HOVER ===== */
       .card-3d {
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         transform-style: preserve-3d;
-      }
-      .card-3d:hover {
-        transform: translateY(-10px) rotateX(5deg);
-        box-shadow: 0 25px 50px -12px rgba(212, 163, 115, 0.25);
-      }
-
-      /* ===== BOTÃO ANIMADO ===== */
-      .btn-animated {
         position: relative;
         overflow: hidden;
-        transition: all 0.3s ease;
       }
-      .btn-animated::before {
+      .card-3d::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-        transition: left 0.5s ease;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
       }
-      .btn-animated:hover::before {
-        left: 100%;
+      .card-3d:hover::before {
+        opacity: 1;
+      }
+      .card-3d:hover {
+        transform: translateY(-15px) rotateX(5deg);
+        box-shadow: 0 30px 60px -15px rgba(99, 102, 241, 0.35);
       }
 
-      /* ===== SCROLL PROGRESS BAR ===== */
-      #scroll-progress {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #D4A373, #BC6C25, #FFD700);
-        z-index: 99999;
-        transition: width 0.1s ease;
+      /* ===== GLOW EFFECT ===== */
+      .glow-effect {
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.3), 0 0 60px rgba(99, 102, 241, 0.1);
+      }
+
+      /* ===== FLOATING ANIMATION ===== */
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+      @keyframes floating {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+      }
+
+      /* ===== NICHE CARD COLORS ===== */
+      .niche-cilios { --niche-color: #D4A373; --niche-accent: #BC6C25; }
+      .niche-salao { --niche-color: #E91E63; --niche-accent: #C2185B; }
+      .niche-barbearia { --niche-color: #C9A227; --niche-accent: #8B7355; }
+      .niche-depilacao { --niche-color: #9370DB; --niche-accent: #BA55D3; }
+      .niche-estetica { --niche-color: #F472B6; --niche-accent: #EC4899; }
+      .niche-maquiagem { --niche-color: #DC143C; --niche-accent: #8B0000; }
+      .niche-nails { --niche-color: #FF69B4; --niche-accent: #DB7093; }
+      .niche-podologia { --niche-color: #0D9488; --niche-accent: #14B8A6; }
+      .niche-sobrancelhas { --niche-color: #5D4E37; --niche-accent: #C19A6B; }
+      .niche-spa { --niche-color: #2E8B57; --niche-accent: #3CB371; }
+      .niche-tattoo { --niche-color: #EF4444; --niche-accent: #F97316; }
+
+      .niche-card {
+        border-top: 4px solid var(--niche-color);
+      }
+      .niche-card:hover {
+        box-shadow: 0 25px 50px -12px var(--niche-color);
+      }
+      .niche-card .niche-icon {
+        background: linear-gradient(135deg, var(--niche-color), var(--niche-accent));
+      }
+      .niche-card .niche-btn {
+        background: linear-gradient(135deg, var(--niche-color), var(--niche-accent));
+      }
+      .niche-card .niche-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px -5px var(--niche-color);
       }
 
       /* ===== BACK TO TOP ===== */
       #back-to-top {
         position: fixed;
-        bottom: 100px;
-        right: 24px;
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #D4A373, #BC6C25);
+        bottom: 30px;
+        right: 30px;
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(135deg, #6366F1, #8B5CF6);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -272,7 +337,7 @@
         transform: translateY(20px);
         transition: all 0.3s ease;
         z-index: 50;
-        box-shadow: 0 4px 15px rgba(212, 163, 115, 0.4);
+        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
       }
       #back-to-top.visible {
         opacity: 1;
@@ -281,175 +346,7 @@
       }
       #back-to-top:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(212, 163, 115, 0.5);
-      }
-
-      /* ===== FAQ ACCORDION ===== */
-      .faq-item {
-        border-bottom: 1px solid rgba(212, 163, 115, 0.2);
-      }
-      .faq-question {
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      .faq-question:hover {
-        color: #D4A373;
-      }
-      .faq-answer {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
-      }
-      .faq-item.active .faq-answer {
-        max-height: 500px;
-        padding-bottom: 1rem;
-      }
-      .faq-icon {
-        transition: transform 0.3s ease;
-      }
-      .faq-item.active .faq-icon {
-        transform: rotate(180deg);
-      }
-
-      /* ===== CONTADOR ANIMADO ===== */
-      .counter-number {
-        font-size: 3rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #D4A373, #FFD700);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      /* ===== GALERIA MELHORADA ===== */
-      .gallery-item {
-        position: relative;
-        overflow: hidden;
-      }
-      .gallery-item::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(45deg, rgba(212, 163, 115, 0.8), rgba(188, 108, 37, 0.8));
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        z-index: 1;
-      }
-      .gallery-item:hover::before {
-        opacity: 1;
-      }
-      .gallery-item img {
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .gallery-item:hover img {
-        transform: scale(1.15) rotate(2deg);
-      }
-
-      /* ===== DEPOIMENTOS CARROSSEL ===== */
-      .testimonial-slider {
-        overflow: hidden;
-      }
-      .testimonial-track {
-        display: flex;
-        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .testimonial-card {
-        min-width: 100%;
-        padding: 0 1rem;
-      }
-      @media (min-width: 768px) {
-        .testimonial-card { min-width: 33.333%; }
-      }
-
-      /* ===== VIDEO SECTION ===== */
-      @media (max-width: 768px) {
-        .hero-section-video {
-          object-fit: contain !important;
-          width: 100% !important;
-          height: 100% !important;
-          left: 0;
-          top: 0;
-          position: absolute;
-          background: #000;
-        }
-      }
-      
-      /* ===== CALENDAR STYLES ===== */
-      .calendar-day {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        cursor: pointer;
-        aspect-ratio: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
-      .calendar-day::after {
-        content: '';
-        position: absolute;
-        inset: 2px;
-        border-radius: inherit;
-        background: linear-gradient(135deg, #D4A373, #BC6C25);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: -1;
-      }
-      .calendar-day:hover:not(.disabled)::after {
-        opacity: 0.1;
-      }
-      .calendar-day:hover:not(.disabled) {
-        background-color: #FCE7F3;
-        color: #BC6C25;
-        transform: scale(1.1);
-      }
-      .calendar-day.selected {
-        background: linear-gradient(135deg, #D4A373, #BC6C25);
-        color: white;
-        transform: scale(1.1);
-        box-shadow: 0 4px 15px rgba(212, 163, 115, 0.4);
-      }
-      .calendar-day.disabled {
-        color: #ccc;
-        cursor: not-allowed;
-        background-color: #f9f9f9;
-      }
-      .time-slot {
-        border: 2px solid #D4A373;
-        color: #D4A373;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-      }
-      .time-slot::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, #D4A373, #BC6C25);
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-      }
-      .time-slot:hover::before {
-        transform: translateX(0);
-      }
-      .time-slot:hover {
-        color: white;
-        border-color: #BC6C25;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(212, 163, 115, 0.3);
-      }
-      .time-slot span {
-        position: relative;
-        z-index: 1;
-      }
-      .time-slot.selected {
-        background: linear-gradient(135deg, #D4A373, #BC6C25);
-        color: white;
-        border-color: transparent;
-        box-shadow: 0 4px 15px rgba(212, 163, 115, 0.4);
-      }
-
-      body.menu-open {
-        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(99, 102, 241, 0.6);
       }
 
       /* ===== RESPONSIVE ===== */
@@ -458,1738 +355,712 @@
           padding-left: 1.25rem;
           padding-right: 1.25rem;
         }
-        .counter-number {
-          font-size: 2rem;
-        }
       }
 
-      /* ===== TEXTO DECORATIVO ===== */
-      .decorated-title {
-        position: relative;
-        display: inline-block;
-      }
-      .decorated-title::before,
-      .decorated-title::after {
-        content: '✦';
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #D4A373;
-        font-size: 0.8em;
-        opacity: 0.6;
-      }
-      .decorated-title::before { left: -30px; }
-      .decorated-title::after { right: -30px; }
-
-      /* ===== RIBBON ===== */
+      /* ===== RIBBON ===== 
+         Faixa de destaque "Premium" nos cards
+      */
       .ribbon {
         position: absolute;
-        top: 20px;
+        top: 15px;
         right: -35px;
-        background: linear-gradient(135deg, #D4A373, #BC6C25);
+        background: linear-gradient(135deg, #F59E0B, #EF4444);
         color: white;
         padding: 5px 40px;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         font-weight: 700;
         text-transform: uppercase;
         transform: rotate(45deg);
         box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      }
-
-      /* ===== ACESSIBILIDADE WIDGET ===== */
-      #accessibility-widget {
-        position: fixed;
-        left: 20px;
-        bottom: 20px;
-        z-index: 99990;
-        font-family: 'Lato', sans-serif;
-      }
-
-      #accessibility-btn {
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
-        transition: all 0.3s ease;
-        color: white;
-      }
-
-      #accessibility-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 25px rgba(37, 99, 235, 0.5);
-      }
-
-      #accessibility-btn:focus {
-        outline: 3px solid #93c5fd;
-        outline-offset: 2px;
-      }
-
-      #accessibility-panel {
-        position: absolute;
-        bottom: 70px;
-        left: 0;
-        width: 320px;
-        max-height: 80vh;
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(20px) scale(0.95);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        overflow: hidden;
-      }
-
-      #accessibility-panel.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0) scale(1);
-      }
-
-      .acc-header {
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        color: white;
-        padding: 16px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .acc-header h3 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin: 0;
-      }
-
-      .acc-close {
-        background: rgba(255,255,255,0.2);
-        border: none;
-        color: white;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s ease;
-      }
-
-      .acc-close:hover {
-        background: rgba(255,255,255,0.3);
-      }
-
-      .acc-body {
-        padding: 16px;
-        max-height: 60vh;
-        overflow-y: auto;
-      }
-
-      .acc-section {
-        margin-bottom: 16px;
-      }
-
-      .acc-section-title {
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: #6b7280;
-        margin-bottom: 10px;
         letter-spacing: 0.5px;
       }
 
-      .acc-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-      }
-
-      .acc-option {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 8px;
-        border: 2px solid #e5e7eb;
-        border-radius: 12px;
-        background: #f9fafb;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-align: center;
-        gap: 6px;
-      }
-
-      .acc-option:hover {
-        border-color: #2563eb;
-        background: #eff6ff;
-      }
-
-      .acc-option:focus {
-        outline: 3px solid #93c5fd;
-        outline-offset: 2px;
-      }
-
-      .acc-option.active {
-        border-color: #2563eb;
-        background: #dbeafe;
-        color: #1d4ed8;
-      }
-
-      .acc-option svg {
-        width: 24px;
-        height: 24px;
-        color: #4b5563;
-      }
-
-      .acc-option.active svg {
-        color: #2563eb;
-      }
-
-      .acc-option span {
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: #374151;
-      }
-
-      .acc-option.active span {
-        color: #1d4ed8;
-      }
-
-      .acc-slider-container {
-        background: #f9fafb;
-        border-radius: 12px;
-        padding: 12px 16px;
-        border: 2px solid #e5e7eb;
-      }
-
-      .acc-slider-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
-      }
-
-      .acc-slider-label {
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: #374151;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .acc-slider-value {
-        font-size: 0.85rem;
+      /* ===== COUNTER ANIMATION =====
+         Números animados na seção de estatísticas
+      */
+      .counter-number {
+        font-size: 3rem;
         font-weight: 700;
-        color: #2563eb;
-        background: #dbeafe;
-        padding: 2px 8px;
-        border-radius: 6px;
+        background: linear-gradient(135deg, #6366F1, #EC4899);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
-      .acc-slider {
-        width: 100%;
-        height: 8px;
-        border-radius: 4px;
-        background: #e5e7eb;
-        outline: none;
-        -webkit-appearance: none;
-        appearance: none;
+      /* ===== MOBILE MENU =====
+         Menu hambúrguer para dispositivos móveis
+      */
+      #mobile-menu {
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
-
-      .acc-slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        cursor: pointer;
-        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+      #mobile-menu.open {
+        transform: translateX(0);
       }
-
-      .acc-slider::-moz-range-thumb {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        cursor: pointer;
-        border: none;
-        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
-      }
-
-      .acc-reset {
-        width: 100%;
-        padding: 12px;
-        background: #fee2e2;
-        color: #dc2626;
-        border: none;
-        border-radius: 10px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 8px;
-      }
-
-      .acc-reset:hover {
-        background: #fecaca;
-      }
-
-      /* ===== ACESSIBILIDADE - ESTILOS APLICADOS ===== */
-      body.acc-high-contrast {
-        filter: contrast(1.5) !important;
-      }
-
-      body.acc-high-contrast * {
-        border-color: #000 !important;
-      }
-
-      body.acc-grayscale {
-        filter: grayscale(100%) !important;
-      }
-
-      body.acc-invert {
-        filter: invert(100%) hue-rotate(180deg) !important;
-      }
-
-      body.acc-invert img,
-      body.acc-invert video {
-        filter: invert(100%) hue-rotate(180deg) !important;
-      }
-
-      body.acc-underline-links a {
-        text-decoration: underline !important;
-        text-underline-offset: 3px !important;
-      }
-
-      body.acc-big-cursor,
-      body.acc-big-cursor * {
-        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='%232563eb' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M4 4l16 8-8 2-2 8z'/%3E%3C/svg%3E"), auto !important;
-      }
-
-      body.acc-stop-animations *,
-      body.acc-stop-animations *::before,
-      body.acc-stop-animations *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-
-      body.acc-dyslexia-font {
-        font-family: 'OpenDyslexic', 'Comic Sans MS', cursive, sans-serif !important;
-        letter-spacing: 0.1em !important;
-        word-spacing: 0.2em !important;
-      }
-
-      body.acc-dyslexia-font * {
-        font-family: inherit !important;
-        letter-spacing: inherit !important;
-        word-spacing: inherit !important;
-      }
-
-      body.acc-highlight-focus *:focus {
-        outline: 4px solid #f59e0b !important;
-        outline-offset: 4px !important;
-      }
-
-      body.acc-line-height * {
-        line-height: 2 !important;
-      }
-
-      #reading-guide {
-        position: fixed;
-        left: 0;
-        right: 0;
-        height: 40px;
-        background: rgba(255, 235, 59, 0.3);
-        border-top: 2px solid #f59e0b;
-        border-bottom: 2px solid #f59e0b;
-        pointer-events: none;
-        z-index: 99989;
-        display: none;
-      }
-
-      body.acc-reading-guide #reading-guide {
-        display: block;
-      }
-
-      /* Responsivo para o widget */
-      @media (max-width: 400px) {
-        #accessibility-panel {
-          width: 290px;
-          left: -10px;
-        }
+      body.menu-open {
+        overflow: hidden;
       }
     </style>
   </head>
-  <body class="font-sans text-dark bg-secondary selection:bg-primary selection:text-white">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       INÍCIO DO CORPO DA PÁGINA
+       ═══════════════════════════════════════════════════════════════════ -->
+  <body class="font-sans text-dark bg-light overflow-x-hidden">
     
-    <!-- Page Loader -->
+    <!-- ===============================================================
+         LOADER - TELA DE CARREGAMENTO
+         Exibido por 1.5 segundos ao carregar a página
+         Para alterar tempo: modifique setTimeout no script (linha ~930)
+    ================================================================ -->
     <div id="page-loader">
-      <div class="loader-lash"></div>
-      <div class="loader-eye"></div>
-      <p class="text-primary mt-6 font-serif text-xl tracking-widest">Carregando beleza...</p>
+      <div class="loader-ring"></div>
+      <p class="text-white mt-6 font-serif text-2xl tracking-wide">WebStudio <span class="shimmer-text">Premium</span></p>
+      <p class="text-gray-400 mt-2 text-sm">Carregando experiência...</p>
     </div>
 
-    <!-- Custom Cursor -->
-    <div class="custom-cursor" id="custom-cursor"></div>
-
-    <!-- Scroll Progress Bar -->
+    <!-- ===============================================================
+         SCROLL PROGRESS BAR
+         Barra de progresso no topo da página durante rolagem
+    ================================================================ -->
     <div id="scroll-progress"></div>
 
-    <!-- Sparkle Particles -->
+    <!-- CURSOR PERSONALIZADO -->
+    <div class="custom-cursor"></div>
+
+    <!-- PARTÍCULAS FLUTUANTES DE FUNDO -->
     <div id="particles-container"></div>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" aria-label="Voltar ao topo">
-      <i data-lucide="chevron-up" class="w-6 h-6"></i>
-    </button>
+    <!-- ===============================================================
+         NAVBAR - MENU DE NAVEGAÇÃO FIXO
+         Links: Início, Catálogo, Resultados, Contato
+         Menu mobile com ícone hambúrguer
+    ================================================================ -->
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl md:text-3xl font-serif font-bold text-white group">
+          Web<span class="shimmer-text">Studio</span>
+          <span class="block text-xs font-sans font-normal text-gray-400 group-hover:text-primary transition">Sites Premium</span>
+        </a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-gray-300 hover:text-white transition font-medium">Início</a>
+          <a href="#catalogo" class="text-gray-300 hover:text-white transition font-medium">Catálogo</a>
+          <a href="#stats" class="text-gray-300 hover:text-white transition font-medium">Resultados</a>
+          <a href="#contato" class="bg-gradient-to-r from-primary to-accent text-white px-6 py-2.5 rounded-full hover:opacity-90 transition font-semibold shadow-lg">
+            Contato
+          </a>
+        </nav>
+        <!-- Botão Menu Mobile -->
+        <button id="menu-toggle" aria-label="Abrir menu" class="md:hidden text-white focus:outline-none">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+    </header>
 
-    <!-- Reading Guide (para acessibilidade) -->
-    <div id="reading-guide"></div>
-
-    <!-- Widget de Acessibilidade -->
-    <div id="accessibility-widget">
-      <button id="accessibility-btn" aria-label="Opções de Acessibilidade" title="Acessibilidade">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="4" r="1"/>
-          <path d="M12 12v9"/>
-          <path d="M6.5 7.5h11"/>
-          <path d="M12 7.5V12"/>
-          <path d="M7 20l5-5 5 5"/>
-        </svg>
-      </button>
-      
-      <div id="accessibility-panel" role="dialog" aria-label="Painel de Acessibilidade">
-        <div class="acc-header">
-          <h3>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="4" r="1"/>
-              <path d="M12 12v9"/>
-              <path d="M6.5 7.5h11"/>
-              <path d="M12 7.5V12"/>
-              <path d="M7 20l5-5 5 5"/>
-            </svg>
-            Acessibilidade
-          </h3>
-          <button class="acc-close" aria-label="Fechar painel">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-        
-        <div class="acc-body">
-          <!-- Tamanho da Fonte -->
-          <div class="acc-section">
-            <div class="acc-section-title">Tamanho do Texto</div>
-            <div class="acc-slider-container">
-              <div class="acc-slider-header">
-                <span class="acc-slider-label">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 7V4h16v3"/>
-                    <path d="M9 20h6"/>
-                    <path d="M12 4v16"/>
-                  </svg>
-                  Fonte
-                </span>
-                <span class="acc-slider-value" id="font-size-value">100%</span>
-              </div>
-              <input type="range" class="acc-slider" id="font-size-slider" min="80" max="150" value="100" step="10">
-            </div>
-          </div>
-
-          <!-- Opções Visuais -->
-          <div class="acc-section">
-            <div class="acc-section-title">Visão</div>
-            <div class="acc-grid">
-              <button class="acc-option" data-acc="high-contrast" aria-pressed="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 2v20"/>
-                  <path d="M12 2a10 10 0 0 1 0 20"/>
-                </svg>
-                <span>Alto Contraste</span>
-              </button>
-              
-              <button class="acc-option" data-acc="grayscale" aria-pressed="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <path d="M3 3l18 18"/>
-                </svg>
-                <span>Escala de Cinza</span>
-              </button>
-              
-              <button class="acc-option" data-acc="invert" aria-pressed="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 2a10 10 0 0 0 0 20z"/>
-                </svg>
-                <span>Inverter Cores</span>
-              </button>
-              
-              <button class="acc-option" data-acc="underline-links" aria-pressed="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                  <line x1="4" y1="21" x2="20" y2="21"/>
-                </svg>
-                <span>Destacar Links</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Navegação -->
-          <div class="acc-section">
-            <div class="acc-section-title">Navegação</div>
-            <div class="acc-grid">
-              <button class="acc-option" data-acc="big-cursor" aria-pressed="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M4 4l16 8-8 2-2 8z"/>
-                </svg>
-                <span>Cursor Grande</span>
-              </button>
-              
-              <button class="acc-option" data-acc="reading-guide" aria-pressed="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="10" width="18" height="4" rx="1"/>
-                  <line x1="3" y1="6" x2="21" y2="6"/>
-                  <line x1="3" y1="18" x2="21" y2="18"/>
-                </svg>
-                <span>Guia de Leitura</span>
-              </button>
-              
-              <button class="acc-option" data-acc="highlight-focus" aria-pressed="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <rect x="7" y="7" width="10" height="10" rx="1"/>
-                </svg>
-                <span>Destacar Foco</span>
-              </button>
-              
-              <button class="acc-option" data-acc="stop-animations" aria-pressed="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <rect x="9" y="9" width="6" height="6"/>
-                </svg>
-                <span>Parar Animações</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Leitura -->
-          <div class="acc-section">
-            <div class="acc-section-title">Leitura</div>
-            <div class="acc-grid">
-              <button class="acc-option" data-acc="dyslexia-font" aria-pressed="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M4 7V4h16v3"/>
-                  <path d="M9 20h6"/>
-                  <path d="M12 4v16"/>
-                </svg>
-                <span>Fonte p/ Dislexia</span>
-              </button>
-              
-              <button class="acc-option" data-acc="line-height" aria-pressed="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="21" y1="6" x2="3" y2="6"/>
-                  <line x1="21" y1="12" x2="3" y2="12"/>
-                  <line x1="21" y1="18" x2="3" y2="18"/>
-                  <path d="M4 6v12"/>
-                  <path d="M20 6v12"/>
-                </svg>
-                <span>Espaçamento</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Botão Reset -->
-          <button class="acc-reset" id="acc-reset-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-              <path d="M3 3v5h5"/>
-            </svg>
-            Restaurar Padrões
-          </button>
-        </div>
+    <!-- MENU MOBILE (tela cheia) -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-dark/98 backdrop-blur-lg md:hidden">
+      <div class="flex flex-col items-center justify-center h-full space-y-8">
+        <a href="#home" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Início</a>
+        <a href="#catalogo" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Catálogo</a>
+        <a href="#stats" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Resultados</a>
+        <a href="#contato" class="bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full text-xl" onclick="closeMobileMenu()">Contato</a>
+        <button onclick="closeMobileMenu()" aria-label="Fechar menu" class="absolute top-6 right-6 text-white">
+          <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
       </div>
     </div>
 
-    <!-- Navbar -->
-    <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300" id="navbar">
-      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" class="text-2xl md:text-3xl font-serif font-bold text-accent tracking-wide z-50 relative">
-          Paloma<span class="text-primary">Cílios</span>
-        </a>
-        
-        <!-- Desktop Menu -->
-        <nav class="hidden md:flex space-x-8 items-center">
-          <a href="#home" class="text-dark hover:text-primary transition font-medium">Início</a>
-          <a href="#sobre" class="text-dark hover:text-primary transition font-medium">Sobre</a>
-          <a href="#servicos" class="text-dark hover:text-primary transition font-medium">Serviços</a>
-          <a href="#galeria" class="text-dark hover:text-primary transition font-medium">Galeria</a>
-          <a href="#agendamento-online" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-accent transition transform hover:scale-105 shadow-md">Agendar</a>
-        </nav>
-
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden text-dark focus:outline-none z-50 relative p-2 bg-white" aria-label="Menu">
-          <i data-lucide="menu" class="w-8 h-8"></i>
-        </button>
-      </div>
-
-      
-
-    </header> 
-
-</header>
-
-<!-- Mobile Menu Dropdown (FORA DO HEADER) -->
-<div id="mobile-menu"
-     class="fixed top-0 left-0 w-64 h-screen bg-white z-60 flex flex-col items-center justify-center space-y-8 text-center transition-transform duration-300 transform -translate-x-full"
-     style="z-index:9999;">
-  <button onclick="toggleMenu()" class="absolute top-4 right-4 text-dark hover:text-primary transition" aria-label="Fechar menu">
-    <i data-lucide="x" class="w-8 h-8"></i>
-  </button>
-
-  <a href="#home" class="text-2xl text-dark hover:text-primary font-serif" onclick="toggleMenu()">Início</a>
-  <a href="#sobre" class="text-2xl text-dark hover:text-primary font-serif" onclick="toggleMenu()">Sobre</a>
-  <a href="#servicos" class="text-2xl text-dark hover:text-primary font-serif" onclick="toggleMenu()">Serviços</a>
-  <a href="#galeria" class="text-2xl text-dark hover:text-primary font-serif" onclick="toggleMenu()">Galeria</a>
-  <a href="#agendamento-online" class="text-2xl font-bold text-primary font-serif" onclick="toggleMenu()">Agendar Agora</a>
-
-</div>
-
-
-    <!-- Hero Section -->
-    <section id="home" class="relative h-[85vh] md:h-screen flex items-center justify-center -mt-20 parallax-hero">
-      <div class="absolute inset-0 z-0">
-        <video class="w-full h-full object-cover opacity-90 md:opacity-80 transition-all duration-500 hero-section-video" autoplay muted loop playsinline>
-          <source src="https://i.imgur.com/IW1Jpr6.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay absolute inset-0"></div>
-        <!-- Animated Gradient Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 animate-pulse-slow"></div>
-      </div>
-      
-      <div class="container mx-auto px-6 relative z-10 text-center text-white flex flex-col justify-center h-full pb-20">
-        <!-- Hero Text Content -->
-        <div data-aos="fade-up" data-aos-delay="300">
-          <span class="inline-block px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-sm mb-6 border border-white/20">
-            ✨ Especialista em Alongamento de Cílios
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO HERO - BANNER PRINCIPAL
+         ═══════════════════════════════════════════════════════════════════
+         - Título principal com efeito shimmer
+         - Botões: Ver Catálogo e Fale Conosco (WhatsApp)
+         - Indicador de scroll animado
+         - Elementos decorativos com blur
+    -->
+    <section id="home" class="hero-gradient min-h-screen flex items-center justify-center relative">
+      <div class="container mx-auto px-6 text-center relative z-10">
+        <div data-aos="fade-up" data-aos-duration="1000">
+          <span class="inline-block px-6 py-2 bg-white/10 backdrop-blur border border-white/20 rounded-full text-sm text-white mb-6">
+            ✨ Catálogo de Sites Premium para Profissionais de Beleza
           </span>
         </div>
-        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-4" data-aos="fade-up" data-aos-delay="400">
-          <span class="shimmer-text">Paloma Oliveira</span>
+        
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6" data-aos="fade-up" data-aos-delay="100">
+          Sites que <span class="shimmer-text">Transformam</span><br/>
+          <span class="text-gray-300">Negócios em Sucesso</span>
         </h1>
-        <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="500">
-          Designer de Cílios • Realçando sua beleza natural
+        
+        <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="200">
+          Explore nossa coleção exclusiva de sites premium desenvolvidos para nichos de beleza, estética e bem-estar. Cada template é uma obra de arte digital.
         </p>
-      </div>
-
-      <!-- Botões Hero -->
-      <div class="absolute left-0 right-0 bottom-8 md:bottom-12 z-20 flex flex-col sm:flex-row gap-4 w-full justify-center items-center px-6" data-aos="fade-up" data-aos-delay="600">
-        <a href="#agendamento-online" class="btn-animated w-full sm:w-auto bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-full text-lg font-medium transition shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 hover:shadow-2xl glow-effect">
-          <i data-lucide="calendar"></i> Agendar Horário
-        </a>
-        <a href="https://www.instagram.com/paloma_cilioslash" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full text-lg font-medium transition shadow-lg flex items-center justify-center gap-2 hover:scale-105">
-            <i data-lucide="instagram"></i> Instagram
-        </a>
-      </div>
-
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-24 md:bottom-28 left-1/2 transform -translate-x-1/2 z-20 hidden md:block" data-aos="fade-up" data-aos-delay="800">
-        <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-          <div class="w-1.5 h-3 bg-white rounded-full mt-2 animate-bounce"></div>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="300">
+          <a href="#catalogo" class="bg-gradient-to-r from-primary to-accent text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-primary/30 transition-all transform hover:scale-105">
+            <i data-lucide="layout-grid" class="inline w-5 h-5 mr-2"></i>Ver Catálogo
+          </a>
+          <!-- BOTÃO WHATSAPP - Altere o número abaixo se necessário -->
+          <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="border-2 border-white/30 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all">
+            <i data-lucide="message-circle" class="inline w-5 h-5 mr-2"></i>Fale Conosco
+          </a>
         </div>
-      </div>
-    </section>
 
-    <!-- Sobre Mim -->
-    <section id="sobre" class="py-16 md:py-24 bg-white relative overflow-hidden">
-      <!-- Decorative Elements -->
-      <div class="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 right-0 w-96 h-96 bg-rose/50 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
-      
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-          <div class="w-full md:w-1/2 relative order-2 md:order-1" data-aos="fade-right">
-            <div class="absolute top-6 -left-6 w-full h-full border-2 border-primary rounded-2xl z-0 hidden md:block"></div>
-            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-primary to-accent rounded-full blur-xl opacity-50 hidden md:block"></div>
-            <img src="https://i.imgur.com/CkOdEvw.jpeg" onerror="this.src='https://placehold.co/800x600/D4A373/FFF?text=Sobre+a+Profissional'" alt="Lash Designer" class="relative z-10 w-full h-72 md:h-[500px] object-cover rounded-2xl shadow-2xl bg-gray-100 hover:shadow-3xl transition-shadow duration-500" />
-            
-            <!-- Floating Badge -->
-            <div class="absolute -bottom-4 -right-4 md:bottom-8 md:right-8 bg-white px-6 py-4 rounded-xl shadow-xl z-20 hidden md:flex items-center gap-3" data-aos="fade-up" data-aos-delay="300">
-              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white">
-                <i data-lucide="award" class="w-6 h-6"></i>
-              </div>
-              <div>
-                <p class="font-bold text-dark">+5 Anos</p>
-                <p class="text-sm text-gray-500">de Experiência</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="w-full md:w-1/2 order-1 md:order-2" data-aos="fade-left">
-            <span class="inline-block px-4 py-1 bg-rose text-primary rounded-full text-sm font-bold tracking-wider uppercase mb-4">Sobre Mim</span>
-            <h2 class="text-3xl md:text-5xl font-serif font-bold mb-6 text-dark leading-tight">
-              Dedicada à arte de <span class="text-primary">realçar olhares</span>
-            </h2>
-            <p class="text-gray-600 mb-8 leading-relaxed text-base md:text-lg">
-              Olá! Sou Paloma, Lash Designer certificada com mais de 5 anos de experiência. Minha missão vai além de apenas aplicar fios; eu estudo a simetria do seu rosto (visagismo) para criar um design único que valorize sua beleza natural.
-            </p>
-            
-            <div class="grid grid-cols-2 gap-4 md:gap-6 mb-8">
-              <div class="flex items-center gap-3 p-4 bg-rose/50 rounded-xl hover:bg-rose transition-colors">
-                <div class="bg-white p-3 rounded-full text-primary shadow-md shrink-0"><i data-lucide="award" class="w-5 h-5 md:w-6 md:h-6"></i></div>
-                <span class="font-medium text-sm md:text-base">Certificada</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 bg-rose/50 rounded-xl hover:bg-rose transition-colors">
-                <div class="bg-white p-3 rounded-full text-primary shadow-md shrink-0"><i data-lucide="heart" class="w-5 h-5 md:w-6 md:h-6"></i></div>
-                <span class="font-medium text-sm md:text-base">Material Premium</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 bg-rose/50 rounded-xl hover:bg-rose transition-colors">
-                <div class="bg-white p-3 rounded-full text-primary shadow-md shrink-0"><i data-lucide="sparkles" class="w-5 h-5 md:w-6 md:h-6"></i></div>
-                <span class="font-medium text-sm md:text-base">Técnicas Exclusivas</span>
-              </div>
-              <div class="flex items-center gap-3 p-4 bg-rose/50 rounded-xl hover:bg-rose transition-colors">
-                <div class="bg-white p-3 rounded-full text-primary shadow-md shrink-0"><i data-lucide="shield-check" class="w-5 h-5 md:w-6 md:h-6"></i></div>
-                <span class="font-medium text-sm md:text-base">100% Seguro</span>
-              </div>
-            </div>
+        <!-- Indicador de Scroll -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2" data-aos="fade-up" data-aos-delay="500">
+          <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
+            <div class="w-1.5 h-3 bg-white rounded-full animate-bounce"></div>
           </div>
         </div>
       </div>
+
+      <!-- Elementos Decorativos de Fundo -->
+      <div class="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+      <div class="absolute top-1/2 left-1/4 w-64 h-64 bg-rose/10 rounded-full blur-3xl"></div>
     </section>
 
-    <!-- Estatísticas -->
-    <section class="py-12 md:py-16 bg-gradient-to-r from-dark via-dark to-dark relative overflow-hidden">
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 left-1/4 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-accent rounded-full blur-3xl"></div>
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO STATS - ESTATÍSTICAS COM CONTADORES ANIMADOS
+         ═══════════════════════════════════════════════════════════════════
+         - 11 Nichos Disponíveis
+         - 100% Responsivos
+         - 24 Horas de Suporte
+         - 500 Clientes Satisfeitos
+    -->
+    <section id="stats" class="py-20 bg-dark relative overflow-hidden">
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
       </div>
-      
       <div class="container mx-auto px-6 relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up">
+            <p class="counter-number" data-target="11">0</p>
+            <p class="text-gray-400 mt-2 font-medium">Nichos Disponíveis</p>
+          </div>
           <div data-aos="fade-up" data-aos-delay="100">
-            <div class="counter-number" data-target="1500">0</div>
-            <p class="text-white/80 mt-2 text-sm md:text-base">Clientes Felizes</p>
+            <p class="counter-number" data-target="100">0</p>
+            <p class="text-gray-400 mt-2 font-medium">% Responsivos</p>
           </div>
           <div data-aos="fade-up" data-aos-delay="200">
-            <div class="counter-number" data-target="5">0</div>
-            <p class="text-white/80 mt-2 text-sm md:text-base">Anos de Experiência</p>
+            <p class="counter-number" data-target="24">0</p>
+            <p class="text-gray-400 mt-2 font-medium">Horas de Suporte</p>
           </div>
           <div data-aos="fade-up" data-aos-delay="300">
-            <div class="counter-number" data-target="9">0</div>
-            <p class="text-white/80 mt-2 text-sm md:text-base">Técnicas Disponíveis</p>
-          </div>
-          <div data-aos="fade-up" data-aos-delay="400">
-            <div class="counter-number" data-target="100">0</div>
-            <p class="text-white/80 mt-2 text-sm md:text-base">% Satisfação</p>
+            <p class="counter-number" data-target="500">0</p>
+            <p class="text-gray-400 mt-2 font-medium">Clientes Satisfeitos</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Serviços -->
-    <section id="servicos" class="py-16 md:py-24 bg-secondary relative overflow-hidden">
-      <!-- Background Decoration -->
-      <div class="absolute top-1/2 left-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-      
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center mb-12 md:mb-16">
-          <span class="inline-block px-4 py-1 bg-rose text-primary rounded-full text-sm font-bold tracking-wider uppercase mb-4" data-aos="fade-up">Nossas Técnicas</span>
-          <h2 class="text-3xl md:text-5xl font-serif font-bold text-dark" data-aos="fade-up" data-aos-delay="100">
-            Menu de <span class="shimmer-text">Serviços</span>
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO CATÁLOGO - GRID DE CARDS DOS 11 NICHOS
+         ═══════════════════════════════════════════════════════════════════
+         Cada card contém:
+         - Ícone do nicho com cor personalizada
+         - Título e descrição
+         - Tags de funcionalidades
+         - Botão "Ver Demo" linkando para a página do nicho
+         
+         CARDS DISPONÍVEIS:
+         1. cilios.html - Designer de Cílios (Destaque)
+         2. salao.html - Salão de Beleza
+         3. barbearia.html - Barbearia
+         4. depilacao.html - Depilação
+         5. estetica-facial.html - Estética Facial
+         6. maquiagem.html - Maquiadora
+         7. nails.html - Nail Designer
+         8. podologia.html - Podologia
+         9. sobrancelhas.html - Sobrancelhas
+         10. spa.html - Spa & Estética
+         11. tattoo.html - Estúdio de Tattoo
+    -->
+    <section id="catalogo" class="py-24 bg-gradient-to-b from-light to-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm" data-aos="fade-up">Nosso Portfólio</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+            Catálogo de <span class="shimmer-text">Sites Premium</span>
           </h2>
-          <p class="text-gray-600 mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-            Escolha a técnica perfeita para realçar seu olhar e elevar sua autoestima
+          <p class="text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Cada site foi cuidadosamente desenvolvido para atender as necessidades específicas de cada nicho. Clique em "Ver Demo" para explorar.
           </p>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            
-            <!-- Card Fio a Fio - DESTAQUE -->
-            <div class="card-3d glass-card p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition border-b-4 border-primary relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                <div class="ribbon">Popular</div>
-                <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-br from-rose to-white rounded-full flex items-center justify-center mb-6 text-primary shadow-lg"><i data-lucide="eye" class="w-6 h-6 md:w-8 md:h-8"></i></div>
-                <h3 class="text-xl md:text-2xl font-serif font-bold mb-3">Fio a Fio Clássico</h3>
-                <p class="text-gray-600 mb-4 text-sm md:text-base">Técnica natural. Um fio sintético sobre um fio natural, efeito rímel impecável.</p>
-                <div class="flex justify-between items-center mt-6 pt-6 border-t border-gray-100">
-                    <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">R$ 110,00</span>
-                    <button onclick="preSelectService('Fio a Fio Clássico')" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-4 py-2 md:px-6 rounded-full hover:shadow-lg transition shadow-md font-bold text-xs md:text-sm uppercase">Agendar</button>
-                </div>
-            </div>
 
-            <!-- Volume Brasileiro -->
-            <div class="card-3d glass-card p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition border-b-4 border-primary" data-aos="fade-up" data-aos-delay="150">
-                <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-br from-rose to-white rounded-full flex items-center justify-center mb-6 text-primary shadow-lg"><i data-lucide="sparkles" class="w-6 h-6 md:w-8 md:h-8"></i></div>
-                <h3 class="text-xl md:text-2xl font-serif font-bold mb-3">Volume Brasileiro</h3>
-                <p class="text-gray-600 mb-4 text-sm md:text-base">Fios em formato de Y que garantem preenchimento e textura únicos.</p>
-                <div class="flex justify-between items-center mt-6 pt-6 border-t border-gray-100">
-                    <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">R$ 120,00</span>
-                    <button onclick="preSelectService('Volume Brasileiro')" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-4 py-2 md:px-6 rounded-full hover:shadow-lg transition shadow-md font-bold text-xs md:text-sm uppercase">Agendar</button>
-                </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- ===== CARD 1 - CÍLIOS ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-cilios" data-aos="fade-up" data-aos-delay="100">
+            <div class="ribbon">Destaque</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="eye" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Designer de Cílios</h3>
+              <p class="text-gray-600 mb-6">Site premium para profissionais de alongamento de cílios. Design elegante com sistema de agendamento integrado.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Agendamento</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Galeria</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">WhatsApp</span>
+              </div>
+              <!-- Link para Demo - Altere href para o arquivo do nicho -->
+              <a href="cilios.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
             </div>
+          </div>
 
-            <!-- Cílios Postiços -->
-            <div class="card-3d glass-card p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition border-b-4 border-primary" data-aos="fade-up" data-aos-delay="200">
-                <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-br from-rose to-white rounded-full flex items-center justify-center mb-6 text-primary shadow-lg"><i data-lucide="crown" class="w-6 h-6 md:w-8 md:h-8"></i></div>
-                <h3 class="text-xl md:text-2xl font-serif font-bold mb-3">Cílios Postiços</h3>
-                <p class="text-gray-600 mb-4 text-sm md:text-base">Aplicação de cílios postiços para um look instantâneo e glamouroso.</p>
-                <div class="flex justify-between items-center mt-6 pt-6 border-t border-gray-100">
-                    <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">R$ 20,00</span>
-                    <button onclick="preSelectService('Cílios Postiços')" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-4 py-2 md:px-6 rounded-full hover:shadow-lg transition shadow-md font-bold text-xs md:text-sm uppercase">Agendar</button>
-                </div>
+          <!-- Card 2 - Salão -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-salao" data-aos="fade-up" data-aos-delay="150">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="scissors" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Salão de Beleza</h3>
+              <p class="text-gray-600 mb-6">Solução completa para salões. Apresente seus serviços com elegância e atraia mais clientes.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Serviços</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Equipe</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Localização</span>
+              </div>
+              <a href="salao.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
             </div>
+          </div>
 
-            <!-- Tufinho 10 P -->
-            <div class="card-3d glass-card p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition border-b-4 border-primary" data-aos="fade-up" data-aos-delay="250">
-                <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-br from-rose to-white rounded-full flex items-center justify-center mb-6 text-primary shadow-lg"><i data-lucide="layers" class="w-6 h-6 md:w-8 md:h-8"></i></div>
-                <h3 class="text-xl md:text-2xl font-serif font-bold mb-3">Tufinho 10 P</h3>
-                <p class="text-gray-600 mb-4 text-sm md:text-base">Volume e definição discretos para um olhar marcante e natural.</p>
-                <div class="flex justify-between items-center mt-6 pt-6 border-t border-gray-100">
-                    <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">R$ 50,00</span>
-                    <button onclick="preSelectService('Tufinho 10P')" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-4 py-2 md:px-6 rounded-full hover:shadow-lg transition shadow-md font-bold text-xs md:text-sm uppercase">Agendar</button>
-                </div>
+          <!-- Card 3 - Barbearia -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-barbearia" data-aos="fade-up" data-aos-delay="200">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="user" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Barbearia</h3>
+              <p class="text-gray-600 mb-6">Design masculino e sofisticado. Ideal para barbearias que querem se destacar no mercado.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Cortes</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Barba</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Tratamentos</span>
+              </div>
+              <a href="barbearia.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
             </div>
+          </div>
 
-            <!-- Tufinho 20 P -->
-            <div class="card-3d glass-card p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition border-b-4 border-primary" data-aos="fade-up" data-aos-delay="300">
-                <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-br from-rose to-white rounded-full flex items-center justify-center mb-6 text-primary shadow-lg"><i data-lucide="layers" class="w-6 h-6 md:w-8 md:h-8"></i></div>
-                <h3 class="text-xl md:text-2xl font-serif font-bold mb-3">Tufinho 20 P</h3>
-                <p class="text-gray-600 mb-4 text-sm md:text-base">Mais volume e definição média para um visual equilibrado.</p>
-                <div class="flex justify-between items-center mt-6 pt-6 border-t border-gray-100">
-                    <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">R$ 55,00</span>
-                    <button onclick="preSelectService('Tufinho 20P')" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-4 py-2 md:px-6 rounded-full hover:shadow-lg transition shadow-md font-bold text-xs md:text-sm uppercase">Agendar</button>
-                </div>
+          <!-- Card 4 - Depilação -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-depilacao" data-aos="fade-up" data-aos-delay="250">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="sparkles" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Depilação</h3>
+              <p class="text-gray-600 mb-6">Site delicado e profissional para clínicas de depilação a laser e cera.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Laser</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Cera</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Pacotes</span>
+              </div>
+              <a href="depilacao.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
             </div>
+          </div>
 
-            <!-- Tufinho 40 P -->
-            <div class="card-3d glass-card p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition border-b-4 border-primary" data-aos="fade-up" data-aos-delay="350">
-                <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-br from-rose to-white rounded-full flex items-center justify-center mb-6 text-primary shadow-lg"><i data-lucide="layers" class="w-6 h-6 md:w-8 md:h-8"></i></div>
-                <h3 class="text-xl md:text-2xl font-serif font-bold mb-3">Tufinho 40 P</h3>
-                <p class="text-gray-600 mb-4 text-sm md:text-base">Volume máximo para um destaque total e olhar poderoso.</p>
-                <div class="flex justify-between items-center mt-6 pt-6 border-t border-gray-100">
-                    <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">R$ 60,00</span>
-                    <button onclick="preSelectService('Tufinho 40P')" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-4 py-2 md:px-6 rounded-full hover:shadow-lg transition shadow-md font-bold text-xs md:text-sm uppercase">Agendar</button>
-                </div>
+          <!-- Card 5 - Estética Facial -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-estetica" data-aos="fade-up" data-aos-delay="300">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="heart" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Estética Facial</h3>
+              <p class="text-gray-600 mb-6">Para clínicas de estética. Transmita confiança e profissionalismo aos seus pacientes.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Limpeza</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Peeling</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Botox</span>
+              </div>
+              <a href="estetica-facial.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
             </div>
+          </div>
 
-            <!-- Efeito Rímel -->
-            <div class="card-3d glass-card p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition border-b-4 border-primary" data-aos="fade-up" data-aos-delay="400">
-                <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-br from-rose to-white rounded-full flex items-center justify-center mb-6 text-primary shadow-lg"><i data-lucide="crown" class="w-6 h-6 md:w-8 md:h-8"></i></div>
-                <h3 class="text-xl md:text-2xl font-serif font-bold mb-3">Cílios Efeito Rímel</h3>
-                <p class="text-gray-600 mb-4 text-sm md:text-base">Cílios mais grossos e longos simulando rímel profissional.</p>
-                <div class="flex justify-between items-center mt-6 pt-6 border-t border-gray-100">
-                    <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">R$ 100,00</span>
-                    <button onclick="preSelectService('Cílios Efeito Rímel')" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-4 py-2 md:px-6 rounded-full hover:shadow-lg transition shadow-md font-bold text-xs md:text-sm uppercase">Agendar</button>
-                </div>
+          <!-- Card 6 - Maquiagem -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-maquiagem" data-aos="fade-up" data-aos-delay="350">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="palette" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Maquiadora</h3>
+              <p class="text-gray-600 mb-6">Portfólio glamouroso para maquiadoras profissionais. Mostre seu trabalho com estilo.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Noivas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Festas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Editorial</span>
+              </div>
+              <a href="maquiagem.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
             </div>
+          </div>
 
-            <!-- Remoção -->
-            <div class="card-3d glass-card p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition border-b-4 border-primary" data-aos="fade-up" data-aos-delay="450">
-                <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-br from-rose to-white rounded-full flex items-center justify-center mb-6 text-primary shadow-lg"><i data-lucide="trash-2" class="w-6 h-6 md:w-8 md:h-8"></i></div>
-                <h3 class="text-xl md:text-2xl font-serif font-bold mb-3">Remoção de Cílios</h3>
-                <p class="text-gray-600 mb-4 text-sm md:text-base">Remoção cuidadosa garantindo a saúde dos seus fios naturais.</p>
-                <div class="flex justify-between items-center mt-6 pt-6 border-t border-gray-100">
-                    <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">R$ 30,00</span>
-                    <button onclick="preSelectService('Remoção de Cílios')" class="btn-animated bg-gradient-to-r from-primary to-accent text-white px-4 py-2 md:px-6 rounded-full hover:shadow-lg transition shadow-md font-bold text-xs md:text-sm uppercase">Agendar</button>
-                </div>
+          <!-- Card 7 - Nails -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-nails" data-aos="fade-up" data-aos-delay="400">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="gem" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Nail Designer</h3>
+              <p class="text-gray-600 mb-6">Site vibrante para nail artists. Galeria incrível para exibir suas criações.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Nail Art</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Alongamento</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Esmaltação</span>
+              </div>
+              <a href="nails.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
             </div>
+          </div>
 
-            <!-- Manutenção (Card Largo) -->
-            <div class="card-3d glass-card p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition border-b-4 border-accent lg:col-span-3 md:col-span-2 bg-gradient-to-r from-white to-rose/30" data-aos="fade-up" data-aos-delay="500">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="flex items-center gap-6 w-full md:w-auto">
-                        <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white shrink-0 shadow-lg"><i data-lucide="repeat" class="w-6 h-6 md:w-8 md:h-8"></i></div>
-                        <div>
-                            <h3 class="text-xl md:text-2xl font-serif font-bold mb-1">Manutenção</h3>
-                            <p class="text-gray-600 text-sm md:text-base">Recomendada entre 15 a 21 dias para manter o visual perfeito.</p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-                        <div class="flex items-center gap-2">
-                            <span class="text-lg md:text-xl font-bold text-gray-500">A partir de</span>
-                            <span class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">R$ 80,00</span>
-                        </div>
-                        <button onclick="preSelectService('Manutenção')" class="btn-animated w-full md:w-auto bg-gradient-to-r from-primary to-accent text-white px-6 py-3 md:py-2 rounded-full hover:shadow-lg transition shadow-md font-bold text-sm uppercase text-center">Agendar</button>
-                    </div>
-                </div>
+          <!-- Card 8 - Podologia -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-podologia" data-aos="fade-up" data-aos-delay="450">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="footprints" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Podologia</h3>
+              <p class="text-gray-600 mb-6">Site clean e profissional para podólogos. Transmita saúde e cuidado.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Tratamentos</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Unhas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Calosidades</span>
+              </div>
+              <a href="podologia.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
             </div>
+          </div>
+
+          <!-- Card 9 - Sobrancelhas -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-sobrancelhas" data-aos="fade-up" data-aos-delay="500">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="scan-face" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Sobrancelhas</h3>
+              <p class="text-gray-600 mb-6">Para designers de sobrancelhas. Micropigmentação e design com elegância.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Design</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Micropigmentação</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Laminação</span>
+              </div>
+              <a href="sobrancelhas.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 10 - SPA ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-spa" data-aos="fade-up" data-aos-delay="550">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="leaf" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Spa & Estética</h3>
+              <p class="text-gray-600 mb-6">Transmita paz e bem-estar. Ideal para spas e clínicas de massagem.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Massagens</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Drenagem</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Relaxamento</span>
+              </div>
+              <a href="spa.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 11 - TATTOO ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-tattoo" data-aos="fade-up" data-aos-delay="600">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="pen-tool" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Estúdio de Tattoo</h3>
+              <p class="text-gray-600 mb-6">Design impactante para tatuadores. Mostre sua arte com estilo único.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Realismo</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Tradicional</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Fineline</span>
+              </div>
+              <a href="tattoo.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
+    <!-- FIM DA SEÇÃO CATÁLOGO -->
 
-    <!-- Galeria -->
-    <section id="galeria" class="py-16 md:py-24 bg-white relative overflow-hidden">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-10 md:mb-16">
-          <span class="inline-block px-4 py-1 bg-rose text-primary rounded-full text-sm font-bold tracking-wider uppercase mb-4" data-aos="fade-up">Portfólio</span>
-          <h2 class="text-3xl md:text-5xl font-serif font-bold text-dark mb-4" data-aos="fade-up" data-aos-delay="100">
-            <span class="decorated-title">Paloma Oliveira</span>
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO FEATURES - RECURSOS PREMIUM
+         ═══════════════════════════════════════════════════════════════════
+         - 100% Responsivo
+         - Super Rápido
+         - Personalizável
+         - Suporte 24h
+    -->
+    <section class="py-24 bg-dark text-white relative overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm" data-aos="fade-up">Por que nos escolher?</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3" data-aos="fade-up" data-aos-delay="100">
+            Recursos <span class="shimmer-text">Premium</span>
           </h2>
-          <p class="text-gray-600 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="200">Toque na imagem e descubra o tipo de cílios. Cada trabalho é único!</p>
         </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
-            <div class="gallery-item relative group overflow-hidden rounded-2xl aspect-square bg-gray-100 shadow-lg" data-aos="zoom-in" data-aos-delay="100">
-                <img src="https://i.imgur.com/T0HhgnT.jpeg" onerror="this.src='https://placehold.co/400x400/D4A373/FFF?text=Volume+Russo'" class="object-cover w-full h-full" alt="Resultado">
-                <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 z-10 p-4">
-                    <i data-lucide="eye" class="w-8 h-8 text-white mb-2"></i>
-                    <span class="text-white font-serif text-sm md:text-xl text-center">Cílios Tufinho</span>
-                </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Feature 1: Responsivo -->
+          <div class="text-center p-8 rounded-3xl bg-white/5 backdrop-blur border border-white/10 hover:border-primary/50 transition" data-aos="fade-up">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="smartphone" class="w-8 h-8"></i>
             </div>
-            <div class="gallery-item relative group overflow-hidden rounded-2xl aspect-square bg-gray-100 shadow-lg" data-aos="zoom-in" data-aos-delay="200">
-                <img src="https://i.imgur.com/o3RIxKM.jpeg" onerror="this.src='https://placehold.co/400x400/D4A373/FFF?text=Fio+a+Fio'" class="object-cover w-full h-full" alt="Resultado">
-                <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 z-10 p-4">
-                    <i data-lucide="eye" class="w-8 h-8 text-white mb-2"></i>
-                    <span class="text-white font-serif text-sm md:text-xl text-center">Fio a Fio</span>
-                </div>
+            <h3 class="text-xl font-bold mb-3">100% Responsivo</h3>
+            <p class="text-gray-400">Perfeito em qualquer dispositivo - celular, tablet ou desktop.</p>
+          </div>
+
+          <!-- Feature 2: Rápido -->
+          <div class="text-center p-8 rounded-3xl bg-white/5 backdrop-blur border border-white/10 hover:border-primary/50 transition" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="zap" class="w-8 h-8"></i>
             </div>
-            <div class="gallery-item relative group overflow-hidden rounded-2xl aspect-square bg-gray-100 shadow-lg" data-aos="zoom-in" data-aos-delay="300">
-                <img src="https://i.imgur.com/bLORhxu.jpeg" onerror="this.src='https://placehold.co/400x400/D4A373/FFF?text=Brasileiro'" class="object-cover w-full h-full" alt="Resultado">
-                <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 z-10 p-4">
-                    <i data-lucide="eye" class="w-8 h-8 text-white mb-2"></i>
-                    <span class="text-white font-serif text-sm md:text-xl text-center">Brasileiro</span>
-                </div>
+            <h3 class="text-xl font-bold mb-3">Super Rápido</h3>
+            <p class="text-gray-400">Otimizado para carregar em segundos e melhorar seu SEO.</p>
+          </div>
+
+          <div class="text-center p-8 rounded-3xl bg-white/5 backdrop-blur border border-white/10 hover:border-primary/50 transition" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="palette" class="w-8 h-8"></i>
             </div>
-            <div class="gallery-item relative group overflow-hidden rounded-2xl aspect-square bg-gray-100 shadow-lg" data-aos="zoom-in" data-aos-delay="400">
-                <img src="https://i.imgur.com/P7e2Rdr.jpeg" onerror="this.src='https://placehold.co/400x400/D4A373/FFF?text=Mega+Volume'" class="object-cover w-full h-full" alt="Resultado">
-                <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 z-10 p-4">
-                    <i data-lucide="eye" class="w-8 h-8 text-white mb-2"></i>
-                    <span class="text-white font-serif text-sm md:text-xl text-center">Mega Volume</span>
-                </div>
+            <h3 class="text-xl font-bold mb-3">Personalizável</h3>
+            <p class="text-gray-400">Cores, fontes e conteúdo adaptados à sua marca.</p>
+          </div>
+
+          <div class="text-center p-8 rounded-3xl bg-white/5 backdrop-blur border border-white/10 hover:border-primary/50 transition" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="headphones" class="w-8 h-8"></i>
             </div>
+            <h3 class="text-xl font-bold mb-3">Suporte 24h</h3>
+            <p class="text-gray-400">Atendimento dedicado para tirar todas suas dúvidas.</p>
+          </div>
         </div>
-        
-        <!-- CTA da Galeria -->
-        <div class="text-center mt-10" data-aos="fade-up">
-          <a href="https://www.instagram.com/paloma_cilioslash" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-primary hover:text-accent transition font-medium">
-            <i data-lucide="instagram" class="w-5 h-5"></i>
-            Ver mais no Instagram
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO FEATURES -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO CTA (Call To Action) - CONTATO
+         ═══════════════════════════════════════════════════════════════════
+         Botões de contato:
+         - WhatsApp: +55 21 97743-4614
+         - Email: carlospiquet.projetos@gmail.com
+    -->
+    <section id="contato" class="py-24 bg-gradient-to-br from-primary via-accent to-rose relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+      </div>
+      <div class="container mx-auto px-6 text-center relative z-10">
+        <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6" data-aos="fade-up">
+          Pronto para ter seu Site Premium?
+        </h2>
+        <p class="text-xl text-white/90 max-w-2xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="100">
+          Entre em contato e transforme sua presença digital hoje mesmo!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+          <!-- BOTÃO WHATSAPP - Altere o número abaixo se necessário -->
+          <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="bg-white text-primary px-10 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all transform hover:scale-105 inline-flex items-center justify-center">
+            <i data-lucide="message-circle" class="w-6 h-6 mr-2"></i>WhatsApp
+          </a>
+          <!-- BOTÃO EMAIL - Altere o endereço abaixo se necessário -->
+          <a href="mailto:carlospiquet.projetos@gmail.com" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all inline-flex items-center justify-center">
+            <i data-lucide="mail" class="w-6 h-6 mr-2"></i>Email
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Depoimentos -->
-    <section class="py-16 md:py-24 bg-gradient-to-br from-rose via-white to-rose relative overflow-hidden">
-        <!-- Decorative Elements -->
-        <div class="absolute top-10 left-10 text-8xl text-primary/10 font-serif">"</div>
-        <div class="absolute bottom-10 right-10 text-8xl text-primary/10 font-serif rotate-180">"</div>
-        
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <span class="inline-block px-4 py-1 bg-white text-primary rounded-full text-sm font-bold tracking-wider uppercase mb-4 shadow-sm" data-aos="fade-up">Depoimentos</span>
-            <h2 class="text-3xl md:text-5xl font-serif font-bold text-dark mb-4" data-aos="fade-up" data-aos-delay="100">O que dizem as <span class="text-primary">clientes</span></h2>
-            <p class="text-gray-600 max-w-xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="200">Histórias reais de transformação e satisfação</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                <!-- Depoimento 1 -->
-                <div class="glass-card p-8 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">MC</div>
-                    <div class="flex justify-center text-yellow-400 mb-4 gap-1">
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                    </div>
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">"Simplesmente amei o Cílios postiços! A durabilidade é incrível e não incomoda nada. Recomendo demais!"</p>
-                    <h5 class="font-bold text-dark text-lg">Mariana Costa</h5>
-                    <p class="text-sm text-primary">Cliente há 2 anos</p>
-                </div>
-                
-                <!-- Depoimento 2 -->
-                <div class="glass-card p-8 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">BS</div>
-                    <div class="flex justify-center text-yellow-400 mb-4 gap-1">
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                    </div>
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">"Já fiz cílios em vários lugares, mas nenhum se compara à qualidade daqui. O Cílios efeito Rímel fica perfeito!"</p>
-                    <h5 class="font-bold text-dark text-lg">Beatriz Silva</h5>
-                    <p class="text-sm text-primary">Cliente há 1 ano</p>
-                </div>
-                
-                <!-- Depoimento 3 -->
-                <div class="glass-card p-8 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">CN</div>
-                    <div class="flex justify-center text-yellow-400 mb-4 gap-1">
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
-                    </div>
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">"Profissional super atenciosa, explicou tudo sobre os cuidados. Me senti muito segura e o resultado ficou lindo."</p>
-                    <h5 class="font-bold text-dark text-lg">Carla Nunes</h5>
-                    <p class="text-sm text-primary">Cliente há 6 meses</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-3xl mx-auto">
-                <div class="text-center mb-12">
-                    <span class="inline-block px-4 py-1 bg-rose text-primary rounded-full text-sm font-bold tracking-wider uppercase mb-4" data-aos="fade-up">Dúvidas Frequentes</span>
-                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-dark" data-aos="fade-up" data-aos-delay="100">Perguntas <span class="text-primary">Frequentes</span></h2>
-                </div>
-                
-                <div class="space-y-4" data-aos="fade-up" data-aos-delay="200">
-                    <!-- FAQ Item 1 -->
-                    <div class="faq-item bg-gray-50 rounded-xl overflow-hidden">
-                        <button class="faq-question w-full p-6 text-left flex justify-between items-center font-bold text-dark hover:bg-gray-100 transition">
-                            <span>Quanto tempo dura o alongamento?</span>
-                            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-primary"></i>
-                        </button>
-                        <div class="faq-answer px-6 text-gray-600">
-                            <p>O alongamento de cílios dura em média de 3 a 4 semanas, dependendo do ciclo natural de crescimento dos seus cílios e dos cuidados pós-procedimento. Recomendamos manutenção a cada 15-21 dias para manter o visual perfeito.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 2 -->
-                    <div class="faq-item bg-gray-50 rounded-xl overflow-hidden">
-                        <button class="faq-question w-full p-6 text-left flex justify-between items-center font-bold text-dark hover:bg-gray-100 transition">
-                            <span>O procedimento dói?</span>
-                            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-primary"></i>
-                        </button>
-                        <div class="faq-answer px-6 text-gray-600">
-                            <p>Não! O procedimento é totalmente indolor e relaxante. Muitas clientes até aproveitam para tirar um cochilo durante a aplicação. Você ficará de olhos fechados durante todo o processo.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 3 -->
-                    <div class="faq-item bg-gray-50 rounded-xl overflow-hidden">
-                        <button class="faq-question w-full p-6 text-left flex justify-between items-center font-bold text-dark hover:bg-gray-100 transition">
-                            <span>Posso molhar os cílios?</span>
-                            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-primary"></i>
-                        </button>
-                        <div class="faq-answer px-6 text-gray-600">
-                            <p>Sim, após as primeiras 24-48 horas você pode molhar normalmente. Evite apenas jatos de água diretamente nos cílios e não esfregue a região. Pode tomar banho, nadar e fazer atividades físicas normalmente.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 4 -->
-                    <div class="faq-item bg-gray-50 rounded-xl overflow-hidden">
-                        <button class="faq-question w-full p-6 text-left flex justify-between items-center font-bold text-dark hover:bg-gray-100 transition">
-                            <span>O alongamento danifica os cílios naturais?</span>
-                            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-primary"></i>
-                        </button>
-                        <div class="faq-answer px-6 text-gray-600">
-                            <p>Quando feito por profissional qualificada e com materiais de qualidade, não! Utilizo técnicas que respeitam o ciclo natural dos fios e colas hipoalergênicas. Seus cílios naturais permanecem saudáveis.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 5 -->
-                    <div class="faq-item bg-gray-50 rounded-xl overflow-hidden">
-                        <button class="faq-question w-full p-6 text-left flex justify-between items-center font-bold text-dark hover:bg-gray-100 transition">
-                            <span>Qual técnica é melhor para mim?</span>
-                            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-primary"></i>
-                        </button>
-                        <div class="faq-answer px-6 text-gray-600">
-                            <p>A melhor técnica depende do seu estilo, formato dos olhos e resultado desejado. No seu atendimento, faço uma análise de visagismo para indicar a técnica ideal. Fio a Fio é mais natural, Volume Brasileiro dá mais preenchimento!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AGENDAMENTO ONLINE -->
-    <section id="agendamento-online" class="py-16 md:py-24 bg-dark text-white relative overflow-hidden scroll-mt-20">
-        <!-- Background Effects -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
-        </div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-8 md:mb-12">
-                <span class="inline-block px-4 py-1 bg-primary/20 text-primary rounded-full text-sm font-bold tracking-wider uppercase mb-4" data-aos="fade-up">Agendamento</span>
-                <h2 class="text-3xl md:text-5xl font-serif font-bold mb-6" data-aos="fade-up" data-aos-delay="100">
-                    Vamos agendar seu <span class="shimmer-text">horário</span>?
-                </h2>
-                <p class="text-gray-300 mt-4 max-w-2xl mx-auto text-lg md:text-xl" data-aos="fade-up" data-aos-delay="200">
-                    Não perca tempo com rímel todos os dias. Acorde pronta e maravilhosa!
-                </p>
-                
-                <!-- Informações de Contato -->
-                <div class="flex flex-col items-center justify-center gap-4 mt-8 text-base md:text-lg text-gray-300" data-aos="fade-up" data-aos-delay="300">
-                    <div class="flex items-center gap-3 bg-white/5 px-6 py-3 rounded-full backdrop-blur-sm">
-                        <div class="bg-primary/20 p-2 rounded-full"><i data-lucide="map-pin" class="text-primary w-5 h-5"></i></div>
-                        <span>Av general Cândido da Silva 29 Inhaúma - RJ</span>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4">
-                         <div class="flex items-center gap-3 bg-white/5 px-6 py-3 rounded-full backdrop-blur-sm">
-                            <div class="bg-primary/20 p-2 rounded-full"><i data-lucide="clock" class="text-primary w-5 h-5"></i></div>
-                            <span>Terça a Sábado: 09h às 19h</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-white/5 px-6 py-3 rounded-full backdrop-blur-sm">
-                            <div class="bg-primary/20 p-2 rounded-full"><i data-lucide="phone" class="text-primary w-5 h-5"></i></div>
-                            <span>(21) 99437-4107</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto glass-card rounded-3xl shadow-2xl overflow-hidden text-dark" data-aos="fade-up" data-aos-delay="400">
-                
-                <!-- Coluna 1: Calendário -->
-                <div class="w-full lg:w-1/2 p-6 md:p-8 bg-gradient-to-br from-gray-50 to-rose/20">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-lg md:text-xl font-bold text-dark flex items-center gap-2">
-                            <i data-lucide="calendar-days" class="w-5 h-5 text-primary"></i>
-                            <span id="currentMonthYear">Outubro 2024</span>
-                        </h3>
-                        <div class="flex gap-2">
-                            <button onclick="changeMonth(-1)" aria-label="Mês anterior" class="p-2 hover:bg-primary/10 rounded-full text-dark transition hover:text-primary"><i data-lucide="chevron-left"></i></button>
-                            <button onclick="changeMonth(1)" aria-label="Próximo mês" class="p-2 hover:bg-primary/10 rounded-full text-dark transition hover:text-primary"><i data-lucide="chevron-right"></i></button>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-7 text-center mb-2 text-xs md:text-sm font-bold text-primary uppercase tracking-wide">
-                        <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
-                    </div>
-                    
-                    <div id="calendar-grid" class="grid grid-cols-7 text-center gap-1 md:gap-2">
-                        <!-- JS vai preencher aqui -->
-                    </div>
-
-                    <div class="mt-6 p-4 bg-gradient-to-r from-rose/50 to-primary/10 rounded-xl flex items-start gap-3 text-xs md:text-sm text-dark border border-primary/20">
-                        <i data-lucide="info" class="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0 mt-0.5"></i>
-                        <p>Os dias em cinza estão indisponíveis (Domingos e Segundas). Selecione uma data disponível para ver os horários.</p>
-                    </div>
-                </div>
-
-                <!-- Coluna 2: Detalhes -->
-                <div class="w-full lg:w-1/2 p-6 md:p-8 bg-white flex flex-col">
-                    
-                    <!-- 1. Seleção de Serviço -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-bold text-dark mb-2 flex items-center gap-2">
-                            <span class="w-6 h-6 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-xs">1</span>
-                            Qual procedimento?
-                        </label>
-                        <select id="serviceSelect" aria-label="Selecionar serviço" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary bg-white text-base transition hover:border-primary/50">
-                            <option value="">Selecione um serviço...</option>
-                            <option value="Fio a Fio Clássico">Fio a Fio Clássico - R$ 110,00</option>
-                            <option value="Volume Brasileiro">Volume Brasileiro - R$ 120,00</option>
-                            <option value="Cílios Efeito Rímel">Cílios Efeito Rímel - R$ 100,00</option>
-                            <option value="Tufinho 10P">Tufinho 10P - R$ 50,00</option>
-                            <option value="Tufinho 20P">Tufinho 20P - R$ 55,00</option>
-                            <option value="Tufinho 40P">Tufinho 40P - R$ 60,00</option>
-                            <option value="Cílios Postiços">Cílios Postiços - R$ 20,00</option>
-                            <option value="Remoção de Cílios">Remoção de Cílios - R$ 30,00</option>
-                            <option value="Manutenção">Manutenção - A partir de R$ 80,00</option>
-                        </select>
-                    </div>
-
-                    <!-- 2. Seleção de Horário -->
-                    <div id="timeSection" class="mb-6 opacity-50 pointer-events-none transition-all duration-300">
-                        <label class="block text-sm font-bold text-dark mb-2 flex items-center gap-2">
-                            <span class="w-6 h-6 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-xs">2</span>
-                            Horários para <span id="selectedDateDisplay" class="text-primary">...</span>
-                        </label>
-                        <div class="grid grid-cols-3 sm:grid-cols-4 gap-2 md:gap-3" id="timeSlotsContainer">
-                            <!-- JS vai preencher aqui -->
-                        </div>
-                    </div>
-
-                    <!-- 3. Dados e Botão -->
-                    <div class="mt-auto pt-6 border-t border-gray-100">
-                        <div class="mb-4">
-                            <label class="block text-sm font-bold text-dark mb-2 flex items-center gap-2">
-                                <span class="w-6 h-6 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-xs">3</span>
-                                Seu nome
-                            </label>
-                            <input type="text" id="clientName" placeholder="Digite seu nome completo" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary text-base transition hover:border-primary/50">
-                        </div>
-                        <button onclick="finalizeBooking()" id="btnAgendar" class="btn-animated w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-4 rounded-xl hover:from-green-600 hover:to-green-700 transition transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-3 text-lg shadow-lg" disabled>
-                            <i data-lucide="message-circle" class="w-6 h-6"></i> Confirmar no WhatsApp
-                        </button>
-                        <p class="text-center text-xs text-gray-400 mt-3">Você será redirecionado para o WhatsApp</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gradient-to-b from-dark to-black text-gray-400 py-12 border-t border-gray-800">
+    <!-- ═══════════════════════════════════════════════════════════════════
+         FOOTER - RODAPÉ
+         ═══════════════════════════════════════════════════════════════════
+         - Logo e descrição
+         - Links de redes sociais
+         - Créditos do desenvolvedor
+    -->
+    <footer class="bg-dark text-white py-16">
       <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <!-- Logo e Descrição -->
-          <div class="text-center md:text-left">
-            <div class="text-2xl font-serif font-bold text-white mb-4">
-              Paloma Oliveira<span class="text-primary">CíliosSlash</span>
-            </div>
-            <p class="text-sm text-gray-500 mb-4">Transformando olhares e elevando autoestima há mais de 5 anos.</p>
-            <div class="flex justify-center md:justify-start gap-4">
-              <a href="https://www.instagram.com/paloma_cilioslash" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
-                <i data-lucide="instagram" class="w-5 h-5"></i>
-              </a>
-              <a href="https://wa.me/5521994374107" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-green-500 hover:text-white transition">
-                <i data-lucide="message-circle" class="w-5 h-5"></i>
-              </a>
-            </div>
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-8 md:mb-0 text-center md:text-left">
+            <a href="#" class="text-3xl font-serif font-bold">
+              Web<span class="shimmer-text">Studio</span>
+            </a>
+            <p class="text-gray-400 mt-2">Sites Premium para Profissionais de Beleza</p>
           </div>
-          
-          <!-- Links Rápidos -->
-          <div class="text-center">
-            <h4 class="font-bold text-white mb-4">Links Rápidos</h4>
-            <nav class="flex flex-col gap-2">
-              <a href="#home" class="hover:text-primary transition">Início</a>
-              <a href="#sobre" class="hover:text-primary transition">Sobre</a>
-              <a href="#servicos" class="hover:text-primary transition">Serviços</a>
-              <a href="#galeria" class="hover:text-primary transition">Galeria</a>
-              <a href="#agendamento-online" class="hover:text-primary transition">Agendar</a>
-            </nav>
-          </div>
-          
-          <!-- Contato -->
-          <div class="text-center md:text-right">
-            <h4 class="font-bold text-white mb-4">Contato</h4>
-            <div class="flex flex-col gap-2 text-sm">
-              <p class="flex items-center justify-center md:justify-end gap-2">
-                <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>
-                Inhaúma - RJ
-              </p>
-              <p class="flex items-center justify-center md:justify-end gap-2">
-                <i data-lucide="phone" class="w-4 h-4 text-primary"></i>
-                (21) 99437-4107
-              </p>
-              <p class="flex items-center justify-center md:justify-end gap-2">
-                <i data-lucide="clock" class="w-4 h-4 text-primary"></i>
-                Ter-Sáb: 09h - 19h
-              </p>
-            </div>
+          <!-- REDES SOCIAIS - Altere os links href para suas redes -->
+          <div class="flex space-x-6">
+            <a href="#" aria-label="Instagram" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition">
+              <i data-lucide="instagram" class="w-5 h-5"></i>
+            </a>
+            <a href="#" aria-label="Facebook" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition">
+              <i data-lucide="facebook" class="w-5 h-5"></i>
+            </a>
+            <a href="#" aria-label="LinkedIn" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
           </div>
         </div>
-        
-        <div class="border-t border-gray-800 pt-8 text-center">
-          <p class="text-sm text-gray-500">© 2024 Paloma Designer de Cílios. Todos os direitos reservados.</p>
-          <p class="text-xs text-gray-600 mt-2">Feito com <span class="text-primary">♥</span> para realçar sua beleza</p>
+        <!-- CRÉDITOS DO DESENVOLVEDOR -->
+        <div class="border-t border-white/10 mt-10 pt-10 text-center text-gray-400">
+          <p>&copy; 2026 WebStudio Premium. Todos os direitos reservados.</p>
+          <p class="mt-2 text-sm">Desenvolvido por <a href="mailto:carlospiquet.projetos@gmail.com" class="text-primary hover:text-accent transition">Carlos Antonio de Oliveira Piquet</a></p>
         </div>
       </div>
     </footer>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/5521994374107" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white p-3 md:p-4 rounded-full shadow-2xl hover:from-green-600 hover:to-green-700 transition-all z-50 flex items-center justify-center transform hover:scale-110 group">
-      <i data-lucide="message-circle" class="w-6 h-6 md:w-8 md:h-8"></i>
-      <span class="absolute right-full mr-3 bg-white text-dark px-4 py-2 rounded-lg shadow-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden md:block">
-        Fale conosco!
-      </span>
-    </a>
+    <!-- ===============================================================
+         BACK TO TOP BUTTON
+         Botão flutuante para voltar ao topo
+    ================================================================ -->
+    <button id="back-to-top">
+      <i data-lucide="chevron-up" class="w-6 h-6"></i>
+    </button>
 
-    <!-- Scripts -->
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SCRIPTS JAVASCRIPT
+         ═══════════════════════════════════════════════════════════════════ -->
     <script>
-      // ===== INICIALIZAÇÃO =====
-      document.addEventListener('DOMContentLoaded', function() {
-        // Inicializa Lucide Icons
-        lucide.createIcons();
-        
-        // Inicializa AOS (Animate On Scroll)
-        AOS.init({
-          duration: 800,
-          easing: 'ease-out-cubic',
-          once: true,
-          offset: 50
-        });
-        
-        // Page Loader
+      /* ===============================================================
+         LOADER - TELA DE CARREGAMENTO
+         Duração: 1.5 segundos (1500ms)
+         Para alterar: mude o valor no setTimeout
+      ================================================================ */
+      window.addEventListener('load', () => {
         setTimeout(() => {
           document.getElementById('page-loader').classList.add('hidden');
         }, 1500);
-        
-        // Inicializa partículas de brilho
-        createSparkles();
-        
-        // Inicializa cursor personalizado
-        initCustomCursor();
-        
-        // Inicializa scroll progress
-        initScrollProgress();
-        
-        // Inicializa back to top
-        initBackToTop();
-        
-        // Inicializa contadores
-        initCounters();
-        
-        // Inicializa FAQ
-        initFAQ();
-        
-        // Inicializa calendário
-        initCalendar();
       });
 
-      // ===== CURSOR PERSONALIZADO =====
-      function initCustomCursor() {
-        const cursor = document.getElementById('custom-cursor');
-        if (!cursor) return;
-        
-        document.addEventListener('mousemove', (e) => {
-          cursor.style.left = e.clientX - 10 + 'px';
-          cursor.style.top = e.clientY - 10 + 'px';
-        });
-        
-        const hoverElements = document.querySelectorAll('a, button, .card-3d, .gallery-item');
-        hoverElements.forEach(el => {
-          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-      }
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50
+      });
 
-      // ===== PARTÍCULAS DE BRILHO =====
-      function createSparkles() {
-        const container = document.getElementById('particles-container');
-        if (!container) return;
-        
-        for (let i = 0; i < 30; i++) {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          sparkle.style.left = Math.random() * 100 + '%';
-          sparkle.style.animationDelay = Math.random() * 8 + 's';
-          sparkle.style.animationDuration = (Math.random() * 4 + 6) + 's';
-          container.appendChild(sparkle);
-        }
-      }
+      // Initialize Lucide Icons
+      lucide.createIcons();
 
-      // ===== SCROLL PROGRESS BAR =====
-      function initScrollProgress() {
-        const progressBar = document.getElementById('scroll-progress');
-        if (!progressBar) return;
-        
-        window.addEventListener('scroll', () => {
-          const scrollTop = document.documentElement.scrollTop;
-          const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-          const progress = (scrollTop / scrollHeight) * 100;
-          progressBar.style.width = progress + '%';
-        });
-      }
+      // Custom Cursor
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+      });
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
 
-      // ===== BACK TO TOP =====
-      function initBackToTop() {
-        const backToTop = document.getElementById('back-to-top');
-        if (!backToTop) return;
-        
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > 500) {
-            backToTop.classList.add('visible');
-          } else {
-            backToTop.classList.remove('visible');
-          }
-        });
-        
-        backToTop.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-
-      // ===== CONTADORES ANIMADOS =====
-      function initCounters() {
-        const counters = document.querySelectorAll('.counter-number');
-        
-        const observerOptions = {
-          threshold: 0.5
-        };
-        
-        const counterObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const counter = entry.target;
-              const target = parseInt(counter.getAttribute('data-target'));
-              animateCounter(counter, target);
-              counterObserver.unobserve(counter);
-            }
-          });
-        }, observerOptions);
-        
-        counters.forEach(counter => counterObserver.observe(counter));
-      }
-      
-      function animateCounter(element, target) {
-        let current = 0;
-        const increment = target / 50;
-        const duration = 2000;
-        const stepTime = duration / 50;
-        
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= target) {
-            element.textContent = target + (target === 100 ? '%' : '+');
-            clearInterval(timer);
-          } else {
-            element.textContent = Math.floor(current) + (target === 100 ? '%' : '+');
-          }
-        }, stepTime);
-      }
-
-      // ===== FAQ ACCORDION =====
-      function initFAQ() {
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        faqItems.forEach(item => {
-          const question = item.querySelector('.faq-question');
-          question.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            
-            // Fecha todos os outros
-            faqItems.forEach(i => i.classList.remove('active'));
-            
-            // Toggle o atual
-            if (!isActive) {
-              item.classList.add('active');
-            }
-            
-            // Reinicializa ícones
-            lucide.createIcons();
-          });
-        });
-      }
-
-      // ===== MOBILE MENU =====
-      function toggleMenu() {
-        const menu = document.getElementById("mobile-menu");
-        const btn = document.getElementById("mobile-menu-btn");
-        const isOpen = !menu.classList.contains("-translate-x-full");
-
-        if (isOpen) {
-          menu.classList.add("-translate-x-full");
-          document.body.classList.remove("menu-open");
-          btn.innerHTML = '<i data-lucide="menu" class="w-8 h-8"></i>';
-        } else {
-          menu.classList.remove("-translate-x-full");
-          document.body.classList.add("menu-open");
-          btn.innerHTML = '<i data-lucide="x" class="w-8 h-8"></i>';
-        }
-
-        lucide.createIcons();
-      }
-
-      document.getElementById("mobile-menu-btn").addEventListener("click", toggleMenu);
-
-      // ===== SCROLL ANIMATIONS (Fallback) =====
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll(".fade-in-up").forEach((el) => observer.observe(el));
-
-      // ===== NAVBAR SCROLL EFFECT =====
-      const navbar = document.getElementById('navbar');
+      // Scroll Progress
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add('shadow-lg');
-        } else {
-          navbar.classList.remove('shadow-lg');
-        }
+        const scrollProgress = document.getElementById('scroll-progress');
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        scrollProgress.style.width = progress + '%';
       });
 
-      // --- LÓGICA DO AGENDAMENTO --- //
-      
-      let currentDate = new Date();
-      let selectedDate = null;
-      let selectedTime = null;
-      const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-      
-      const availableTimes = ["09:00", "10:30", "13:00", "14:30", "16:00", "17:30", "19:00"];
-
-      function initCalendar() {
-        renderCalendar();
-      }
-
-      function changeMonth(step) {
-        currentDate.setMonth(currentDate.getMonth() + step);
-        renderCalendar();
-      }
-
-      function renderCalendar() {
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth();
-        
-        document.getElementById("currentMonthYear").innerText = `${monthNames[month]} ${year}`;
-        
-        const firstDayIndex = new Date(year, month, 1).getDay();
-        const lastDay = new Date(year, month + 1, 0).getDate();
-        
-        const grid = document.getElementById("calendar-grid");
-        grid.innerHTML = "";
-        
-        for (let i = 0; i < firstDayIndex; i++) {
-            const div = document.createElement("div");
-            grid.appendChild(div);
-        }
-        
-        const today = new Date();
-        today.setHours(0,0,0,0);
-
-        for (let i = 1; i <= lastDay; i++) {
-            const date = new Date(year, month, i);
-            const dayDiv = document.createElement("div");
-            dayDiv.innerText = i;
-            dayDiv.classList.add("rounded-xl", "calendar-day", "font-medium", "text-sm", "md:text-base");
-            
-            const isWorkDay = date.getDay() !== 0 && date.getDay() !== 1; 
-
-            if (date < today || !isWorkDay) {
-                dayDiv.classList.add("disabled");
-            } else {
-                dayDiv.onclick = () => selectDate(date, dayDiv);
-                if (selectedDate && date.getTime() === selectedDate.getTime()) {
-                    dayDiv.classList.add("selected");
-                }
-            }
-            grid.appendChild(dayDiv);
-        }
-      }
-
-      function selectDate(date, element) {
-        document.querySelectorAll(".calendar-day").forEach(el => el.classList.remove("selected"));
-        selectedDate = date;
-        element.classList.add("selected");
-        
-        const timeSection = document.getElementById("timeSection");
-        timeSection.classList.remove("opacity-50", "pointer-events-none");
-        
-        const dateStr = date.toLocaleDateString('pt-BR', { weekday: 'short', day: 'numeric', month: 'short' });
-        document.getElementById("selectedDateDisplay").innerText = dateStr;
-        
-        renderTimeSlots();
-        checkFormValidity();
-      }
-
-      function renderTimeSlots() {
-        const container = document.getElementById("timeSlotsContainer");
-        container.innerHTML = "";
-        selectedTime = null; 
-        
-        availableTimes.forEach(time => {
-            const btn = document.createElement("button");
-            btn.innerHTML = `<span>${time}</span>`;
-            btn.classList.add("time-slot", "py-3", "rounded-xl", "text-sm", "font-bold", "relative", "overflow-hidden");
-            btn.onclick = () => selectTime(time, btn);
-            container.appendChild(btn);
-        });
-        checkFormValidity();
-      }
-
-      function selectTime(time, element) {
-        document.querySelectorAll(".time-slot").forEach(el => el.classList.remove("selected"));
-        element.classList.add("selected");
-        selectedTime = time;
-        checkFormValidity();
-      }
-
-      function preSelectService(serviceName) {
-        const select = document.getElementById("serviceSelect");
-        select.value = serviceName;
-        document.getElementById("agendamento-online").scrollIntoView({ behavior: 'smooth' });
-        checkFormValidity();
-      }
-
-      document.getElementById("serviceSelect").addEventListener("change", checkFormValidity);
-      document.getElementById("clientName").addEventListener("input", checkFormValidity);
-
-      function checkFormValidity() {
-        const service = document.getElementById("serviceSelect").value;
-        const name = document.getElementById("clientName").value;
-        const btn = document.getElementById("btnAgendar");
-        
-        if (service && selectedDate && selectedTime && name.trim() !== "") {
-            btn.disabled = false;
+      // Back to Top
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          backToTop.classList.add('visible');
         } else {
-            btn.disabled = true;
+          backToTop.classList.remove('visible');
         }
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      /* ===============================================================
+         MENU MOBILE
+         Abre/fecha o menu hambúrguer em dispositivos móveis
+      ================================================================ */
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        document.body.classList.toggle('menu-open');
+      });
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('open');
+        document.body.classList.remove('menu-open');
       }
 
-      function finalizeBooking() {
-        const service = document.getElementById("serviceSelect").value;
-        const name = document.getElementById("clientName").value;
-        const dateStr = selectedDate.toLocaleDateString('pt-BR');
-        
-        const message = `Olá Paloma! ✨ Gostaria de confirmar um agendamento.%0A%0A*👤 Cliente:* ${name}%0A*💅 Serviço:* ${service}%0A*📅 Data:* ${dateStr}%0A*⏰ Horário:* ${selectedTime}%0A%0AAguardo confirmação! 💕`;
-        
-        window.open(`https://wa.me/5521994374107?text=${message}`, '_blank');
+      /* ===============================================================
+         PARTÍCULAS DE FUNDO
+         Cria 30 partículas flutuantes animadas
+         Para alterar quantidade: modifique o número no loop for
+      ================================================================ */
+      const particlesContainer = document.getElementById('particles-container');
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+        particlesContainer.appendChild(particle);
       }
 
-      // ===== WIDGET DE ACESSIBILIDADE =====
-      function initAccessibility() {
-        const accBtn = document.getElementById('accessibility-btn');
-        const accPanel = document.getElementById('accessibility-panel');
-        const accClose = document.querySelector('.acc-close');
-        const accOptions = document.querySelectorAll('.acc-option');
-        const fontSlider = document.getElementById('font-size-slider');
-        const fontValue = document.getElementById('font-size-value');
-        const resetBtn = document.getElementById('acc-reset-btn');
-        const readingGuide = document.getElementById('reading-guide');
-
-        // Carrega preferências salvas
-        loadAccessibilitySettings();
-
-        // Toggle do painel
-        accBtn.addEventListener('click', () => {
-          accPanel.classList.toggle('active');
-        });
-
-        // Fecha o painel
-        accClose.addEventListener('click', () => {
-          accPanel.classList.remove('active');
-        });
-
-        // Fecha ao clicar fora
-        document.addEventListener('click', (e) => {
-          if (!accBtn.contains(e.target) && !accPanel.contains(e.target)) {
-            accPanel.classList.remove('active');
+      /* ===============================================================
+         CONTADOR ANIMADO
+         Anima os números na seção de estatísticas
+         - data-target: valor final do contador
+         - Usa IntersectionObserver para iniciar quando visível
+      ================================================================ */
+      const counters = document.querySelectorAll('.counter-number');
+      const observerOptions = { threshold: 0.5 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = parseInt(counter.getAttribute('data-target'));
+            let count = 0;
+            const increment = target / 50;
+            const updateCount = () => {
+              if (count < target) {
+                count += increment;
+                counter.textContent = Math.ceil(count);
+                requestAnimationFrame(updateCount);
+              } else {
+                counter.textContent = target;
+              }
+            };
+            updateCount();
+            observer.unobserve(counter);
           }
         });
-
-        // Opções de acessibilidade
-        accOptions.forEach(option => {
-          option.addEventListener('click', () => {
-            const accType = option.dataset.acc;
-            option.classList.toggle('active');
-            const isActive = option.classList.contains('active');
-            option.setAttribute('aria-pressed', isActive);
-            
-            document.body.classList.toggle(`acc-${accType}`, isActive);
-            
-            // Salva preferência
-            saveAccessibilitySetting(accType, isActive);
-          });
-        });
-
-        // Slider de fonte
-        fontSlider.addEventListener('input', (e) => {
-          const value = e.target.value;
-          fontValue.textContent = `${value}%`;
-          document.documentElement.style.fontSize = `${value}%`;
-          localStorage.setItem('acc-font-size', value);
-        });
-
-        // Guia de leitura - segue o mouse
-        document.addEventListener('mousemove', (e) => {
-          if (document.body.classList.contains('acc-reading-guide')) {
-            readingGuide.style.top = `${e.clientY - 20}px`;
-          }
-        });
-
-        // Reset
-        resetBtn.addEventListener('click', () => {
-          // Remove todas as classes
-          const accClasses = [
-            'acc-high-contrast', 'acc-grayscale', 'acc-invert',
-            'acc-underline-links', 'acc-big-cursor', 'acc-stop-animations',
-            'acc-dyslexia-font', 'acc-highlight-focus', 'acc-line-height',
-            'acc-reading-guide'
-          ];
-          
-          accClasses.forEach(cls => {
-            document.body.classList.remove(cls);
-          });
-
-          // Reset botões
-          accOptions.forEach(option => {
-            option.classList.remove('active');
-            option.setAttribute('aria-pressed', 'false');
-          });
-
-          // Reset fonte
-          document.documentElement.style.fontSize = '100%';
-          fontSlider.value = 100;
-          fontValue.textContent = '100%';
-
-          // Limpa localStorage
-          localStorage.removeItem('acc-font-size');
-          accClasses.forEach(cls => {
-            localStorage.removeItem(cls.replace('acc-', 'acc-setting-'));
-          });
-
-          // Feedback visual
-          resetBtn.textContent = '✓ Restaurado!';
-          setTimeout(() => {
-            resetBtn.innerHTML = `
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                <path d="M3 3v5h5"/>
-              </svg>
-              Restaurar Padrões
-            `;
-          }, 1500);
-        });
-
-        // Atalho de teclado (Alt + A)
-        document.addEventListener('keydown', (e) => {
-          if (e.altKey && e.key === 'a') {
-            e.preventDefault();
-            accPanel.classList.toggle('active');
-            if (accPanel.classList.contains('active')) {
-              accBtn.focus();
-            }
-          }
-        });
-      }
-
-      function saveAccessibilitySetting(key, value) {
-        localStorage.setItem(`acc-setting-${key}`, value);
-      }
-
-      function loadAccessibilitySettings() {
-        // Carrega tamanho da fonte
-        const savedFontSize = localStorage.getItem('acc-font-size');
-        if (savedFontSize) {
-          document.documentElement.style.fontSize = `${savedFontSize}%`;
-          document.getElementById('font-size-slider').value = savedFontSize;
-          document.getElementById('font-size-value').textContent = `${savedFontSize}%`;
-        }
-
-        // Carrega outras configurações
-        const accTypes = [
-          'high-contrast', 'grayscale', 'invert', 'underline-links',
-          'big-cursor', 'stop-animations', 'dyslexia-font',
-          'highlight-focus', 'line-height', 'reading-guide'
-        ];
-
-        accTypes.forEach(type => {
-          const saved = localStorage.getItem(`acc-setting-${type}`);
-          if (saved === 'true') {
-            document.body.classList.add(`acc-${type}`);
-            const btn = document.querySelector(`[data-acc="${type}"]`);
-            if (btn) {
-              btn.classList.add('active');
-              btn.setAttribute('aria-pressed', 'true');
-            }
-          }
-        });
-      }
-
-      // Inicializa acessibilidade quando DOM carregar
-      document.addEventListener('DOMContentLoaded', initAccessibility);
+      }, observerOptions);
+      counters.forEach(counter => observer.observe(counter));
     </script>
+    
+    <!-- FIM DO DOCUMENTO -->
   </body>
 </html>

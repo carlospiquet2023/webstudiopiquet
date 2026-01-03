@@ -1,0 +1,457 @@
+<!-- 
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                GLOW SKIN - ESTÉTICA FACIAL PREMIUM                           ║
+║══════════════════════════════════════════════════════════════════════════════║
+║  Template premium para clínicas de estética facial e tratamentos             ║
+║  avançados para rejuvenescimento e cuidados com a pele                       ║
+║                                                                              ║
+║  Desenvolvido por: Carlos Antonio de Oliveira Piquet                         ║
+║  Email: carlospiquet.projetos@gmail.com                                      ║
+║  WhatsApp: +55 21 97743-4614                                                 ║
+║                                                                              ║
+║  © 2026 - Todos os direitos reservados                                       ║
+║  Protegido por Lei de Direitos Autorais - Lei nº 9.610/1998                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glow Skin - Estética Facial Premium</title>
+    <meta property="og:title" content="Glow Skin - Estética Facial">
+    <meta property="og:description" content="Tratamentos faciais avançados para uma pele radiante">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#F472B6",
+              secondary: "#FDF2F8",
+              accent: "#EC4899",
+              dark: "#831843",
+              light: "#FFF1F2",
+              blush: "#FBCFE8",
+            },
+            fontFamily: {
+              serif: ['"Bodoni Moda"', "serif"],
+              sans: ['"Nunito"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      #page-loader {
+        position: fixed; inset: 0;
+        background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%);
+        z-index: 99999; display: flex; align-items: center; justify-content: center; flex-direction: column;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-glow {
+        width: 60px; height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #F472B6, #EC4899);
+        animation: glow-pulse 1.5s ease-in-out infinite;
+      }
+      @keyframes glow-pulse {
+        0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 20px #F472B6; }
+        50% { transform: scale(1.1); opacity: 0.8; box-shadow: 0 0 40px #F472B6; }
+      }
+      .glass-nav {
+        background: rgba(255, 241, 242, 0.95);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 4px 30px rgba(244, 114, 182, 0.1);
+      }
+      .hero-gradient {
+        background: linear-gradient(135deg, #831843 0%, #BE185D 50%, #EC4899 100%);
+      }
+      .pink-gradient {
+        background: linear-gradient(135deg, #F472B6 0%, #EC4899 50%, #F472B6 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 3s linear infinite;
+      }
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px -12px rgba(236, 72, 153, 0.25);
+      }
+      .floating { animation: floating 3s ease-in-out infinite; }
+      @keyframes floating {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      .glow-effect {
+        box-shadow: 0 0 30px rgba(244, 114, 182, 0.3);
+      }
+
+      /* ===== SCROLL PROGRESS ===== */
+      #scroll-progress {
+        position: fixed; top: 0; left: 0; height: 4px;
+        background: linear-gradient(90deg, #F472B6, #EC4899, #F472B6);
+        z-index: 99999; transition: width 0.1s ease;
+      }
+
+      /* ===== CURSOR PERSONALIZADO ===== */
+      .custom-cursor {
+        width: 20px; height: 20px; border: 2px solid #F472B6;
+        border-radius: 50%; position: fixed; pointer-events: none;
+        z-index: 99998; transition: transform 0.15s ease;
+        mix-blend-mode: difference;
+      }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(244, 114, 182, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+
+      /* ===== BACK TO TOP ===== */
+      #back-to-top {
+        position: fixed; bottom: 100px; right: 24px;
+        width: 50px; height: 50px;
+        background: linear-gradient(135deg, #F472B6, #EC4899);
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        color: white; cursor: pointer; opacity: 0; visibility: hidden;
+        transform: translateY(20px); transition: all 0.3s ease; z-index: 50;
+      }
+      #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+      #back-to-top:hover { transform: translateY(-5px); }
+    </style>
+  </head>
+  <body class="font-sans text-dark bg-light">
+    <!-- Loader -->
+    <div id="page-loader">
+      <div class="loader-glow"></div>
+      <p class="text-accent mt-6 font-serif text-3xl italic">Glow Skin</p>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Navbar -->
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl md:text-3xl font-serif italic">
+          <span class="text-primary">Glow</span><span class="text-accent">Skin</span>
+        </a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-dark hover:text-primary transition font-medium">Início</a>
+          <a href="#sobre" class="text-dark hover:text-primary transition font-medium">Sobre</a>
+          <a href="#servicos" class="text-dark hover:text-primary transition font-medium">Tratamentos</a>
+          <a href="#galeria" class="text-dark hover:text-primary transition font-medium">Resultados</a>
+          <a href="#contato" class="bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-full hover:opacity-90 transition font-semibold">Agendar</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-pink-300 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-pink-200 rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 text-center text-white relative z-10">
+        <span class="inline-block px-6 py-2 bg-white/20 backdrop-blur rounded-full text-sm mb-6" data-aos="fade-up">
+          ✨ Estética Facial Premium
+        </span>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif italic mb-6" data-aos="fade-up" data-aos-delay="100">
+          Desperte seu<br/><span class="text-blush">Brilho Natural</span>
+        </h1>
+        <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="200">
+          Tratamentos faciais avançados com tecnologia de ponta para rejuvenescimento e cuidado da sua pele.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="300">
+          <a href="#contato" class="bg-white text-accent px-8 py-4 rounded-full font-bold hover:bg-blush transition shadow-xl glow-effect">
+            <i data-lucide="calendar" class="inline w-5 h-5 mr-2"></i>Agendar Avaliação
+          </a>
+          <a href="#servicos" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition">
+            Ver Tratamentos
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-16 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up">
+            <p class="text-4xl md:text-5xl font-serif text-accent">2000+</p>
+            <p class="text-gray-600 mt-2">Peles Transformadas</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="100">
+            <p class="text-4xl md:text-5xl font-serif text-accent">12</p>
+            <p class="text-gray-600 mt-2">Anos de Experiência</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="200">
+            <p class="text-4xl md:text-5xl font-serif text-accent">20+</p>
+            <p class="text-gray-600 mt-2">Tratamentos</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="300">
+            <p class="text-4xl md:text-5xl font-serif text-accent">100%</p>
+            <p class="text-gray-600 mt-2">Resultados</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="relative" data-aos="fade-right">
+            <div class="absolute -top-4 -left-4 w-full h-full border-4 border-primary rounded-3xl"></div>
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600" alt="Estética Facial" class="relative rounded-3xl shadow-2xl w-full h-96 object-cover"/>
+            <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-primary to-accent text-white p-6 rounded-2xl shadow-xl floating glow-effect">
+              <p class="text-3xl font-bold">12+</p>
+              <p class="text-sm">Anos</p>
+            </div>
+          </div>
+          <div data-aos="fade-left">
+            <span class="text-accent font-semibold uppercase tracking-wider">Sobre Nós</span>
+            <h2 class="text-4xl md:text-5xl font-serif italic mt-2 mb-6">
+              Ciência & Arte da <span class="pink-gradient">Beleza</span>
+            </h2>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Na Glow Skin combinamos tecnologia avançada com protocolos personalizados para cada tipo de pele. Nossa missão é realçar sua beleza natural através de tratamentos seguros e eficazes.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex items-center gap-3 p-4 bg-secondary rounded-2xl">
+                <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white">
+                  <i data-lucide="microscope" class="w-6 h-6"></i>
+                </div>
+                <span class="font-medium text-sm">Tecnologia Avançada</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-secondary rounded-2xl">
+                <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white">
+                  <i data-lucide="heart" class="w-6 h-6"></i>
+                </div>
+                <span class="font-medium text-sm">Protocolos Exclusivos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos" class="py-20 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-accent font-semibold uppercase tracking-wider" data-aos="fade-up">Tratamentos</span>
+          <h2 class="text-4xl md:text-5xl font-serif italic mt-2" data-aos="fade-up">
+            Nossos <span class="pink-gradient">Protocolos</span>
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-3xl card-hover" data-aos="fade-up">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="sparkles" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif mb-3">Limpeza de Pele</h3>
+            <p class="text-gray-600 mb-4">Limpeza profunda com extração, peeling e hidratação.</p>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-2xl font-bold text-accent">R$ 180</span>
+              <button class="bg-gradient-to-r from-primary to-accent text-white px-4 py-2 rounded-full text-sm hover:opacity-90 transition font-semibold">Agendar</button>
+            </div>
+          </div>
+          <div class="bg-white p-8 rounded-3xl card-hover" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="zap" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif mb-3">Microagulhamento</h3>
+            <p class="text-gray-600 mb-4">Estimula colágeno para rejuvenescimento profundo.</p>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-2xl font-bold text-accent">R$ 350</span>
+              <button class="bg-gradient-to-r from-primary to-accent text-white px-4 py-2 rounded-full text-sm hover:opacity-90 transition font-semibold">Agendar</button>
+            </div>
+          </div>
+          <div class="bg-white p-8 rounded-3xl card-hover" data-aos="fade-up" data-aos-delay="150">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="sun" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif mb-3">Peeling Químico</h3>
+            <p class="text-gray-600 mb-4">Renovação celular para uniformizar a pele.</p>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-2xl font-bold text-accent">R$ 250</span>
+              <button class="bg-gradient-to-r from-primary to-accent text-white px-4 py-2 rounded-full text-sm hover:opacity-90 transition font-semibold">Agendar</button>
+            </div>
+          </div>
+          <div class="bg-white p-8 rounded-3xl card-hover" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="droplet" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif mb-3">Hidratação Profunda</h3>
+            <p class="text-gray-600 mb-4">Máscara de vitamina C e ácido hialurônico.</p>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-2xl font-bold text-accent">R$ 200</span>
+              <button class="bg-gradient-to-r from-primary to-accent text-white px-4 py-2 rounded-full text-sm hover:opacity-90 transition font-semibold">Agendar</button>
+            </div>
+          </div>
+          <div class="bg-white p-8 rounded-3xl card-hover" data-aos="fade-up" data-aos-delay="250">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="radio" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif mb-3">Radiofrequência</h3>
+            <p class="text-gray-600 mb-4">Firmeza e redução de flacidez facial.</p>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-2xl font-bold text-accent">R$ 280</span>
+              <button class="bg-gradient-to-r from-primary to-accent text-white px-4 py-2 rounded-full text-sm hover:opacity-90 transition font-semibold">Agendar</button>
+            </div>
+          </div>
+          <div class="bg-white p-8 rounded-3xl card-hover" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="crown" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif mb-3">Protocolo VIP</h3>
+            <p class="text-gray-600 mb-4">Tratamento completo anti-aging premium.</p>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-2xl font-bold text-accent">R$ 500</span>
+              <button class="bg-gradient-to-r from-primary to-accent text-white px-4 py-2 rounded-full text-sm hover:opacity-90 transition font-semibold">Agendar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galeria -->
+    <section id="galeria" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-accent font-semibold uppercase tracking-wider" data-aos="fade-up">Resultados</span>
+          <h2 class="text-4xl md:text-5xl font-serif italic mt-2" data-aos="fade-up">Antes e <span class="pink-gradient">Depois</span></h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="relative group overflow-hidden rounded-3xl aspect-square" data-aos="zoom-in">
+            <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=400" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Resultado"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-accent/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+              <span class="text-white font-semibold">Rejuvenescimento</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-3xl aspect-square" data-aos="zoom-in" data-aos-delay="100">
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Resultado"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-accent/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+              <span class="text-white font-semibold">Pele Radiante</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-3xl aspect-square" data-aos="zoom-in" data-aos-delay="200">
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Resultado"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-accent/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+              <span class="text-white font-semibold">Hidratação</span>
+            </div>
+          </div>
+          <div class="relative group overflow-hidden rounded-3xl aspect-square" data-aos="zoom-in" data-aos-delay="300">
+            <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Resultado"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-accent/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+              <span class="text-white font-semibold">Firmeza</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="py-20 hero-gradient text-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-5xl font-serif italic mb-6" data-aos="fade-up">Agende sua Avaliação</h2>
+          <p class="text-xl text-white/80 mb-8" data-aos="fade-up" data-aos-delay="100">
+            Descubra o protocolo ideal para sua pele! ✨
+          </p>
+          <div class="grid md:grid-cols-3 gap-6 mb-10" data-aos="fade-up" data-aos-delay="200">
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
+              <i data-lucide="map-pin" class="w-8 h-8 mx-auto mb-3"></i>
+              <p>Alameda Glow, 500<br/>Itaim Bibi - SP</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
+              <i data-lucide="clock" class="w-8 h-8 mx-auto mb-3"></i>
+              <p>Seg - Sáb<br/>09h às 19h</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
+              <i data-lucide="phone" class="w-8 h-8 mx-auto mb-3"></i>
+              <p>(11) 92222-2222</p>
+            </div>
+          </div>
+          <a href="https://wa.me/5511922222222" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-white text-accent px-10 py-4 rounded-full font-bold text-lg hover:bg-blush transition shadow-xl glow-effect" data-aos="fade-up" data-aos-delay="300">
+            <i data-lucide="message-circle" class="w-6 h-6"></i>Agendar pelo WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-10">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-2xl font-serif italic mb-4"><span class="text-primary">Glow</span>Skin</p>
+        <p class="text-gray-400">© 2026 Glow Skin Estética. Todos os direitos reservados.</p>
+        <div class="flex justify-center gap-4 mt-6">
+          <a href="#" aria-label="Instagram" class="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center hover:opacity-90 transition">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+          </a>
+          <a href="#" aria-label="Facebook" class="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center hover:opacity-90 transition">
+            <i data-lucide="facebook" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="back-to-top"><i data-lucide="chevron-up" class="w-6 h-6"></i></button>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/5511922222222" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition z-50 hover:scale-110">
+      <i data-lucide="message-circle" class="w-7 h-7"></i>
+    </a>
+
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 1000);
+      });
+      lucide.createIcons();
+      AOS.init({ duration: 800, once: true });
+
+      // Scroll Progress
+      window.addEventListener('scroll', () => {
+        const progress = document.getElementById('scroll-progress');
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = (scrollTop / docHeight) * 100 + '%';
+      });
+
+      // Back to Top
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 500);
+      });
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Custom Cursor
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+      });
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+    </script>
+  </body>
+</html>
