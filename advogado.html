@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Silva & Associados - Advocacia</title>
+    <meta property="og:title" content="Silva & Associados - Advocacia">
+    <meta property="og:description" content="Excelência jurídica ao seu alcance. Consultoria e defesa.">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1e3a5f",
+              secondary: "#f8fafc",
+              accent: "#b8860b",
+              dark: "#0f172a",
+              light: "#f1f5f9",
+              gold: "#b8860b",
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Poppins"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      #page-loader { position: fixed; inset: 0; background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-spin { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #b8860b; border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #1e3a5f, #b8860b); z-index: 99999; }
+      .custom-cursor { width: 20px; height: 20px; border: 2px solid #b8860b; border-radius: 50%; position: fixed; pointer-events: none; z-index: 99998; transition: transform 0.15s ease; mix-blend-mode: difference; }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(184, 134, 11, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+      .glass-nav { background: rgba(30, 58, 95, 0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(184, 134, 11, 0.2); }
+      .hero-gradient { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1e293b 100%); }
+      .shimmer-text { background: linear-gradient(90deg, #b8860b, #d4a84b, #b8860b); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s linear infinite; }
+      @keyframes shimmer { to { background-position: 200% center; } }
+      .glass-card { background: rgba(255,255,255,0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border: 1px solid rgba(184, 134, 11, 0.1); transition: all 0.4s ease; }
+      .glass-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(184, 134, 11, 0.25); }
+      .btn-primary { background: linear-gradient(135deg, #1e3a5f, #2d4a6f); transition: all 0.3s ease; }
+      .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(30, 58, 95, 0.5); }
+      .btn-gold { background: linear-gradient(135deg, #b8860b, #d4a84b); color: white; transition: all 0.3s ease; }
+      .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(184, 134, 11, 0.5); }
+      #mobile-menu { position: fixed; inset: 0; background: rgba(30, 58, 95, 0.98); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); z-index: 40; transform: translateX(100%); transition: transform 0.4s ease; }
+      #mobile-menu.open { transform: translateX(0); }
+      .floating { animation: floating 3s ease-in-out infinite; }
+      @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+      #back-to-top { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; background: linear-gradient(135deg, #1e3a5f, #b8860b); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease; z-index: 50; }
+      #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    </style>
+  </head>
+  <body class="font-sans bg-light text-dark overflow-x-hidden">
+    <div id="page-loader"><div class="loader-spin"></div><p class="text-white mt-4 font-medium">⚖️ Carregando...</p></div>
+    <div id="scroll-progress"></div>
+    <div class="custom-cursor"></div>
+
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-serif font-bold text-white">Silva<span class="shimmer-text">&Associados</span></a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-gray-300 hover:text-gold transition">Início</a>
+          <a href="#areas" class="text-gray-300 hover:text-gold transition">Áreas</a>
+          <a href="#sobre" class="text-gray-300 hover:text-gold transition">Sobre</a>
+          <a href="#contato" class="btn-gold px-6 py-2.5 rounded-full font-semibold">Consulta</a>
+        </nav>
+        <button id="menu-toggle" class="md:hidden text-white" aria-label="Menu"><i data-lucide="menu" class="w-7 h-7"></i></button>
+      </div>
+    </header>
+
+    <div id="mobile-menu" class="md:hidden">
+      <div class="flex flex-col items-center justify-center h-full space-y-8">
+        <a href="#home" class="text-2xl text-white hover:text-gold transition" onclick="closeMobileMenu()">Início</a>
+        <a href="#areas" class="text-2xl text-white hover:text-gold transition" onclick="closeMobileMenu()">Áreas</a>
+        <a href="#sobre" class="text-2xl text-white hover:text-gold transition" onclick="closeMobileMenu()">Sobre</a>
+        <a href="#contato" class="btn-gold px-8 py-3 rounded-full text-xl" onclick="closeMobileMenu()">Consulta</a>
+        <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-white" aria-label="Fechar menu"><i data-lucide="x" class="w-8 h-8"></i></button>
+      </div>
+    </div>
+
+    <section id="home" class="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-20">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-10 w-96 h-96 bg-gold rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-80 h-80 bg-primary rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div data-aos="fade-right">
+            <span class="inline-block px-4 py-2 bg-gold/20 text-gold rounded-full text-sm font-medium mb-6">⚖️ OAB/RJ 12345 • 20 Anos de Experiência</span>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6">Excelência <span class="shimmer-text">Jurídica</span> ao Seu Alcance</h1>
+            <p class="text-gray-400 text-lg mb-8">Advogados especializados em diversas áreas do direito. Consultoria, defesa e assessoria jurídica com comprometimento e ética.</p>
+            <div class="flex flex-wrap gap-4">
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-gold px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="calendar" class="w-5 h-5"></i>Agendar Consulta</a>
+              <a href="#areas" class="bg-white/10 backdrop-blur text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2 hover:bg-white/20 transition"><i data-lucide="scale" class="w-5 h-5"></i>Áreas de Atuação</a>
+            </div>
+          </div>
+          <div class="hidden md:block relative" data-aos="fade-left">
+            <div class="relative z-10 floating">
+              <div class="w-80 h-80 mx-auto bg-gradient-to-br from-gold/20 to-primary/20 rounded-3xl flex items-center justify-center">
+                <i data-lucide="scale" class="w-40 h-40 text-gold"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up"><p class="text-4xl font-bold text-primary">2.000+</p><p class="text-gray-600">Casos Ganhos</p></div>
+          <div data-aos="fade-up" data-aos-delay="100"><p class="text-4xl font-bold text-primary">20</p><p class="text-gray-600">Anos de Advocacia</p></div>
+          <div data-aos="fade-up" data-aos-delay="200"><p class="text-4xl font-bold text-primary">98%</p><p class="text-gray-600">Satisfação</p></div>
+          <div data-aos="fade-up" data-aos-delay="300"><p class="text-4xl font-bold text-primary">24h</p><p class="text-gray-600">Atendimento</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="areas" class="py-24 bg-light">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-gold font-semibold uppercase tracking-widest text-sm">Especialidades</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 text-dark">Áreas de <span class="text-primary">Atuação</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="glass-card rounded-3xl p-8" data-aos="fade-up">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-dark rounded-2xl flex items-center justify-center mb-6"><i data-lucide="users" class="w-8 h-8 text-gold"></i></div>
+            <h3 class="text-xl font-bold mb-3">Direito de Família</h3>
+            <p class="text-gray-600">Divórcio, guarda, pensão alimentícia, inventário e partilha de bens.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-dark rounded-2xl flex items-center justify-center mb-6"><i data-lucide="briefcase" class="w-8 h-8 text-gold"></i></div>
+            <h3 class="text-xl font-bold mb-3">Direito Trabalhista</h3>
+            <p class="text-gray-600">Rescisões, horas extras, assédio moral, acidentes de trabalho.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-dark rounded-2xl flex items-center justify-center mb-6"><i data-lucide="shield" class="w-8 h-8 text-gold"></i></div>
+            <h3 class="text-xl font-bold mb-3">Direito do Consumidor</h3>
+            <p class="text-gray-600">Cobranças indevidas, produtos defeituosos, negativação indevida.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-dark rounded-2xl flex items-center justify-center mb-6"><i data-lucide="alert-triangle" class="w-8 h-8 text-gold"></i></div>
+            <h3 class="text-xl font-bold mb-3">Direito Criminal</h3>
+            <p class="text-gray-600">Defesa criminal, habeas corpus, recursos e acompanhamento processual.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="400">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-dark rounded-2xl flex items-center justify-center mb-6"><i data-lucide="building-2" class="w-8 h-8 text-gold"></i></div>
+            <h3 class="text-xl font-bold mb-3">Direito Empresarial</h3>
+            <p class="text-gray-600">Contratos, abertura de empresas, recuperação judicial.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="500">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-dark rounded-2xl flex items-center justify-center mb-6"><i data-lucide="home" class="w-8 h-8 text-gold"></i></div>
+            <h3 class="text-xl font-bold mb-3">Direito Imobiliário</h3>
+            <p class="text-gray-600">Compra e venda, locação, usucapião, regularização fundiária.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="py-24 bg-primary text-white">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div data-aos="fade-right">
+            <div class="w-full h-96 bg-gradient-to-br from-gold/20 to-white/10 rounded-3xl flex items-center justify-center"><i data-lucide="graduation-cap" class="w-32 h-32 text-gold/50"></i></div>
+          </div>
+          <div data-aos="fade-left">
+            <span class="text-gold font-semibold uppercase tracking-widest text-sm">O Escritório</span>
+            <h2 class="text-4xl font-serif font-bold mt-3 mb-6">Tradição e <span class="shimmer-text">Competência</span></h2>
+            <p class="text-gray-300 mb-6">Fundado em 2004, o escritório Silva & Associados é referência em advocacia de qualidade. Nossa equipe é formada por profissionais experientes e comprometidos com os melhores resultados para nossos clientes.</p>
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-center gap-3"><i data-lucide="check-circle" class="w-6 h-6 text-gold"></i><span>Equipe multidisciplinar</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check-circle" class="w-6 h-6 text-gold"></i><span>Atendimento personalizado</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check-circle" class="w-6 h-6 text-gold"></i><span>Ética e transparência</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check-circle" class="w-6 h-6 text-gold"></i><span>Honorários justos</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+          <span class="text-gold font-semibold uppercase tracking-widest text-sm">Contato</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 mb-6 text-dark">Agende Uma <span class="text-primary">Consulta</span></h2>
+          <p class="text-gray-600 mb-8">Primeira consulta avaliativa. Entre em contato e conte-nos seu caso.</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-primary text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i>WhatsApp</a>
+            <a href="tel:+5521977434614" class="btn-gold px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="phone" class="w-5 h-5"></i>Ligar</a>
+          </div>
+          <div class="mt-12 flex flex-wrap justify-center gap-8 text-gray-600">
+            <div class="flex items-center gap-2"><i data-lucide="mail" class="w-5 h-5 text-gold"></i>contato@silvaeassociados.adv.br</div>
+            <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5 text-gold"></i>Centro, Rio de Janeiro</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-12">
+      <div class="container mx-auto px-6 text-center">
+        <a href="#" class="text-2xl font-serif font-bold">Silva<span class="shimmer-text">&Associados</span></a>
+        <p class="text-gray-400 mt-4">© 2024 Silva & Associados Advocacia. Todos os direitos reservados.</p>
+        <p class="text-gray-500 text-sm mt-2">OAB/RJ 12345 • Este site não constitui propaganda de advocacia</p>
+      </div>
+    </footer>
+
+    <button id="back-to-top" aria-label="Voltar ao topo"><i data-lucide="chevron-up" class="w-6 h-6"></i></button>
+
+    <script>
+      window.addEventListener('load', () => { setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 800); });
+      AOS.init({ duration: 800, once: true, offset: 50 });
+      lucide.createIcons();
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX - 10 + 'px'; cursor.style.top = e.clientY - 10 + 'px'; });
+      document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => cursor.classList.add('hover')); el.addEventListener('mouseleave', () => cursor.classList.remove('hover')); });
+      window.addEventListener('scroll', () => { const progress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100; document.getElementById('scroll-progress').style.width = progress + '%'; });
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => { backToTop.classList.toggle('visible', window.scrollY > 500); });
+      backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+      function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+    </script>
+  </body>
+</html>

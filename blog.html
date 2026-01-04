@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog WebStudio Premium - Dicas de marketing digital, design, SEO e como destacar seu negócio na internet. Conteúdo exclusivo para empreendedores.">
+  <meta name="keywords" content="marketing digital, SEO, design de sites, criação de sites, presença digital, empreendedorismo, dicas de negócios">
+  <meta name="author" content="WebStudio Premium">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://webstudio.com/blog">
+  <meta property="og:title" content="Blog WebStudio Premium - Dicas de Marketing Digital e Design">
+  <meta property="og:description" content="Conteúdo exclusivo sobre marketing digital, SEO, design e como destacar seu negócio na internet.">
+  <meta property="og:image" content="https://webstudio.com/og-blog.jpg">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://webstudio.com/blog">
+  <meta property="twitter:title" content="Blog WebStudio Premium - Dicas de Marketing Digital e Design">
+  <meta property="twitter:description" content="Conteúdo exclusivo sobre marketing digital, SEO, design e como destacar seu negócio na internet.">
+  
+  <title>Blog | WebStudio Premium - Dicas de Marketing Digital e Design</title>
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://webstudio.com/blog">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌐%3C/text%3E%3C/svg%3E">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'serif': ['Playfair Display', 'serif'],
+            'sans': ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#6366F1',
+            accent: '#8B5CF6',
+            dark: '#0f0f0f',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <style>
+    * { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #0f0f0f 100%);
+      color: #ffffff;
+      min-height: 100vh;
+    }
+    
+    /* Glass Nav */
+    .glass-nav {
+      background: rgba(15, 15, 15, 0.8);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Blog Cards */
+    .blog-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+    .blog-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.2);
+    }
+    .blog-card img {
+      transition: transform 0.5s ease;
+    }
+    .blog-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    /* Categories */
+    .category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .category-marketing { background: rgba(99, 102, 241, 0.2); color: #818CF8; }
+    .category-design { background: rgba(236, 72, 153, 0.2); color: #F472B6; }
+    .category-seo { background: rgba(34, 197, 94, 0.2); color: #4ADE80; }
+    .category-negocios { background: rgba(245, 158, 11, 0.2); color: #FBBF24; }
+    .category-tecnologia { background: rgba(6, 182, 212, 0.2); color: #22D3EE; }
+    
+    /* Newsletter Form */
+    .newsletter-section {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 24px;
+    }
+    
+    /* Featured Post */
+    .featured-post {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+    }
+    
+    /* Sidebar */
+    .sidebar-widget {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    
+    /* Read More Link */
+    .read-more {
+      color: #6366F1;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    .read-more:hover {
+      gap: 12px;
+      color: #818CF8;
+    }
+    
+    /* Schema Markup hidden */
+    .schema-markup { display: none; }
+  </style>
+  
+  <!-- Structured Data / Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog WebStudio Premium",
+    "description": "Dicas de marketing digital, design, SEO e como destacar seu negócio na internet",
+    "url": "https://webstudio.com/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "WebStudio Premium",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://webstudio.com/logo.png"
+      }
+    },
+    "blogPost": [
+      {
+        "@type": "BlogPosting",
+        "headline": "Por que todo negócio precisa de um site profissional em 2024",
+        "description": "Descubra como um site profissional pode transformar seu negócio e atrair mais clientes qualificados.",
+        "datePublished": "2024-01-15",
+        "author": {
+          "@type": "Person",
+          "name": "Carlos Piquet"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="glass-nav fixed w-full z-50 top-0">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+            <i data-lucide="globe" class="w-5 h-5 text-white"></i>
+          </div>
+          <div>
+            <span class="text-2xl font-serif font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">WebStudio</span>
+            <span class="text-xs text-gray-400 block -mt-1">Premium Sites</span>
+          </div>
+        </a>
+        
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+          <a href="index.html#catalogo" class="text-gray-300 hover:text-white transition-colors">Catálogo</a>
+          <a href="blog.html" class="text-primary font-medium">Blog</a>
+          <a href="index.html#faq" class="text-gray-300 hover:text-white transition-colors">FAQ</a>
+          <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="bg-gradient-to-r from-primary to-accent text-white px-6 py-2.5 rounded-full font-medium hover:shadow-lg hover:shadow-primary/30 transition-all transform hover:scale-105 flex items-center gap-2">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            WhatsApp
+          </a>
+        </div>
+        
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-white" aria-label="Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed inset-0 bg-dark/98 z-40 hidden flex-col items-center justify-center gap-8 text-xl">
+    <a href="index.html" class="text-white hover:text-primary transition-colors">Home</a>
+    <a href="index.html#catalogo" class="text-white hover:text-primary transition-colors">Catálogo</a>
+    <a href="blog.html" class="text-primary font-medium">Blog</a>
+    <a href="index.html#faq" class="text-white hover:text-primary transition-colors">FAQ</a>
+    <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full font-medium">WhatsApp</a>
+  </div>
+  
+  <!-- Hero Section -->
+  <header class="pt-32 pb-16 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center" data-aos="fade-up">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-medium mb-6">
+          <i data-lucide="book-open" class="w-4 h-4"></i>
+          Blog WebStudio
+        </span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
+          Conteúdo que <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Transforma</span> Negócios
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+          Dicas práticas de marketing digital, design, SEO e estratégias para destacar sua marca na internet.
+        </p>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Featured Post -->
+  <section class="py-8 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <article class="featured-post p-8 md:p-12" data-aos="fade-up">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="order-2 md:order-1">
+            <div class="flex items-center gap-4 mb-4">
+              <span class="category-tag category-negocios">
+                <i data-lucide="trending-up" class="w-3 h-3"></i>
+                Negócios
+              </span>
+              <span class="text-gray-400 text-sm flex items-center gap-1">
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+                15 Jan 2024
+              </span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-serif font-bold mb-4 hover:text-primary transition-colors cursor-pointer">
+              Por que todo negócio precisa de um site profissional em 2024
+            </h2>
+            <p class="text-gray-400 mb-6 line-clamp-3">
+              Em um mundo cada vez mais digital, ter apenas redes sociais não é suficiente. Descubra por que um site profissional é o investimento mais importante para qualquer negócio que deseja crescer e conquistar credibilidade no mercado.
+            </p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">
+                  CP
+                </div>
+                <div>
+                  <span class="text-sm font-medium">Carlos Piquet</span>
+                  <span class="text-xs text-gray-400 block">Especialista em Web Design</span>
+                </div>
+              </div>
+              <a href="#" class="read-more">
+                Ler artigo
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+          <div class="order-1 md:order-2 overflow-hidden rounded-2xl">
+            <img 
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" 
+              alt="Pessoa trabalhando em laptop com gráficos de negócio"
+              class="w-full h-64 md:h-80 object-cover"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+  
+  <!-- Main Content -->
+  <main class="py-12 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Blog Posts Grid -->
+        <div class="lg:col-span-2">
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-serif font-bold">Últimos Artigos</h2>
+            <div class="flex gap-2">
+              <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-primary text-white">Todos</button>
+              <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-white/5 text-gray-400 hover:bg-white/10">Marketing</button>
+              <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-white/5 text-gray-400 hover:bg-white/10">SEO</button>
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Post 1 -->
+            <article class="blog-card" data-aos="fade-up">
+              <div class="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=250&fit=crop" 
+                  alt="Design de interface de usuário"
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                >
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="category-tag category-design">
+                    <i data-lucide="palette" class="w-3 h-3"></i>
+                    Design
+                  </span>
+                  <span class="text-gray-500 text-xs">8 min de leitura</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2 hover:text-primary transition-colors cursor-pointer">
+                  5 Tendências de Web Design para 2024
+                </h3>
+                <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                  Descubra as principais tendências que vão dominar o design de sites este ano, desde glassmorphism até animações micro-interativas.
+                </p>
+                <a href="#" class="read-more text-sm">
+                  Continuar lendo
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </article>
+            
+            <!-- Post 2 -->
+            <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?w=400&h=250&fit=crop" 
+                  alt="Gráfico de SEO e analytics"
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                >
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="category-tag category-seo">
+                    <i data-lucide="search" class="w-3 h-3"></i>
+                    SEO
+                  </span>
+                  <span class="text-gray-500 text-xs">12 min de leitura</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2 hover:text-primary transition-colors cursor-pointer">
+                  Guia Completo de SEO para Pequenos Negócios
+                </h3>
+                <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                  Aprenda estratégias de SEO que você pode implementar hoje mesmo para aparecer nas primeiras posições do Google.
+                </p>
+                <a href="#" class="read-more text-sm">
+                  Continuar lendo
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </article>
+            
+            <!-- Post 3 -->
+            <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=250&fit=crop" 
+                  alt="Social media marketing"
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                >
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="category-tag category-marketing">
+                    <i data-lucide="megaphone" class="w-3 h-3"></i>
+                    Marketing
+                  </span>
+                  <span class="text-gray-500 text-xs">6 min de leitura</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2 hover:text-primary transition-colors cursor-pointer">
+                  Como Integrar Site e Redes Sociais
+                </h3>
+                <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                  Estratégias para criar uma presença digital consistente combinando seu site profissional com suas redes sociais.
+                </p>
+                <a href="#" class="read-more text-sm">
+                  Continuar lendo
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </article>
+            
+            <!-- Post 4 -->
+            <article class="blog-card" data-aos="fade-up" data-aos-delay="300">
+              <div class="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=250&fit=crop" 
+                  alt="Pessoa analisando dados no computador"
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                >
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="category-tag category-tecnologia">
+                    <i data-lucide="smartphone" class="w-3 h-3"></i>
+                    Tecnologia
+                  </span>
+                  <span class="text-gray-500 text-xs">5 min de leitura</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2 hover:text-primary transition-colors cursor-pointer">
+                  Site Responsivo: Por que é Essencial?
+                </h3>
+                <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                  Mais de 60% do tráfego web vem de dispositivos móveis. Entenda por que seu site PRECISA ser responsivo.
+                </p>
+                <a href="#" class="read-more text-sm">
+                  Continuar lendo
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </article>
+            
+            <!-- Post 5 -->
+            <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1556155092-490a1ba16284?w=400&h=250&fit=crop" 
+                  alt="Conversão e vendas online"
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                >
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="category-tag category-negocios">
+                    <i data-lucide="trending-up" class="w-3 h-3"></i>
+                    Negócios
+                  </span>
+                  <span class="text-gray-500 text-xs">10 min de leitura</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2 hover:text-primary transition-colors cursor-pointer">
+                  Transformando Visitantes em Clientes
+                </h3>
+                <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                  Técnicas comprovadas de CRO (Otimização de Conversão) para aumentar suas vendas através do site.
+                </p>
+                <a href="#" class="read-more text-sm">
+                  Continuar lendo
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </article>
+            
+            <!-- Post 6 -->
+            <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=250&fit=crop" 
+                  alt="WhatsApp Business para empresas"
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                >
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="category-tag category-marketing">
+                    <i data-lucide="message-circle" class="w-3 h-3"></i>
+                    Marketing
+                  </span>
+                  <span class="text-gray-500 text-xs">7 min de leitura</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2 hover:text-primary transition-colors cursor-pointer">
+                  WhatsApp Business: O Guia Definitivo
+                </h3>
+                <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                  Como usar o WhatsApp Business integrado ao seu site para automatizar atendimentos e fechar mais vendas.
+                </p>
+                <a href="#" class="read-more text-sm">
+                  Continuar lendo
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </article>
+          </div>
+          
+          <!-- Pagination -->
+          <div class="flex justify-center gap-2 mt-12">
+            <button class="w-10 h-10 rounded-full bg-primary text-white font-medium" aria-label="Página 1">1</button>
+            <button class="w-10 h-10 rounded-full bg-white/5 text-gray-400 hover:bg-white/10 transition-colors" aria-label="Página 2">2</button>
+            <button class="w-10 h-10 rounded-full bg-white/5 text-gray-400 hover:bg-white/10 transition-colors" aria-label="Página 3">3</button>
+            <button class="w-10 h-10 rounded-full bg-white/5 text-gray-400 hover:bg-white/10 transition-colors flex items-center justify-center" aria-label="Próxima página">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <aside class="lg:col-span-1 space-y-6">
+          <!-- Newsletter -->
+          <div class="newsletter-section p-6" data-aos="fade-left">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
+                <i data-lucide="mail" class="w-6 h-6 text-white"></i>
+              </div>
+              <div>
+                <h3 class="font-bold">Newsletter</h3>
+                <p class="text-gray-400 text-sm">Conteúdo exclusivo</p>
+              </div>
+            </div>
+            <p class="text-gray-400 text-sm mb-4">
+              Receba dicas semanais de marketing digital e design diretamente no seu email.
+            </p>
+            <form class="space-y-3">
+              <input 
+                type="email" 
+                placeholder="Seu melhor email"
+                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-primary focus:outline-none transition-all"
+              >
+              <button type="submit" class="w-full bg-gradient-to-r from-primary to-accent text-white py-3 rounded-xl font-medium hover:shadow-lg hover:shadow-primary/30 transition-all">
+                Inscrever-se
+              </button>
+            </form>
+            <p class="text-gray-500 text-xs mt-3 text-center">
+              Sem spam. Cancele quando quiser.
+            </p>
+          </div>
+          
+          <!-- Categories -->
+          <div class="sidebar-widget" data-aos="fade-left" data-aos-delay="100">
+            <h3 class="font-bold mb-4 flex items-center gap-2">
+              <i data-lucide="folder" class="w-5 h-5 text-primary"></i>
+              Categorias
+            </h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="flex items-center justify-between text-gray-400 hover:text-white transition-colors">
+                  <span>Marketing Digital</span>
+                  <span class="bg-white/10 px-2 py-1 rounded text-xs">12</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex items-center justify-between text-gray-400 hover:text-white transition-colors">
+                  <span>SEO & Analytics</span>
+                  <span class="bg-white/10 px-2 py-1 rounded text-xs">8</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex items-center justify-between text-gray-400 hover:text-white transition-colors">
+                  <span>Web Design</span>
+                  <span class="bg-white/10 px-2 py-1 rounded text-xs">15</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex items-center justify-between text-gray-400 hover:text-white transition-colors">
+                  <span>Negócios & Vendas</span>
+                  <span class="bg-white/10 px-2 py-1 rounded text-xs">10</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex items-center justify-between text-gray-400 hover:text-white transition-colors">
+                  <span>Tecnologia</span>
+                  <span class="bg-white/10 px-2 py-1 rounded text-xs">6</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Popular Posts -->
+          <div class="sidebar-widget" data-aos="fade-left" data-aos-delay="200">
+            <h3 class="font-bold mb-4 flex items-center gap-2">
+              <i data-lucide="flame" class="w-5 h-5 text-orange-500"></i>
+              Mais Lidos
+            </h3>
+            <ul class="space-y-4">
+              <li>
+                <a href="#" class="flex gap-3 group">
+                  <span class="text-3xl font-bold text-primary/30 group-hover:text-primary transition-colors">01</span>
+                  <div>
+                    <h4 class="text-sm font-medium group-hover:text-primary transition-colors">Por que todo negócio precisa de um site</h4>
+                    <span class="text-xs text-gray-500">2.4k visualizações</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex gap-3 group">
+                  <span class="text-3xl font-bold text-primary/30 group-hover:text-primary transition-colors">02</span>
+                  <div>
+                    <h4 class="text-sm font-medium group-hover:text-primary transition-colors">Guia Completo de SEO para Iniciantes</h4>
+                    <span class="text-xs text-gray-500">1.8k visualizações</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex gap-3 group">
+                  <span class="text-3xl font-bold text-primary/30 group-hover:text-primary transition-colors">03</span>
+                  <div>
+                    <h4 class="text-sm font-medium group-hover:text-primary transition-colors">WhatsApp Business: Guia Definitivo</h4>
+                    <span class="text-xs text-gray-500">1.5k visualizações</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- CTA Widget -->
+          <div class="sidebar-widget bg-gradient-to-br from-primary/20 to-accent/20 border-primary/30" data-aos="fade-left" data-aos-delay="300">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="rocket" class="w-8 h-8 text-white"></i>
+              </div>
+              <h3 class="font-bold mb-2">Quer seu site premium?</h3>
+              <p class="text-gray-400 text-sm mb-4">
+                Mais de 30 modelos exclusivos prontos para personalizar.
+              </p>
+              <a 
+                href="index.html#catalogo" 
+                class="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-accent text-white px-6 py-3 rounded-full font-medium hover:shadow-lg hover:shadow-primary/30 transition-all transform hover:scale-105"
+              >
+                Ver Catálogo
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-dark py-16 px-6 border-t border-white/10">
+    <div class="container mx-auto max-w-6xl">
+      <div class="grid md:grid-cols-4 gap-12">
+        <div class="md:col-span-2">
+          <a href="index.html" class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
+              <i data-lucide="globe" class="w-6 h-6 text-white"></i>
+            </div>
+            <div>
+              <span class="text-2xl font-serif font-bold">WebStudio</span>
+              <span class="text-xs text-gray-400 block">Premium Sites</span>
+            </div>
+          </a>
+          <p class="text-gray-400 mb-6 max-w-sm">
+            Criamos sites premium que transformam visitantes em clientes. Design exclusivo para cada nicho de mercado.
+          </p>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all" aria-label="Instagram">
+              <i data-lucide="instagram" class="w-5 h-5"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all" aria-label="LinkedIn">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
+            <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:bg-green-500 hover:text-white transition-all" aria-label="WhatsApp">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-bold mb-4">Links Rápidos</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="index.html#catalogo" class="hover:text-white transition-colors">Catálogo</a></li>
+            <li><a href="blog.html" class="hover:text-white transition-colors">Blog</a></li>
+            <li><a href="index.html#faq" class="hover:text-white transition-colors">FAQ</a></li>
+            <li><a href="index.html#contato" class="hover:text-white transition-colors">Contato</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-bold mb-4">Contato</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li class="flex items-center gap-2">
+              <i data-lucide="message-circle" class="w-4 h-4 text-green-500"></i>
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="hover:text-white transition-colors">+55 21 97743-4614</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 text-primary"></i>
+              <a href="mailto:carlospiquet.projetos@gmail.com" class="hover:text-white transition-colors">carlospiquet.projetos@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-white/10 mt-12 pt-8 text-center text-gray-500 text-sm">
+        <p>© 2024 WebStudio Premium. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Back to Top -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white shadow-lg shadow-primary/30 opacity-0 invisible transition-all hover:scale-110" aria-label="Voltar ao topo">
+    <i data-lucide="chevron-up" class="w-6 h-6"></i>
+  </button>
+  
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+    
+    // Initialize Lucide Icons
+    lucide.createIcons();
+    
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
+    });
+    
+    // Close mobile menu on link click
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+      });
+    });
+    
+    // Back to Top Button
+    const backToTop = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTop.classList.remove('opacity-0', 'invisible');
+        backToTop.classList.add('opacity-100', 'visible');
+      } else {
+        backToTop.classList.add('opacity-0', 'invisible');
+        backToTop.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    backToTop?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Filter Buttons (placeholder functionality)
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active', 'bg-primary', 'text-white'));
+        filterBtns.forEach(b => b.classList.add('bg-white/5', 'text-gray-400'));
+        btn.classList.add('active', 'bg-primary', 'text-white');
+        btn.classList.remove('bg-white/5', 'text-gray-400');
+      });
+    });
+  </script>
+</body>
+</html>

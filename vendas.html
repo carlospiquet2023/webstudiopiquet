@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebStudio Premium - Pack Completo de Sites Prontos | R$ 39,90</title>
+    <meta property="og:image" content="https://i.imgur.com/1Ms9yRH.jpeg">
+    <meta property="og:title" content="WebStudio Premium - 36 Sites Prontos por R$ 39,90">
+    <meta property="og:description" content="Pack completo com 36 sites profissionais prontos para usar. Comece a lucrar hoje mesmo!">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366F1",
+              secondary: "#F8FAFC",
+              accent: "#8B5CF6",
+              dark: "#0F172A",
+              success: "#10B981",
+              warning: "#F59E0B",
+              danger: "#EF4444",
+            },
+            fontFamily: {
+              sans: ['"Inter"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      .gradient-bg { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
+      .gradient-text { background: linear-gradient(135deg, #6366F1, #8B5CF6, #EC4899); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+      .shimmer { background: linear-gradient(90deg, #6366F1, #EC4899, #6366F1); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s linear infinite; }
+      @keyframes shimmer { to { background-position: 200% center; } }
+      .pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+      @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); } 50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.8), 0 0 60px rgba(139, 92, 246, 0.4); } }
+      .float { animation: float 3s ease-in-out infinite; }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+      .card-hover { transition: all 0.3s ease; }
+      .card-hover:hover { transform: translateY(-5px); box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25); }
+      .btn-cta { background: linear-gradient(135deg, #10B981, #059669); transition: all 0.3s ease; }
+      .btn-cta:hover { transform: scale(1.05); box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.5); }
+      .countdown-box { background: rgba(255,255,255,0.1); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+      .urgency-bar { background: linear-gradient(90deg, #EF4444, #F59E0B); animation: urgencyPulse 1s ease-in-out infinite; }
+      @keyframes urgencyPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+      .testimonial-card { background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1)); border: 1px solid rgba(99, 102, 241, 0.2); }
+      .check-icon { background: linear-gradient(135deg, #10B981, #059669); }
+      .price-slash { position: relative; }
+      .price-slash::after { content: ''; position: absolute; left: -5%; top: 50%; width: 110%; height: 3px; background: #EF4444; transform: rotate(-15deg); }
+      .guarantee-badge { background: linear-gradient(135deg, #F59E0B, #D97706); }
+      .ribbon { position: absolute; top: 20px; right: -35px; background: linear-gradient(135deg, #EF4444, #DC2626); color: white; padding: 8px 40px; font-size: 12px; font-weight: bold; transform: rotate(45deg); box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4); }
+    </style>
+  </head>
+  <body class="font-sans bg-dark text-white overflow-x-hidden">
+
+    <!-- URGENCY BAR -->
+    <div class="urgency-bar py-3 text-center text-white font-bold text-sm md:text-base">
+      <span class="animate-pulse">🔥</span> OFERTA ESPECIAL: Apenas <span id="spots">47</span> vagas restantes! <span class="animate-pulse">🔥</span>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="gradient-bg min-h-screen flex items-center relative overflow-hidden py-20">
+      <div class="absolute inset-0">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-block px-4 py-2 bg-success/20 border border-success/30 rounded-full text-success text-sm font-semibold mb-6" data-aos="fade-down">
+            ✅ Mais de 500 pessoas já compraram!
+          </div>
+          
+          <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight" data-aos="fade-up">
+            Ganhe Dinheiro Vendendo <span class="shimmer">Sites Prontos</span> na Internet!
+          </h1>
+          
+          <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+            Pack completo com <strong class="text-white">36 sites profissionais</strong> de nichos lucrativos. Basta personalizar e revender por <strong class="text-success">R$ 500 a R$ 2.000</strong> cada!
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" data-aos="fade-up" data-aos-delay="200">
+            <a href="#comprar" class="btn-cta text-white px-10 py-5 rounded-2xl font-bold text-xl flex items-center justify-center gap-3 pulse-glow">
+              <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+              QUERO COMEÇAR AGORA
+            </a>
+          </div>
+
+          <!-- PREVIEW MOCKUP -->
+          <div class="relative" data-aos="zoom-in" data-aos-delay="300">
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-4 shadow-2xl max-w-3xl mx-auto">
+              <div class="flex gap-2 mb-4">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <img src="https://i.imgur.com/1Ms9yRH.jpeg" alt="WebStudio Preview" class="rounded-xl w-full">
+            </div>
+            <div class="absolute -top-4 -right-4 bg-danger text-white px-4 py-2 rounded-full font-bold text-sm animate-bounce">
+              36 SITES!
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM/SOLUTION -->
+    <section class="py-20 bg-slate-900">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">
+            Você se identifica com isso? 🤔
+          </h2>
+          
+          <div class="grid md:grid-cols-2 gap-8 mb-16">
+            <div class="bg-red-500/10 border border-red-500/30 rounded-2xl p-6" data-aos="fade-right">
+              <h3 class="text-xl font-bold text-red-400 mb-4 flex items-center gap-2">
+                <i data-lucide="x-circle" class="w-6 h-6"></i> O Problema
+              </h3>
+              <ul class="space-y-3 text-gray-300">
+                <li class="flex items-start gap-2"><span class="text-red-400">✗</span> Quer ganhar dinheiro online mas não sabe por onde começar</li>
+                <li class="flex items-start gap-2"><span class="text-red-400">✗</span> Não tem tempo para aprender programação</li>
+                <li class="flex items-start gap-2"><span class="text-red-400">✗</span> Já tentou vários "métodos" que não funcionaram</li>
+                <li class="flex items-start gap-2"><span class="text-red-400">✗</span> Precisa de uma renda extra urgente</li>
+              </ul>
+            </div>
+            
+            <div class="bg-green-500/10 border border-green-500/30 rounded-2xl p-6" data-aos="fade-left">
+              <h3 class="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-6 h-6"></i> A Solução
+              </h3>
+              <ul class="space-y-3 text-gray-300">
+                <li class="flex items-start gap-2"><span class="text-green-400">✓</span> Sites 100% prontos, só personalizar e vender</li>
+                <li class="flex items-start gap-2"><span class="text-green-400">✓</span> Não precisa saber programar NADA</li>
+                <li class="flex items-start gap-2"><span class="text-green-400">✓</span> Nichos validados e lucrativos</li>
+                <li class="flex items-start gap-2"><span class="text-green-400">✓</span> Comece a vender ainda HOJE</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT YOU GET -->
+    <section class="py-20 gradient-bg">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm" data-aos="fade-up">O que você recebe</span>
+          <h2 class="text-3xl md:text-5xl font-bold mt-3" data-aos="fade-up" data-aos-delay="100">
+            <span class="gradient-text">36 Sites Premium</span> Prontos para Vender
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+          <!-- Niche Cards -->
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 card-hover" data-aos="fade-up">
+            <div class="text-4xl mb-4">💇‍♀️</div>
+            <h3 class="font-bold mb-2">Salão de Beleza</h3>
+            <p class="text-gray-400 text-sm">Site completo para salões</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 card-hover" data-aos="fade-up" data-aos-delay="50">
+            <div class="text-4xl mb-4">💈</div>
+            <h3 class="font-bold mb-2">Barbearia</h3>
+            <p class="text-gray-400 text-sm">Design masculino premium</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 card-hover" data-aos="fade-up" data-aos-delay="100">
+            <div class="text-4xl mb-4">🏠</div>
+            <h3 class="font-bold mb-2">Imobiliária</h3>
+            <p class="text-gray-400 text-sm">Para corretores de imóveis</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 card-hover" data-aos="fade-up" data-aos-delay="150">
+            <div class="text-4xl mb-4">🦷</div>
+            <h3 class="font-bold mb-2">Dentista</h3>
+            <p class="text-gray-400 text-sm">Clínicas odontológicas</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 card-hover" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-4xl mb-4">🍔</div>
+            <h3 class="font-bold mb-2">Hamburgueria</h3>
+            <p class="text-gray-400 text-sm">Restaurantes e delivery</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 card-hover" data-aos="fade-up" data-aos-delay="250">
+            <div class="text-4xl mb-4">🐕</div>
+            <h3 class="font-bold mb-2">Pet Shop</h3>
+            <p class="text-gray-400 text-sm">Lojas de animais</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 card-hover" data-aos="fade-up" data-aos-delay="300">
+            <div class="text-4xl mb-4">💪</div>
+            <h3 class="font-bold mb-2">Academia</h3>
+            <p class="text-gray-400 text-sm">Fitness e personal</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 card-hover" data-aos="fade-up" data-aos-delay="350">
+            <div class="text-4xl mb-4">📸</div>
+            <h3 class="font-bold mb-2">Fotógrafo</h3>
+            <p class="text-gray-400 text-sm">Portfólio profissional</p>
+          </div>
+        </div>
+
+        <div class="text-center" data-aos="fade-up">
+          <p class="text-2xl font-bold text-gray-300 mb-4">+ 28 outros nichos inclusos!</p>
+          <div class="flex flex-wrap justify-center gap-2 text-sm text-gray-400">
+            <span class="px-3 py-1 bg-white/5 rounded-full">Açaí</span>
+            <span class="px-3 py-1 bg-white/5 rounded-full">Perfumaria</span>
+            <span class="px-3 py-1 bg-white/5 rounded-full">Bijuteria</span>
+            <span class="px-3 py-1 bg-white/5 rounded-full">Sorveteria</span>
+            <span class="px-3 py-1 bg-white/5 rounded-full">Festas</span>
+            <span class="px-3 py-1 bg-white/5 rounded-full">Advogado</span>
+            <span class="px-3 py-1 bg-white/5 rounded-full">Massoterapia</span>
+            <span class="px-3 py-1 bg-white/5 rounded-full">E muito mais...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="py-20 bg-slate-900">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold" data-aos="fade-up">Por que esse pack é <span class="text-success">diferente</span>?</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="text-center" data-aos="fade-up">
+            <div class="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="smartphone" class="w-8 h-8 text-primary"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-2">100% Responsivo</h3>
+            <p class="text-gray-400">Funciona perfeitamente em celular, tablet e computador.</p>
+          </div>
+          <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-success/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="zap" class="w-8 h-8 text-success"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-2">Carregamento Rápido</h3>
+            <p class="text-gray-400">Sites otimizados para máxima velocidade e performance.</p>
+          </div>
+          <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="palette" class="w-8 h-8 text-accent"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-2">Fácil Personalização</h3>
+            <p class="text-gray-400">Mude cores, textos e imagens sem saber programar.</p>
+          </div>
+          <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-warning/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="message-circle" class="w-8 h-8 text-warning"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-2">WhatsApp Integrado</h3>
+            <p class="text-gray-400">Botão de WhatsApp pronto para receber clientes.</p>
+          </div>
+          <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="w-16 h-16 bg-danger/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="infinity" class="w-8 h-8 text-danger"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-2">Licença Vitalícia</h3>
+            <p class="text-gray-400">Use e revenda quantas vezes quiser, para sempre.</p>
+          </div>
+          <div class="text-center" data-aos="fade-up" data-aos-delay="500">
+            <div class="w-16 h-16 bg-cyan-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="headphones" class="w-8 h-8 text-cyan-500"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-2">Suporte Incluído</h3>
+            <p class="text-gray-400">Tire suas dúvidas via WhatsApp a qualquer momento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MATH SECTION -->
+    <section class="py-20 bg-gradient-to-r from-success/20 to-primary/20">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-8" data-aos="fade-up">
+            Faça as contas 🧮
+          </h2>
+          
+          <div class="bg-dark/50 backdrop-blur rounded-3xl p-8 md:p-12" data-aos="zoom-in">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+              <div>
+                <p class="text-5xl font-black text-primary">1</p>
+                <p class="text-gray-300">Site vendido</p>
+              </div>
+              <div>
+                <p class="text-5xl font-black text-warning">x</p>
+                <p class="text-gray-300">Valor mínimo</p>
+              </div>
+              <div>
+                <p class="text-5xl font-black text-success">R$ 500</p>
+                <p class="text-gray-300">Por site</p>
+              </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8">
+              <p class="text-xl text-gray-300 mb-4">Se você vender apenas <strong class="text-white">1 site por semana</strong>:</p>
+              <p class="text-5xl md:text-6xl font-black text-success">R$ 2.000/mês</p>
+              <p class="text-gray-400 mt-2">de renda extra, trabalhando de casa!</p>
+            </div>
+          </div>
+
+          <p class="text-xl text-gray-300 mt-8" data-aos="fade-up">
+            E você paga apenas <strong class="text-success text-2xl">R$ 39,90</strong> uma única vez! 🤯
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-20 gradient-bg">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm" data-aos="fade-up">Depoimentos</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-3" data-aos="fade-up" data-aos-delay="100">
+            Quem comprou, <span class="text-success">aprovou!</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="testimonial-card rounded-2xl p-6" data-aos="fade-up">
+            <div class="flex items-center gap-1 text-warning mb-4">
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            </div>
+            <p class="text-gray-300 mb-4">"Comprei sem acreditar muito, mas já vendi 3 sites no primeiro mês! Melhor investimento que fiz."</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-bold">M</div>
+              <div>
+                <p class="font-semibold">Marcos Silva</p>
+                <p class="text-sm text-gray-400">Designer Freelancer</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center gap-1 text-warning mb-4">
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            </div>
+            <p class="text-gray-300 mb-4">"Não sabia nada de sites e consegui vender! Os templates são muito profissionais."</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center font-bold">A</div>
+              <div>
+                <p class="font-semibold">Ana Beatriz</p>
+                <p class="text-sm text-gray-400">Empreendedora Digital</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-center gap-1 text-warning mb-4">
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+            </div>
+            <p class="text-gray-300 mb-4">"Por esse preço? É de graça! Qualidade absurda, parece coisa de agência grande."</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-success rounded-full flex items-center justify-center font-bold">R</div>
+              <div>
+                <p class="font-semibold">Rafael Costa</p>
+                <p class="text-sm text-gray-400">Social Media</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING CTA -->
+    <section id="comprar" class="py-20 bg-slate-900">
+      <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <div class="bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 rounded-3xl p-8 md:p-12 relative overflow-hidden" data-aos="zoom-in">
+            <div class="ribbon">OFERTA</div>
+            
+            <div class="text-center relative z-10">
+              <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Pacote Completo WebStudio Premium
+              </h2>
+              <p class="text-gray-300 mb-8">36 sites prontos + Suporte + Atualizações</p>
+
+              <div class="mb-8">
+                <p class="text-gray-400 mb-2">De <span class="price-slash text-2xl text-gray-500">R$ 297</span></p>
+                <p class="text-6xl md:text-7xl font-black text-success">R$ 39<span class="text-3xl">,90</span></p>
+                <p class="text-gray-400 mt-2">Pagamento único • Acesso vitalício</p>
+              </div>
+
+              <ul class="text-left max-w-md mx-auto space-y-3 mb-8">
+                <li class="flex items-center gap-3">
+                  <div class="check-icon w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                  </div>
+                  <span>36 Sites Premium de nichos lucrativos</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="check-icon w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                  </div>
+                  <span>100% responsivos e otimizados</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="check-icon w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                  </div>
+                  <span>Licença para revenda ilimitada</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="check-icon w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                  </div>
+                  <span>Suporte via WhatsApp</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <div class="check-icon w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                  </div>
+                  <span>Atualizações gratuitas</span>
+                </li>
+              </ul>
+
+              <a href="https://wa.me/5521977434614?text=Olá! Quero comprar o Pack WebStudio Premium por R$39,90" target="_blank" rel="noopener" class="btn-cta text-white px-12 py-5 rounded-2xl font-bold text-xl inline-flex items-center justify-center gap-3 w-full md:w-auto pulse-glow">
+                <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                COMPRAR AGORA
+              </a>
+
+              <div class="flex items-center justify-center gap-4 mt-6 text-sm text-gray-400">
+                <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-4 h-4"></i> Compra segura</span>
+                <span class="flex items-center gap-1"><i data-lucide="credit-card" class="w-4 h-4"></i> Pix ou Cartão</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GUARANTEE -->
+          <div class="mt-8 bg-warning/10 border border-warning/30 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-4" data-aos="fade-up">
+            <div class="guarantee-badge w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0">
+              <i data-lucide="shield" class="w-10 h-10 text-dark"></i>
+            </div>
+            <div class="text-center md:text-left">
+              <h3 class="font-bold text-xl text-warning">Garantia de 7 Dias</h3>
+              <p class="text-gray-300">Se por qualquer motivo você não gostar, devolvemos 100% do seu dinheiro. Sem perguntas!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 gradient-bg">
+      <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold" data-aos="fade-up">Perguntas Frequentes</h2>
+          </div>
+
+          <div class="space-y-4">
+            <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6" data-aos="fade-up">
+              <h3 class="font-bold text-lg mb-2">Preciso saber programar?</h3>
+              <p class="text-gray-400">Não! Os sites vêm 100% prontos. Você só precisa trocar textos, cores e imagens usando qualquer editor de código simples ou até mesmo o Notepad.</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6" data-aos="fade-up" data-aos-delay="100">
+              <h3 class="font-bold text-lg mb-2">Posso revender os sites?</h3>
+              <p class="text-gray-400">Sim! Você tem licença vitalícia para usar e revender quantas vezes quiser. Cada site pode ser vendido por R$ 500 a R$ 2.000 ou mais!</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6" data-aos="fade-up" data-aos-delay="200">
+              <h3 class="font-bold text-lg mb-2">Como recebo os arquivos?</h3>
+              <p class="text-gray-400">Após o pagamento, você recebe acesso imediato por e-mail ou WhatsApp com o link para download de todos os arquivos.</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6" data-aos="fade-up" data-aos-delay="300">
+              <h3 class="font-bold text-lg mb-2">O pagamento é único mesmo?</h3>
+              <p class="text-gray-400">Sim! Você paga apenas R$ 39,90 uma única vez e tem acesso vitalício a todos os 36 sites + atualizações futuras.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-20 bg-gradient-to-r from-primary to-accent">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-5xl font-bold mb-6" data-aos="fade-up">
+          Não perca essa oportunidade!
+        </h2>
+        <p class="text-xl text-white/80 max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="100">
+          Por menos de R$ 40 você pode começar um negócio lucrativo vendendo sites profissionais.
+        </p>
+        <a href="#comprar" class="bg-white text-primary px-12 py-5 rounded-2xl font-bold text-xl inline-flex items-center justify-center gap-3 hover:shadow-2xl transition transform hover:scale-105" data-aos="zoom-in" data-aos-delay="200">
+          <i data-lucide="rocket" class="w-6 h-6"></i>
+          QUERO COMEÇAR AGORA
+        </a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark py-8 border-t border-white/10">
+      <div class="container mx-auto px-6 text-center text-gray-400 text-sm">
+        <p>© 2026 WebStudio Premium. Todos os direitos reservados.</p>
+        <p class="mt-2">Desenvolvido por Carlos Antonio de Oliveira Piquet</p>
+      </div>
+    </footer>
+
+    <script>
+      AOS.init({ duration: 800, once: true, offset: 100 });
+      lucide.createIcons();
+      
+      // Countdown spots
+      let spots = 47;
+      setInterval(() => {
+        if (spots > 12) {
+          spots -= Math.random() > 0.7 ? 1 : 0;
+          document.getElementById('spots').textContent = spots;
+        }
+      }, 30000);
+    </script>
+  </body>
+</html>

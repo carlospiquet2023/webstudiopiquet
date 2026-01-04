@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PetLove - Pet Shop & Clínica Veterinária</title>
+    <meta property="og:title" content="PetLove - Pet Shop & Veterinária">
+    <meta property="og:description" content="Cuidando do seu melhor amigo com amor e carinho">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#f97316",
+              secondary: "#fff7ed",
+              accent: "#ea580c",
+              dark: "#431407",
+              light: "#fffbeb",
+              paw: "#fbbf24",
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Poppins"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      #page-loader { position: fixed; inset: 0; background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-spin { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #fbbf24; border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #f97316, #fbbf24); z-index: 99999; }
+      .custom-cursor { width: 20px; height: 20px; border: 2px solid #f97316; border-radius: 50%; position: fixed; pointer-events: none; z-index: 99998; transition: transform 0.15s ease; mix-blend-mode: difference; }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(249, 115, 22, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+      .glass-nav { background: rgba(249, 115, 22, 0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+      .hero-gradient { background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #431407 100%); }
+      .shimmer-text { background: linear-gradient(90deg, #fbbf24, #ffffff, #fbbf24); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s linear infinite; }
+      @keyframes shimmer { to { background-position: 200% center; } }
+      .glass-card { background: rgba(255,255,255,0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border: 1px solid rgba(249, 115, 22, 0.1); transition: all 0.4s ease; }
+      .glass-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(249, 115, 22, 0.25); }
+      .btn-primary { background: linear-gradient(135deg, #f97316, #ea580c); transition: all 0.3s ease; }
+      .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(249, 115, 22, 0.5); }
+      .btn-paw { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #431407; transition: all 0.3s ease; }
+      .btn-paw:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(251, 191, 36, 0.5); }
+      #mobile-menu { position: fixed; inset: 0; background: rgba(249, 115, 22, 0.98); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); z-index: 40; transform: translateX(100%); transition: transform 0.4s ease; }
+      #mobile-menu.open { transform: translateX(0); }
+      .floating { animation: floating 3s ease-in-out infinite; }
+      @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+      #back-to-top { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; background: linear-gradient(135deg, #f97316, #fbbf24); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease; z-index: 50; }
+      #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+      .paw-pattern { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='%23f9731620'%3E%3Cpath d='M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/%3E%3C/svg%3E"); }
+    </style>
+  </head>
+  <body class="font-sans bg-light text-dark overflow-x-hidden">
+    <div id="page-loader"><div class="loader-spin"></div><p class="text-white mt-4 font-medium">🐾 Carregando...</p></div>
+    <div id="scroll-progress"></div>
+    <div class="custom-cursor"></div>
+
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-serif font-bold text-white">Pet<span class="shimmer-text">Love</span> 🐾</a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-white/80 hover:text-white transition">Início</a>
+          <a href="#servicos" class="text-white/80 hover:text-white transition">Serviços</a>
+          <a href="#produtos" class="text-white/80 hover:text-white transition">Produtos</a>
+          <a href="#contato" class="btn-paw px-6 py-2.5 rounded-full font-semibold">Contato</a>
+        </nav>
+        <button id="menu-toggle" class="md:hidden text-white" aria-label="Menu"><i data-lucide="menu" class="w-7 h-7"></i></button>
+      </div>
+    </header>
+
+    <div id="mobile-menu" class="md:hidden">
+      <div class="flex flex-col items-center justify-center h-full space-y-8">
+        <a href="#home" class="text-2xl text-white hover:text-paw transition" onclick="closeMobileMenu()">Início</a>
+        <a href="#servicos" class="text-2xl text-white hover:text-paw transition" onclick="closeMobileMenu()">Serviços</a>
+        <a href="#produtos" class="text-2xl text-white hover:text-paw transition" onclick="closeMobileMenu()">Produtos</a>
+        <a href="#contato" class="btn-paw px-8 py-3 rounded-full text-xl" onclick="closeMobileMenu()">Contato</a>
+        <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-white" aria-label="Fechar menu"><i data-lucide="x" class="w-8 h-8"></i></button>
+      </div>
+    </div>
+
+    <section id="home" class="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-20">
+      <div class="absolute inset-0 paw-pattern opacity-20"></div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div data-aos="fade-right">
+            <span class="inline-block px-4 py-2 bg-white/20 text-white rounded-full text-sm font-medium mb-6">🐕 Pet Shop & Clínica Veterinária</span>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6">Seu Pet Merece o <span class="shimmer-text">Melhor</span> Cuidado</h1>
+            <p class="text-white/80 text-lg mb-8">Banho, tosa, veterinário, produtos e muito amor para seu melhor amigo!</p>
+            <div class="flex flex-wrap gap-4">
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-paw px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="calendar" class="w-5 h-5"></i>Agendar</a>
+              <a href="#servicos" class="bg-white/20 backdrop-blur text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2 hover:bg-white/30 transition"><i data-lucide="heart" class="w-5 h-5"></i>Serviços</a>
+            </div>
+          </div>
+          <div class="hidden md:block relative" data-aos="fade-left">
+            <div class="relative z-10 floating">
+              <div class="w-80 h-80 mx-auto bg-gradient-to-br from-white/20 to-paw/20 rounded-full flex items-center justify-center">
+                <i data-lucide="cat" class="w-40 h-40 text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up"><p class="text-4xl font-bold text-primary">5.000+</p><p class="text-gray-600">Pets Atendidos</p></div>
+          <div data-aos="fade-up" data-aos-delay="100"><p class="text-4xl font-bold text-primary">10</p><p class="text-gray-600">Anos no Mercado</p></div>
+          <div data-aos="fade-up" data-aos-delay="200"><p class="text-4xl font-bold text-primary">100%</p><p class="text-gray-600">Amor aos Animais</p></div>
+          <div data-aos="fade-up" data-aos-delay="300"><p class="text-4xl font-bold text-primary">5★</p><p class="text-gray-600">Avaliação</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos" class="py-24 bg-light">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm">Serviços</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 text-dark">Cuidados <span class="text-primary">Especiais</span> 🐾</h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="droplets" class="w-8 h-8 text-white"></i></div>
+            <h3 class="text-xl font-bold mb-2">Banho</h3>
+            <p class="text-gray-600 text-sm">Banho completo com produtos hipoalergênicos</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="scissors" class="w-8 h-8 text-white"></i></div>
+            <h3 class="text-xl font-bold mb-2">Tosa</h3>
+            <p class="text-gray-600 text-sm">Tosa higiênica, máquina e tesoura</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="stethoscope" class="w-8 h-8 text-white"></i></div>
+            <h3 class="text-xl font-bold mb-2">Veterinário</h3>
+            <p class="text-gray-600 text-sm">Consultas, vacinas e emergências</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="home" class="w-8 h-8 text-white"></i></div>
+            <h3 class="text-xl font-bold mb-2">Hotel Pet</h3>
+            <p class="text-gray-600 text-sm">Hospedagem com muito carinho</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="produtos" class="py-24 bg-primary text-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-paw font-semibold uppercase tracking-widest text-sm">Loja</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3">Produtos <span class="shimmer-text">Pet</span></h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 text-center" data-aos="fade-up">
+            <div class="w-20 h-20 bg-paw rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="shopping-bag" class="w-10 h-10 text-dark"></i></div>
+            <h3 class="text-2xl font-bold mb-2">Rações Premium</h3>
+            <p class="text-white/80">As melhores marcas para seu pet</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-20 h-20 bg-paw rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="bone" class="w-10 h-10 text-dark"></i></div>
+            <h3 class="text-2xl font-bold mb-2">Brinquedos</h3>
+            <p class="text-white/80">Diversão garantida para seu amigo</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-20 h-20 bg-paw rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="pill" class="w-10 h-10 text-dark"></i></div>
+            <h3 class="text-2xl font-bold mb-2">Medicamentos</h3>
+            <p class="text-white/80">Farmácia veterinária completa</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm">Contato</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 mb-6 text-dark">Traga Seu <span class="text-primary">Pet</span> 🐾</h2>
+          <p class="text-gray-600 mb-8">Agende um horário pelo WhatsApp ou visite nossa loja!</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-primary text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i>WhatsApp</a>
+            <a href="#" class="btn-paw px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="instagram" class="w-5 h-5"></i>Instagram</a>
+          </div>
+          <div class="mt-12 flex flex-wrap justify-center gap-8 text-gray-600">
+            <div class="flex items-center gap-2"><i data-lucide="clock" class="w-5 h-5 text-primary"></i>Seg-Sáb: 8h às 19h</div>
+            <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5 text-primary"></i>Seu Bairro, Cidade</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-12">
+      <div class="container mx-auto px-6 text-center">
+        <a href="#" class="text-2xl font-serif font-bold">Pet<span class="shimmer-text">Love</span> 🐾</a>
+        <p class="text-gray-400 mt-4">© 2024 PetLove. Todos os direitos reservados.</p>
+        <p class="text-gray-500 text-sm mt-2">CRMV 12345 • Veterinário Responsável</p>
+      </div>
+    </footer>
+
+    <button id="back-to-top" aria-label="Voltar ao topo"><i data-lucide="chevron-up" class="w-6 h-6"></i></button>
+
+    <script>
+      window.addEventListener('load', () => { setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 800); });
+      AOS.init({ duration: 800, once: true, offset: 50 });
+      lucide.createIcons();
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX - 10 + 'px'; cursor.style.top = e.clientY - 10 + 'px'; });
+      document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => cursor.classList.add('hover')); el.addEventListener('mouseleave', () => cursor.classList.remove('hover')); });
+      window.addEventListener('scroll', () => { const progress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100; document.getElementById('scroll-progress').style.width = progress + '%'; });
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => { backToTop.classList.toggle('visible', window.scrollY > 500); });
+      backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+      function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+    </script>
+  </body>
+</html>

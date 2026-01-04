@@ -260,6 +260,7 @@
         transform-style: preserve-3d;
         position: relative;
         overflow: hidden;
+        z-index: 1; /* Garante que não sobreponha o header */
       }
       .card-3d::before {
         content: '';
@@ -319,6 +320,21 @@
       .niche-professor { --niche-color: #4f46e5; --niche-accent: #4338ca; }
       .niche-educacaofisica { --niche-color: #16a34a; --niche-accent: #15803d; }
       .niche-personal { --niche-color: #ea580c; --niche-accent: #c2410c; }
+      /* Novos nichos lucrativos */
+      .niche-imobiliaria { --niche-color: #1e3a5f; --niche-accent: #c9a227; }
+      .niche-dentista { --niche-color: #0ea5e9; --niche-accent: #14b8a6; }
+      .niche-petshop { --niche-color: #f97316; --niche-accent: #fbbf24; }
+      .niche-fotografo { --niche-color: #6b21a8; --niche-accent: #a855f7; }
+      .niche-delivery { --niche-color: #dc2626; --niche-accent: #f97316; }
+      .niche-advogado { --niche-color: #1e3a5f; --niche-accent: #b8860b; }
+      .niche-academia { --niche-color: #dc2626; --niche-accent: #22c55e; }
+      /* Novos nichos - Alimentação e Varejo */
+      .niche-acai { --niche-color: #7c3aed; --niche-accent: #ec4899; }
+      .niche-hamburgueria { --niche-color: #b91c1c; --niche-accent: #f59e0b; }
+      .niche-festas { --niche-color: #ec4899; --niche-accent: #fbbf24; }
+      .niche-perfumaria { --niche-color: #be185d; --niche-accent: #d4af37; }
+      .niche-bijuteria { --niche-color: #b45309; --niche-accent: #d4af37; }
+      .niche-sorveteria { --niche-color: #ec4899; --niche-accent: #06b6d4; }
 
       .niche-card {
         border-top: 4px solid var(--niche-color);
@@ -337,6 +353,232 @@
       .niche-card .niche-btn:hover {
         transform: scale(1.05);
         box-shadow: 0 10px 30px -5px var(--niche-color);
+      }
+
+      /* ===== FILTROS DE CATEGORIA ===== */
+      .filter-btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+        background: white;
+        color: #64748b;
+        border: 2px solid #e2e8f0;
+        cursor: pointer;
+      }
+      .filter-btn:hover {
+        border-color: #6366F1;
+        color: #6366F1;
+        transform: translateY(-2px);
+      }
+      .filter-btn.active {
+        background: linear-gradient(135deg, #6366F1, #8B5CF6);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+      }
+      .category-section {
+        transition: all 0.4s ease;
+      }
+      .category-section.hidden {
+        display: none;
+      }
+
+      /* ===== BUSCA DE NICHOS ===== */
+      .niche-card.search-hidden {
+        display: none !important;
+      }
+      .niche-card.search-highlight {
+        animation: pulse-highlight 0.5s ease;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+      @keyframes pulse-highlight {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+      }
+      #search-nichos:focus {
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2), 0 10px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      /* ===== MODAL DE PREVIEW ===== */
+      #preview-modal.active {
+        display: flex;
+      }
+      .preview-size-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .preview-size-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+      }
+      .preview-size-btn.active {
+        background: linear-gradient(135deg, #6366F1, #8B5CF6);
+        color: white;
+      }
+      #preview-container {
+        transition: all 0.3s ease;
+      }
+      #preview-container.preview-desktop {
+        width: 100%;
+        height: 100%;
+      }
+      #preview-container.preview-tablet {
+        width: 768px;
+        height: 100%;
+        max-height: 1024px;
+      }
+      #preview-container.preview-mobile {
+        width: 375px;
+        height: 100%;
+        max-height: 812px;
+      }
+      .preview-btn {
+        position: relative;
+        overflow: hidden;
+      }
+      .preview-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .preview-btn:hover::before {
+        opacity: 1;
+      }
+
+      /* ===== BANNER DE URGÊNCIA/PROMO ===== */
+      #urgency-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(90deg, #6366F1, #EC4899, #F59E0B);
+        background-size: 200% 200%;
+        animation: gradientMove 5s ease infinite;
+        padding: 12px 20px;
+        z-index: 60;
+        transform: translateY(100%);
+        transition: transform 0.5s ease;
+      }
+      #urgency-banner.visible {
+        transform: translateY(0);
+      }
+      @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      #urgency-banner .countdown-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 10px;
+      }
+      #urgency-banner .countdown-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+      #urgency-banner .countdown-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        opacity: 0.9;
+      }
+      @media (max-width: 768px) {
+        #urgency-banner .countdown-number { font-size: 1.1rem; }
+        #urgency-banner .countdown-item { padding: 0 6px; }
+      }
+
+      /* ===== FAQ INTERATIVO ===== */
+      .faq-section {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%);
+        padding: 80px 20px;
+      }
+      .faq-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .faq-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        margin-bottom: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .faq-item:hover {
+        border-color: rgba(212, 175, 55, 0.3);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .faq-question {
+        width: 100%;
+        padding: 24px 28px;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 500;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.3s ease;
+      }
+      .faq-question:hover {
+        color: #d4af37;
+      }
+      .faq-question .faq-icon {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease;
+      }
+      .faq-question .faq-icon svg {
+        width: 14px;
+        height: 14px;
+        color: #000;
+        transition: transform 0.3s ease;
+      }
+      .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+      }
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.3s ease;
+      }
+      .faq-answer-content {
+        padding: 0 28px 24px;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.7;
+        font-size: 1rem;
+      }
+      .faq-item.active .faq-answer {
+        max-height: 500px;
+      }
+      .faq-cta {
+        text-align: center;
+        margin-top: 48px;
+        padding: 32px;
+        background: rgba(212, 175, 55, 0.05);
+        border-radius: 20px;
+        border: 1px solid rgba(212, 175, 55, 0.15);
+      }
+      .faq-cta p {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 16px;
+        font-size: 1.1rem;
       }
 
       /* ===== BACK TO TOP ===== */
@@ -378,6 +620,88 @@
         }
       }
 
+      /* ===== TEMA CLARO (LIGHT MODE) ===== */
+      body.light-mode {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      }
+      body.light-mode .hero-gradient {
+        background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%);
+      }
+      body.light-mode .glass-nav {
+        background: rgba(255, 255, 255, 0.9);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      body.light-mode .glass-nav a:not(.bg-gradient-to-r) {
+        color: #1e293b;
+      }
+      body.light-mode .glass-nav a:hover:not(.bg-gradient-to-r) {
+        color: #6366F1;
+      }
+      body.light-mode .glass-nav .text-2xl,
+      body.light-mode .glass-nav .text-3xl {
+        color: #1e293b;
+      }
+      body.light-mode .glass-nav .text-gray-400 {
+        color: #64748b;
+      }
+      body.light-mode #theme-toggle {
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.1);
+        color: #1e293b;
+      }
+      body.light-mode .theme-icon-light {
+        display: none;
+      }
+      body.light-mode .theme-icon-dark {
+        display: block !important;
+      }
+      body.light-mode section:not(.hero-gradient):not(.bg-dark) {
+        background: #ffffff;
+      }
+      body.light-mode .niche-card {
+        background: #ffffff;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+      body.light-mode .text-dark {
+        color: #1e293b;
+      }
+      body.light-mode #mobile-menu {
+        background: rgba(255, 255, 255, 0.98);
+      }
+      body.light-mode #mobile-menu a {
+        color: #1e293b;
+      }
+      body.light-mode footer {
+        background: #1e293b;
+      }
+      body.light-mode .faq-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      }
+      body.light-mode .faq-item {
+        background: #ffffff;
+        border-color: rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      body.light-mode .faq-item:hover {
+        border-color: rgba(99, 102, 241, 0.3);
+      }
+      body.light-mode .faq-question {
+        color: #1e293b;
+      }
+      body.light-mode .faq-question:hover {
+        color: #6366F1;
+      }
+      body.light-mode .faq-answer-content {
+        color: #475569;
+      }
+      body.light-mode .faq-cta {
+        background: rgba(99, 102, 241, 0.05);
+        border-color: rgba(99, 102, 241, 0.15);
+      }
+      body.light-mode .faq-cta p {
+        color: #475569;
+      }
+
       /* ===== RIBBON ===== 
          Faixa de destaque "Premium" nos cards
       */
@@ -394,6 +718,7 @@
         transform: rotate(45deg);
         box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         letter-spacing: 0.5px;
+        z-index: 5; /* Menor que o header z-50 */
       }
 
       /* ===== COUNTER ANIMATION =====
@@ -449,6 +774,54 @@
     <!-- CURSOR PERSONALIZADO -->
     <div class="custom-cursor"></div>
 
+    <!-- ===============================================================
+         BANNER DE URGÊNCIA/PROMOÇÃO
+         Contador regressivo com promoção especial
+    ================================================================ -->
+    <div id="urgency-banner" class="text-white">
+      <div class="container mx-auto flex flex-wrap items-center justify-center gap-4 md:gap-8">
+        <div class="flex items-center gap-2">
+          <i data-lucide="flame" class="w-5 h-5 animate-pulse"></i>
+          <span class="font-bold text-sm md:text-base">🔥 OFERTA ESPECIAL</span>
+        </div>
+        
+        <div class="flex items-center gap-1 md:gap-2">
+          <div class="countdown-item">
+            <span id="countdown-hours" class="countdown-number">00</span>
+            <span class="countdown-label">Horas</span>
+          </div>
+          <span class="text-xl font-bold">:</span>
+          <div class="countdown-item">
+            <span id="countdown-minutes" class="countdown-number">00</span>
+            <span class="countdown-label">Min</span>
+          </div>
+          <span class="text-xl font-bold">:</span>
+          <div class="countdown-item">
+            <span id="countdown-seconds" class="countdown-number">00</span>
+            <span class="countdown-label">Seg</span>
+          </div>
+        </div>
+        
+        <div class="hidden sm:flex items-center gap-2">
+          <span class="text-sm md:text-base"><strong>30% OFF</strong> no primeiro site!</span>
+        </div>
+        
+        <a href="https://wa.me/5521977434614?text=Ol%C3%A1!%20Vi%20a%20promo%C3%A7%C3%A3o%20de%2030%25%20OFF%20e%20gostaria%20de%20saber%20mais!" target="_blank" rel="noopener" class="bg-white text-primary px-4 py-1.5 rounded-full font-bold text-sm hover:scale-105 transition-transform">
+          GARANTIR
+        </a>
+        
+        <button id="close-urgency" class="ml-2 opacity-70 hover:opacity-100 transition-opacity" aria-label="Fechar banner">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      
+      <!-- Indicador de pessoas online -->
+      <div class="absolute left-4 top-1/2 -translate-y-1/2 hidden lg:flex items-center gap-2 text-xs">
+        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+        <span><strong id="online-count">127</strong> pessoas online</span>
+      </div>
+    </div>
+
     <!-- PARTÍCULAS FLUTUANTES DE FUNDO -->
     <div id="particles-container"></div>
 
@@ -466,7 +839,13 @@
         <nav class="hidden md:flex space-x-8 items-center">
           <a href="#home" class="text-gray-300 hover:text-white transition font-medium">Início</a>
           <a href="#catalogo" class="text-gray-300 hover:text-white transition font-medium">Catálogo</a>
-          <a href="#planos" class="text-gray-300 hover:text-white transition font-medium">Planos</a>
+          <a href="#faq" class="text-gray-300 hover:text-white transition font-medium">FAQ</a>
+          <a href="blog.html" class="text-gray-300 hover:text-white transition font-medium">Blog</a>
+          <!-- Botão Dark/Light Mode -->
+          <button id="theme-toggle" aria-label="Alternar tema claro/escuro" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition">
+            <i data-lucide="sun" class="w-5 h-5 theme-icon-light"></i>
+            <i data-lucide="moon" class="w-5 h-5 theme-icon-dark hidden"></i>
+          </button>
           <a href="#contato" class="bg-gradient-to-r from-primary to-accent text-white px-6 py-2.5 rounded-full hover:opacity-90 transition font-semibold shadow-lg">
             Contato
           </a>
@@ -483,7 +862,8 @@
       <div class="flex flex-col items-center justify-center h-full space-y-8">
         <a href="#home" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Início</a>
         <a href="#catalogo" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Catálogo</a>
-        <a href="#planos" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Planos</a>
+        <a href="#faq" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">FAQ</a>
+        <a href="blog.html" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Blog</a>
         <a href="#contato" class="bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full text-xl" onclick="closeMobileMenu()">Contato</a>
         <button onclick="closeMobileMenu()" aria-label="Fechar menu" class="absolute top-6 right-6 text-white">
           <i data-lucide="x" class="w-8 h-8"></i>
@@ -543,7 +923,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════
          SEÇÃO STATS - ESTATÍSTICAS COM CONTADORES ANIMADOS
          ═══════════════════════════════════════════════════════════════════
-         - 18 Nichos Disponíveis
+         - 35 Nichos Disponíveis
          - 100% Responsivos
          - 24 Horas de Suporte
          - 500 Clientes Satisfeitos
@@ -555,7 +935,7 @@
       <div class="container mx-auto px-6 relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div data-aos="fade-up">
-            <p class="counter-number" data-target="23">0</p>
+            <p class="counter-number" data-target="36">0</p>
             <p class="text-gray-400 mt-2 font-medium">Nichos Disponíveis</p>
           </div>
           <div data-aos="fade-up" data-aos-delay="100">
@@ -580,8 +960,9 @@
          CATEGORIAS:
          💄 Beleza & Estética (15 nichos)
          📚 Educação (3 nichos)
-         💪 Fitness & Saúde (3 nichos)
-         🔧 Serviços (2 nichos)
+         💪 Fitness & Saúde (5 nichos)
+         🔧 Serviços (7 nichos)
+         🛒 Alimentação & Varejo (6 nichos)
     -->
     <section id="catalogo" class="py-24 bg-gradient-to-b from-light to-white">
       <div class="container mx-auto px-6">
@@ -593,11 +974,54 @@
           <p class="text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
             Explore nossos sites organizados por categoria. Clique em "Ver Demo" para conhecer cada modelo.
           </p>
+
+          <!-- BARRA DE BUSCA -->
+          <div class="max-w-md mx-auto mt-8" data-aos="fade-up" data-aos-delay="250">
+            <div class="relative">
+              <input 
+                type="text" 
+                id="search-nichos" 
+                placeholder="Buscar nicho... (ex: cílios, salão, tattoo)" 
+                class="w-full px-6 py-4 pl-14 rounded-2xl border-2 border-gray-200 focus:border-primary focus:outline-none transition-all bg-white shadow-lg text-gray-700"
+                oninput="searchNichos(this.value)"
+              >
+              <i data-lucide="search" class="absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+              <button 
+                id="clear-search" 
+                onclick="clearSearch()" 
+                class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden"
+                aria-label="Limpar busca"
+              >
+                <i data-lucide="x" class="w-5 h-5"></i>
+              </button>
+            </div>
+            <p id="search-results-count" class="text-sm text-gray-500 mt-2 hidden"></p>
+          </div>
+
+          <!-- FILTROS POR CATEGORIA -->
+          <div class="flex flex-wrap justify-center gap-3 mt-8" data-aos="fade-up" data-aos-delay="300">
+            <button onclick="filterCategory('todos')" class="filter-btn active px-6 py-3 rounded-full font-semibold transition-all" data-category="todos">
+              🎯 Todos (30)
+            </button>
+            <button onclick="filterCategory('beleza')" class="filter-btn px-6 py-3 rounded-full font-semibold transition-all" data-category="beleza">
+              💄 Beleza (15)
+            </button>
+            <button onclick="filterCategory('servicos')" class="filter-btn px-6 py-3 rounded-full font-semibold transition-all" data-category="servicos">
+              🔧 Serviços (7)
+            </button>
+            <button onclick="filterCategory('educacao')" class="filter-btn px-6 py-3 rounded-full font-semibold transition-all" data-category="educacao">
+              📚 Educação (3)
+            </button>
+            <button onclick="filterCategory('fitness')" class="filter-btn px-6 py-3 rounded-full font-semibold transition-all" data-category="fitness">
+              💪 Fitness (5)
+            </button>
+          </div>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════════════════
              CATEGORIA: BELEZA & ESTÉTICA
         ═══════════════════════════════════════════════════════════════════ -->
+        <div id="cat-beleza" class="category-section">
         <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
           <div class="w-14 h-14 bg-gradient-to-br from-rose to-pink-400 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">💄</div>
           <div>
@@ -897,15 +1321,17 @@
             </div>
           </div>
         </div>
+        </div><!-- fim cat-beleza -->
 
         <!-- ═══════════════════════════════════════════════════════════════════
              CATEGORIA: SERVIÇOS PROFISSIONAIS
         ═══════════════════════════════════════════════════════════════════ -->
+        <div id="cat-servicos" class="category-section">
         <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
           <div class="w-14 h-14 bg-gradient-to-br from-gray-700 to-gray-900 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">🔧</div>
           <div>
             <h3 class="text-3xl font-serif font-bold text-dark">Serviços Profissionais</h3>
-            <p class="text-gray-500">2 modelos para prestadores de serviços</p>
+            <p class="text-gray-500">7 modelos para prestadores de serviços</p>
           </div>
         </div>
 
@@ -946,16 +1372,98 @@
               <a href="mecanico.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
             </div>
           </div>
+
+          <!-- CORRETOR DE IMÓVEIS -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-imobiliaria" data-aos="fade-up" data-aos-delay="200">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="home" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Corretor de Imóveis</h3>
+              <p class="text-gray-600 mb-6">Site elegante para corretores e imobiliárias de alto padrão.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Vendas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Locação</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Avaliação</span>
+              </div>
+              <a href="imobiliaria.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- CLÍNICA ODONTOLÓGICA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-dentista" data-aos="fade-up" data-aos-delay="300">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="smile" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Clínica Odontológica</h3>
+              <p class="text-gray-600 mb-6">Site profissional para dentistas e clínicas odontológicas.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Implantes</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Ortodontia</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Estética</span>
+              </div>
+              <a href="dentista.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- ADVOCACIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-advogado" data-aos="fade-up" data-aos-delay="400">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="scale" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Advocacia</h3>
+              <p class="text-gray-600 mb-6">Site sóbrio e elegante para escritórios de advocacia.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Civil</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Trabalhista</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Empresarial</span>
+              </div>
+              <a href="advogado.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- FOTOGRAFIA PROFISSIONAL -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-fotografo" data-aos="fade-up" data-aos-delay="500">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="camera" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Fotografia Profissional</h3>
+              <p class="text-gray-600 mb-6">Portfolio elegante para fotógrafos e videografistas.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Casamentos</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Ensaios</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Eventos</span>
+              </div>
+              <a href="fotografo.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- DELIVERY -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-delivery" data-aos="fade-up" data-aos-delay="600">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="utensils" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Delivery de Comida</h3>
+              <p class="text-gray-600 mb-6">Site apetitoso para restaurantes e delivery de comida.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Cardápio</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Promoções</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">WhatsApp</span>
+              </div>
+              <a href="delivery.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
         </div>
+        </div><!-- fim cat-servicos -->
 
         <!-- ═══════════════════════════════════════════════════════════════════
              CATEGORIA: EDUCAÇÃO
         ═══════════════════════════════════════════════════════════════════ -->
+        <div id="cat-educacao" class="category-section">
         <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
           <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">📚</div>
           <div>
             <h3 class="text-3xl font-serif font-bold text-dark">Educação</h3>
-            <p class="text-gray-500">4 modelos para profissionais da educação</p>
+            <p class="text-gray-500">3 modelos para profissionais da educação</p>
           </div>
         </div>
 
@@ -1021,15 +1529,17 @@
             </div>
           </div>
         </div>
+        </div><!-- fim cat-educacao -->
 
         <!-- ═══════════════════════════════════════════════════════════════════
              CATEGORIA: FITNESS & SAÚDE
         ═══════════════════════════════════════════════════════════════════ -->
+        <div id="cat-fitness" class="category-section">
         <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
           <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">💪</div>
           <div>
             <h3 class="text-3xl font-serif font-bold text-dark">Fitness & Saúde</h3>
-            <p class="text-gray-500">3 modelos para profissionais de saúde e fitness</p>
+            <p class="text-gray-500">5 modelos para profissionais de saúde e fitness</p>
           </div>
         </div>
 
@@ -1087,7 +1597,136 @@
             </div>
           </div>
 
+          <!-- PET SHOP & VETERINÁRIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-petshop" data-aos="fade-up" data-aos-delay="100">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="paw-print" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Pet Shop & Veterinária</h3>
+              <p class="text-gray-600 mb-6">Site encantador para pet shops e clínicas veterinárias.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Banho/Tosa</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Consultas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Produtos</span>
+              </div>
+              <a href="petshop.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- ACADEMIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-academia" data-aos="fade-up" data-aos-delay="200">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="dumbbell" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Academia</h3>
+              <p class="text-gray-600 mb-6">Site energético para academias e centros fitness.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Musculação</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">CrossFit</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Aulas</span>
+              </div>
+              <a href="academia.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
         </div>
+        </div><!-- fim cat-fitness -->
+
+        <!-- ═════════════════════════════════════════════════════════════
+             CATEGORIA: ALIMENTAÇÃO E VAREJO
+             ═════════════════════════════════════════════════════════════ -->
+        <div class="category-section mt-8" id="cat-varejo" data-category="varejo">
+          <h3 class="text-2xl font-serif font-bold mb-8 flex items-center gap-3" data-aos="fade-right">
+            <span class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white">
+              <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+            </span>
+            Alimentação & Varejo
+          </h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <!-- AÇAÍ -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-acai" data-aos="fade-up">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="cup-soda" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Açaíteria</h3>
+              <p class="text-gray-600 mb-6">Site vibrante para vendedores de açaí e açaíterias.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Açaí</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Delivery</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Combos</span>
+              </div>
+              <a href="acai.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- HAMBURGUERIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-hamburgueria" data-aos="fade-up" data-aos-delay="100">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="beef" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Hamburgueria</h3>
+              <p class="text-gray-600 mb-6">Site apetitoso para hamburguerias artesanais.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Burgers</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Artesanal</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Delivery</span>
+              </div>
+              <a href="hamburgueria.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- DESIGNER DE FESTAS -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-festas" data-aos="fade-up" data-aos-delay="200">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="party-popper" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Designer de Festas</h3>
+              <p class="text-gray-600 mb-6">Site elegante para designers e decoradores de festas.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Decoração</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Festas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Eventos</span>
+              </div>
+              <a href="festas.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- PERFUMARIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-perfumaria" data-aos="fade-up" data-aos-delay="300">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="droplet" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Perfumaria</h3>
+              <p class="text-gray-600 mb-6">Site sofisticado para vendedores de perfumes e fragrâncias.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Perfumes</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Importados</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Fragrâncias</span>
+              </div>
+              <a href="perfumaria.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- BIJUTERIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-bijuteria" data-aos="fade-up" data-aos-delay="400">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="gem" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Bijuteria</h3>
+              <p class="text-gray-600 mb-6">Site elegante para vendedores de bijuterias e acessórios.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Bijuterias</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Semi-joias</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Acessórios</span>
+              </div>
+              <a href="bijuteria.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+        </div>
+        </div><!-- fim cat-varejo -->
+
       </div>
     </section>
     <!-- FIM DA SEÇÃO CATÁLOGO -->
@@ -1151,6 +1790,184 @@
       </div>
     </section>
     <!-- FIM DA SEÇÃO FEATURES -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO DEPOIMENTOS - TESTIMONIALS
+         ═══════════════════════════════════════════════════════════════════
+         Carrossel de depoimentos de clientes satisfeitos
+    -->
+    <section id="depoimentos" class="py-24 bg-gradient-to-b from-light to-white relative overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm" data-aos="fade-up">O que dizem nossos clientes</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3" data-aos="fade-up" data-aos-delay="100">
+            Depoimentos <span class="shimmer-text">Reais</span>
+          </h2>
+          <p class="text-gray-600 mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Veja o que profissionais como você estão falando sobre nossos sites
+          </p>
+        </div>
+
+        <!-- Carrossel de Depoimentos -->
+        <div class="relative max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="300">
+          <div id="testimonials-container" class="overflow-hidden">
+            <div id="testimonials-track" class="flex transition-transform duration-500 ease-in-out">
+              
+              <!-- Depoimento 1 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"Meu salão de beleza triplicou os agendamentos depois que coloquei o site no ar. Os clientes amam poder ver meus trabalhos e agendar pelo WhatsApp!"</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-rose to-pink-400 rounded-full flex items-center justify-center text-white font-bold">MA</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Marina Alves</h4>
+                      <p class="text-sm text-gray-500">Salão de Beleza - RJ</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Depoimento 2 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"Investimento que valeu cada centavo! Minha barbearia agora tem credibilidade online. Recebi clientes novos já na primeira semana!"</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-amber-600 to-yellow-500 rounded-full flex items-center justify-center text-white font-bold">RC</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Rafael Costa</h4>
+                      <p class="text-sm text-gray-500">Barbearia Premium - SP</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Depoimento 3 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"O site ficou lindo e super profissional! Minhas clientes de micropigmentação confiam muito mais no meu trabalho agora que podem ver tudo organizado."</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">JS</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Juliana Santos</h4>
+                      <p class="text-sm text-gray-500">Studio de Micropigmentação - MG</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Depoimento 4 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"Suporte incrível! Me ajudaram a personalizar tudo do jeito que eu queria. Minha clínica de estética nunca teve tanta visibilidade."</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-emerald to-teal-500 rounded-full flex items-center justify-center text-white font-bold">PL</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Patricia Lima</h4>
+                      <p class="text-sm text-gray-500">Clínica de Estética - BA</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Depoimento 5 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"Meus alunos de inglês aumentaram 40% depois do site. O botão de WhatsApp facilita muito o primeiro contato!"</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-violet-600 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">LM</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Lucas Mendes</h4>
+                      <p class="text-sm text-gray-500">Professor de Inglês - PR</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Depoimento 6 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"Site maravilhoso para meu studio de tatuagem! Os clientes adoram ver meu portfólio online. Profissionalismo total!"</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white font-bold">FR</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Felipe Rodrigues</h4>
+                      <p class="text-sm text-gray-500">Tattoo Artist - RS</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Botões de Navegação -->
+          <button id="prev-testimonial" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all z-10" aria-label="Depoimento anterior">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+          <button id="next-testimonial" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all z-10" aria-label="Próximo depoimento">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Indicadores -->
+          <div id="testimonial-dots" class="flex justify-center gap-2 mt-8"></div>
+        </div>
+
+        <!-- Média de Avaliações -->
+        <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">
+          <div class="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-md">
+            <div class="flex items-center gap-1">
+              <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+              <span class="font-bold text-dark">4.9</span>
+            </div>
+            <span class="text-gray-400">|</span>
+            <span class="text-gray-600">Baseado em <strong>500+</strong> avaliações</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO DEPOIMENTOS -->
 
     <!-- ═══════════════════════════════════════════════════════════════════
          SEÇÃO PLANOS E PREÇOS
@@ -1352,6 +2169,292 @@
     <!-- FIM DA SEÇÃO PLANOS -->
 
     <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO SOLICITAR NICHO - FORMULÁRIO PERSONALIZADO
+         ═══════════════════════════════════════════════════════════════════
+         Formulário para solicitar nicho que não está no catálogo
+    -->
+    <section id="solicitar-nicho" class="py-24 bg-dark text-white relative overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="absolute top-20 right-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 left-20 w-72 h-72 bg-accent/20 rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+          
+          <!-- Texto Explicativo -->
+          <div data-aos="fade-right">
+            <span class="text-primary font-semibold uppercase tracking-widest text-sm">Não encontrou seu nicho?</span>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 mb-6">
+              Criamos o Site <span class="shimmer-text">Perfeito</span> para Você!
+            </h2>
+            <p class="text-gray-400 text-lg mb-8">
+              Se o seu nicho não está no catálogo, não se preocupe! Desenvolvemos sites personalizados 
+              para qualquer área de atuação. Conte-nos sobre seu negócio e criaremos algo único.
+            </p>
+            
+            <div class="space-y-4">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <i data-lucide="palette" class="w-5 h-5 text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Design Exclusivo</h4>
+                  <p class="text-gray-400 text-sm">Criamos um design único que representa sua marca e atrai seus clientes ideais.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <i data-lucide="clock" class="w-5 h-5 text-accent"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Entrega Rápida</h4>
+                  <p class="text-gray-400 text-sm">Prazo médio de 5 a 7 dias úteis para entrega do site completo.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-rose/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <i data-lucide="headphones" class="w-5 h-5 text-rose"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Suporte Dedicado</h4>
+                  <p class="text-gray-400 text-sm">Acompanhamento completo do projeto e suporte pós-entrega.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Formulário -->
+          <div data-aos="fade-left">
+            <form id="niche-request-form" class="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-8">
+              <h3 class="text-2xl font-bold mb-6 text-center">Solicite seu Nicho</h3>
+              
+              <div class="space-y-5">
+                <div>
+                  <label for="niche-name" class="block text-sm font-medium mb-2">Seu Nome *</label>
+                  <input 
+                    type="text" 
+                    id="niche-name" 
+                    name="name"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                    placeholder="Como você se chama?"
+                  >
+                </div>
+                
+                <div>
+                  <label for="niche-whatsapp" class="block text-sm font-medium mb-2">WhatsApp *</label>
+                  <input 
+                    type="tel" 
+                    id="niche-whatsapp" 
+                    name="whatsapp"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                    placeholder="(00) 00000-0000"
+                  >
+                </div>
+                
+                <div>
+                  <label for="niche-type" class="block text-sm font-medium mb-2">Qual é seu nicho/profissão? *</label>
+                  <input 
+                    type="text" 
+                    id="niche-type" 
+                    name="niche"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                    placeholder="Ex: Nutricionista, Arquiteto, Psicólogo..."
+                  >
+                </div>
+                
+                <div>
+                  <label for="niche-description" class="block text-sm font-medium mb-2">Descreva seu negócio</label>
+                  <textarea 
+                    id="niche-description" 
+                    name="description"
+                    rows="3"
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none"
+                    placeholder="Conte um pouco sobre seus serviços, público-alvo e diferenciais..."
+                  ></textarea>
+                </div>
+                
+                <button 
+                  type="submit"
+                  class="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-primary/30 transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2"
+                >
+                  <i data-lucide="send" class="w-5 h-5"></i>
+                  Enviar Solicitação
+                </button>
+              </div>
+              
+              <p class="text-center text-gray-400 text-xs mt-4">
+                Ao enviar, você será redirecionado para o WhatsApp com sua mensagem pronta.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO SOLICITAR NICHO -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO FAQ - PERGUNTAS FREQUENTES
+         ═══════════════════════════════════════════════════════════════════
+         FAQ interativo em estilo acordeão
+    -->
+    <section id="faq" class="faq-section">
+      <div class="faq-container">
+        <div class="text-center mb-12" data-aos="fade-up">
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-primary border border-primary/20 text-sm font-medium mb-4">
+            <i data-lucide="help-circle" class="w-4 h-4"></i>
+            Tire suas dúvidas
+          </span>
+          <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">Perguntas Frequentes</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Reunimos as principais dúvidas dos nossos clientes. Se não encontrar sua resposta, entre em contato!
+          </p>
+        </div>
+
+        <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
+          <!-- FAQ Item 1 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Quanto tempo leva para criar meu site?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                O prazo varia conforme a complexidade do projeto. Um site institucional simples pode ficar pronto em <strong>3 a 5 dias úteis</strong>, enquanto projetos mais elaborados com funcionalidades personalizadas podem levar de <strong>7 a 15 dias</strong>. Após a aprovação do briefing, informamos o prazo exato para seu projeto.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Os sites são responsivos para celular?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                <strong>Sim, 100%!</strong> Todos os nossos sites são desenvolvidos com design responsivo, garantindo uma experiência perfeita em qualquer dispositivo: celulares, tablets, notebooks e desktops. Além disso, otimizamos para diferentes navegadores como Chrome, Firefox, Safari e Edge.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>O que está incluso no preço do site?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Nossos pacotes incluem: design personalizado para seu nicho, layout responsivo, integração com WhatsApp, otimização SEO básica, formulário de contato, ícones e imagens premium, animações suaves e código limpo. <strong>Hospedagem e domínio são contratados separadamente</strong>, mas oferecemos suporte na configuração.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 4 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Vocês fazem sites com sistema de agendamento?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Sim! Podemos integrar sistemas de agendamento como <strong>Calendly, Google Calendar</strong> ou desenvolver uma solução personalizada. Também trabalhamos com integrações de pagamento para quem precisa de reservas pagas ou venda de serviços online.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 5 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Posso solicitar alterações depois do site pronto?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Claro! Durante o desenvolvimento, você tem <strong>até 3 rodadas de revisão inclusas</strong>. Após a entrega, alterações menores podem ser solicitadas por um valor adicional acessível. Também oferecemos planos de manutenção mensal para quem precisa de atualizações frequentes.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 6 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Preciso fornecer textos e imagens?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Idealmente sim, pois você conhece melhor seu negócio. Porém, oferecemos serviço de <strong>copywriting profissional</strong> para criar textos persuasivos e utilizamos bancos de imagens premium caso não tenha fotos próprias. Basta nos passar as informações essenciais que cuidamos do resto!
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 7 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Quais formas de pagamento vocês aceitam?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Aceitamos <strong>PIX, cartão de crédito (em até 12x)</strong> e transferência bancária. O pagamento é dividido em 50% na aprovação do projeto e 50% na entrega final. Para projetos maiores, podemos negociar condições especiais.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 8 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>E se eu não tiver logomarca, vocês criam?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Sim! Oferecemos serviço de <strong>criação de identidade visual</strong> incluindo logomarca, paleta de cores e tipografia. Podemos criar desde uma logo simples até um branding completo para sua marca. Esse serviço é cobrado à parte e o valor varia conforme a complexidade desejada.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA FAQ -->
+        <div class="faq-cta" data-aos="fade-up" data-aos-delay="200">
+          <p>Ainda tem dúvidas? Estamos aqui para ajudar!</p>
+          <a 
+            href="https://wa.me/5521977434614?text=Olá! Tenho algumas dúvidas sobre os sites premium." 
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-full font-bold hover:shadow-lg hover:shadow-primary/30 transition-all transform hover:scale-105"
+          >
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+            Fale Conosco
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO FAQ -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
          SEÇÃO CTA (Call To Action) - CONTATO
          ═══════════════════════════════════════════════════════════════════
          Botões de contato:
@@ -1381,6 +2484,59 @@
         </div>
       </div>
     </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         MODAL DE PREVIEW - IFRAME
+         ═══════════════════════════════════════════════════════════════════
+         - Preview do site em iframe responsivo
+         - Controles para visualizar Desktop/Tablet/Mobile
+         - Botão para abrir em nova aba
+    -->
+    <div id="preview-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm">
+      <div class="relative w-full max-w-7xl mx-4 h-[90vh] bg-gray-900 rounded-3xl overflow-hidden shadow-2xl">
+        <!-- Header do Modal -->
+        <div class="bg-gray-800 px-6 py-4 flex items-center justify-between border-b border-gray-700">
+          <div class="flex items-center gap-4">
+            <div class="flex gap-2">
+              <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+              <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
+              <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+            </div>
+            <span id="preview-title" class="text-white font-medium">Preview do Site</span>
+          </div>
+          
+          <!-- Controles de Tamanho -->
+          <div class="flex items-center gap-2">
+            <button onclick="setPreviewSize('desktop')" class="preview-size-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all" data-size="desktop" aria-label="Visualização Desktop">
+              <i data-lucide="monitor" class="w-4 h-4 inline mr-1"></i>Desktop
+            </button>
+            <button onclick="setPreviewSize('tablet')" class="preview-size-btn px-4 py-2 rounded-lg text-sm font-medium transition-all" data-size="tablet" aria-label="Visualização Tablet">
+              <i data-lucide="tablet" class="w-4 h-4 inline mr-1"></i>Tablet
+            </button>
+            <button onclick="setPreviewSize('mobile')" class="preview-size-btn px-4 py-2 rounded-lg text-sm font-medium transition-all" data-size="mobile" aria-label="Visualização Mobile">
+              <i data-lucide="smartphone" class="w-4 h-4 inline mr-1"></i>Mobile
+            </button>
+          </div>
+          
+          <!-- Ações -->
+          <div class="flex items-center gap-3">
+            <a id="preview-new-tab" href="#" target="_blank" rel="noopener" class="px-4 py-2 bg-primary hover:bg-primary/80 text-white rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+              <i data-lucide="external-link" class="w-4 h-4"></i>Abrir
+            </a>
+            <button onclick="closePreview()" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center text-white transition-all" aria-label="Fechar preview">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Iframe Container -->
+        <div class="flex items-center justify-center h-[calc(100%-72px)] bg-gray-950 p-4">
+          <div id="preview-container" class="preview-desktop bg-white rounded-lg overflow-hidden shadow-xl transition-all duration-300">
+            <iframe id="preview-iframe" class="w-full h-full border-0" src="" title="Preview do site"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ═══════════════════════════════════════════════════════════════════
          FOOTER - RODAPÉ
@@ -1452,6 +2608,196 @@
       // Initialize Lucide Icons
       lucide.createIcons();
 
+      /* ===============================================================
+         FILTRO POR CATEGORIA
+         Mostra/esconde categorias no catálogo
+      ================================================================ */
+      function filterCategory(category) {
+        const sections = document.querySelectorAll('.category-section');
+        const buttons = document.querySelectorAll('.filter-btn');
+        
+        // Atualiza botões ativos
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-category') === category) {
+            btn.classList.add('active');
+          }
+        });
+        
+        // Mostra/esconde categorias
+        if (category === 'todos') {
+          sections.forEach(section => {
+            section.classList.remove('hidden');
+            section.style.opacity = '0';
+            setTimeout(() => {
+              section.style.opacity = '1';
+            }, 50);
+          });
+        } else {
+          sections.forEach(section => {
+            if (section.id === 'cat-' + category) {
+              section.classList.remove('hidden');
+              section.style.opacity = '0';
+              setTimeout(() => {
+                section.style.opacity = '1';
+              }, 50);
+            } else {
+              section.classList.add('hidden');
+            }
+          });
+        }
+        
+        // Reinicializa AOS para animações dos cards visíveis
+        setTimeout(() => {
+          AOS.refresh();
+        }, 100);
+      }
+
+      /* ===============================================================
+         BUSCA DE NICHOS
+         Filtra os cards pelo texto digitado
+      ================================================================ */
+      function searchNichos(query) {
+        const cards = document.querySelectorAll('.niche-card');
+        const clearBtn = document.getElementById('clear-search');
+        const resultsCount = document.getElementById('search-results-count');
+        const searchTerm = query.toLowerCase().trim();
+        
+        // Mostra/esconde botão de limpar
+        clearBtn.classList.toggle('hidden', !searchTerm);
+        
+        if (!searchTerm) {
+          // Se vazio, mostra todos
+          cards.forEach(card => {
+            card.classList.remove('search-hidden', 'search-highlight');
+          });
+          document.querySelectorAll('.category-section').forEach(section => {
+            section.classList.remove('hidden');
+          });
+          resultsCount.classList.add('hidden');
+          return;
+        }
+        
+        // Mostra todas as categorias primeiro
+        document.querySelectorAll('.category-section').forEach(section => {
+          section.classList.remove('hidden');
+        });
+        
+        // Reset filtros de categoria
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-category') === 'todos') {
+            btn.classList.add('active');
+          }
+        });
+        
+        let matchCount = 0;
+        cards.forEach(card => {
+          const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+          const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+          const tags = Array.from(card.querySelectorAll('.bg-gray-100')).map(el => el.textContent.toLowerCase()).join(' ');
+          const content = title + ' ' + desc + ' ' + tags;
+          
+          if (content.includes(searchTerm)) {
+            card.classList.remove('search-hidden');
+            card.classList.add('search-highlight');
+            setTimeout(() => card.classList.remove('search-highlight'), 500);
+            matchCount++;
+          } else {
+            card.classList.add('search-hidden');
+          }
+        });
+        
+        // Mostra contador de resultados
+        resultsCount.classList.remove('hidden');
+        resultsCount.textContent = matchCount === 0 
+          ? '😔 Nenhum nicho encontrado. Tente outro termo.' 
+          : `✨ ${matchCount} nicho${matchCount > 1 ? 's' : ''} encontrado${matchCount > 1 ? 's' : ''}`;
+        
+        AOS.refresh();
+      }
+      
+      function clearSearch() {
+        const searchInput = document.getElementById('search-nichos');
+        searchInput.value = '';
+        searchNichos('');
+        searchInput.focus();
+      }
+
+      /* ===============================================================
+         MODAL DE PREVIEW (IFRAME)
+         Mostra preview responsivo do site selecionado
+      ================================================================ */
+      function openPreview(url, title) {
+        const modal = document.getElementById('preview-modal');
+        const iframe = document.getElementById('preview-iframe');
+        const titleEl = document.getElementById('preview-title');
+        const newTabLink = document.getElementById('preview-new-tab');
+        
+        iframe.src = url;
+        titleEl.textContent = title || 'Preview do Site';
+        newTabLink.href = url;
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Reset para desktop
+        setPreviewSize('desktop');
+        
+        // Reinicializa ícones
+        lucide.createIcons();
+      }
+      
+      function closePreview() {
+        const modal = document.getElementById('preview-modal');
+        const iframe = document.getElementById('preview-iframe');
+        
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        iframe.src = '';
+      }
+      
+      function setPreviewSize(size) {
+        const container = document.getElementById('preview-container');
+        const buttons = document.querySelectorAll('.preview-size-btn');
+        
+        // Atualiza botões
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-size') === size) {
+            btn.classList.add('active');
+          }
+        });
+        
+        // Atualiza tamanho do container
+        container.className = 'bg-white rounded-lg overflow-hidden shadow-xl transition-all duration-300 preview-' + size;
+      }
+      
+      // Fecha modal com ESC
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closePreview();
+        }
+      });
+      
+      // Fecha modal clicando fora
+      document.getElementById('preview-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'preview-modal') {
+          closePreview();
+        }
+      });
+      
+      // Intercepta cliques nos botões "Ver Demo" para abrir no modal
+      document.querySelectorAll('.niche-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const url = btn.getAttribute('href');
+          const card = btn.closest('.niche-card');
+          const title = card?.querySelector('h3')?.textContent || 'Preview';
+          openPreview(url, title);
+        });
+      });
+
       // Custom Cursor
       const cursor = document.querySelector('.custom-cursor');
       document.addEventListener('mousemove', (e) => {
@@ -1499,6 +2845,271 @@
         mobileMenu.classList.remove('open');
         document.body.classList.remove('menu-open');
       }
+
+      /* ===============================================================
+         TEMA CLARO/ESCURO (DARK/LIGHT MODE)
+         Alterna entre modos e salva preferência no localStorage
+      ================================================================ */
+      const themeToggle = document.getElementById('theme-toggle');
+      const savedTheme = localStorage.getItem('theme');
+      
+      // Aplica tema salvo ou detecta preferência do sistema
+      if (savedTheme === 'light' || (!savedTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+        document.body.classList.add('light-mode');
+      }
+      
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        const isLight = document.body.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        
+        // Reinicializa ícones do Lucide
+        lucide.createIcons();
+      });
+
+      /* ===============================================================
+         FAQ INTERATIVO - ACORDEÃO
+         Abre/fecha respostas ao clicar nas perguntas
+      ================================================================ */
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question?.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          
+          // Fecha todos os outros
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+              otherItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+            }
+          });
+          
+          // Toggle do item clicado
+          item.classList.toggle('active');
+          question.setAttribute('aria-expanded', !isActive);
+        });
+      });
+
+      /* ===============================================================
+         BANNER DE URGÊNCIA - CONTADOR REGRESSIVO
+         Mostra promoção com countdown e pessoas online
+      ================================================================ */
+      const urgencyBanner = document.getElementById('urgency-banner');
+      const closeUrgency = document.getElementById('close-urgency');
+      const onlineCount = document.getElementById('online-count');
+      
+      // Mostra banner após 3 segundos
+      setTimeout(() => {
+        urgencyBanner.classList.add('visible');
+      }, 3000);
+      
+      // Fecha banner
+      closeUrgency?.addEventListener('click', () => {
+        urgencyBanner.classList.remove('visible');
+        // Salva no localStorage para não mostrar novamente na sessão
+        sessionStorage.setItem('urgencyBannerClosed', 'true');
+      });
+      
+      // Não mostra se já fechou
+      if (sessionStorage.getItem('urgencyBannerClosed') === 'true') {
+        urgencyBanner.remove();
+      }
+      
+      // Contador Regressivo (renova a cada visita - 24h a partir do acesso)
+      function startCountdown() {
+        let endTime = localStorage.getItem('promoEndTime');
+        
+        if (!endTime) {
+          // Define 24 horas a partir de agora
+          endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+          localStorage.setItem('promoEndTime', endTime);
+        }
+        
+        const hoursEl = document.getElementById('countdown-hours');
+        const minutesEl = document.getElementById('countdown-minutes');
+        const secondsEl = document.getElementById('countdown-seconds');
+        
+        function updateCountdown() {
+          const now = new Date().getTime();
+          const distance = endTime - now;
+          
+          if (distance <= 0) {
+            // Reinicia o contador
+            endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+            localStorage.setItem('promoEndTime', endTime);
+            return;
+          }
+          
+          const hours = Math.floor(distance / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          
+          if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+          if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+          if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      }
+      
+      startCountdown();
+      
+      // Simula pessoas online (variação realista)
+      function updateOnlineCount() {
+        const baseCount = 120;
+        const variation = Math.floor(Math.random() * 30) - 10; // -10 a +20
+        if (onlineCount) {
+          onlineCount.textContent = baseCount + variation;
+        }
+      }
+      
+      updateOnlineCount();
+      setInterval(updateOnlineCount, 5000);
+
+      /* ===============================================================
+         FORMULÁRIO SOLICITAR NICHO
+         Envia dados via WhatsApp
+      ================================================================ */
+      document.getElementById('niche-request-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('niche-name').value.trim();
+        const whatsapp = document.getElementById('niche-whatsapp').value.trim();
+        const niche = document.getElementById('niche-type').value.trim();
+        const description = document.getElementById('niche-description').value.trim();
+        
+        // Monta a mensagem para o WhatsApp
+        let message = `🌟 *SOLICITAÇÃO DE NICHO PERSONALIZADO*\n\n`;
+        message += `👤 *Nome:* ${name}\n`;
+        message += `📱 *WhatsApp:* ${whatsapp}\n`;
+        message += `💼 *Nicho/Profissão:* ${niche}\n`;
+        if (description) {
+          message += `📝 *Descrição:* ${description}\n`;
+        }
+        message += `\n✨ Gostaria de saber mais sobre o desenvolvimento de um site personalizado para meu negócio!`;
+        
+        // Codifica a mensagem para URL
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Abre o WhatsApp com a mensagem
+        window.open(`https://wa.me/5521977434614?text=${encodedMessage}`, '_blank');
+        
+        // Limpa o formulário
+        this.reset();
+      });
+
+      /* ===============================================================
+         CARROSSEL DE DEPOIMENTOS
+         Navegação automática e manual entre depoimentos
+      ================================================================ */
+      const testimonialTrack = document.getElementById('testimonials-track');
+      const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+      const prevBtn = document.getElementById('prev-testimonial');
+      const nextBtn = document.getElementById('next-testimonial');
+      const dotsContainer = document.getElementById('testimonial-dots');
+      
+      let testimonialIndex = 0;
+      let slidesToShow = 3;
+      
+      // Ajusta quantidade de slides baseado na tela
+      function updateSlidesToShow() {
+        if (window.innerWidth < 768) {
+          slidesToShow = 1;
+        } else if (window.innerWidth < 1024) {
+          slidesToShow = 2;
+        } else {
+          slidesToShow = 3;
+        }
+        updateCarousel();
+        createDots();
+      }
+      
+      // Cria indicadores (dots)
+      function createDots() {
+        const totalDots = Math.ceil(testimonialSlides.length / slidesToShow);
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalDots; i++) {
+          const dot = document.createElement('button');
+          dot.className = `w-3 h-3 rounded-full transition-all ${i === Math.floor(testimonialIndex / slidesToShow) ? 'bg-primary w-8' : 'bg-gray-300'}`;
+          dot.setAttribute('aria-label', `Ir para grupo ${i + 1}`);
+          dot.addEventListener('click', () => {
+            testimonialIndex = i * slidesToShow;
+            updateCarousel();
+          });
+          dotsContainer.appendChild(dot);
+        }
+      }
+      
+      // Atualiza posição do carrossel
+      function updateCarousel() {
+        const slideWidth = 100 / slidesToShow;
+        const offset = testimonialIndex * slideWidth;
+        testimonialTrack.style.transform = `translateX(-${offset}%)`;
+        
+        // Atualiza dots
+        const dots = dotsContainer.querySelectorAll('button');
+        dots.forEach((dot, i) => {
+          if (i === Math.floor(testimonialIndex / slidesToShow)) {
+            dot.className = 'w-8 h-3 rounded-full bg-primary transition-all';
+          } else {
+            dot.className = 'w-3 h-3 rounded-full bg-gray-300 transition-all';
+          }
+        });
+      }
+      
+      // Navegação anterior
+      prevBtn.addEventListener('click', () => {
+        if (testimonialIndex > 0) {
+          testimonialIndex--;
+        } else {
+          testimonialIndex = testimonialSlides.length - slidesToShow;
+        }
+        updateCarousel();
+      });
+      
+      // Navegação próximo
+      nextBtn.addEventListener('click', () => {
+        if (testimonialIndex < testimonialSlides.length - slidesToShow) {
+          testimonialIndex++;
+        } else {
+          testimonialIndex = 0;
+        }
+        updateCarousel();
+      });
+      
+      // Auto-play do carrossel
+      let testimonialInterval = setInterval(() => {
+        if (testimonialIndex < testimonialSlides.length - slidesToShow) {
+          testimonialIndex++;
+        } else {
+          testimonialIndex = 0;
+        }
+        updateCarousel();
+      }, 5000);
+      
+      // Pausa auto-play ao passar o mouse
+      document.getElementById('testimonials-container').addEventListener('mouseenter', () => {
+        clearInterval(testimonialInterval);
+      });
+      
+      document.getElementById('testimonials-container').addEventListener('mouseleave', () => {
+        testimonialInterval = setInterval(() => {
+          if (testimonialIndex < testimonialSlides.length - slidesToShow) {
+            testimonialIndex++;
+          } else {
+            testimonialIndex = 0;
+          }
+          updateCarousel();
+        }, 5000);
+      });
+      
+      // Inicializa carrossel
+      updateSlidesToShow();
+      window.addEventListener('resize', updateSlidesToShow);
 
       /* ===============================================================
          PARTÍCULAS DE FUNDO

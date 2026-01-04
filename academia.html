@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PowerFit - Academia Premium</title>
+    <meta property="og:title" content="PowerFit - Academia Premium">
+    <meta property="og:description" content="Transforme seu corpo, transforme sua vida. Estrutura completa.">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#dc2626",
+              secondary: "#fef2f2",
+              accent: "#f97316",
+              dark: "#18181b",
+              light: "#fafafa",
+              neon: "#22c55e",
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Poppins"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      #page-loader { position: fixed; inset: 0; background: linear-gradient(135deg, #18181b 0%, #dc2626 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-spin { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #22c55e; border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #dc2626, #f97316, #22c55e); z-index: 99999; }
+      .custom-cursor { width: 20px; height: 20px; border: 2px solid #dc2626; border-radius: 50%; position: fixed; pointer-events: none; z-index: 99998; transition: transform 0.15s ease; mix-blend-mode: difference; }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(220, 38, 38, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+      .glass-nav { background: rgba(24, 24, 27, 0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(220, 38, 38, 0.3); }
+      .hero-gradient { background: linear-gradient(135deg, #18181b 0%, #27272a 50%, #dc2626 100%); }
+      .shimmer-text { background: linear-gradient(90deg, #dc2626, #f97316, #dc2626); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s linear infinite; }
+      @keyframes shimmer { to { background-position: 200% center; } }
+      .glass-card { background: rgba(255,255,255,0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border: 1px solid rgba(220, 38, 38, 0.1); transition: all 0.4s ease; }
+      .glass-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.25); }
+      .btn-primary { background: linear-gradient(135deg, #dc2626, #b91c1c); transition: all 0.3s ease; }
+      .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(220, 38, 38, 0.5); }
+      .btn-neon { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; transition: all 0.3s ease; }
+      .btn-neon:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(34, 197, 94, 0.5); }
+      #mobile-menu { position: fixed; inset: 0; background: rgba(24, 24, 27, 0.98); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); z-index: 40; transform: translateX(100%); transition: transform 0.4s ease; }
+      #mobile-menu.open { transform: translateX(0); }
+      .floating { animation: floating 3s ease-in-out infinite; }
+      @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+      #back-to-top { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; background: linear-gradient(135deg, #dc2626, #22c55e); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease; z-index: 50; }
+      #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+      .pricing-card { position: relative; overflow: hidden; }
+      .pricing-card.popular { border: 2px solid #dc2626; }
+      .pricing-card.popular::before { content: 'MAIS POPULAR'; position: absolute; top: 20px; right: -35px; background: linear-gradient(135deg, #dc2626, #f97316); color: white; padding: 5px 40px; font-size: 0.7rem; font-weight: 700; transform: rotate(45deg); }
+    </style>
+  </head>
+  <body class="font-sans bg-light text-dark overflow-x-hidden">
+    <div id="page-loader"><div class="loader-spin"></div><p class="text-white mt-4 font-medium">💪 Carregando...</p></div>
+    <div id="scroll-progress"></div>
+    <div class="custom-cursor"></div>
+
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-serif font-bold text-white">Power<span class="shimmer-text">Fit</span> 💪</a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-gray-300 hover:text-primary transition">Início</a>
+          <a href="#estrutura" class="text-gray-300 hover:text-primary transition">Estrutura</a>
+          <a href="#planos" class="text-gray-300 hover:text-primary transition">Planos</a>
+          <a href="#contato" class="btn-primary text-white px-6 py-2.5 rounded-full font-semibold">Matricule-se</a>
+        </nav>
+        <button id="menu-toggle" class="md:hidden text-white" aria-label="Menu"><i data-lucide="menu" class="w-7 h-7"></i></button>
+      </div>
+    </header>
+
+    <div id="mobile-menu" class="md:hidden">
+      <div class="flex flex-col items-center justify-center h-full space-y-8">
+        <a href="#home" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Início</a>
+        <a href="#estrutura" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Estrutura</a>
+        <a href="#planos" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Planos</a>
+        <a href="#contato" class="btn-primary text-white px-8 py-3 rounded-full text-xl" onclick="closeMobileMenu()">Matricule-se</a>
+        <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-white" aria-label="Fechar menu"><i data-lucide="x" class="w-8 h-8"></i></button>
+      </div>
+    </div>
+
+    <section id="home" class="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-20">
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-20 left-10 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-80 h-80 bg-neon rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div data-aos="fade-right">
+            <span class="inline-block px-4 py-2 bg-primary/20 text-primary rounded-full text-sm font-medium mb-6">🏋️ Academia Premium • +2000m²</span>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6">Transforme Seu <span class="shimmer-text">Corpo</span>, Transforme Sua Vida</h1>
+            <p class="text-gray-400 text-lg mb-8">Estrutura completa, equipamentos de última geração e profissionais qualificados para você alcançar seus objetivos.</p>
+            <div class="flex flex-wrap gap-4">
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-primary text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="zap" class="w-5 h-5"></i>Aula Experimental</a>
+              <a href="#planos" class="btn-neon px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="crown" class="w-5 h-5"></i>Ver Planos</a>
+            </div>
+          </div>
+          <div class="hidden md:block relative" data-aos="fade-left">
+            <div class="relative z-10 floating">
+              <div class="w-80 h-80 mx-auto bg-gradient-to-br from-primary/30 to-neon/30 rounded-full flex items-center justify-center">
+                <i data-lucide="dumbbell" class="w-40 h-40 text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-dark text-white">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up"><p class="text-4xl font-bold text-primary">2.000+</p><p class="text-gray-400">Alunos Ativos</p></div>
+          <div data-aos="fade-up" data-aos-delay="100"><p class="text-4xl font-bold text-primary">50+</p><p class="text-gray-400">Aulas por Semana</p></div>
+          <div data-aos="fade-up" data-aos-delay="200"><p class="text-4xl font-bold text-primary">2.000m²</p><p class="text-gray-400">De Estrutura</p></div>
+          <div data-aos="fade-up" data-aos-delay="300"><p class="text-4xl font-bold text-primary">24h</p><p class="text-gray-400">Funcionamento</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="estrutura" class="py-24 bg-light">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm">Estrutura</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 text-dark">Tudo Que Você <span class="text-primary">Precisa</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up">
+            <div class="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="dumbbell" class="w-7 h-7 text-white"></i></div>
+            <h3 class="text-lg font-bold mb-2">Musculação</h3>
+            <p class="text-gray-600 text-sm">Equipamentos Technogym de última geração</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-14 h-14 bg-gradient-to-br from-neon to-green-400 rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="heart-pulse" class="w-7 h-7 text-white"></i></div>
+            <h3 class="text-lg font-bold mb-2">Cardio</h3>
+            <p class="text-gray-600 text-sm">Esteiras, bikes e elípticos com TV</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="flame" class="w-7 h-7 text-white"></i></div>
+            <h3 class="text-lg font-bold mb-2">CrossFit</h3>
+            <p class="text-gray-600 text-sm">Box completo com coaches certificados</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-14 h-14 bg-gradient-to-br from-neon to-green-400 rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="bike" class="w-7 h-7 text-white"></i></div>
+            <h3 class="text-lg font-bold mb-2">Spinning</h3>
+            <p class="text-gray-600 text-sm">Sala climatizada com bikes premium</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="music" class="w-7 h-7 text-white"></i></div>
+            <h3 class="text-lg font-bold mb-2">Aulas Coletivas</h3>
+            <p class="text-gray-600 text-sm">Zumba, funcional, pilates, yoga</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up" data-aos-delay="500">
+            <div class="w-14 h-14 bg-gradient-to-br from-neon to-green-400 rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="waves" class="w-7 h-7 text-white"></i></div>
+            <h3 class="text-lg font-bold mb-2">Piscina</h3>
+            <p class="text-gray-600 text-sm">Piscina aquecida e hidromassagem</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up" data-aos-delay="600">
+            <div class="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="thermometer-sun" class="w-7 h-7 text-white"></i></div>
+            <h3 class="text-lg font-bold mb-2">Sauna</h3>
+            <p class="text-gray-600 text-sm">Sauna seca e a vapor</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 text-center" data-aos="fade-up" data-aos-delay="700">
+            <div class="w-14 h-14 bg-gradient-to-br from-neon to-green-400 rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="sparkles" class="w-7 h-7 text-white"></i></div>
+            <h3 class="text-lg font-bold mb-2">Vestiários</h3>
+            <p class="text-gray-600 text-sm">Armários, chuveiros e secadores</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="planos" class="py-24 bg-dark text-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm">Planos</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3">Escolha Seu <span class="shimmer-text">Plano</span></h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div class="pricing-card glass-card rounded-3xl p-8 text-center text-dark" data-aos="fade-up">
+            <h3 class="text-2xl font-bold mb-2">Básico</h3>
+            <p class="text-gray-500 mb-6">Musculação + Cardio</p>
+            <p class="text-5xl font-bold text-primary mb-6">R$ 99<span class="text-lg font-normal text-gray-500">/mês</span></p>
+            <ul class="space-y-3 text-left mb-8">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Musculação</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Área Cardio</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Vestiários</li>
+              <li class="flex items-center gap-2 text-gray-400"><i data-lucide="x" class="w-5 h-5"></i>Aulas Coletivas</li>
+            </ul>
+            <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-neon w-full py-3 rounded-full font-semibold inline-block">Matricular</a>
+          </div>
+          <div class="pricing-card popular glass-card rounded-3xl p-8 text-center text-dark scale-105" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="text-2xl font-bold mb-2">Completo</h3>
+            <p class="text-gray-500 mb-6">Acesso Total</p>
+            <p class="text-5xl font-bold text-primary mb-6">R$ 149<span class="text-lg font-normal text-gray-500">/mês</span></p>
+            <ul class="space-y-3 text-left mb-8">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Musculação</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Área Cardio</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Todas as Aulas</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Piscina e Sauna</li>
+            </ul>
+            <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-primary text-white w-full py-3 rounded-full font-semibold inline-block">Matricular</a>
+          </div>
+          <div class="pricing-card glass-card rounded-3xl p-8 text-center text-dark" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="text-2xl font-bold mb-2">Premium</h3>
+            <p class="text-gray-500 mb-6">Acesso VIP 24h</p>
+            <p class="text-5xl font-bold text-primary mb-6">R$ 249<span class="text-lg font-normal text-gray-500">/mês</span></p>
+            <ul class="space-y-3 text-left mb-8">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Tudo do Completo</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Acesso 24 horas</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Personal incluso</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-neon"></i>Armário exclusivo</li>
+            </ul>
+            <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-neon w-full py-3 rounded-full font-semibold inline-block">Matricular</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm">Contato</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 mb-6 text-dark">Comece Sua <span class="text-primary">Transformação</span> 💪</h2>
+          <p class="text-gray-600 mb-8">Agende uma aula experimental gratuita!</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-primary text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i>WhatsApp</a>
+            <a href="#" class="btn-neon px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="instagram" class="w-5 h-5"></i>Instagram</a>
+          </div>
+          <div class="mt-12 flex flex-wrap justify-center gap-8 text-gray-600">
+            <div class="flex items-center gap-2"><i data-lucide="clock" class="w-5 h-5 text-primary"></i>5h às 00h (24h Premium)</div>
+            <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5 text-primary"></i>Seu Bairro, Cidade</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-12">
+      <div class="container mx-auto px-6 text-center">
+        <a href="#" class="text-2xl font-serif font-bold">Power<span class="shimmer-text">Fit</span> 💪</a>
+        <p class="text-gray-400 mt-4">© 2024 PowerFit Academia. Todos os direitos reservados.</p>
+        <p class="text-gray-500 text-sm mt-2">CREF 12345-G/RJ</p>
+      </div>
+    </footer>
+
+    <button id="back-to-top" aria-label="Voltar ao topo"><i data-lucide="chevron-up" class="w-6 h-6"></i></button>
+
+    <script>
+      window.addEventListener('load', () => { setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 800); });
+      AOS.init({ duration: 800, once: true, offset: 50 });
+      lucide.createIcons();
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX - 10 + 'px'; cursor.style.top = e.clientY - 10 + 'px'; });
+      document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => cursor.classList.add('hover')); el.addEventListener('mouseleave', () => cursor.classList.remove('hover')); });
+      window.addEventListener('scroll', () => { const progress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100; document.getElementById('scroll-progress').style.width = progress + '%'; });
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => { backToTop.classList.toggle('visible', window.scrollY > 500); });
+      backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+      function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+    </script>
+  </body>
+</html>

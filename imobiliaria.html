@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prime Imóveis - Corretor de Imóveis Premium</title>
+    <meta property="og:title" content="Prime Imóveis - Corretor de Imóveis">
+    <meta property="og:description" content="Encontre o imóvel dos seus sonhos com atendimento personalizado">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1e3a5f",
+              secondary: "#f8fafc",
+              accent: "#c9a227",
+              dark: "#0f172a",
+              light: "#f1f5f9",
+              gold: "#c9a227",
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Poppins"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      #page-loader {
+        position: fixed; inset: 0;
+        background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+        z-index: 99999; display: flex; align-items: center; justify-content: center;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-spin { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #c9a227; border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #1e3a5f, #c9a227); z-index: 99999; }
+      .custom-cursor { width: 20px; height: 20px; border: 2px solid #c9a227; border-radius: 50%; position: fixed; pointer-events: none; z-index: 99998; transition: transform 0.15s ease; mix-blend-mode: difference; }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(201, 162, 39, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+      .glass-nav { background: rgba(30, 58, 95, 0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(201, 162, 39, 0.2); }
+      .hero-gradient { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1e293b 100%); }
+      .shimmer-text { background: linear-gradient(90deg, #c9a227, #f4d03f, #c9a227); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s linear infinite; }
+      @keyframes shimmer { to { background-position: 200% center; } }
+      .glass-card { background: rgba(255,255,255,0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border: 1px solid rgba(201, 162, 39, 0.1); transition: all 0.4s ease; }
+      .glass-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(201, 162, 39, 0.25); }
+      .property-card { position: relative; overflow: hidden; border-radius: 1.5rem; }
+      .property-card img { transition: transform 0.5s ease; }
+      .property-card:hover img { transform: scale(1.1); }
+      .btn-primary { background: linear-gradient(135deg, #1e3a5f, #2d4a6f); transition: all 0.3s ease; }
+      .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(30, 58, 95, 0.5); }
+      .btn-gold { background: linear-gradient(135deg, #c9a227, #f4d03f); color: #1e3a5f; transition: all 0.3s ease; }
+      .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(201, 162, 39, 0.5); }
+      #mobile-menu { position: fixed; inset: 0; background: rgba(30, 58, 95, 0.98); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); z-index: 40; transform: translateX(100%); transition: transform 0.4s ease; }
+      #mobile-menu.open { transform: translateX(0); }
+      .floating { animation: floating 3s ease-in-out infinite; }
+      @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+      #back-to-top { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; background: linear-gradient(135deg, #1e3a5f, #c9a227); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease; z-index: 50; }
+      #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+      #back-to-top:hover { transform: translateY(-5px); }
+    </style>
+  </head>
+  <body class="font-sans bg-light text-dark overflow-x-hidden">
+    <div id="page-loader"><div class="loader-spin"></div><p class="text-white mt-4 font-medium">Carregando...</p></div>
+    <div id="scroll-progress"></div>
+    <div class="custom-cursor"></div>
+
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-serif font-bold text-white">Prime<span class="shimmer-text">Imóveis</span></a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-gray-300 hover:text-gold transition">Início</a>
+          <a href="#imoveis" class="text-gray-300 hover:text-gold transition">Imóveis</a>
+          <a href="#servicos" class="text-gray-300 hover:text-gold transition">Serviços</a>
+          <a href="#sobre" class="text-gray-300 hover:text-gold transition">Sobre</a>
+          <a href="#contato" class="btn-gold px-6 py-2.5 rounded-full font-semibold">Contato</a>
+        </nav>
+        <button id="menu-toggle" class="md:hidden text-white" aria-label="Menu"><i data-lucide="menu" class="w-7 h-7"></i></button>
+      </div>
+    </header>
+
+    <div id="mobile-menu" class="md:hidden">
+      <div class="flex flex-col items-center justify-center h-full space-y-8">
+        <a href="#home" class="text-2xl text-white hover:text-gold transition" onclick="closeMobileMenu()">Início</a>
+        <a href="#imoveis" class="text-2xl text-white hover:text-gold transition" onclick="closeMobileMenu()">Imóveis</a>
+        <a href="#servicos" class="text-2xl text-white hover:text-gold transition" onclick="closeMobileMenu()">Serviços</a>
+        <a href="#sobre" class="text-2xl text-white hover:text-gold transition" onclick="closeMobileMenu()">Sobre</a>
+        <a href="#contato" class="btn-gold px-8 py-3 rounded-full text-xl" onclick="closeMobileMenu()">Contato</a>
+        <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-white" aria-label="Fechar menu"><i data-lucide="x" class="w-8 h-8"></i></button>
+      </div>
+    </div>
+
+    <section id="home" class="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-20">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-10 w-96 h-96 bg-gold rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-80 h-80 bg-primary rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div data-aos="fade-right">
+            <span class="inline-block px-4 py-2 bg-gold/20 text-gold rounded-full text-sm font-medium mb-6">🏠 Corretor Especialista CRECI 12345</span>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6">Encontre o <span class="shimmer-text">Imóvel</span> dos Seus Sonhos</h1>
+            <p class="text-gray-300 text-lg mb-8">Atendimento personalizado para compra, venda e aluguel de imóveis residenciais e comerciais na região.</p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#imoveis" class="btn-gold px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="home" class="w-5 h-5"></i>Ver Imóveis</a>
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-primary text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i>WhatsApp</a>
+            </div>
+          </div>
+          <div class="hidden md:block relative" data-aos="fade-left">
+            <div class="relative z-10 floating">
+              <div class="w-80 h-80 mx-auto bg-gradient-to-br from-gold/20 to-primary/20 rounded-3xl flex items-center justify-center">
+                <i data-lucide="building-2" class="w-40 h-40 text-gold"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up"><p class="text-4xl font-bold text-primary">500+</p><p class="text-gray-600">Imóveis Vendidos</p></div>
+          <div data-aos="fade-up" data-aos-delay="100"><p class="text-4xl font-bold text-primary">15</p><p class="text-gray-600">Anos de Experiência</p></div>
+          <div data-aos="fade-up" data-aos-delay="200"><p class="text-4xl font-bold text-primary">98%</p><p class="text-gray-600">Clientes Satisfeitos</p></div>
+          <div data-aos="fade-up" data-aos-delay="300"><p class="text-4xl font-bold text-primary">24h</p><p class="text-gray-600">Atendimento</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="imoveis" class="py-24 bg-light">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-gold font-semibold uppercase tracking-widest text-sm">Portfólio</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3">Imóveis em <span class="shimmer-text">Destaque</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="glass-card property-card" data-aos="fade-up">
+            <div class="h-48 bg-gradient-to-br from-primary to-dark flex items-center justify-center"><i data-lucide="home" class="w-20 h-20 text-gold/50"></i></div>
+            <div class="p-6">
+              <span class="px-3 py-1 bg-gold/20 text-gold text-xs font-semibold rounded-full">Venda</span>
+              <h3 class="text-xl font-bold mt-3 mb-2">Apartamento 3 Quartos</h3>
+              <p class="text-gray-600 text-sm mb-4">Copacabana • 120m² • Suite Master</p>
+              <p class="text-2xl font-bold text-primary">R$ 1.200.000</p>
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="mt-4 btn-primary text-white px-6 py-2 rounded-full text-sm font-medium flex items-center justify-center gap-2 w-full"><i data-lucide="message-circle" class="w-4 h-4"></i>Agendar Visita</a>
+            </div>
+          </div>
+          <div class="glass-card property-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="h-48 bg-gradient-to-br from-gold/80 to-gold/40 flex items-center justify-center"><i data-lucide="building" class="w-20 h-20 text-white/50"></i></div>
+            <div class="p-6">
+              <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Aluguel</span>
+              <h3 class="text-xl font-bold mt-3 mb-2">Cobertura Duplex</h3>
+              <p class="text-gray-600 text-sm mb-4">Barra da Tijuca • 250m² • 4 Suítes</p>
+              <p class="text-2xl font-bold text-primary">R$ 8.500/mês</p>
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="mt-4 btn-primary text-white px-6 py-2 rounded-full text-sm font-medium flex items-center justify-center gap-2 w-full"><i data-lucide="message-circle" class="w-4 h-4"></i>Agendar Visita</a>
+            </div>
+          </div>
+          <div class="glass-card property-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="h-48 bg-gradient-to-br from-primary/80 to-primary/40 flex items-center justify-center"><i data-lucide="warehouse" class="w-20 h-20 text-gold/50"></i></div>
+            <div class="p-6">
+              <span class="px-3 py-1 bg-gold/20 text-gold text-xs font-semibold rounded-full">Venda</span>
+              <h3 class="text-xl font-bold mt-3 mb-2">Casa em Condomínio</h3>
+              <p class="text-gray-600 text-sm mb-4">Recreio • 400m² • Piscina</p>
+              <p class="text-2xl font-bold text-primary">R$ 2.800.000</p>
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="mt-4 btn-primary text-white px-6 py-2 rounded-full text-sm font-medium flex items-center justify-center gap-2 w-full"><i data-lucide="message-circle" class="w-4 h-4"></i>Agendar Visita</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos" class="py-24 bg-primary text-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-gold font-semibold uppercase tracking-widest text-sm">O Que Faço</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3">Serviços <span class="shimmer-text">Especializados</span></h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center p-8 bg-white/10 rounded-3xl backdrop-blur" data-aos="fade-up">
+            <div class="w-20 h-20 bg-gold rounded-2xl flex items-center justify-center mx-auto mb-6"><i data-lucide="shopping-cart" class="w-10 h-10 text-primary"></i></div>
+            <h3 class="text-2xl font-bold mb-4">Compra</h3>
+            <p class="text-gray-300">Ajudo você a encontrar o imóvel perfeito dentro do seu orçamento e necessidades.</p>
+          </div>
+          <div class="text-center p-8 bg-white/10 rounded-3xl backdrop-blur" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-20 h-20 bg-gold rounded-2xl flex items-center justify-center mx-auto mb-6"><i data-lucide="tag" class="w-10 h-10 text-primary"></i></div>
+            <h3 class="text-2xl font-bold mb-4">Venda</h3>
+            <p class="text-gray-300">Estratégias de marketing e avaliação justa para vender seu imóvel rapidamente.</p>
+          </div>
+          <div class="text-center p-8 bg-white/10 rounded-3xl backdrop-blur" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-20 h-20 bg-gold rounded-2xl flex items-center justify-center mx-auto mb-6"><i data-lucide="key" class="w-10 h-10 text-primary"></i></div>
+            <h3 class="text-2xl font-bold mb-4">Aluguel</h3>
+            <p class="text-gray-300">Administração completa de locação para proprietários e inquilinos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div data-aos="fade-right">
+            <div class="w-full h-96 bg-gradient-to-br from-primary to-dark rounded-3xl flex items-center justify-center"><i data-lucide="user" class="w-32 h-32 text-gold/50"></i></div>
+          </div>
+          <div data-aos="fade-left">
+            <span class="text-gold font-semibold uppercase tracking-widest text-sm">Sobre Mim</span>
+            <h2 class="text-4xl font-serif font-bold mt-3 mb-6">Seu Parceiro no <span class="text-primary">Mercado Imobiliário</span></h2>
+            <p class="text-gray-600 mb-6">Com mais de 15 anos de experiência no mercado imobiliário, ofereço um atendimento personalizado e transparente para cada cliente.</p>
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-center gap-3"><i data-lucide="check-circle" class="w-6 h-6 text-gold"></i><span>CRECI ativo e regularizado</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check-circle" class="w-6 h-6 text-gold"></i><span>Especialista na região</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check-circle" class="w-6 h-6 text-gold"></i><span>Assessoria jurídica parceira</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check-circle" class="w-6 h-6 text-gold"></i><span>Financiamento facilitado</span></li>
+            </ul>
+            <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-gold px-8 py-4 rounded-full font-semibold inline-flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i>Falar Comigo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="py-24 bg-light">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+          <span class="text-gold font-semibold uppercase tracking-widest text-sm">Contato</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 mb-6">Vamos Conversar Sobre Seu <span class="text-primary">Próximo Imóvel?</span></h2>
+          <p class="text-gray-600 mb-8">Entre em contato pelo WhatsApp ou redes sociais</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-gold px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i>WhatsApp</a>
+            <a href="#" class="btn-primary text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="instagram" class="w-5 h-5"></i>Instagram</a>
+          </div>
+          <div class="mt-12 flex flex-wrap justify-center gap-8 text-gray-600">
+            <div class="flex items-center gap-2"><i data-lucide="phone" class="w-5 h-5 text-gold"></i>(21) 97743-4614</div>
+            <div class="flex items-center gap-2"><i data-lucide="mail" class="w-5 h-5 text-gold"></i>contato@primeimoveis.com</div>
+            <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5 text-gold"></i>Rio de Janeiro, RJ</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-12">
+      <div class="container mx-auto px-6 text-center">
+        <a href="#" class="text-2xl font-serif font-bold">Prime<span class="shimmer-text">Imóveis</span></a>
+        <p class="text-gray-400 mt-4">© 2024 Prime Imóveis. Todos os direitos reservados.</p>
+        <p class="text-gray-500 text-sm mt-2">CRECI 12345 • Corretor de Imóveis</p>
+      </div>
+    </footer>
+
+    <button id="back-to-top" aria-label="Voltar ao topo"><i data-lucide="chevron-up" class="w-6 h-6"></i></button>
+
+    <script>
+      window.addEventListener('load', () => { setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 800); });
+      AOS.init({ duration: 800, once: true, offset: 50 });
+      lucide.createIcons();
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX - 10 + 'px'; cursor.style.top = e.clientY - 10 + 'px'; });
+      document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => cursor.classList.add('hover')); el.addEventListener('mouseleave', () => cursor.classList.remove('hover')); });
+      window.addEventListener('scroll', () => { const progress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100; document.getElementById('scroll-progress').style.width = progress + '%'; });
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => { backToTop.classList.toggle('visible', window.scrollY > 500); });
+      backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+      function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+    </script>
+  </body>
+</html>

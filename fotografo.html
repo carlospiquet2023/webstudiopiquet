@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lens Studio - Fotografia Profissional</title>
+    <meta property="og:title" content="Lens Studio - Fotografia Profissional">
+    <meta property="og:description" content="Capturando momentos eternos com arte e paixão">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1f2937",
+              secondary: "#f3f4f6",
+              accent: "#a855f7",
+              dark: "#111827",
+              light: "#fafafa",
+              gold: "#f59e0b",
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Poppins"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      #page-loader { position: fixed; inset: 0; background: linear-gradient(135deg, #1f2937 0%, #111827 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-spin { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #a855f7; border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #a855f7, #f59e0b); z-index: 99999; }
+      .custom-cursor { width: 20px; height: 20px; border: 2px solid #a855f7; border-radius: 50%; position: fixed; pointer-events: none; z-index: 99998; transition: transform 0.15s ease; mix-blend-mode: difference; }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(168, 85, 247, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+      .glass-nav { background: rgba(31, 41, 55, 0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+      .hero-gradient { background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #0f172a 100%); }
+      .shimmer-text { background: linear-gradient(90deg, #a855f7, #f59e0b, #a855f7); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s linear infinite; }
+      @keyframes shimmer { to { background-position: 200% center; } }
+      .glass-card { background: rgba(255,255,255,0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border: 1px solid rgba(168, 85, 247, 0.1); transition: all 0.4s ease; }
+      .glass-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(168, 85, 247, 0.25); }
+      .btn-primary { background: linear-gradient(135deg, #a855f7, #9333ea); transition: all 0.3s ease; }
+      .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(168, 85, 247, 0.5); }
+      .btn-gold { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; transition: all 0.3s ease; }
+      .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(245, 158, 11, 0.5); }
+      #mobile-menu { position: fixed; inset: 0; background: rgba(31, 41, 55, 0.98); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); z-index: 40; transform: translateX(100%); transition: transform 0.4s ease; }
+      #mobile-menu.open { transform: translateX(0); }
+      .floating { animation: floating 3s ease-in-out infinite; }
+      @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+      #back-to-top { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; background: linear-gradient(135deg, #a855f7, #f59e0b); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease; z-index: 50; }
+      #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+      .gallery-item { position: relative; overflow: hidden; border-radius: 1rem; }
+      .gallery-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); opacity: 0; transition: opacity 0.3s ease; }
+      .gallery-item:hover::after { opacity: 1; }
+      .gallery-item img { transition: transform 0.5s ease; }
+      .gallery-item:hover img { transform: scale(1.1); }
+    </style>
+  </head>
+  <body class="font-sans bg-light text-dark overflow-x-hidden">
+    <div id="page-loader"><div class="loader-spin"></div><p class="text-white mt-4 font-medium">📷 Carregando...</p></div>
+    <div id="scroll-progress"></div>
+    <div class="custom-cursor"></div>
+
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-serif font-bold text-white">Lens<span class="shimmer-text">Studio</span></a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-gray-300 hover:text-white transition">Início</a>
+          <a href="#portfolio" class="text-gray-300 hover:text-white transition">Portfólio</a>
+          <a href="#servicos" class="text-gray-300 hover:text-white transition">Serviços</a>
+          <a href="#contato" class="btn-primary text-white px-6 py-2.5 rounded-full font-semibold">Orçamento</a>
+        </nav>
+        <button id="menu-toggle" class="md:hidden text-white" aria-label="Menu"><i data-lucide="menu" class="w-7 h-7"></i></button>
+      </div>
+    </header>
+
+    <div id="mobile-menu" class="md:hidden">
+      <div class="flex flex-col items-center justify-center h-full space-y-8">
+        <a href="#home" class="text-2xl text-white hover:text-accent transition" onclick="closeMobileMenu()">Início</a>
+        <a href="#portfolio" class="text-2xl text-white hover:text-accent transition" onclick="closeMobileMenu()">Portfólio</a>
+        <a href="#servicos" class="text-2xl text-white hover:text-accent transition" onclick="closeMobileMenu()">Serviços</a>
+        <a href="#contato" class="btn-primary text-white px-8 py-3 rounded-full text-xl" onclick="closeMobileMenu()">Orçamento</a>
+        <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-white" aria-label="Fechar menu"><i data-lucide="x" class="w-8 h-8"></i></button>
+      </div>
+    </div>
+
+    <section id="home" class="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-20">
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-20 left-10 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-80 h-80 bg-gold rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div data-aos="fade-right">
+            <span class="inline-block px-4 py-2 bg-accent/20 text-accent rounded-full text-sm font-medium mb-6">📷 Fotógrafo Profissional</span>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6">Capturando <span class="shimmer-text">Momentos</span> Eternos</h1>
+            <p class="text-gray-400 text-lg mb-8">Ensaios fotográficos, casamentos, eventos corporativos e muito mais. Arte e paixão em cada clique.</p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#portfolio" class="btn-primary text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="image" class="w-5 h-5"></i>Ver Portfólio</a>
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-gold px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i>WhatsApp</a>
+            </div>
+          </div>
+          <div class="hidden md:block relative" data-aos="fade-left">
+            <div class="relative z-10 floating">
+              <div class="w-80 h-80 mx-auto bg-gradient-to-br from-accent/20 to-gold/20 rounded-3xl flex items-center justify-center">
+                <i data-lucide="camera" class="w-40 h-40 text-accent"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up"><p class="text-4xl font-bold text-accent">500+</p><p class="text-gray-600">Ensaios Realizados</p></div>
+          <div data-aos="fade-up" data-aos-delay="100"><p class="text-4xl font-bold text-accent">200+</p><p class="text-gray-600">Casamentos</p></div>
+          <div data-aos="fade-up" data-aos-delay="200"><p class="text-4xl font-bold text-accent">8</p><p class="text-gray-600">Anos de Experiência</p></div>
+          <div data-aos="fade-up" data-aos-delay="300"><p class="text-4xl font-bold text-accent">5★</p><p class="text-gray-600">Google Reviews</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="py-24 bg-light">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-accent font-semibold uppercase tracking-widest text-sm">Trabalhos</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 text-dark">Meu <span class="text-accent">Portfólio</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="gallery-item h-80 bg-gradient-to-br from-accent to-primary flex items-center justify-center" data-aos="fade-up"><i data-lucide="heart" class="w-20 h-20 text-white/50"></i></div>
+          <div class="gallery-item h-80 bg-gradient-to-br from-gold to-accent flex items-center justify-center" data-aos="fade-up" data-aos-delay="100"><i data-lucide="users" class="w-20 h-20 text-white/50"></i></div>
+          <div class="gallery-item h-80 bg-gradient-to-br from-primary to-dark flex items-center justify-center" data-aos="fade-up" data-aos-delay="200"><i data-lucide="baby" class="w-20 h-20 text-white/50"></i></div>
+          <div class="gallery-item h-80 bg-gradient-to-br from-dark to-accent flex items-center justify-center" data-aos="fade-up" data-aos-delay="300"><i data-lucide="building" class="w-20 h-20 text-white/50"></i></div>
+          <div class="gallery-item h-80 bg-gradient-to-br from-accent to-gold flex items-center justify-center" data-aos="fade-up" data-aos-delay="400"><i data-lucide="sparkles" class="w-20 h-20 text-white/50"></i></div>
+          <div class="gallery-item h-80 bg-gradient-to-br from-gold to-primary flex items-center justify-center" data-aos="fade-up" data-aos-delay="500"><i data-lucide="mountain" class="w-20 h-20 text-white/50"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos" class="py-24 bg-primary text-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-accent font-semibold uppercase tracking-widest text-sm">Serviços</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3">O Que <span class="shimmer-text">Ofereço</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 text-center" data-aos="fade-up">
+            <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mx-auto mb-6"><i data-lucide="heart" class="w-8 h-8 text-white"></i></div>
+            <h3 class="text-xl font-bold mb-3">Casamentos</h3>
+            <p class="text-gray-300">Cobertura completa do seu grande dia</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-gold rounded-2xl flex items-center justify-center mx-auto mb-6"><i data-lucide="user" class="w-8 h-8 text-white"></i></div>
+            <h3 class="text-xl font-bold mb-3">Ensaios</h3>
+            <p class="text-gray-300">Ensaios pessoais, gestante, família</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mx-auto mb-6"><i data-lucide="building-2" class="w-8 h-8 text-white"></i></div>
+            <h3 class="text-xl font-bold mb-3">Corporativo</h3>
+            <p class="text-gray-300">Eventos e fotos institucionais</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-gold rounded-2xl flex items-center justify-center mx-auto mb-6"><i data-lucide="baby" class="w-8 h-8 text-white"></i></div>
+            <h3 class="text-xl font-bold mb-3">Newborn</h3>
+            <p class="text-gray-300">Ensaios de recém-nascidos</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mx-auto mb-6"><i data-lucide="cake" class="w-8 h-8 text-white"></i></div>
+            <h3 class="text-xl font-bold mb-3">Aniversários</h3>
+            <p class="text-gray-300">15 anos, infantil, adulto</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="500">
+            <div class="w-16 h-16 bg-gold rounded-2xl flex items-center justify-center mx-auto mb-6"><i data-lucide="shopping-bag" class="w-8 h-8 text-white"></i></div>
+            <h3 class="text-xl font-bold mb-3">Produtos</h3>
+            <p class="text-gray-300">Still e e-commerce</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+          <span class="text-accent font-semibold uppercase tracking-widest text-sm">Contato</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 mb-6 text-dark">Vamos Criar Algo <span class="text-accent">Incrível</span>?</h2>
+          <p class="text-gray-600 mb-8">Entre em contato para um orçamento personalizado</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-primary text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i>WhatsApp</a>
+            <a href="#" class="btn-gold px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="instagram" class="w-5 h-5"></i>Instagram</a>
+          </div>
+          <div class="mt-12 flex flex-wrap justify-center gap-8 text-gray-600">
+            <div class="flex items-center gap-2"><i data-lucide="mail" class="w-5 h-5 text-accent"></i>contato@lensstudio.com</div>
+            <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5 text-accent"></i>Rio de Janeiro, RJ</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-12">
+      <div class="container mx-auto px-6 text-center">
+        <a href="#" class="text-2xl font-serif font-bold">Lens<span class="shimmer-text">Studio</span></a>
+        <p class="text-gray-400 mt-4">© 2024 Lens Studio. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <button id="back-to-top" aria-label="Voltar ao topo"><i data-lucide="chevron-up" class="w-6 h-6"></i></button>
+
+    <script>
+      window.addEventListener('load', () => { setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 800); });
+      AOS.init({ duration: 800, once: true, offset: 50 });
+      lucide.createIcons();
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX - 10 + 'px'; cursor.style.top = e.clientY - 10 + 'px'; });
+      document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => cursor.classList.add('hover')); el.addEventListener('mouseleave', () => cursor.classList.remove('hover')); });
+      window.addEventListener('scroll', () => { const progress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100; document.getElementById('scroll-progress').style.width = progress + '%'; });
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => { backToTop.classList.toggle('visible', window.scrollY > 500); });
+      backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+      function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+    </script>
+  </body>
+</html>

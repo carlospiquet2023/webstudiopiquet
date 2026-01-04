@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Festa Encantada - Designer de Festas e Eventos</title>
+    <meta property="og:title" content="Festa Encantada - Decoração de Festas Personalizadas">
+    <meta property="og:description" content="Transformamos sonhos em festas inesquecíveis. Decoração infantil, 15 anos, casamentos e corporativos.">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ec4899",
+              secondary: "#fdf2f8",
+              accent: "#f472b6",
+              dark: "#831843",
+              light: "#fdf4ff",
+              pink: "#ec4899",
+              gold: "#fbbf24",
+            },
+            fontFamily: {
+              display: ['"Pacifico"', "cursive"],
+              sans: ['"Poppins"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      #page-loader {
+        position: fixed; inset: 0;
+        background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+        z-index: 99999; display: flex; align-items: center; justify-content: center; flex-direction: column;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-spin { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #fbbf24; border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #ec4899, #fbbf24); z-index: 99999; }
+      .glass-nav { background: rgba(236, 72, 153, 0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(251, 191, 36, 0.3); }
+      .hero-gradient { background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%); }
+      .shimmer-text { background: linear-gradient(90deg, #ec4899, #f472b6, #ec4899); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s linear infinite; }
+      @keyframes shimmer { to { background-position: 200% center; } }
+      .glass-card { background: rgba(255,255,255,0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border: 1px solid rgba(236, 72, 153, 0.1); transition: all 0.4s ease; box-shadow: 0 10px 40px rgba(236, 72, 153, 0.1); }
+      .glass-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(236, 72, 153, 0.25); }
+      .btn-primary { background: linear-gradient(135deg, #ec4899, #f472b6); transition: all 0.3s ease; }
+      .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(236, 72, 153, 0.5); }
+      .btn-gold { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #831843; transition: all 0.3s ease; }
+      .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -5px rgba(251, 191, 36, 0.5); }
+      #mobile-menu { position: fixed; inset: 0; background: rgba(236, 72, 153, 0.98); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); z-index: 40; transform: translateX(100%); transition: transform 0.4s ease; }
+      #mobile-menu.open { transform: translateX(0); }
+      .floating { animation: floating 3s ease-in-out infinite; }
+      @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+      #back-to-top { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; background: linear-gradient(135deg, #ec4899, #fbbf24); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease; z-index: 50; }
+      #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+      #back-to-top:hover { transform: translateY(-5px); }
+      .confetti { position: absolute; width: 10px; height: 10px; border-radius: 50%; animation: confetti-fall 5s linear infinite; }
+      @keyframes confetti-fall { 0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+    </style>
+  </head>
+  <body class="font-sans bg-light text-dark overflow-x-hidden">
+    <div id="page-loader"><div class="loader-spin"></div><p class="text-white mt-4 font-display text-3xl">Festa Encantada</p></div>
+    <div id="scroll-progress"></div>
+
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-display text-white">🎈 Festa Encantada</a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-white/90 hover:text-gold transition">Início</a>
+          <a href="#servicos" class="text-white/90 hover:text-gold transition">Serviços</a>
+          <a href="#portfolio" class="text-white/90 hover:text-gold transition">Portfólio</a>
+          <a href="#contato" class="btn-gold px-6 py-2.5 rounded-full font-semibold">Orçamento</a>
+        </nav>
+        <button id="menu-toggle" class="md:hidden text-white" aria-label="Menu"><i data-lucide="menu" class="w-7 h-7"></i></button>
+      </div>
+    </header>
+
+    <div id="mobile-menu" class="md:hidden">
+      <div class="flex flex-col items-center justify-center h-full space-y-8">
+        <a href="#home" class="text-2xl text-white hover:text-gold transition font-display" onclick="closeMobileMenu()">Início</a>
+        <a href="#servicos" class="text-2xl text-white hover:text-gold transition font-display" onclick="closeMobileMenu()">Serviços</a>
+        <a href="#portfolio" class="text-2xl text-white hover:text-gold transition font-display" onclick="closeMobileMenu()">Portfólio</a>
+        <a href="#contato" class="btn-gold px-8 py-3 rounded-full text-xl font-semibold" onclick="closeMobileMenu()">Orçamento</a>
+        <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-white" aria-label="Fechar menu"><i data-lucide="x" class="w-8 h-8"></i></button>
+      </div>
+    </div>
+
+    <section id="home" class="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-20">
+      <div class="absolute inset-0 opacity-20">
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1920&q=80" alt="Festa Decorada" class="w-full h-full object-cover">
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div data-aos="fade-right">
+            <span class="inline-block px-4 py-2 bg-pink/20 text-pink rounded-full text-sm font-medium mb-6">🎉 Designer de Festas & Eventos</span>
+            <h1 class="text-4xl md:text-6xl font-display text-dark mb-6">Transformamos Sonhos em <span class="shimmer-text">Festas Mágicas</span></h1>
+            <p class="text-gray-600 text-lg mb-8">Decoração personalizada para todos os momentos especiais: aniversários infantis, 15 anos, casamentos, chá de bebê e eventos corporativos.</p>
+            <div class="flex flex-wrap gap-4">
+              <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="btn-primary text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="sparkles" class="w-5 h-5"></i>Solicitar Orçamento</a>
+              <a href="#portfolio" class="btn-gold px-8 py-4 rounded-full font-semibold flex items-center gap-2"><i data-lucide="image" class="w-5 h-5"></i>Ver Portfólio</a>
+            </div>
+          </div>
+          <div class="hidden md:block relative" data-aos="fade-left">
+            <div class="relative z-10 floating">
+              <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&q=80" alt="Decoração de Festa" class="w-96 h-96 mx-auto object-cover rounded-3xl shadow-2xl border-4 border-white">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up"><p class="text-4xl font-display text-pink">500+</p><p class="text-gray-600">Festas Realizadas</p></div>
+          <div data-aos="fade-up" data-aos-delay="100"><p class="text-4xl font-display text-pink">8</p><p class="text-gray-600">Anos de Experiência</p></div>
+          <div data-aos="fade-up" data-aos-delay="200"><p class="text-4xl font-display text-pink">100%</p><p class="text-gray-600">Personalizado</p></div>
+          <div data-aos="fade-up" data-aos-delay="300"><p class="text-4xl font-display text-pink">5★</p><p class="text-gray-600">Avaliação</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos" class="py-24 bg-light">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-pink font-semibold uppercase tracking-widest text-sm">Nossos Serviços</span>
+          <h2 class="text-4xl md:text-5xl font-display mt-3">Criamos Momentos <span class="shimmer-text">Inesquecíveis</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="glass-card rounded-3xl p-8 text-center" data-aos="fade-up">
+            <div class="w-20 h-20 bg-pink/20 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-4xl">🎂</span></div>
+            <h3 class="text-xl font-bold mb-3">Aniversário Infantil</h3>
+            <p class="text-gray-600 text-sm">Temas personalizados, decoração temática completa com balões, painéis e mesa do bolo.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-4xl">👑</span></div>
+            <h3 class="text-xl font-bold mb-3">15 Anos & Debutantes</h3>
+            <p class="text-gray-600 text-sm">Decoração elegante e sofisticada para um dos dias mais especiais da vida.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-20 h-20 bg-pink/20 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-4xl">💒</span></div>
+            <h3 class="text-xl font-bold mb-3">Casamentos</h3>
+            <p class="text-gray-600 text-sm">Decoração completa para cerimônia e recepção, do altar à mesa de doces.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-20 h-20 bg-blue-200 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-4xl">🍼</span></div>
+            <h3 class="text-xl font-bold mb-3">Chá de Bebê</h3>
+            <p class="text-gray-600 text-sm">Decoração delicada e encantadora para celebrar a chegada do novo membro da família.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="w-20 h-20 bg-purple-200 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-4xl">🎓</span></div>
+            <h3 class="text-xl font-bold mb-3">Formaturas</h3>
+            <p class="text-gray-600 text-sm">Decoração temática para celebrar conquistas acadêmicas com estilo.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-8 text-center" data-aos="fade-up" data-aos-delay="500">
+            <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-4xl">🏢</span></div>
+            <h3 class="text-xl font-bold mb-3">Corporativo</h3>
+            <p class="text-gray-600 text-sm">Eventos empresariais, confraternizações e festas de fim de ano.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="py-24 bg-gradient-to-br from-pink to-dark text-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <span class="text-gold font-semibold uppercase tracking-widest text-sm">Portfólio</span>
+          <h2 class="text-4xl md:text-5xl font-display mt-3">Nossos <span class="text-gold">Trabalhos</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="rounded-3xl overflow-hidden group" data-aos="fade-up">
+            <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=500&q=80" alt="Festa Infantil" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+          </div>
+          <div class="rounded-3xl overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=500&q=80" alt="Casamento" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+          </div>
+          <div class="rounded-3xl overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+            <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=500&q=80" alt="Decoração" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="py-24 bg-gradient-to-r from-pink via-accent to-pink text-white">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-display mb-6" data-aos="fade-up">Vamos Criar sua Festa dos Sonhos?</h2>
+        <p class="text-xl text-white/90 max-w-2xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="100">Entre em contato para um orçamento personalizado!</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+          <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" class="bg-white text-pink px-10 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition transform hover:scale-105 flex items-center justify-center gap-2">
+            <i data-lucide="message-circle" class="w-6 h-6"></i>WhatsApp
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition flex items-center justify-center gap-2">
+            <i data-lucide="instagram" class="w-6 h-6"></i>Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-12">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-6 md:mb-0">
+            <h3 class="text-2xl font-display">🎈 Festa Encantada</h3>
+            <p class="text-gray-400 mt-2">Transformando sonhos em festas!</p>
+          </div>
+          <div class="flex gap-4">
+            <a href="https://wa.me/5521977434614" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-pink transition" aria-label="WhatsApp"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+            <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-pink transition" aria-label="Instagram"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+          </div>
+        </div>
+        <div class="border-t border-white/10 mt-8 pt-8 text-center text-gray-400 text-sm">
+          <p>© 2024 Festa Encantada. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <button id="back-to-top" aria-label="Voltar ao topo"><i data-lucide="chevron-up" class="w-6 h-6"></i></button>
+
+    <script>
+      window.addEventListener('load', () => { setTimeout(() => { document.getElementById('page-loader').classList.add('hidden'); }, 1000); });
+      AOS.init({ duration: 800, once: true, offset: 100 });
+      lucide.createIcons();
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle?.addEventListener('click', () => mobileMenu.classList.add('open'));
+      window.closeMobileMenu = () => mobileMenu.classList.remove('open');
+      window.addEventListener('scroll', () => {
+        const scrollProgress = document.getElementById('scroll-progress');
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress.style.width = (scrollTop / docHeight) * 100 + '%';
+        const backToTop = document.getElementById('back-to-top');
+        if (scrollTop > 500) { backToTop.classList.add('visible'); } else { backToTop.classList.remove('visible'); }
+      });
+      document.getElementById('back-to-top')?.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    </script>
+  </body>
+</html>
