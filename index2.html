@@ -1,0 +1,3163 @@
+<!-- 
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                      WEBSTUDIO PREMIUM - CATÁLOGO                            ║
+║══════════════════════════════════════════════════════════════════════════════║
+║  Página principal do catálogo de sites premium para profissionais de beleza  ║
+║                                                                              ║
+║  Template para Revendedores - WebStudio Premium                              ║
+║  Personalize com seus dados de contato                                       ║
+║  [SEU WHATSAPP AQUI]                                                         ║
+║                                                                              ║
+║  © 2026 - Todos os direitos reservados                                       ║
+║  Protegido por Lei de Direitos Autorais - Lei nº 9.610/1998                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- ===============================================================
+         SEÇÃO HEAD - CONFIGURAÇÕES INICIAIS E META TAGS
+         - charset: Define codificação UTF-8 para caracteres especiais
+         - viewport: Responsividade em dispositivos móveis
+         - title: Título exibido na aba do navegador
+         - og:tags: Meta tags para compartilhamento em redes sociais
+    ================================================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebStudio Premium - Catálogo de Sites Profissionais</title>
+    <meta property="og:image" content="https://i.imgur.com/1Ms9yRH.jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:title" content="WebStudio Premium - Sites Profissionais">
+    <meta property="og:description" content="Demonstração de sites premium para nichos de beleza e estética">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://webstudiopremium.com">
+
+    <!-- ===============================================================
+         BIBLIOTECAS EXTERNAS
+         - Tailwind CSS: Framework CSS utilitário
+         - Google Fonts: Fontes Playfair Display e Inter
+         - Lucide Icons: Biblioteca de ícones
+         - AOS: Animate On Scroll - Animações de entrada
+    ================================================================ -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- ===============================================================
+         CONFIGURAÇÃO DO TAILWIND
+         PALETA DE CORES DO CATÁLOGO:
+         - primary: #6366F1 (Índigo) - Cor principal
+         - secondary: #F8FAFC (Cinza claro) - Fundos
+         - accent: #8B5CF6 (Violeta) - Destaques
+         - dark: #0F172A (Azul escuro) - Textos e fundos escuros
+         - light: #F1F5F9 (Cinza) - Fundos claros
+         - gold: #F59E0B (Dourado) - Destaques especiais
+         - rose: #EC4899 (Rosa) - Acentos femininos
+         - emerald: #10B981 (Verde) - Sucesso/Natureza
+         - cyan: #06B6D4 (Ciano) - Informação
+         
+         Para alterar cores: modifique os valores HEX abaixo
+    ================================================================ -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366F1",
+              secondary: "#F8FAFC",
+              accent: "#8B5CF6",
+              dark: "#0F172A",
+              light: "#F1F5F9",
+              gold: "#F59E0B",
+              rose: "#EC4899",
+              emerald: "#10B981",
+              cyan: "#06B6D4",
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Inter"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- ===============================================================
+         ESTILOS CSS PERSONALIZADOS
+         Inclui: Loader, Cursor, Scroll Progress, Cards, etc.
+    ================================================================ -->
+    <style>
+      html { scroll-behavior: smooth; }
+
+      /* ===== LOADER PREMIUM ===== 
+         Animação de carregamento inicial da página
+         Para alterar duração: modifique o setTimeout no JS (linha ~880)
+      */
+      #page-loader {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+      #page-loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .loader-ring {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        position: relative;
+      }
+      .loader-ring::before,
+      .loader-ring::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 3px solid transparent;
+      }
+      .loader-ring::before {
+        border-top-color: #6366F1;
+        border-right-color: #8B5CF6;
+        animation: spin 1.2s linear infinite;
+      }
+      .loader-ring::after {
+        border-bottom-color: #EC4899;
+        border-left-color: #F59E0B;
+        animation: spin 1.8s linear infinite reverse;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      /* ===== CURSOR PERSONALIZADO =====
+         Cursor decorativo que segue o mouse
+         Para desativar: remova o elemento .custom-cursor do HTML
+      */
+      .custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #6366F1;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 99998;
+        transition: transform 0.15s ease, background 0.15s ease;
+        mix-blend-mode: difference;
+      }
+      .custom-cursor.hover {
+        transform: scale(1.5);
+        background: rgba(99, 102, 241, 0.3);
+      }
+      @media (max-width: 768px) {
+        .custom-cursor { display: none; }
+      }
+
+      /* ===== PARTÍCULAS ===== */
+      #particles-container {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+      }
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: linear-gradient(135deg, #6366F1, #EC4899);
+        border-radius: 50%;
+        animation: particle-float 15s linear infinite;
+        opacity: 0;
+      }
+      @keyframes particle-float {
+        0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+        10% { opacity: 0.6; }
+        90% { opacity: 0.6; }
+        100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+      }
+
+      /* ===== SCROLL PROGRESS ===== */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #6366F1, #8B5CF6, #EC4899, #F59E0B);
+        z-index: 99999;
+        transition: width 0.1s ease;
+      }
+
+      /* ===== GLASS MORPHISM ===== */
+      .glass-nav {
+        background: rgba(15, 23, 42, 0.85);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(99, 102, 241, 0.1);
+      }
+
+      /* ===== HERO GRADIENT ===== */
+      .hero-gradient {
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-gradient::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+        animation: rotate-bg 30s linear infinite;
+      }
+      @keyframes rotate-bg {
+        to { transform: rotate(360deg); }
+      }
+
+      /* ===== TEXT SHIMMER ===== */
+      .shimmer-text {
+        background: linear-gradient(90deg, #6366F1 0%, #EC4899 25%, #F59E0B 50%, #EC4899 75%, #6366F1 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 4s linear infinite;
+      }
+      @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      /* ===== CARD 3D HOVER ===== */
+      .card-3d {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+        position: relative;
+        overflow: hidden;
+        z-index: 1; /* Garante que não sobreponha o header */
+      }
+      .card-3d::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none; /* Permite cliques através do overlay */
+      }
+      .card-3d:hover::before {
+        opacity: 1;
+      }
+      .card-3d:hover {
+        transform: translateY(-15px) rotateX(5deg);
+        box-shadow: 0 30px 60px -15px rgba(99, 102, 241, 0.35);
+      }
+
+      /* ===== GLOW EFFECT ===== */
+      .glow-effect {
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.3), 0 0 60px rgba(99, 102, 241, 0.1);
+      }
+
+      /* ===== FLOATING ANIMATION ===== */
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+      @keyframes floating {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+      }
+
+      /* ===== NICHE CARD COLORS ===== */
+      .niche-cilios { --niche-color: #D4A373; --niche-accent: #BC6C25; }
+      .niche-salao { --niche-color: #E91E63; --niche-accent: #C2185B; }
+      .niche-barbearia { --niche-color: #C9A227; --niche-accent: #8B7355; }
+      .niche-depilacao { --niche-color: #9370DB; --niche-accent: #BA55D3; }
+      .niche-estetica { --niche-color: #F472B6; --niche-accent: #EC4899; }
+      .niche-maquiagem { --niche-color: #DC143C; --niche-accent: #8B0000; }
+      .niche-nails { --niche-color: #FF69B4; --niche-accent: #DB7093; }
+      .niche-podologia { --niche-color: #0D9488; --niche-accent: #14B8A6; }
+      .niche-sobrancelhas { --niche-color: #5D4E37; --niche-accent: #C19A6B; }
+      .niche-spa { --niche-color: #2E8B57; --niche-accent: #3CB371; }
+      .niche-tattoo { --niche-color: #EF4444; --niche-accent: #F97316; }
+      /* Novos nichos */
+      .niche-massoterapia { --niche-color: #7C9A92; --niche-accent: #4A6670; }
+      .niche-bronzeamento { --niche-color: #D4A574; --niche-accent: #8B5E3C; }
+      .niche-micropigmentacao { --niche-color: #9D6B53; --niche-accent: #7C4A3D; }
+      .niche-harmonizacao { --niche-color: #8B7355; --niche-accent: #5C4033; }
+      /* Novos nichos - serviços profissionais */
+      .niche-motorista { --niche-color: #1a365d; --niche-accent: #0f172a; }
+      .niche-idiomas { --niche-color: #7c3aed; --niche-accent: #5b21b6; }
+      .niche-cuidadores { --niche-color: #059669; --niche-accent: #047857; }
+      /* Novos nichos - serviços especializados */
+      .niche-corretor { --niche-color: #0891b2; --niche-accent: #0e7490; }
+      .niche-mecanico { --niche-color: #dc2626; --niche-accent: #b91c1c; }
+      .niche-professor { --niche-color: #4f46e5; --niche-accent: #4338ca; }
+      .niche-educacaofisica { --niche-color: #16a34a; --niche-accent: #15803d; }
+      .niche-personal { --niche-color: #ea580c; --niche-accent: #c2410c; }
+      /* Novos nichos lucrativos */
+      .niche-imobiliaria { --niche-color: #1e3a5f; --niche-accent: #c9a227; }
+      .niche-dentista { --niche-color: #0ea5e9; --niche-accent: #14b8a6; }
+      .niche-petshop { --niche-color: #f97316; --niche-accent: #fbbf24; }
+      .niche-fotografo { --niche-color: #6b21a8; --niche-accent: #a855f7; }
+      .niche-delivery { --niche-color: #dc2626; --niche-accent: #f97316; }
+      .niche-advogado { --niche-color: #1e3a5f; --niche-accent: #b8860b; }
+      .niche-academia { --niche-color: #dc2626; --niche-accent: #22c55e; }
+      /* Novos nichos - Alimentação e Varejo */
+      .niche-acai { --niche-color: #7c3aed; --niche-accent: #ec4899; }
+      .niche-hamburgueria { --niche-color: #b91c1c; --niche-accent: #f59e0b; }
+      .niche-festas { --niche-color: #ec4899; --niche-accent: #fbbf24; }
+      .niche-perfumaria { --niche-color: #be185d; --niche-accent: #d4af37; }
+      .niche-bijuteria { --niche-color: #b45309; --niche-accent: #d4af37; }
+      .niche-sorveteria { --niche-color: #ec4899; --niche-accent: #06b6d4; }
+
+      .niche-card {
+        border-top: 4px solid var(--niche-color);
+      }
+      .niche-card:hover {
+        box-shadow: 0 25px 50px -12px var(--niche-color);
+      }
+      .niche-card .niche-icon {
+        background: linear-gradient(135deg, var(--niche-color), var(--niche-accent));
+      }
+      .niche-card .niche-btn {
+        background: linear-gradient(135deg, var(--niche-color), var(--niche-accent));
+        position: relative;
+        z-index: 10; /* Garante que o botão fique acima dos overlays */
+      }
+      .niche-card .niche-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px -5px var(--niche-color);
+      }
+
+      /* ===== FILTROS DE CATEGORIA ===== */
+      .filter-btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+        background: white;
+        color: #64748b;
+        border: 2px solid #e2e8f0;
+        cursor: pointer;
+      }
+      .filter-btn:hover {
+        border-color: #6366F1;
+        color: #6366F1;
+        transform: translateY(-2px);
+      }
+      .filter-btn.active {
+        background: linear-gradient(135deg, #6366F1, #8B5CF6);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+      }
+      .category-section {
+        transition: all 0.4s ease;
+      }
+      .category-section.hidden {
+        display: none;
+      }
+
+      /* ===== BUSCA DE NICHOS ===== */
+      .niche-card.search-hidden {
+        display: none !important;
+      }
+      .niche-card.search-highlight {
+        animation: pulse-highlight 0.5s ease;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+      @keyframes pulse-highlight {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+      }
+      #search-nichos:focus {
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2), 0 10px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      /* ===== MODAL DE PREVIEW ===== */
+      #preview-modal.active {
+        display: flex;
+      }
+      .preview-size-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .preview-size-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+      }
+      .preview-size-btn.active {
+        background: linear-gradient(135deg, #6366F1, #8B5CF6);
+        color: white;
+      }
+      #preview-container {
+        transition: all 0.3s ease;
+      }
+      #preview-container.preview-desktop {
+        width: 100%;
+        height: 100%;
+      }
+      #preview-container.preview-tablet {
+        width: 768px;
+        height: 100%;
+        max-height: 1024px;
+      }
+      #preview-container.preview-mobile {
+        width: 375px;
+        height: 100%;
+        max-height: 812px;
+      }
+      .preview-btn {
+        position: relative;
+        overflow: hidden;
+      }
+      .preview-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .preview-btn:hover::before {
+        opacity: 1;
+      }
+
+      /* ===== BANNER DE URGÊNCIA/PROMO ===== */
+      #urgency-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(90deg, #6366F1, #EC4899, #F59E0B);
+        background-size: 200% 200%;
+        animation: gradientMove 5s ease infinite;
+        padding: 12px 20px;
+        z-index: 60;
+        transform: translateY(100%);
+        transition: transform 0.5s ease;
+      }
+      #urgency-banner.visible {
+        transform: translateY(0);
+      }
+      @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      #urgency-banner .countdown-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 10px;
+      }
+      #urgency-banner .countdown-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+      #urgency-banner .countdown-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        opacity: 0.9;
+      }
+      @media (max-width: 768px) {
+        #urgency-banner .countdown-number { font-size: 1.1rem; }
+        #urgency-banner .countdown-item { padding: 0 6px; }
+      }
+
+      /* ===== FAQ INTERATIVO ===== */
+      .faq-section {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%);
+        padding: 80px 20px;
+      }
+      .faq-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .faq-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        margin-bottom: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .faq-item:hover {
+        border-color: rgba(212, 175, 55, 0.3);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .faq-question {
+        width: 100%;
+        padding: 24px 28px;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 500;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        transition: all 0.3s ease;
+      }
+      .faq-question:hover {
+        color: #d4af37;
+      }
+      .faq-question .faq-icon {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease;
+      }
+      .faq-question .faq-icon svg {
+        width: 14px;
+        height: 14px;
+        color: #000;
+        transition: transform 0.3s ease;
+      }
+      .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+      }
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.3s ease;
+      }
+      .faq-answer-content {
+        padding: 0 28px 24px;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.7;
+        font-size: 1rem;
+      }
+      .faq-item.active .faq-answer {
+        max-height: 500px;
+      }
+      .faq-cta {
+        text-align: center;
+        margin-top: 48px;
+        padding: 32px;
+        background: rgba(212, 175, 55, 0.05);
+        border-radius: 20px;
+        border: 1px solid rgba(212, 175, 55, 0.15);
+      }
+      .faq-cta p {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 16px;
+        font-size: 1.1rem;
+      }
+
+      /* ===== BACK TO TOP ===== */
+      #back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(135deg, #6366F1, #8B5CF6);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        z-index: 50;
+        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+      }
+      #back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      #back-to-top:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(99, 102, 241, 0.6);
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .container {
+          padding-left: 1.25rem;
+          padding-right: 1.25rem;
+        }
+      }
+
+      /* ===== TEMA CLARO (LIGHT MODE) ===== */
+      body.light-mode {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      }
+      body.light-mode .hero-gradient {
+        background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%);
+      }
+      body.light-mode .glass-nav {
+        background: rgba(255, 255, 255, 0.9);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      body.light-mode .glass-nav a:not(.bg-gradient-to-r) {
+        color: #1e293b;
+      }
+      body.light-mode .glass-nav a:hover:not(.bg-gradient-to-r) {
+        color: #6366F1;
+      }
+      body.light-mode .glass-nav .text-2xl,
+      body.light-mode .glass-nav .text-3xl {
+        color: #1e293b;
+      }
+      body.light-mode .glass-nav .text-gray-400 {
+        color: #64748b;
+      }
+      body.light-mode #theme-toggle {
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.1);
+        color: #1e293b;
+      }
+      body.light-mode .theme-icon-light {
+        display: none;
+      }
+      body.light-mode .theme-icon-dark {
+        display: block !important;
+      }
+      body.light-mode section:not(.hero-gradient):not(.bg-dark) {
+        background: #ffffff;
+      }
+      body.light-mode .niche-card {
+        background: #ffffff;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+      body.light-mode .text-dark {
+        color: #1e293b;
+      }
+      body.light-mode #mobile-menu {
+        background: rgba(255, 255, 255, 0.98);
+      }
+      body.light-mode #mobile-menu a {
+        color: #1e293b;
+      }
+      body.light-mode footer {
+        background: #1e293b;
+      }
+      body.light-mode .faq-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      }
+      body.light-mode .faq-item {
+        background: #ffffff;
+        border-color: rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      body.light-mode .faq-item:hover {
+        border-color: rgba(99, 102, 241, 0.3);
+      }
+      body.light-mode .faq-question {
+        color: #1e293b;
+      }
+      body.light-mode .faq-question:hover {
+        color: #6366F1;
+      }
+      body.light-mode .faq-answer-content {
+        color: #475569;
+      }
+      body.light-mode .faq-cta {
+        background: rgba(99, 102, 241, 0.05);
+        border-color: rgba(99, 102, 241, 0.15);
+      }
+      body.light-mode .faq-cta p {
+        color: #475569;
+      }
+
+      /* ===== RIBBON ===== 
+         Faixa de destaque "Premium" nos cards
+      */
+      .ribbon {
+        position: absolute;
+        top: 15px;
+        right: -35px;
+        background: linear-gradient(135deg, #F59E0B, #EF4444);
+        color: white;
+        padding: 5px 40px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        transform: rotate(45deg);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        letter-spacing: 0.5px;
+        z-index: 5; /* Menor que o header z-50 */
+      }
+
+      /* ===== COUNTER ANIMATION =====
+         Números animados na seção de estatísticas
+      */
+      .counter-number {
+        font-size: 3rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #6366F1, #EC4899);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* ===== MOBILE MENU =====
+         Menu hambúrguer para dispositivos móveis
+      */
+      #mobile-menu {
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      #mobile-menu.open {
+        transform: translateX(0);
+      }
+      body.menu-open {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       INÍCIO DO CORPO DA PÁGINA
+       ═══════════════════════════════════════════════════════════════════ -->
+  <body class="font-sans text-dark bg-light overflow-x-hidden">
+    
+    <!-- ===============================================================
+         LOADER - TELA DE CARREGAMENTO
+         Exibido por 1.5 segundos ao carregar a página
+         Para alterar tempo: modifique setTimeout no script (linha ~930)
+    ================================================================ -->
+    <div id="page-loader">
+      <div class="loader-ring"></div>
+      <p class="text-white mt-6 font-serif text-2xl tracking-wide">WebStudio <span class="shimmer-text">Premium</span></p>
+      <p class="text-gray-400 mt-2 text-sm">Carregando experiência...</p>
+    </div>
+
+    <!-- ===============================================================
+         SCROLL PROGRESS BAR
+         Barra de progresso no topo da página durante rolagem
+    ================================================================ -->
+    <div id="scroll-progress"></div>
+
+    <!-- CURSOR PERSONALIZADO -->
+    <div class="custom-cursor"></div>
+
+    <!-- ===============================================================
+         BANNER DE URGÊNCIA/PROMOÇÃO
+         Contador regressivo com promoção especial
+    ================================================================ -->
+    <div id="urgency-banner" class="text-white">
+      <div class="container mx-auto flex flex-wrap items-center justify-center gap-4 md:gap-8">
+        <div class="flex items-center gap-2">
+          <i data-lucide="flame" class="w-5 h-5 animate-pulse"></i>
+          <span class="font-bold text-sm md:text-base">🔥 OFERTA ESPECIAL</span>
+        </div>
+        
+        <div class="flex items-center gap-1 md:gap-2">
+          <div class="countdown-item">
+            <span id="countdown-hours" class="countdown-number">00</span>
+            <span class="countdown-label">Horas</span>
+          </div>
+          <span class="text-xl font-bold">:</span>
+          <div class="countdown-item">
+            <span id="countdown-minutes" class="countdown-number">00</span>
+            <span class="countdown-label">Min</span>
+          </div>
+          <span class="text-xl font-bold">:</span>
+          <div class="countdown-item">
+            <span id="countdown-seconds" class="countdown-number">00</span>
+            <span class="countdown-label">Seg</span>
+          </div>
+        </div>
+        
+        <div class="hidden sm:flex items-center gap-2">
+          <span class="text-sm md:text-base"><strong>30% OFF</strong> no primeiro site!</span>
+        </div>
+        
+        <a href="https://wa.me/SEUWHATSAPP?text=Ol%C3%A1!%20Vi%20a%20promo%C3%A7%C3%A3o%20de%2030%25%20OFF%20e%20gostaria%20de%20saber%20mais!" target="_blank" rel="noopener" class="bg-white text-primary px-4 py-1.5 rounded-full font-bold text-sm hover:scale-105 transition-transform">
+          GARANTIR
+        </a>
+        
+        <button id="close-urgency" class="ml-2 opacity-70 hover:opacity-100 transition-opacity" aria-label="Fechar banner">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      
+      <!-- Indicador de pessoas online -->
+      <div class="absolute left-4 top-1/2 -translate-y-1/2 hidden lg:flex items-center gap-2 text-xs">
+        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+        <span><strong id="online-count">127</strong> pessoas online</span>
+      </div>
+    </div>
+
+    <!-- PARTÍCULAS FLUTUANTES DE FUNDO -->
+    <div id="particles-container"></div>
+
+    <!-- ===============================================================
+         NAVBAR - MENU DE NAVEGAÇÃO FIXO
+         Links: Início, Catálogo, Resultados, Contato
+         Menu mobile com ícone hambúrguer
+    ================================================================ -->
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl md:text-3xl font-serif font-bold text-white group">
+          Web<span class="shimmer-text">Studio</span>
+          <span class="block text-xs font-sans font-normal text-gray-400 group-hover:text-primary transition">Sites Premium</span>
+        </a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-gray-300 hover:text-white transition font-medium">Início</a>
+          <a href="#catalogo" class="text-gray-300 hover:text-white transition font-medium">Catálogo</a>
+          <a href="#faq" class="text-gray-300 hover:text-white transition font-medium">FAQ</a>
+          <a href="blog.html" class="text-gray-300 hover:text-white transition font-medium">Blog</a>
+          <!-- Botão Dark/Light Mode -->
+          <button id="theme-toggle" aria-label="Alternar tema claro/escuro" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition">
+            <i data-lucide="sun" class="w-5 h-5 theme-icon-light"></i>
+            <i data-lucide="moon" class="w-5 h-5 theme-icon-dark hidden"></i>
+          </button>
+          <a href="#contato" class="bg-gradient-to-r from-primary to-accent text-white px-6 py-2.5 rounded-full hover:opacity-90 transition font-semibold shadow-lg">
+            Contato
+          </a>
+        </nav>
+        <!-- Botão Menu Mobile -->
+        <button id="menu-toggle" aria-label="Abrir menu" class="md:hidden text-white focus:outline-none">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- MENU MOBILE (tela cheia) -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-dark/98 backdrop-blur-lg md:hidden">
+      <div class="flex flex-col items-center justify-center h-full space-y-8">
+        <a href="#home" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Início</a>
+        <a href="#catalogo" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Catálogo</a>
+        <a href="#faq" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">FAQ</a>
+        <a href="blog.html" class="text-2xl text-white hover:text-primary transition" onclick="closeMobileMenu()">Blog</a>
+        <a href="#contato" class="bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full text-xl" onclick="closeMobileMenu()">Contato</a>
+        <button onclick="closeMobileMenu()" aria-label="Fechar menu" class="absolute top-6 right-6 text-white">
+          <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO HERO - BANNER PRINCIPAL
+         ═══════════════════════════════════════════════════════════════════
+         - Título principal com efeito shimmer
+         - Botões: Ver Catálogo e Fale Conosco (WhatsApp)
+         - Indicador de scroll animado
+         - Elementos decorativos com blur
+    -->
+    <section id="home" class="hero-gradient min-h-screen flex items-center justify-center relative">
+      <div class="container mx-auto px-6 text-center relative z-10">
+        <div data-aos="fade-up" data-aos-duration="1000">
+          <span class="inline-block px-6 py-2 bg-white/10 backdrop-blur border border-white/20 rounded-full text-sm text-white mb-6">
+            ✨ Catálogo de Sites Premium para Profissionais de Beleza
+          </span>
+        </div>
+        
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6" data-aos="fade-up" data-aos-delay="100">
+          Sites que <span class="shimmer-text">Transformam</span><br/>
+          <span class="text-gray-300">Negócios em Sucesso</span>
+        </h1>
+        
+        <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="200">
+          Explore nossa coleção exclusiva de sites premium desenvolvidos para nichos de beleza, estética e bem-estar. Cada template é uma obra de arte digital.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="300">
+          <a href="#catalogo" class="bg-gradient-to-r from-primary to-accent text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-primary/30 transition-all transform hover:scale-105">
+            <i data-lucide="layout-grid" class="inline w-5 h-5 mr-2"></i>Ver Catálogo
+          </a>
+          <!-- BOTÃO WHATSAPP - Altere o número abaixo se necessário -->
+          <a href="https://wa.me/SEUWHATSAPP" target="_blank" rel="noopener" class="border-2 border-white/30 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all">
+            <i data-lucide="message-circle" class="inline w-5 h-5 mr-2"></i>Fale Conosco
+          </a>
+        </div>
+
+        <!-- Indicador de Scroll -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2" data-aos="fade-up" data-aos-delay="500">
+          <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
+            <div class="w-1.5 h-3 bg-white rounded-full animate-bounce"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Elementos Decorativos de Fundo -->
+      <div class="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+      <div class="absolute top-1/2 left-1/4 w-64 h-64 bg-rose/10 rounded-full blur-3xl"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO STATS - ESTATÍSTICAS COM CONTADORES ANIMADOS
+         ═══════════════════════════════════════════════════════════════════
+         - 35 Nichos Disponíveis
+         - 100% Responsivos
+         - 24 Horas de Suporte
+         - 500 Clientes Satisfeitos
+    -->
+    <section id="stats" class="py-20 bg-dark relative overflow-hidden">
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up">
+            <p class="counter-number" data-target="36">0</p>
+            <p class="text-gray-400 mt-2 font-medium">Nichos Disponíveis</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="100">
+            <p class="counter-number" data-target="100">0</p>
+            <p class="text-gray-400 mt-2 font-medium">% Responsivos</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="200">
+            <p class="counter-number" data-target="24">0</p>
+            <p class="text-gray-400 mt-2 font-medium">Horas de Suporte</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="300">
+            <p class="counter-number" data-target="500">0</p>
+            <p class="text-gray-400 mt-2 font-medium">Clientes Satisfeitos</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO CATÁLOGO - ORGANIZADO POR CATEGORIAS
+         ═══════════════════════════════════════════════════════════════════
+         CATEGORIAS:
+         💄 Beleza & Estética (15 nichos)
+         📚 Educação (3 nichos)
+         💪 Fitness & Saúde (5 nichos)
+         🔧 Serviços (7 nichos)
+         🛒 Alimentação & Varejo (6 nichos)
+    -->
+    <section id="catalogo" class="py-24 bg-gradient-to-b from-light to-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm" data-aos="fade-up">Nosso Portfólio</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+            Catálogo de <span class="shimmer-text">Sites Premium</span>
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Explore nossos sites organizados por categoria. Clique em "Ver Demo" para conhecer cada modelo.
+          </p>
+
+          <!-- BARRA DE BUSCA -->
+          <div class="max-w-md mx-auto mt-8" data-aos="fade-up" data-aos-delay="250">
+            <div class="relative">
+              <input 
+                type="text" 
+                id="search-nichos" 
+                placeholder="Buscar nicho... (ex: cílios, salão, tattoo)" 
+                class="w-full px-6 py-4 pl-14 rounded-2xl border-2 border-gray-200 focus:border-primary focus:outline-none transition-all bg-white shadow-lg text-gray-700"
+                oninput="searchNichos(this.value)"
+              >
+              <i data-lucide="search" class="absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+              <button 
+                id="clear-search" 
+                onclick="clearSearch()" 
+                class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden"
+                aria-label="Limpar busca"
+              >
+                <i data-lucide="x" class="w-5 h-5"></i>
+              </button>
+            </div>
+            <p id="search-results-count" class="text-sm text-gray-500 mt-2 hidden"></p>
+          </div>
+
+          <!-- FILTROS POR CATEGORIA -->
+          <div class="flex flex-wrap justify-center gap-3 mt-8" data-aos="fade-up" data-aos-delay="300">
+            <button onclick="filterCategory('todos')" class="filter-btn active px-6 py-3 rounded-full font-semibold transition-all" data-category="todos">
+              🎯 Todos (30)
+            </button>
+            <button onclick="filterCategory('beleza')" class="filter-btn px-6 py-3 rounded-full font-semibold transition-all" data-category="beleza">
+              💄 Beleza (15)
+            </button>
+            <button onclick="filterCategory('servicos')" class="filter-btn px-6 py-3 rounded-full font-semibold transition-all" data-category="servicos">
+              🔧 Serviços (7)
+            </button>
+            <button onclick="filterCategory('educacao')" class="filter-btn px-6 py-3 rounded-full font-semibold transition-all" data-category="educacao">
+              📚 Educação (3)
+            </button>
+            <button onclick="filterCategory('fitness')" class="filter-btn px-6 py-3 rounded-full font-semibold transition-all" data-category="fitness">
+              💪 Fitness (5)
+            </button>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             CATEGORIA: BELEZA & ESTÉTICA
+        ═══════════════════════════════════════════════════════════════════ -->
+        <div id="cat-beleza" class="category-section">
+        <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
+          <div class="w-14 h-14 bg-gradient-to-br from-rose to-pink-400 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">💄</div>
+          <div>
+            <h3 class="text-3xl font-serif font-bold text-dark">Beleza & Estética</h3>
+            <p class="text-gray-500">15 modelos para profissionais da beleza</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            
+          <!-- CÍLIOS -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-cilios" data-aos="fade-up">
+            <div class="ribbon">Destaque</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="eye" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Designer de Cílios</h3>
+              <p class="text-gray-600 mb-6">Site premium para profissionais de alongamento de cílios.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Agendamento</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Galeria</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">WhatsApp</span>
+              </div>
+              <!-- Link para Demo - Altere href para o arquivo do nicho -->
+              <a href="cilios.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2 - Salão -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-salao" data-aos="fade-up" data-aos-delay="150">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="scissors" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Salão de Beleza</h3>
+              <p class="text-gray-600 mb-6">Solução completa para salões. Apresente seus serviços com elegância e atraia mais clientes.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Serviços</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Equipe</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Localização</span>
+              </div>
+              <a href="salao.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 - Barbearia -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-barbearia" data-aos="fade-up" data-aos-delay="200">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="user" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Barbearia</h3>
+              <p class="text-gray-600 mb-6">Design masculino e sofisticado. Ideal para barbearias que querem se destacar no mercado.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Cortes</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Barba</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Tratamentos</span>
+              </div>
+              <a href="barbearia.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 4 - Depilação -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-depilacao" data-aos="fade-up" data-aos-delay="250">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="sparkles" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Depilação</h3>
+              <p class="text-gray-600 mb-6">Site delicado e profissional para clínicas de depilação a laser e cera.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Laser</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Cera</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Pacotes</span>
+              </div>
+              <a href="depilacao.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 5 - Estética Facial -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-estetica" data-aos="fade-up" data-aos-delay="300">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="heart" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Estética Facial</h3>
+              <p class="text-gray-600 mb-6">Para clínicas de estética. Transmita confiança e profissionalismo aos seus pacientes.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Limpeza</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Peeling</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Botox</span>
+              </div>
+              <a href="estetica-facial.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 6 - Maquiagem -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-maquiagem" data-aos="fade-up" data-aos-delay="350">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="palette" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Maquiadora</h3>
+              <p class="text-gray-600 mb-6">Portfólio glamouroso para maquiadoras profissionais. Mostre seu trabalho com estilo.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Noivas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Festas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Editorial</span>
+              </div>
+              <a href="maquiagem.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 7 - Nails -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-nails" data-aos="fade-up" data-aos-delay="400">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="gem" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Nail Designer</h3>
+              <p class="text-gray-600 mb-6">Site vibrante para nail artists. Galeria incrível para exibir suas criações.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Nail Art</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Alongamento</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Esmaltação</span>
+              </div>
+              <a href="nails.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 8 - Podologia -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-podologia" data-aos="fade-up" data-aos-delay="450">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="footprints" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Podologia</h3>
+              <p class="text-gray-600 mb-6">Site clean e profissional para podólogos. Transmita saúde e cuidado.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Tratamentos</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Unhas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Calosidades</span>
+              </div>
+              <a href="podologia.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 9 - Sobrancelhas -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-sobrancelhas" data-aos="fade-up" data-aos-delay="500">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="scan-face" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Sobrancelhas</h3>
+              <p class="text-gray-600 mb-6">Para designers de sobrancelhas. Micropigmentação e design com elegância.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Design</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Micropigmentação</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Laminação</span>
+              </div>
+              <a href="sobrancelhas.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 10 - SPA ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-spa" data-aos="fade-up" data-aos-delay="550">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="leaf" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Spa & Estética</h3>
+              <p class="text-gray-600 mb-6">Transmita paz e bem-estar. Ideal para spas e clínicas de massagem.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Massagens</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Drenagem</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Relaxamento</span>
+              </div>
+              <a href="spa.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 11 - TATTOO ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-tattoo" data-aos="fade-up" data-aos-delay="600">
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="pen-tool" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Estúdio de Tattoo</h3>
+              <p class="text-gray-600 mb-6">Design impactante para tatuadores. Mostre sua arte com estilo único.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Realismo</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Tradicional</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Fineline</span>
+              </div>
+              <a href="tattoo.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 12 - MASSOTERAPIA ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-massoterapia" data-aos="fade-up" data-aos-delay="650">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="hand" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Massoterapia</h3>
+              <p class="text-gray-600 mb-6">Site zen para massoterapeutas. Transmita relaxamento e bem-estar.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Relaxante</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Shiatsu</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Drenagem</span>
+              </div>
+              <a href="massoterapia.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 13 - BRONZEAMENTO ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-bronzeamento" data-aos="fade-up" data-aos-delay="700">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="sun" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Bronzeamento</h3>
+              <p class="text-gray-600 mb-6">Site dourado para studios de bronze natural e artificial.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Natural</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Spray Tan</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Marquinhas</span>
+              </div>
+              <a href="bronzeamento.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 14 - MICROPIGMENTAÇÃO ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-micropigmentacao" data-aos="fade-up" data-aos-delay="750">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="pen-line" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Micropigmentação</h3>
+              <p class="text-gray-600 mb-6">Site elegante para profissionais de micropigmentação e beleza permanente.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Sobrancelhas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Lábios</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Olhos</span>
+              </div>
+              <a href="micropigmentacao.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 15 - HARMONIZAÇÃO FACIAL ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-harmonizacao" data-aos="fade-up" data-aos-delay="800">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="sparkles" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Harmonização Facial</h3>
+              <p class="text-gray-600 mb-6">Site luxuoso para clínicas de estética e procedimentos faciais.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Botox</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Preenchimento</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Bioestimuladores</span>
+              </div>
+              <a href="harmonizacao.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+        </div>
+        </div><!-- fim cat-beleza -->
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             CATEGORIA: SERVIÇOS PROFISSIONAIS
+        ═══════════════════════════════════════════════════════════════════ -->
+        <div id="cat-servicos" class="category-section">
+        <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
+          <div class="w-14 h-14 bg-gradient-to-br from-gray-700 to-gray-900 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">🔧</div>
+          <div>
+            <h3 class="text-3xl font-serif font-bold text-dark">Serviços Profissionais</h3>
+            <p class="text-gray-500">7 modelos para prestadores de serviços</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+
+          <!-- ===== CARD 16 - MOTORISTA PARTICULAR ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-motorista" data-aos="fade-up" data-aos-delay="100">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="car" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Motorista Particular</h3>
+              <p class="text-gray-600 mb-6">Site executivo para motoristas e serviços de transporte premium.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Executivo</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Aeroporto</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Eventos</span>
+              </div>
+              <a href="motorista.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- MECÂNICO AUTOMOTIVO -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-mecanico" data-aos="fade-up">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="wrench" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Mecânico Automotivo</h3>
+              <p class="text-gray-600 mb-6">Site robusto para oficinas mecânicas.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Revisão</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Freios</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Motor</span>
+              </div>
+              <a href="mecanico.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- CORRETOR DE IMÓVEIS -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-imobiliaria" data-aos="fade-up" data-aos-delay="200">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="home" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Corretor de Imóveis</h3>
+              <p class="text-gray-600 mb-6">Site elegante para corretores e imobiliárias de alto padrão.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Vendas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Locação</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Avaliação</span>
+              </div>
+              <a href="imobiliaria.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- CLÍNICA ODONTOLÓGICA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-dentista" data-aos="fade-up" data-aos-delay="300">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="smile" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Clínica Odontológica</h3>
+              <p class="text-gray-600 mb-6">Site profissional para dentistas e clínicas odontológicas.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Implantes</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Ortodontia</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Estética</span>
+              </div>
+              <a href="dentista.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- ADVOCACIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-advogado" data-aos="fade-up" data-aos-delay="400">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="scale" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Advocacia</h3>
+              <p class="text-gray-600 mb-6">Site sóbrio e elegante para escritórios de advocacia.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Civil</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Trabalhista</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Empresarial</span>
+              </div>
+              <a href="advogado.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- FOTOGRAFIA PROFISSIONAL -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-fotografo" data-aos="fade-up" data-aos-delay="500">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="camera" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Fotografia Profissional</h3>
+              <p class="text-gray-600 mb-6">Portfolio elegante para fotógrafos e videografistas.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Casamentos</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Ensaios</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Eventos</span>
+              </div>
+              <a href="fotografo.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- DELIVERY -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-delivery" data-aos="fade-up" data-aos-delay="600">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="utensils" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Delivery de Comida</h3>
+              <p class="text-gray-600 mb-6">Site apetitoso para restaurantes e delivery de comida.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Cardápio</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Promoções</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">WhatsApp</span>
+              </div>
+              <a href="delivery.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+        </div>
+        </div><!-- fim cat-servicos -->
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             CATEGORIA: EDUCAÇÃO
+        ═══════════════════════════════════════════════════════════════════ -->
+        <div id="cat-educacao" class="category-section">
+        <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
+          <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">📚</div>
+          <div>
+            <h3 class="text-3xl font-serif font-bold text-dark">Educação</h3>
+            <p class="text-gray-500">3 modelos para profissionais da educação</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+
+          <!-- ===== CARD 17 - PROFESSORES DE IDIOMAS ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-idiomas" data-aos="fade-up" data-aos-delay="200">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="globe" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Professores de Idiomas</h3>
+              <p class="text-gray-600 mb-6">Site moderno para professores particulares de línguas estrangeiras.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Inglês</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Espanhol</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Francês</span>
+              </div>
+              <a href="idiomas.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 21 - PROFESSOR ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-professor" data-aos="fade-up" data-aos-delay="450">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Professor Particular</h3>
+              <p class="text-gray-600 mb-6">Site educativo para professores particulares e tutores.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Reforço</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Vestibular</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Concursos</span>
+              </div>
+              <a href="professor.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 22 - PROFESSOR DE EDUCAÇÃO FÍSICA ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-educacaofisica" data-aos="fade-up" data-aos-delay="500">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="dumbbell" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Professor de Ed. Física</h3>
+              <p class="text-gray-600 mb-6">Site dinâmico para profissionais de educação física.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Escolas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Esportes</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Recreação</span>
+              </div>
+              <a href="educacaofisica.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+        </div>
+        </div><!-- fim cat-educacao -->
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             CATEGORIA: FITNESS & SAÚDE
+        ═══════════════════════════════════════════════════════════════════ -->
+        <div id="cat-fitness" class="category-section">
+        <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
+          <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">💪</div>
+          <div>
+            <h3 class="text-3xl font-serif font-bold text-dark">Fitness & Saúde</h3>
+            <p class="text-gray-500">5 modelos para profissionais de saúde e fitness</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <!-- ===== CARD 23 - PERSONAL TRAINER ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-personal" data-aos="fade-up" data-aos-delay="550">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="heart-pulse" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Personal Trainer</h3>
+              <p class="text-gray-600 mb-6">Site motivador para personal trainers e coaches fitness.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Treinos</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Nutrição</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Online</span>
+              </div>
+              <a href="personal.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- CUIDADORES DE IDOSOS -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-cuidadores" data-aos="fade-up">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="heart" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Cuidadores de Idosos</h3>
+              <p class="text-gray-600 mb-6">Site acolhedor para cuidadores e home care.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Domiciliar</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Hospitalar</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Companhia</span>
+              </div>
+              <a href="cuidadores.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- CORRETOR DE PLANO DE SAÚDE -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-corretor" data-aos="fade-up">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="shield-check" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Corretor de Plano de Saúde</h3>
+              <p class="text-gray-600 mb-6">Site para corretores de planos de saúde.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Individual</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Familiar</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Empresarial</span>
+              </div>
+              <a href="corretor.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- PET SHOP & VETERINÁRIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-petshop" data-aos="fade-up" data-aos-delay="100">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="paw-print" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Pet Shop & Veterinária</h3>
+              <p class="text-gray-600 mb-6">Site encantador para pet shops e clínicas veterinárias.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Banho/Tosa</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Consultas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Produtos</span>
+              </div>
+              <a href="petshop.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- ACADEMIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-academia" data-aos="fade-up" data-aos-delay="200">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="dumbbell" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Academia</h3>
+              <p class="text-gray-600 mb-6">Site energético para academias e centros fitness.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Musculação</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">CrossFit</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Aulas</span>
+              </div>
+              <a href="academia.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+        </div>
+        </div><!-- fim cat-fitness -->
+
+        <!-- ═════════════════════════════════════════════════════════════
+             CATEGORIA: ALIMENTAÇÃO E VAREJO
+             ═════════════════════════════════════════════════════════════ -->
+        <div class="category-section mt-8" id="cat-varejo" data-category="varejo">
+          <h3 class="text-2xl font-serif font-bold mb-8 flex items-center gap-3" data-aos="fade-right">
+            <span class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white">
+              <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+            </span>
+            Alimentação & Varejo
+          </h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <!-- AÇAÍ -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-acai" data-aos="fade-up">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="cup-soda" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Açaíteria</h3>
+              <p class="text-gray-600 mb-6">Site vibrante para vendedores de açaí e açaíterias.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Açaí</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Delivery</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Combos</span>
+              </div>
+              <a href="acai.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- HAMBURGUERIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-hamburgueria" data-aos="fade-up" data-aos-delay="100">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="beef" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Hamburgueria</h3>
+              <p class="text-gray-600 mb-6">Site apetitoso para hamburguerias artesanais.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Burgers</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Artesanal</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Delivery</span>
+              </div>
+              <a href="hamburgueria.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- DESIGNER DE FESTAS -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-festas" data-aos="fade-up" data-aos-delay="200">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="party-popper" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Designer de Festas</h3>
+              <p class="text-gray-600 mb-6">Site elegante para designers e decoradores de festas.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Decoração</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Festas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Eventos</span>
+              </div>
+              <a href="festas.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- PERFUMARIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-perfumaria" data-aos="fade-up" data-aos-delay="300">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="droplet" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Perfumaria</h3>
+              <p class="text-gray-600 mb-6">Site sofisticado para vendedores de perfumes e fragrâncias.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Perfumes</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Importados</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Fragrâncias</span>
+              </div>
+              <a href="perfumaria.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- BIJUTERIA -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-bijuteria" data-aos="fade-up" data-aos-delay="400">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="gem" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Bijuteria</h3>
+              <p class="text-gray-600 mb-6">Site elegante para vendedores de bijuterias e acessórios.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Bijuterias</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Semi-joias</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Acessórios</span>
+              </div>
+              <a href="bijuteria.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+        </div>
+        </div><!-- fim cat-varejo -->
+
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO CATÁLOGO -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO FEATURES - RECURSOS PREMIUM
+         ═══════════════════════════════════════════════════════════════════
+         - 100% Responsivo
+         - Super Rápido
+         - Personalizável
+         - Suporte 24h
+    -->
+    <section class="py-24 bg-dark text-white relative overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm" data-aos="fade-up">Por que nos escolher?</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3" data-aos="fade-up" data-aos-delay="100">
+            Recursos <span class="shimmer-text">Premium</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Feature 1: Responsivo -->
+          <div class="text-center p-8 rounded-3xl bg-white/5 backdrop-blur border border-white/10 hover:border-primary/50 transition" data-aos="fade-up">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="smartphone" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">100% Responsivo</h3>
+            <p class="text-gray-400">Perfeito em qualquer dispositivo - celular, tablet ou desktop.</p>
+          </div>
+
+          <!-- Feature 2: Rápido -->
+          <div class="text-center p-8 rounded-3xl bg-white/5 backdrop-blur border border-white/10 hover:border-primary/50 transition" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="zap" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Super Rápido</h3>
+            <p class="text-gray-400">Otimizado para carregar em segundos e melhorar seu SEO.</p>
+          </div>
+
+          <div class="text-center p-8 rounded-3xl bg-white/5 backdrop-blur border border-white/10 hover:border-primary/50 transition" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="palette" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Personalizável</h3>
+            <p class="text-gray-400">Cores, fontes e conteúdo adaptados à sua marca.</p>
+          </div>
+
+          <div class="text-center p-8 rounded-3xl bg-white/5 backdrop-blur border border-white/10 hover:border-primary/50 transition" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="headphones" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Suporte 24h</h3>
+            <p class="text-gray-400">Atendimento dedicado para tirar todas suas dúvidas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO FEATURES -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO DEPOIMENTOS - TESTIMONIALS
+         ═══════════════════════════════════════════════════════════════════
+         Carrossel de depoimentos de clientes satisfeitos
+    -->
+    <section id="depoimentos" class="py-24 bg-gradient-to-b from-light to-white relative overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm" data-aos="fade-up">O que dizem nossos clientes</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3" data-aos="fade-up" data-aos-delay="100">
+            Depoimentos <span class="shimmer-text">Reais</span>
+          </h2>
+          <p class="text-gray-600 mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Veja o que profissionais como você estão falando sobre nossos sites
+          </p>
+        </div>
+
+        <!-- Carrossel de Depoimentos -->
+        <div class="relative max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="300">
+          <div id="testimonials-container" class="overflow-hidden">
+            <div id="testimonials-track" class="flex transition-transform duration-500 ease-in-out">
+              
+              <!-- Depoimento 1 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"Meu salão de beleza triplicou os agendamentos depois que coloquei o site no ar. Os clientes amam poder ver meus trabalhos e agendar pelo WhatsApp!"</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-rose to-pink-400 rounded-full flex items-center justify-center text-white font-bold">MA</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Marina Alves</h4>
+                      <p class="text-sm text-gray-500">Salão de Beleza - RJ</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Depoimento 2 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"Investimento que valeu cada centavo! Minha barbearia agora tem credibilidade online. Recebi clientes novos já na primeira semana!"</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-amber-600 to-yellow-500 rounded-full flex items-center justify-center text-white font-bold">RC</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Rafael Costa</h4>
+                      <p class="text-sm text-gray-500">Barbearia Premium - SP</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Depoimento 3 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"O site ficou lindo e super profissional! Minhas clientes de micropigmentação confiam muito mais no meu trabalho agora que podem ver tudo organizado."</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold">JS</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Juliana Santos</h4>
+                      <p class="text-sm text-gray-500">Studio de Micropigmentação - MG</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Depoimento 4 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"Suporte incrível! Me ajudaram a personalizar tudo do jeito que eu queria. Minha clínica de estética nunca teve tanta visibilidade."</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-emerald to-teal-500 rounded-full flex items-center justify-center text-white font-bold">PL</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Patricia Lima</h4>
+                      <p class="text-sm text-gray-500">Clínica de Estética - BA</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Depoimento 5 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"Meus alunos de inglês aumentaram 40% depois do site. O botão de WhatsApp facilita muito o primeiro contato!"</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-violet-600 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">LM</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Lucas Mendes</h4>
+                      <p class="text-sm text-gray-500">Professor de Inglês - PR</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Depoimento 6 -->
+              <div class="testimonial-slide min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4">
+                <div class="bg-white rounded-3xl p-8 shadow-lg h-full border border-gray-100 hover:border-primary/20 transition-all">
+                  <div class="flex items-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+                  </div>
+                  <p class="text-gray-600 mb-6 italic">"Site maravilhoso para meu studio de tatuagem! Os clientes adoram ver meu portfólio online. Profissionalismo total!"</p>
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white font-bold">FR</div>
+                    <div>
+                      <h4 class="font-bold text-dark">Felipe Rodrigues</h4>
+                      <p class="text-sm text-gray-500">Tattoo Artist - RS</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Botões de Navegação -->
+          <button id="prev-testimonial" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all z-10" aria-label="Depoimento anterior">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+          <button id="next-testimonial" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all z-10" aria-label="Próximo depoimento">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Indicadores -->
+          <div id="testimonial-dots" class="flex justify-center gap-2 mt-8"></div>
+        </div>
+
+        <!-- Média de Avaliações -->
+        <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">
+          <div class="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-md">
+            <div class="flex items-center gap-1">
+              <i data-lucide="star" class="w-5 h-5 text-gold fill-gold"></i>
+              <span class="font-bold text-dark">4.9</span>
+            </div>
+            <span class="text-gray-400">|</span>
+            <span class="text-gray-600">Baseado em <strong>500+</strong> avaliações</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO DEPOIMENTOS -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO PLANOS E PREÇOS
+         ═══════════════════════════════════════════════════════════════════
+    -->
+    <section id="planos" class="py-24 bg-secondary relative overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-widest text-sm" data-aos="fade-up">Invista no seu Negócio</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3" data-aos="fade-up" data-aos-delay="100">
+            Escolha seu <span class="shimmer-text">Plano</span>
+          </h2>
+          <p class="text-gray-600 mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Sites profissionais que transformam visitantes em clientes. Um investimento que se paga rapidamente!
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          
+          <!-- Plano 1: Modelo Pronto -->
+          <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2" data-aos="fade-up">
+            <div class="text-center mb-8">
+              <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="layout-template" class="w-8 h-8 text-primary"></i>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Modelo Pronto</h3>
+              <p class="text-gray-500 text-sm">Personalização completa</p>
+            </div>
+            <div class="text-center mb-8">
+              <span class="text-5xl font-bold text-dark">R$ 499</span>
+              <span class="text-gray-500">/único</span>
+            </div>
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Escolha do modelo do catálogo</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Personalização de cores</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Suas fotos e imagens</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Seus textos e serviços</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>WhatsApp configurado</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Instagram integrado</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Publicação no GitHub</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/SEUWHATSAPP?text=Olá!%20Tenho%20interesse%20no%20plano%20Modelo%20Pronto%20por%20R$499!" target="_blank" rel="noopener" class="block w-full text-center bg-gradient-to-r from-primary to-accent text-white py-4 rounded-xl font-bold hover:opacity-90 transition">
+              <i data-lucide="sparkles" class="inline w-5 h-5 mr-2"></i>Quero Esse!
+            </a>
+            <p class="text-center text-sm text-gray-400 mt-4">✨ Melhor custo-benefício</p>
+          </div>
+
+          <!-- Plano 2: Modelo + Manutenção (DESTAQUE) -->
+          <div class="bg-gradient-to-br from-primary to-accent rounded-3xl p-8 shadow-2xl hover:shadow-3xl transition-all hover:-translate-y-3 relative" data-aos="fade-up" data-aos-delay="100">
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-dark px-6 py-2 rounded-full text-sm font-bold">
+              ⭐ MAIS POPULAR
+            </div>
+            <div class="text-center mb-8 text-white">
+              <div class="w-16 h-16 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="crown" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Modelo + Suporte</h3>
+              <p class="text-white/80 text-sm">Tudo incluso + manutenção</p>
+            </div>
+            <div class="text-center mb-8 text-white">
+              <span class="text-5xl font-bold">R$ 499</span>
+              <span class="text-white/80">+ R$ 100/mês</span>
+            </div>
+            <ul class="space-y-4 mb-8 text-white">
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Tudo do plano anterior</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Atualizações mensais</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Alterações de conteúdo</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Novos recursos e melhorias</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Suporte prioritário</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Backup garantido</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-gold"></i>
+                <span>Consultoria de marketing</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/SEUWHATSAPP?text=Olá!%20Tenho%20interesse%20no%20plano%20Modelo%20+%20Suporte%20com%20manutenção%20mensal!" target="_blank" rel="noopener" class="block w-full text-center bg-white text-primary py-4 rounded-xl font-bold hover:bg-gray-100 transition">
+              <i data-lucide="rocket" class="inline w-5 h-5 mr-2"></i>Começar Agora
+            </a>
+            <p class="text-center text-sm text-white/80 mt-4">🔥 Ideal para quem quer crescer</p>
+          </div>
+
+          <!-- Plano 3: Construção Personalizada -->
+          <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-dashed border-gray-200" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-center mb-8">
+              <div class="w-16 h-16 bg-gradient-to-br from-rose/20 to-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="code-2" class="w-8 h-8 text-rose"></i>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Sob Medida</h3>
+              <p class="text-gray-500 text-sm">Projeto exclusivo do zero</p>
+            </div>
+            <div class="text-center mb-8">
+              <span class="text-3xl font-bold text-dark">Sob Consulta</span>
+              <p class="text-gray-500 text-sm mt-2">Cada projeto é único</p>
+            </div>
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Design 100% exclusivo</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Funcionalidades personalizadas</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Integração com sistemas</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>E-commerce/Agendamento</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Domínio próprio</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Hospedagem profissional</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald"></i>
+                <span>Reunião de briefing</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/SEUWHATSAPP?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20um%20site%20personalizado!" target="_blank" rel="noopener" class="block w-full text-center bg-dark text-white py-4 rounded-xl font-bold hover:bg-gray-800 transition">
+              <i data-lucide="message-square" class="inline w-5 h-5 mr-2"></i>Falar com o Time
+            </a>
+            <p class="text-center text-sm text-gray-400 mt-4">💎 Para projetos especiais</p>
+            <div class="mt-4 p-3 bg-rose/5 rounded-xl border border-rose/20">
+              <p class="text-xs text-gray-500 text-center">
+                <i data-lucide="globe" class="inline w-3 h-3 mr-1"></i>
+                Quer seu próprio domínio (.com.br) e hospedagem profissional fora do GitHub? Fale com nossa equipe!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Observação Geral -->
+        <div class="mt-12 text-center" data-aos="fade-up">
+          <div class="inline-flex items-center gap-3 bg-amber-50 px-6 py-3 rounded-xl border border-amber-200">
+            <i data-lucide="info" class="w-5 h-5 text-amber-500"></i>
+            <p class="text-sm text-gray-600">
+              <strong>Observação:</strong> Se desejar domínio próprio e hospedagem fora do GitHub, entre em contato com nossa equipe para um orçamento personalizado.
+            </p>
+          </div>
+        </div>
+
+        <!-- Garantia -->
+        <div class="mt-16 text-center" data-aos="fade-up">
+          <div class="inline-flex items-center gap-4 bg-emerald/10 px-8 py-4 rounded-2xl">
+            <i data-lucide="shield-check" class="w-10 h-10 text-emerald"></i>
+            <div class="text-left">
+              <p class="font-bold text-dark">Garantia de Satisfação</p>
+              <p class="text-gray-600 text-sm">Se não gostar, devolvemos seu dinheiro em até 7 dias</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO PLANOS -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO SOLICITAR NICHO - FORMULÁRIO PERSONALIZADO
+         ═══════════════════════════════════════════════════════════════════
+         Formulário para solicitar nicho que não está no catálogo
+    -->
+    <section id="solicitar-nicho" class="py-24 bg-dark text-white relative overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="absolute top-20 right-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 left-20 w-72 h-72 bg-accent/20 rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+          
+          <!-- Texto Explicativo -->
+          <div data-aos="fade-right">
+            <span class="text-primary font-semibold uppercase tracking-widest text-sm">Não encontrou seu nicho?</span>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mt-3 mb-6">
+              Criamos o Site <span class="shimmer-text">Perfeito</span> para Você!
+            </h2>
+            <p class="text-gray-400 text-lg mb-8">
+              Se o seu nicho não está no catálogo, não se preocupe! Desenvolvemos sites personalizados 
+              para qualquer área de atuação. Conte-nos sobre seu negócio e criaremos algo único.
+            </p>
+            
+            <div class="space-y-4">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <i data-lucide="palette" class="w-5 h-5 text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Design Exclusivo</h4>
+                  <p class="text-gray-400 text-sm">Criamos um design único que representa sua marca e atrai seus clientes ideais.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <i data-lucide="clock" class="w-5 h-5 text-accent"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Entrega Rápida</h4>
+                  <p class="text-gray-400 text-sm">Prazo médio de 5 a 7 dias úteis para entrega do site completo.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-rose/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <i data-lucide="headphones" class="w-5 h-5 text-rose"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold mb-1">Suporte Dedicado</h4>
+                  <p class="text-gray-400 text-sm">Acompanhamento completo do projeto e suporte pós-entrega.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Formulário -->
+          <div data-aos="fade-left">
+            <form id="niche-request-form" class="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-8">
+              <h3 class="text-2xl font-bold mb-6 text-center">Solicite seu Nicho</h3>
+              
+              <div class="space-y-5">
+                <div>
+                  <label for="niche-name" class="block text-sm font-medium mb-2">Seu Nome *</label>
+                  <input 
+                    type="text" 
+                    id="niche-name" 
+                    name="name"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                    placeholder="Como você se chama?"
+                  >
+                </div>
+                
+                <div>
+                  <label for="niche-whatsapp" class="block text-sm font-medium mb-2">WhatsApp *</label>
+                  <input 
+                    type="tel" 
+                    id="niche-whatsapp" 
+                    name="whatsapp"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                    placeholder="(00) 00000-0000"
+                  >
+                </div>
+                
+                <div>
+                  <label for="niche-type" class="block text-sm font-medium mb-2">Qual é seu nicho/profissão? *</label>
+                  <input 
+                    type="text" 
+                    id="niche-type" 
+                    name="niche"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                    placeholder="Ex: Nutricionista, Arquiteto, Psicólogo..."
+                  >
+                </div>
+                
+                <div>
+                  <label for="niche-description" class="block text-sm font-medium mb-2">Descreva seu negócio</label>
+                  <textarea 
+                    id="niche-description" 
+                    name="description"
+                    rows="3"
+                    class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none"
+                    placeholder="Conte um pouco sobre seus serviços, público-alvo e diferenciais..."
+                  ></textarea>
+                </div>
+                
+                <button 
+                  type="submit"
+                  class="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-primary/30 transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2"
+                >
+                  <i data-lucide="send" class="w-5 h-5"></i>
+                  Enviar Solicitação
+                </button>
+              </div>
+              
+              <p class="text-center text-gray-400 text-xs mt-4">
+                Ao enviar, você será redirecionado para o WhatsApp com sua mensagem pronta.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO SOLICITAR NICHO -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO FAQ - PERGUNTAS FREQUENTES
+         ═══════════════════════════════════════════════════════════════════
+         FAQ interativo em estilo acordeão
+    -->
+    <section id="faq" class="faq-section">
+      <div class="faq-container">
+        <div class="text-center mb-12" data-aos="fade-up">
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-primary border border-primary/20 text-sm font-medium mb-4">
+            <i data-lucide="help-circle" class="w-4 h-4"></i>
+            Tire suas dúvidas
+          </span>
+          <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">Perguntas Frequentes</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Reunimos as principais dúvidas dos nossos clientes. Se não encontrar sua resposta, entre em contato!
+          </p>
+        </div>
+
+        <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
+          <!-- FAQ Item 1 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Quanto tempo leva para criar meu site?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                O prazo varia conforme a complexidade do projeto. Um site institucional simples pode ficar pronto em <strong>3 a 5 dias úteis</strong>, enquanto projetos mais elaborados com funcionalidades personalizadas podem levar de <strong>7 a 15 dias</strong>. Após a aprovação do briefing, informamos o prazo exato para seu projeto.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Os sites são responsivos para celular?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                <strong>Sim, 100%!</strong> Todos os nossos sites são desenvolvidos com design responsivo, garantindo uma experiência perfeita em qualquer dispositivo: celulares, tablets, notebooks e desktops. Além disso, otimizamos para diferentes navegadores como Chrome, Firefox, Safari e Edge.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>O que está incluso no preço do site?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Nossos pacotes incluem: design personalizado para seu nicho, layout responsivo, integração com WhatsApp, otimização SEO básica, formulário de contato, ícones e imagens premium, animações suaves e código limpo. <strong>Hospedagem e domínio são contratados separadamente</strong>, mas oferecemos suporte na configuração.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 4 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Vocês fazem sites com sistema de agendamento?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Sim! Podemos integrar sistemas de agendamento como <strong>Calendly, Google Calendar</strong> ou desenvolver uma solução personalizada. Também trabalhamos com integrações de pagamento para quem precisa de reservas pagas ou venda de serviços online.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 5 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Posso solicitar alterações depois do site pronto?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Claro! Durante o desenvolvimento, você tem <strong>até 3 rodadas de revisão inclusas</strong>. Após a entrega, alterações menores podem ser solicitadas por um valor adicional acessível. Também oferecemos planos de manutenção mensal para quem precisa de atualizações frequentes.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 6 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Preciso fornecer textos e imagens?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Idealmente sim, pois você conhece melhor seu negócio. Porém, oferecemos serviço de <strong>copywriting profissional</strong> para criar textos persuasivos e utilizamos bancos de imagens premium caso não tenha fotos próprias. Basta nos passar as informações essenciais que cuidamos do resto!
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 7 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Quais formas de pagamento vocês aceitam?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Aceitamos <strong>PIX, cartão de crédito (em até 12x)</strong> e transferência bancária. O pagamento é dividido em 50% na aprovação do projeto e 50% na entrega final. Para projetos maiores, podemos negociar condições especiais.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 8 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>E se eu não tiver logomarca, vocês criam?</span>
+              <span class="faq-icon">
+                <i data-lucide="chevron-down"></i>
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Sim! Oferecemos serviço de <strong>criação de identidade visual</strong> incluindo logomarca, paleta de cores e tipografia. Podemos criar desde uma logo simples até um branding completo para sua marca. Esse serviço é cobrado à parte e o valor varia conforme a complexidade desejada.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA FAQ -->
+        <div class="faq-cta" data-aos="fade-up" data-aos-delay="200">
+          <p>Ainda tem dúvidas? Estamos aqui para ajudar!</p>
+          <a 
+            href="https://wa.me/SEUWHATSAPP?text=Olá! Tenho algumas dúvidas sobre os sites premium." 
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-full font-bold hover:shadow-lg hover:shadow-primary/30 transition-all transform hover:scale-105"
+          >
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+            Fale Conosco
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- FIM DA SEÇÃO FAQ -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SEÇÃO CTA (Call To Action) - CONTATO
+         ═══════════════════════════════════════════════════════════════════
+         Botões de contato:
+         - WhatsApp: +55 21 97743-4614
+         - Email: SEUEMAIL@email.com
+    -->
+    <section id="contato" class="py-24 bg-gradient-to-br from-primary via-accent to-rose relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+      </div>
+      <div class="container mx-auto px-6 text-center relative z-10">
+        <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6" data-aos="fade-up">
+          Pronto para ter seu Site Premium?
+        </h2>
+        <p class="text-xl text-white/90 max-w-2xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="100">
+          Entre em contato e transforme sua presença digital hoje mesmo!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+          <!-- BOTÃO WHATSAPP - Altere o número abaixo se necessário -->
+          <a href="https://wa.me/SEUWHATSAPP" target="_blank" rel="noopener" class="bg-white text-primary px-10 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all transform hover:scale-105 inline-flex items-center justify-center">
+            <i data-lucide="message-circle" class="w-6 h-6 mr-2"></i>WhatsApp
+          </a>
+          <!-- BOTÃO EMAIL - Altere o endereço abaixo se necessário -->
+          <a href="mailto:SEUEMAIL@email.com" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all inline-flex items-center justify-center">
+            <i data-lucide="mail" class="w-6 h-6 mr-2"></i>Email
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         MODAL DE PREVIEW - IFRAME
+         ═══════════════════════════════════════════════════════════════════
+         - Preview do site em iframe responsivo
+         - Controles para visualizar Desktop/Tablet/Mobile
+         - Botão para abrir em nova aba
+    -->
+    <div id="preview-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm">
+      <div class="relative w-full max-w-7xl mx-4 h-[90vh] bg-gray-900 rounded-3xl overflow-hidden shadow-2xl">
+        <!-- Header do Modal -->
+        <div class="bg-gray-800 px-6 py-4 flex items-center justify-between border-b border-gray-700">
+          <div class="flex items-center gap-4">
+            <div class="flex gap-2">
+              <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+              <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
+              <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+            </div>
+            <span id="preview-title" class="text-white font-medium">Preview do Site</span>
+          </div>
+          
+          <!-- Controles de Tamanho -->
+          <div class="flex items-center gap-2">
+            <button onclick="setPreviewSize('desktop')" class="preview-size-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all" data-size="desktop" aria-label="Visualização Desktop">
+              <i data-lucide="monitor" class="w-4 h-4 inline mr-1"></i>Desktop
+            </button>
+            <button onclick="setPreviewSize('tablet')" class="preview-size-btn px-4 py-2 rounded-lg text-sm font-medium transition-all" data-size="tablet" aria-label="Visualização Tablet">
+              <i data-lucide="tablet" class="w-4 h-4 inline mr-1"></i>Tablet
+            </button>
+            <button onclick="setPreviewSize('mobile')" class="preview-size-btn px-4 py-2 rounded-lg text-sm font-medium transition-all" data-size="mobile" aria-label="Visualização Mobile">
+              <i data-lucide="smartphone" class="w-4 h-4 inline mr-1"></i>Mobile
+            </button>
+          </div>
+          
+          <!-- Ações -->
+          <div class="flex items-center gap-3">
+            <a id="preview-new-tab" href="#" target="_blank" rel="noopener" class="px-4 py-2 bg-primary hover:bg-primary/80 text-white rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+              <i data-lucide="external-link" class="w-4 h-4"></i>Abrir
+            </a>
+            <button onclick="closePreview()" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center text-white transition-all" aria-label="Fechar preview">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Iframe Container -->
+        <div class="flex items-center justify-center h-[calc(100%-72px)] bg-gray-950 p-4">
+          <div id="preview-container" class="preview-desktop bg-white rounded-lg overflow-hidden shadow-xl transition-all duration-300">
+            <iframe id="preview-iframe" class="w-full h-full border-0" src="" title="Preview do site"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         FOOTER - RODAPÉ
+         ═══════════════════════════════════════════════════════════════════
+         - Logo e descrição
+         - Links de redes sociais
+         - Créditos do desenvolvedor
+    -->
+    <footer class="bg-dark text-white py-16">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-8 md:mb-0 text-center md:text-left">
+            <a href="#" class="text-3xl font-serif font-bold">
+              Web<span class="shimmer-text">Studio</span>
+            </a>
+            <p class="text-gray-400 mt-2">Sites Premium para Profissionais de Beleza</p>
+          </div>
+          <!-- REDES SOCIAIS - Altere os links href para suas redes -->
+          <div class="flex space-x-6">
+            <a href="#" aria-label="Instagram" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition">
+              <i data-lucide="instagram" class="w-5 h-5"></i>
+            </a>
+            <a href="#" aria-label="Facebook" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition">
+              <i data-lucide="facebook" class="w-5 h-5"></i>
+            </a>
+            <a href="#" aria-label="LinkedIn" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+        <!-- CRÉDITOS DO DESENVOLVEDOR -->
+        <div class="border-t border-white/10 mt-10 pt-10 text-center text-gray-400">
+          <p>&copy; 2026 WebStudio Premium. Todos os direitos reservados.</p>
+          <p class="mt-2 text-sm">Desenvolvido por <a href="mailto:SEUEMAIL@email.com" class="text-primary hover:text-accent transition">[SEU NOME AQUI]</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===============================================================
+         BACK TO TOP BUTTON
+         Botão flutuante para voltar ao topo
+    ================================================================ -->
+    <button id="back-to-top">
+      <i data-lucide="chevron-up" class="w-6 h-6"></i>
+    </button>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SCRIPTS JAVASCRIPT
+         ═══════════════════════════════════════════════════════════════════ -->
+    <script>
+      /* ===============================================================
+         LOADER - TELA DE CARREGAMENTO
+         Duração: 1.5 segundos (1500ms)
+         Para alterar: mude o valor no setTimeout
+      ================================================================ */
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          document.getElementById('page-loader').classList.add('hidden');
+        }, 1500);
+      });
+
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50
+      });
+
+      // Initialize Lucide Icons
+      lucide.createIcons();
+
+      /* ===============================================================
+         FILTRO POR CATEGORIA
+         Mostra/esconde categorias no catálogo
+      ================================================================ */
+      function filterCategory(category) {
+        const sections = document.querySelectorAll('.category-section');
+        const buttons = document.querySelectorAll('.filter-btn');
+        
+        // Atualiza botões ativos
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-category') === category) {
+            btn.classList.add('active');
+          }
+        });
+        
+        // Mostra/esconde categorias
+        if (category === 'todos') {
+          sections.forEach(section => {
+            section.classList.remove('hidden');
+            section.style.opacity = '0';
+            setTimeout(() => {
+              section.style.opacity = '1';
+            }, 50);
+          });
+        } else {
+          sections.forEach(section => {
+            if (section.id === 'cat-' + category) {
+              section.classList.remove('hidden');
+              section.style.opacity = '0';
+              setTimeout(() => {
+                section.style.opacity = '1';
+              }, 50);
+            } else {
+              section.classList.add('hidden');
+            }
+          });
+        }
+        
+        // Reinicializa AOS para animações dos cards visíveis
+        setTimeout(() => {
+          AOS.refresh();
+        }, 100);
+      }
+
+      /* ===============================================================
+         BUSCA DE NICHOS
+         Filtra os cards pelo texto digitado
+      ================================================================ */
+      function searchNichos(query) {
+        const cards = document.querySelectorAll('.niche-card');
+        const clearBtn = document.getElementById('clear-search');
+        const resultsCount = document.getElementById('search-results-count');
+        const searchTerm = query.toLowerCase().trim();
+        
+        // Mostra/esconde botão de limpar
+        clearBtn.classList.toggle('hidden', !searchTerm);
+        
+        if (!searchTerm) {
+          // Se vazio, mostra todos
+          cards.forEach(card => {
+            card.classList.remove('search-hidden', 'search-highlight');
+          });
+          document.querySelectorAll('.category-section').forEach(section => {
+            section.classList.remove('hidden');
+          });
+          resultsCount.classList.add('hidden');
+          return;
+        }
+        
+        // Mostra todas as categorias primeiro
+        document.querySelectorAll('.category-section').forEach(section => {
+          section.classList.remove('hidden');
+        });
+        
+        // Reset filtros de categoria
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-category') === 'todos') {
+            btn.classList.add('active');
+          }
+        });
+        
+        let matchCount = 0;
+        cards.forEach(card => {
+          const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+          const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+          const tags = Array.from(card.querySelectorAll('.bg-gray-100')).map(el => el.textContent.toLowerCase()).join(' ');
+          const content = title + ' ' + desc + ' ' + tags;
+          
+          if (content.includes(searchTerm)) {
+            card.classList.remove('search-hidden');
+            card.classList.add('search-highlight');
+            setTimeout(() => card.classList.remove('search-highlight'), 500);
+            matchCount++;
+          } else {
+            card.classList.add('search-hidden');
+          }
+        });
+        
+        // Mostra contador de resultados
+        resultsCount.classList.remove('hidden');
+        resultsCount.textContent = matchCount === 0 
+          ? '😔 Nenhum nicho encontrado. Tente outro termo.' 
+          : `✨ ${matchCount} nicho${matchCount > 1 ? 's' : ''} encontrado${matchCount > 1 ? 's' : ''}`;
+        
+        AOS.refresh();
+      }
+      
+      function clearSearch() {
+        const searchInput = document.getElementById('search-nichos');
+        searchInput.value = '';
+        searchNichos('');
+        searchInput.focus();
+      }
+
+      /* ===============================================================
+         MODAL DE PREVIEW (IFRAME)
+         Mostra preview responsivo do site selecionado
+      ================================================================ */
+      function openPreview(url, title) {
+        const modal = document.getElementById('preview-modal');
+        const iframe = document.getElementById('preview-iframe');
+        const titleEl = document.getElementById('preview-title');
+        const newTabLink = document.getElementById('preview-new-tab');
+        
+        iframe.src = url;
+        titleEl.textContent = title || 'Preview do Site';
+        newTabLink.href = url;
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Reset para desktop
+        setPreviewSize('desktop');
+        
+        // Reinicializa ícones
+        lucide.createIcons();
+      }
+      
+      function closePreview() {
+        const modal = document.getElementById('preview-modal');
+        const iframe = document.getElementById('preview-iframe');
+        
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        iframe.src = '';
+      }
+      
+      function setPreviewSize(size) {
+        const container = document.getElementById('preview-container');
+        const buttons = document.querySelectorAll('.preview-size-btn');
+        
+        // Atualiza botões
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-size') === size) {
+            btn.classList.add('active');
+          }
+        });
+        
+        // Atualiza tamanho do container
+        container.className = 'bg-white rounded-lg overflow-hidden shadow-xl transition-all duration-300 preview-' + size;
+      }
+      
+      // Fecha modal com ESC
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closePreview();
+        }
+      });
+      
+      // Fecha modal clicando fora
+      document.getElementById('preview-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'preview-modal') {
+          closePreview();
+        }
+      });
+      
+      // Intercepta cliques nos botões "Ver Demo" para abrir no modal
+      document.querySelectorAll('.niche-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const url = btn.getAttribute('href');
+          const card = btn.closest('.niche-card');
+          const title = card?.querySelector('h3')?.textContent || 'Preview';
+          openPreview(url, title);
+        });
+      });
+
+      // Custom Cursor
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+      });
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+
+      // Scroll Progress
+      window.addEventListener('scroll', () => {
+        const scrollProgress = document.getElementById('scroll-progress');
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        scrollProgress.style.width = progress + '%';
+      });
+
+      // Back to Top
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      /* ===============================================================
+         MENU MOBILE
+         Abre/fecha o menu hambúrguer em dispositivos móveis
+      ================================================================ */
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        document.body.classList.toggle('menu-open');
+      });
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('open');
+        document.body.classList.remove('menu-open');
+      }
+
+      /* ===============================================================
+         TEMA CLARO/ESCURO (DARK/LIGHT MODE)
+         Alterna entre modos e salva preferência no localStorage
+      ================================================================ */
+      const themeToggle = document.getElementById('theme-toggle');
+      const savedTheme = localStorage.getItem('theme');
+      
+      // Aplica tema salvo ou detecta preferência do sistema
+      if (savedTheme === 'light' || (!savedTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+        document.body.classList.add('light-mode');
+      }
+      
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        const isLight = document.body.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        
+        // Reinicializa ícones do Lucide
+        lucide.createIcons();
+      });
+
+      /* ===============================================================
+         FAQ INTERATIVO - ACORDEÃO
+         Abre/fecha respostas ao clicar nas perguntas
+      ================================================================ */
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question?.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          
+          // Fecha todos os outros
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+              otherItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+            }
+          });
+          
+          // Toggle do item clicado
+          item.classList.toggle('active');
+          question.setAttribute('aria-expanded', !isActive);
+        });
+      });
+
+      /* ===============================================================
+         BANNER DE URGÊNCIA - CONTADOR REGRESSIVO
+         Mostra promoção com countdown e pessoas online
+      ================================================================ */
+      const urgencyBanner = document.getElementById('urgency-banner');
+      const closeUrgency = document.getElementById('close-urgency');
+      const onlineCount = document.getElementById('online-count');
+      
+      // Mostra banner após 3 segundos
+      setTimeout(() => {
+        urgencyBanner.classList.add('visible');
+      }, 3000);
+      
+      // Fecha banner
+      closeUrgency?.addEventListener('click', () => {
+        urgencyBanner.classList.remove('visible');
+        // Salva no localStorage para não mostrar novamente na sessão
+        sessionStorage.setItem('urgencyBannerClosed', 'true');
+      });
+      
+      // Não mostra se já fechou
+      if (sessionStorage.getItem('urgencyBannerClosed') === 'true') {
+        urgencyBanner.remove();
+      }
+      
+      // Contador Regressivo (renova a cada visita - 24h a partir do acesso)
+      function startCountdown() {
+        let endTime = localStorage.getItem('promoEndTime');
+        
+        if (!endTime) {
+          // Define 24 horas a partir de agora
+          endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+          localStorage.setItem('promoEndTime', endTime);
+        }
+        
+        const hoursEl = document.getElementById('countdown-hours');
+        const minutesEl = document.getElementById('countdown-minutes');
+        const secondsEl = document.getElementById('countdown-seconds');
+        
+        function updateCountdown() {
+          const now = new Date().getTime();
+          const distance = endTime - now;
+          
+          if (distance <= 0) {
+            // Reinicia o contador
+            endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+            localStorage.setItem('promoEndTime', endTime);
+            return;
+          }
+          
+          const hours = Math.floor(distance / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          
+          if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+          if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+          if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      }
+      
+      startCountdown();
+      
+      // Simula pessoas online (variação realista)
+      function updateOnlineCount() {
+        const baseCount = 120;
+        const variation = Math.floor(Math.random() * 30) - 10; // -10 a +20
+        if (onlineCount) {
+          onlineCount.textContent = baseCount + variation;
+        }
+      }
+      
+      updateOnlineCount();
+      setInterval(updateOnlineCount, 5000);
+
+      /* ===============================================================
+         FORMULÁRIO SOLICITAR NICHO
+         Envia dados via WhatsApp
+      ================================================================ */
+      document.getElementById('niche-request-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('niche-name').value.trim();
+        const whatsapp = document.getElementById('niche-whatsapp').value.trim();
+        const niche = document.getElementById('niche-type').value.trim();
+        const description = document.getElementById('niche-description').value.trim();
+        
+        // Monta a mensagem para o WhatsApp
+        let message = `🌟 *SOLICITAÇÃO DE NICHO PERSONALIZADO*\n\n`;
+        message += `👤 *Nome:* ${name}\n`;
+        message += `📱 *WhatsApp:* ${whatsapp}\n`;
+        message += `💼 *Nicho/Profissão:* ${niche}\n`;
+        if (description) {
+          message += `📝 *Descrição:* ${description}\n`;
+        }
+        message += `\n✨ Gostaria de saber mais sobre o desenvolvimento de um site personalizado para meu negócio!`;
+        
+        // Codifica a mensagem para URL
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Abre o WhatsApp com a mensagem
+        window.open(`https://wa.me/SEUWHATSAPP?text=${encodedMessage}`, '_blank');
+        
+        // Limpa o formulário
+        this.reset();
+      });
+
+      /* ===============================================================
+         CARROSSEL DE DEPOIMENTOS
+         Navegação automática e manual entre depoimentos
+      ================================================================ */
+      const testimonialTrack = document.getElementById('testimonials-track');
+      const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+      const prevBtn = document.getElementById('prev-testimonial');
+      const nextBtn = document.getElementById('next-testimonial');
+      const dotsContainer = document.getElementById('testimonial-dots');
+      
+      let testimonialIndex = 0;
+      let slidesToShow = 3;
+      
+      // Ajusta quantidade de slides baseado na tela
+      function updateSlidesToShow() {
+        if (window.innerWidth < 768) {
+          slidesToShow = 1;
+        } else if (window.innerWidth < 1024) {
+          slidesToShow = 2;
+        } else {
+          slidesToShow = 3;
+        }
+        updateCarousel();
+        createDots();
+      }
+      
+      // Cria indicadores (dots)
+      function createDots() {
+        const totalDots = Math.ceil(testimonialSlides.length / slidesToShow);
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalDots; i++) {
+          const dot = document.createElement('button');
+          dot.className = `w-3 h-3 rounded-full transition-all ${i === Math.floor(testimonialIndex / slidesToShow) ? 'bg-primary w-8' : 'bg-gray-300'}`;
+          dot.setAttribute('aria-label', `Ir para grupo ${i + 1}`);
+          dot.addEventListener('click', () => {
+            testimonialIndex = i * slidesToShow;
+            updateCarousel();
+          });
+          dotsContainer.appendChild(dot);
+        }
+      }
+      
+      // Atualiza posição do carrossel
+      function updateCarousel() {
+        const slideWidth = 100 / slidesToShow;
+        const offset = testimonialIndex * slideWidth;
+        testimonialTrack.style.transform = `translateX(-${offset}%)`;
+        
+        // Atualiza dots
+        const dots = dotsContainer.querySelectorAll('button');
+        dots.forEach((dot, i) => {
+          if (i === Math.floor(testimonialIndex / slidesToShow)) {
+            dot.className = 'w-8 h-3 rounded-full bg-primary transition-all';
+          } else {
+            dot.className = 'w-3 h-3 rounded-full bg-gray-300 transition-all';
+          }
+        });
+      }
+      
+      // Navegação anterior
+      prevBtn.addEventListener('click', () => {
+        if (testimonialIndex > 0) {
+          testimonialIndex--;
+        } else {
+          testimonialIndex = testimonialSlides.length - slidesToShow;
+        }
+        updateCarousel();
+      });
+      
+      // Navegação próximo
+      nextBtn.addEventListener('click', () => {
+        if (testimonialIndex < testimonialSlides.length - slidesToShow) {
+          testimonialIndex++;
+        } else {
+          testimonialIndex = 0;
+        }
+        updateCarousel();
+      });
+      
+      // Auto-play do carrossel
+      let testimonialInterval = setInterval(() => {
+        if (testimonialIndex < testimonialSlides.length - slidesToShow) {
+          testimonialIndex++;
+        } else {
+          testimonialIndex = 0;
+        }
+        updateCarousel();
+      }, 5000);
+      
+      // Pausa auto-play ao passar o mouse
+      document.getElementById('testimonials-container').addEventListener('mouseenter', () => {
+        clearInterval(testimonialInterval);
+      });
+      
+      document.getElementById('testimonials-container').addEventListener('mouseleave', () => {
+        testimonialInterval = setInterval(() => {
+          if (testimonialIndex < testimonialSlides.length - slidesToShow) {
+            testimonialIndex++;
+          } else {
+            testimonialIndex = 0;
+          }
+          updateCarousel();
+        }, 5000);
+      });
+      
+      // Inicializa carrossel
+      updateSlidesToShow();
+      window.addEventListener('resize', updateSlidesToShow);
+
+      /* ===============================================================
+         PARTÍCULAS DE FUNDO
+         Cria 30 partículas flutuantes animadas
+         Para alterar quantidade: modifique o número no loop for
+      ================================================================ */
+      const particlesContainer = document.getElementById('particles-container');
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+        particlesContainer.appendChild(particle);
+      }
+
+      /* ===============================================================
+         CONTADOR ANIMADO
+         Anima os números na seção de estatísticas
+         - data-target: valor final do contador
+         - Usa IntersectionObserver para iniciar quando visível
+      ================================================================ */
+      const counters = document.querySelectorAll('.counter-number');
+      const observerOptions = { threshold: 0.5 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = parseInt(counter.getAttribute('data-target'));
+            let count = 0;
+            const increment = target / 50;
+            const updateCount = () => {
+              if (count < target) {
+                count += increment;
+                counter.textContent = Math.ceil(count);
+                requestAnimationFrame(updateCount);
+              } else {
+                counter.textContent = target;
+              }
+            };
+            updateCount();
+            observer.unobserve(counter);
+          }
+        });
+      }, observerOptions);
+      counters.forEach(counter => observer.observe(counter));
+    </script>
+    
+    <!-- FIM DO DOCUMENTO -->
+  </body>
+</html>
