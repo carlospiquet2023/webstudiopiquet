@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manual WebStudio Premium - Mini Curso de Personalização</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366F1",
+              secondary: "#F8FAFC",
+              accent: "#8B5CF6",
+              dark: "#0F172A",
+              success: "#10B981",
+              warning: "#F59E0B",
+              danger: "#EF4444",
+            },
+            fontFamily: {
+              sans: ['"Inter"', "sans-serif"],
+              mono: ['"Fira Code"', "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      .gradient-bg { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); }
+      .code-block { background: #1e293b; border-radius: 12px; overflow-x: auto; }
+      .code-block code { font-family: 'Fira Code', monospace; font-size: 14px; }
+      .highlight { background: linear-gradient(90deg, #fef08a, #fde047); padding: 2px 6px; border-radius: 4px; color: #1e293b; }
+      .step-card { transition: all 0.3s ease; }
+      .step-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.3); }
+      .nav-link { transition: all 0.2s ease; }
+      .nav-link:hover { background: rgba(99, 102, 241, 0.1); }
+      .nav-link.active { background: rgba(99, 102, 241, 0.2); border-left: 3px solid #6366F1; }
+      .copy-btn { transition: all 0.2s ease; }
+      .copy-btn:hover { background: #6366F1; color: white; }
+      .video-placeholder { background: linear-gradient(135deg, #6366F1, #8B5CF6); }
+    </style>
+  </head>
+  <body class="font-sans bg-secondary text-dark">
+
+    <!-- HEADER -->
+    <header class="gradient-bg text-white py-6 sticky top-0 z-50">
+      <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+              <i data-lucide="book-open" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h1 class="font-bold text-lg">Manual WebStudio Premium</h1>
+              <p class="text-xs text-gray-400">Mini Curso de Personalização</p>
+            </div>
+          </div>
+          <div class="hidden md:flex items-center gap-4">
+            <span class="text-sm text-gray-400">Versão 1.0</span>
+            <a href="index2.html" class="bg-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-accent transition">Ver Catálogo</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-8">
+      <div class="grid lg:grid-cols-4 gap-8">
+        
+        <!-- SIDEBAR NAVEGAÇÃO -->
+        <aside class="lg:col-span-1">
+          <nav class="bg-white rounded-2xl p-4 shadow-lg sticky top-24">
+            <h3 class="font-bold text-sm text-gray-500 uppercase tracking-wider mb-4">📚 Conteúdo</h3>
+            <ul class="space-y-1">
+              <li><a href="#introducao" class="nav-link block px-3 py-2 rounded-lg text-sm">1. Introdução</a></li>
+              <li><a href="#ferramentas" class="nav-link block px-3 py-2 rounded-lg text-sm">2. Ferramentas Necessárias</a></li>
+              <li><a href="#whatsapp" class="nav-link block px-3 py-2 rounded-lg text-sm">3. Alterar WhatsApp</a></li>
+              <li><a href="#instagram" class="nav-link block px-3 py-2 rounded-lg text-sm">4. Alterar Instagram</a></li>
+              <li><a href="#precos" class="nav-link block px-3 py-2 rounded-lg text-sm">5. Alterar Preços</a></li>
+              <li><a href="#textos" class="nav-link block px-3 py-2 rounded-lg text-sm">6. Alterar Textos</a></li>
+              <li><a href="#cores" class="nav-link block px-3 py-2 rounded-lg text-sm">7. Alterar Cores</a></li>
+              <li><a href="#imagens" class="nav-link block px-3 py-2 rounded-lg text-sm">8. Alterar Imagens</a></li>
+              <li><a href="#publicar" class="nav-link block px-3 py-2 rounded-lg text-sm">9. Publicar o Site</a></li>
+              <li><a href="#dicas" class="nav-link block px-3 py-2 rounded-lg text-sm">10. Dicas de Venda</a></li>
+            </ul>
+            
+            <div class="mt-6 p-4 bg-success/10 rounded-xl border border-success/20">
+              <p class="text-xs text-success font-semibold">💡 Dica</p>
+              <p class="text-xs text-gray-600 mt-1">Use Ctrl+F para buscar texto específico nos arquivos!</p>
+            </div>
+          </nav>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="lg:col-span-3 space-y-12">
+
+          <!-- INTRODUÇÃO -->
+          <section id="introducao" class="bg-white rounded-3xl p-8 shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center">
+                <span class="text-2xl">👋</span>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">1. Introdução</h2>
+                <p class="text-gray-500 text-sm">Bem-vindo ao WebStudio Premium!</p>
+              </div>
+            </div>
+
+            <div class="prose max-w-none">
+              <p class="text-gray-600 mb-4">
+                Parabéns pela sua compra! Você agora tem em mãos <strong>36 sites profissionais</strong> prontos para personalizar e revender. Este manual vai te ensinar passo a passo como fazer as alterações básicas.
+              </p>
+              
+              <div class="bg-primary/5 border border-primary/20 rounded-xl p-4 mb-4">
+                <h4 class="font-bold text-primary flex items-center gap-2">
+                  <i data-lucide="target" class="w-5 h-5"></i> O que você vai aprender:
+                </h4>
+                <ul class="mt-2 space-y-1 text-sm text-gray-600">
+                  <li>✅ Alterar número do WhatsApp</li>
+                  <li>✅ Alterar link do Instagram</li>
+                  <li>✅ Alterar preços e valores</li>
+                  <li>✅ Alterar textos e descrições</li>
+                  <li>✅ Alterar cores do site</li>
+                  <li>✅ Alterar imagens</li>
+                  <li>✅ Publicar o site gratuitamente</li>
+                </ul>
+              </div>
+
+              <div class="bg-warning/10 border border-warning/20 rounded-xl p-4">
+                <h4 class="font-bold text-warning flex items-center gap-2">
+                  <i data-lucide="alert-triangle" class="w-5 h-5"></i> Importante!
+                </h4>
+                <p class="text-sm text-gray-600 mt-2">
+                  Não se preocupe se você nunca mexeu com código antes. As alterações são simples e você só precisa trocar textos específicos. É como editar um documento do Word!
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- FERRAMENTAS -->
+          <section id="ferramentas" class="bg-white rounded-3xl p-8 shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-accent/10 rounded-2xl flex items-center justify-center">
+                <span class="text-2xl">🛠️</span>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">2. Ferramentas Necessárias</h2>
+                <p class="text-gray-500 text-sm">O que você precisa para começar</p>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="step-card border border-gray-200 rounded-2xl p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-white font-bold">1</div>
+                  <h3 class="font-bold">VS Code (Recomendado)</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-4">Editor de código gratuito e fácil de usar. Ideal para editar os arquivos HTML.</p>
+                <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-primary text-sm font-semibold hover:underline">
+                  <i data-lucide="download" class="w-4 h-4"></i> Baixar VS Code
+                </a>
+              </div>
+
+              <div class="step-card border border-gray-200 rounded-2xl p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center text-white font-bold">2</div>
+                  <h3 class="font-bold">Notepad++ (Alternativa)</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-4">Editor simples e leve. Boa opção para quem prefere algo mais básico.</p>
+                <a href="https://notepad-plus-plus.org/downloads/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-primary text-sm font-semibold hover:underline">
+                  <i data-lucide="download" class="w-4 h-4"></i> Baixar Notepad++
+                </a>
+              </div>
+
+              <div class="step-card border border-gray-200 rounded-2xl p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 bg-purple-500 rounded-xl flex items-center justify-center text-white font-bold">3</div>
+                  <h3 class="font-bold">Navegador Web</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-4">Chrome, Firefox ou Edge para visualizar as alterações no site.</p>
+                <p class="text-xs text-gray-400">Você já tem instalado!</p>
+              </div>
+
+              <div class="step-card border border-gray-200 rounded-2xl p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center text-white font-bold">4</div>
+                  <h3 class="font-bold">Conta no GitHub</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-4">Para publicar o site gratuitamente na internet.</p>
+                <a href="https://github.com/signup" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-primary text-sm font-semibold hover:underline">
+                  <i data-lucide="external-link" class="w-4 h-4"></i> Criar conta grátis
+                </a>
+              </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
+              <h4 class="font-bold text-blue-700 flex items-center gap-2">
+                <i data-lucide="info" class="w-5 h-5"></i> Como abrir um arquivo no VS Code
+              </h4>
+              <ol class="mt-2 text-sm text-gray-600 space-y-1">
+                <li>1. Abra o VS Code</li>
+                <li>2. Vá em <strong>Arquivo → Abrir Pasta</strong></li>
+                <li>3. Selecione a pasta do site que quer editar</li>
+                <li>4. Clique no arquivo .html na lateral esquerda</li>
+              </ol>
+            </div>
+          </section>
+
+          <!-- WHATSAPP -->
+          <section id="whatsapp" class="bg-white rounded-3xl p-8 shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-green-500/10 rounded-2xl flex items-center justify-center">
+                <span class="text-2xl">📱</span>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">3. Alterar o WhatsApp</h2>
+                <p class="text-gray-500 text-sm">Coloque o número do seu cliente</p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="bg-gray-50 rounded-xl p-4">
+                <h4 class="font-bold mb-2">📌 Passo a Passo:</h4>
+                <ol class="space-y-2 text-sm text-gray-600">
+                  <li><strong>1.</strong> Abra o arquivo HTML no VS Code</li>
+                  <li><strong>2.</strong> Pressione <kbd class="bg-gray-200 px-2 py-1 rounded text-xs">Ctrl + H</kbd> (Substituir)</li>
+                  <li><strong>3.</strong> No campo "Localizar", cole: <code class="bg-gray-200 px-2 py-1 rounded text-xs">SEUWHATSAPP</code></li>
+                  <li><strong>4.</strong> No campo "Substituir", coloque o número do cliente (só números)</li>
+                  <li><strong>5.</strong> Clique em "Substituir Tudo"</li>
+                </ol>
+              </div>
+
+              <div class="code-block p-4">
+                <p class="text-gray-400 text-xs mb-2">❌ ANTES (encontrar isso):</p>
+                <code class="text-green-400">https://wa.me/<span class="text-yellow-400 font-bold">SEUWHATSAPP</span></code>
+              </div>
+
+              <div class="code-block p-4">
+                <p class="text-gray-400 text-xs mb-2">✅ DEPOIS (substituir por):</p>
+                <code class="text-green-400">https://wa.me/<span class="text-yellow-400 font-bold">5511999999999</span></code>
+              </div>
+
+              <div class="bg-warning/10 border border-warning/20 rounded-xl p-4">
+                <h4 class="font-bold text-warning flex items-center gap-2">
+                  <i data-lucide="alert-circle" class="w-5 h-5"></i> Atenção ao formato!
+                </h4>
+                <ul class="mt-2 text-sm text-gray-600 space-y-1">
+                  <li>• Use apenas números, sem espaços ou traços</li>
+                  <li>• Inclua o código do país: <strong>55</strong> (Brasil)</li>
+                  <li>• Inclua o DDD: <strong>11</strong> (São Paulo), <strong>21</strong> (Rio), etc.</li>
+                  <li>• Exemplo correto: <code class="bg-gray-200 px-2 py-1 rounded">5521999999999</code></li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- INSTAGRAM -->
+          <section id="instagram" class="bg-white rounded-3xl p-8 shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-pink-500/10 rounded-2xl flex items-center justify-center">
+                <span class="text-2xl">📸</span>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">4. Alterar o Instagram</h2>
+                <p class="text-gray-500 text-sm">Coloque o @ do seu cliente</p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="bg-gray-50 rounded-xl p-4">
+                <h4 class="font-bold mb-2">📌 Passo a Passo:</h4>
+                <ol class="space-y-2 text-sm text-gray-600">
+                  <li><strong>1.</strong> Pressione <kbd class="bg-gray-200 px-2 py-1 rounded text-xs">Ctrl + H</kbd></li>
+                  <li><strong>2.</strong> Localize: <code class="bg-gray-200 px-2 py-1 rounded text-xs">https://instagram.com</code></li>
+                  <li><strong>3.</strong> Substitua por: <code class="bg-gray-200 px-2 py-1 rounded text-xs">https://instagram.com/nomedousuario</code></li>
+                </ol>
+              </div>
+
+              <div class="code-block p-4">
+                <p class="text-gray-400 text-xs mb-2">❌ ANTES:</p>
+                <code class="text-green-400">href="<span class="text-yellow-400">https://instagram.com</span>"</code>
+              </div>
+
+              <div class="code-block p-4">
+                <p class="text-gray-400 text-xs mb-2">✅ DEPOIS:</p>
+                <code class="text-green-400">href="<span class="text-yellow-400">https://instagram.com/salaobeleza</span>"</code>
+              </div>
+
+              <div class="bg-success/10 border border-success/20 rounded-xl p-4">
+                <h4 class="font-bold text-success flex items-center gap-2">
+                  <i data-lucide="check-circle" class="w-5 h-5"></i> Dica Extra
+                </h4>
+                <p class="text-sm text-gray-600 mt-2">
+                  Você também pode adicionar links para Facebook, TikTok, YouTube, etc. Basta procurar os ícones de redes sociais no código e alterar os links!
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- PREÇOS -->
+          <section id="precos" class="bg-white rounded-3xl p-8 shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-yellow-500/10 rounded-2xl flex items-center justify-center">
+                <span class="text-2xl">💰</span>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">5. Alterar Preços</h2>
+                <p class="text-gray-500 text-sm">Defina os valores dos serviços</p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="bg-gray-50 rounded-xl p-4">
+                <h4 class="font-bold mb-2">📌 Passo a Passo:</h4>
+                <ol class="space-y-2 text-sm text-gray-600">
+                  <li><strong>1.</strong> Use <kbd class="bg-gray-200 px-2 py-1 rounded text-xs">Ctrl + F</kbd> para buscar</li>
+                  <li><strong>2.</strong> Procure por "R$" para encontrar todos os preços</li>
+                  <li><strong>3.</strong> Altere cada valor conforme necessário</li>
+                </ol>
+              </div>
+
+              <div class="code-block p-4">
+                <p class="text-gray-400 text-xs mb-2">Exemplo de preço no código:</p>
+                <code class="text-green-400">&lt;span class="text-2xl font-bold"&gt;<span class="text-yellow-400">R$ 89,90</span>&lt;/span&gt;</code>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="border border-gray-200 rounded-xl p-4">
+                  <h4 class="font-bold text-sm mb-2">🔍 Termos para buscar:</h4>
+                  <ul class="text-xs text-gray-600 space-y-1">
+                    <li>• <code class="bg-gray-100 px-1 rounded">R$</code> - Preços em geral</li>
+                    <li>• <code class="bg-gray-100 px-1 rounded">partir de</code> - Preços iniciais</li>
+                    <li>• <code class="bg-gray-100 px-1 rounded">/mês</code> - Mensalidades</li>
+                    <li>• <code class="bg-gray-100 px-1 rounded">/único</code> - Pagamento único</li>
+                  </ul>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-4">
+                  <h4 class="font-bold text-sm mb-2">💡 Sugestões de preço:</h4>
+                  <ul class="text-xs text-gray-600 space-y-1">
+                    <li>• Site simples: R$ 299 - R$ 499</li>
+                    <li>• Site + manutenção: R$ 499 + R$ 99/mês</li>
+                    <li>• Serviços do cliente: pergunte a ele!</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TEXTOS -->
+          <section id="textos" class="bg-white rounded-3xl p-8 shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center">
+                <span class="text-2xl">✏️</span>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">6. Alterar Textos</h2>
+                <p class="text-gray-500 text-sm">Personalize com os dados do cliente</p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="bg-gray-50 rounded-xl p-4">
+                <h4 class="font-bold mb-2">📌 O que alterar:</h4>
+                <ul class="space-y-2 text-sm text-gray-600">
+                  <li>✏️ <strong>Nome do negócio:</strong> "Salão da Maria", "Barbearia do João", etc.</li>
+                  <li>✏️ <strong>Descrições:</strong> Textos sobre a empresa e serviços</li>
+                  <li>✏️ <strong>Endereço:</strong> Rua, número, bairro, cidade</li>
+                  <li>✏️ <strong>Horário:</strong> Dias e horários de funcionamento</li>
+                  <li>✏️ <strong>Serviços:</strong> Lista de serviços oferecidos</li>
+                </ul>
+              </div>
+
+              <div class="code-block p-4">
+                <p class="text-gray-400 text-xs mb-2">Exemplo - Título do site:</p>
+                <code class="text-green-400">&lt;title&gt;<span class="text-yellow-400">Nome do Negócio - Slogan Aqui</span>&lt;/title&gt;</code>
+              </div>
+
+              <div class="code-block p-4">
+                <p class="text-gray-400 text-xs mb-2">Exemplo - Texto de parágrafo:</p>
+                <code class="text-green-400">&lt;p&gt;<span class="text-yellow-400">Somos especialistas em cortes masculinos desde 2010...</span>&lt;/p&gt;</code>
+              </div>
+
+              <div class="bg-primary/5 border border-primary/20 rounded-xl p-4">
+                <h4 class="font-bold text-primary flex items-center gap-2">
+                  <i data-lucide="lightbulb" class="w-5 h-5"></i> Dica Profissional
+                </h4>
+                <p class="text-sm text-gray-600 mt-2">
+                  Peça para o cliente enviar um texto pronto sobre a empresa dele. Assim você só precisa copiar e colar no lugar certo!
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- CORES -->
+          <section id="cores" class="bg-white rounded-3xl p-8 shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center">
+                <span class="text-2xl">🎨</span>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">7. Alterar Cores</h2>
+                <p class="text-gray-500 text-sm">Combine com a marca do cliente</p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="bg-gray-50 rounded-xl p-4">
+                <h4 class="font-bold mb-2">📌 Onde ficam as cores:</h4>
+                <p class="text-sm text-gray-600">As cores principais ficam no início do arquivo, dentro da tag <code class="bg-gray-200 px-1 rounded">&lt;script&gt;</code> do Tailwind:</p>
+              </div>
+
+              <div class="code-block p-4">
+                <p class="text-gray-400 text-xs mb-2">Procure por "tailwind.config" no código:</p>
+<pre class="text-green-400 text-sm"><code>tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: "<span class="text-yellow-400">#6366F1</span>",   // Cor principal
+        secondary: "<span class="text-yellow-400">#F8FAFC</span>", // Cor de fundo
+        accent: "<span class="text-yellow-400">#8B5CF6</span>",    // Cor de destaque
+      }
+    }
+  }
+}</code></pre>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-4">
+                <div class="border border-gray-200 rounded-xl p-4 text-center">
+                  <div class="w-12 h-12 bg-[#E91E63] rounded-xl mx-auto mb-2"></div>
+                  <p class="text-xs font-mono">#E91E63</p>
+                  <p class="text-xs text-gray-500">Rosa (salão)</p>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-4 text-center">
+                  <div class="w-12 h-12 bg-[#C9A227] rounded-xl mx-auto mb-2"></div>
+                  <p class="text-xs font-mono">#C9A227</p>
+                  <p class="text-xs text-gray-500">Dourado (barbearia)</p>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-4 text-center">
+                  <div class="w-12 h-12 bg-[#10B981] rounded-xl mx-auto mb-2"></div>
+                  <p class="text-xs font-mono">#10B981</p>
+                  <p class="text-xs text-gray-500">Verde (saúde)</p>
+                </div>
+              </div>
+
+              <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                <h4 class="font-bold text-blue-700 flex items-center gap-2">
+                  <i data-lucide="palette" class="w-5 h-5"></i> Gerador de Cores
+                </h4>
+                <p class="text-sm text-gray-600 mt-2">
+                  Use o site <a href="https://coolors.co" target="_blank" rel="noopener" class="text-primary font-semibold hover:underline">coolors.co</a> para criar paletas de cores bonitas e copiar os códigos HEX!
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- IMAGENS -->
+          <section id="imagens" class="bg-white rounded-3xl p-8 shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-orange-500/10 rounded-2xl flex items-center justify-center">
+                <span class="text-2xl">🖼️</span>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">8. Alterar Imagens</h2>
+                <p class="text-gray-500 text-sm">Use fotos do negócio do cliente</p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="bg-gray-50 rounded-xl p-4">
+                <h4 class="font-bold mb-2">📌 Como funciona:</h4>
+                <p class="text-sm text-gray-600">As imagens nos sites usam links da internet (URLs). Você pode substituir por:</p>
+                <ul class="mt-2 text-sm text-gray-600 space-y-1">
+                  <li>• Imagens do <a href="https://unsplash.com" target="_blank" rel="noopener" class="text-primary hover:underline">Unsplash</a> (gratuitas)</li>
+                  <li>• Fotos enviadas pelo cliente (hospedadas no <a href="https://imgur.com" target="_blank" rel="noopener" class="text-primary hover:underline">Imgur</a>)</li>
+                  <li>• Imagens do Google Drive (com link público)</li>
+                </ul>
+              </div>
+
+              <div class="code-block p-4">
+                <p class="text-gray-400 text-xs mb-2">Exemplo de imagem no código:</p>
+                <code class="text-green-400">&lt;img src="<span class="text-yellow-400">https://images.unsplash.com/photo-xxx</span>" alt="Descrição"&gt;</code>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="border border-gray-200 rounded-xl p-4">
+                  <h4 class="font-bold text-sm mb-2">📤 Como usar o Imgur:</h4>
+                  <ol class="text-xs text-gray-600 space-y-1">
+                    <li>1. Acesse <a href="https://imgur.com/upload" target="_blank" rel="noopener" class="text-primary hover:underline">imgur.com/upload</a></li>
+                    <li>2. Faça upload da imagem</li>
+                    <li>3. Clique com botão direito na imagem</li>
+                    <li>4. Copie o endereço da imagem</li>
+                    <li>5. Cole no código HTML</li>
+                  </ol>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-4">
+                  <h4 class="font-bold text-sm mb-2">🔍 Bancos de imagens grátis:</h4>
+                  <ul class="text-xs text-gray-600 space-y-1">
+                    <li>• <a href="https://unsplash.com" target="_blank" rel="noopener" class="text-primary hover:underline">Unsplash</a></li>
+                    <li>• <a href="https://pexels.com" target="_blank" rel="noopener" class="text-primary hover:underline">Pexels</a></li>
+                    <li>• <a href="https://pixabay.com" target="_blank" rel="noopener" class="text-primary hover:underline">Pixabay</a></li>
+                    <li>• <a href="https://freepik.com" target="_blank" rel="noopener" class="text-primary hover:underline">Freepik</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- PUBLICAR -->
+          <section id="publicar" class="bg-white rounded-3xl p-8 shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-success/10 rounded-2xl flex items-center justify-center">
+                <span class="text-2xl">🚀</span>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">9. Publicar o Site</h2>
+                <p class="text-gray-500 text-sm">Coloque na internet gratuitamente</p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="bg-success/5 border border-success/20 rounded-xl p-4">
+                <h4 class="font-bold text-success">🎉 Boas notícias!</h4>
+                <p class="text-sm text-gray-600 mt-2">
+                  Você pode publicar sites gratuitamente usando o <strong>GitHub Pages</strong>. O cliente terá um link assim: <code class="bg-gray-200 px-1 rounded">nomedocliente.github.io</code>
+                </p>
+              </div>
+
+              <div class="bg-gray-50 rounded-xl p-4">
+                <h4 class="font-bold mb-3">📌 Passo a Passo - GitHub Pages:</h4>
+                <ol class="space-y-3 text-sm text-gray-600">
+                  <li class="flex gap-3">
+                    <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                    <span>Crie uma conta no <a href="https://github.com/signup" target="_blank" rel="noopener" class="text-primary hover:underline">GitHub</a> (ou use a do cliente)</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                    <span>Clique em <strong>"New repository"</strong> (novo repositório)</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                    <span>Nomeie como: <code class="bg-gray-200 px-1 rounded">nomedousuario.github.io</code></span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+                    <span>Faça upload dos arquivos HTML do site</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+                    <span>Renomeie o arquivo principal para <code class="bg-gray-200 px-1 rounded">index.html</code></span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="w-6 h-6 bg-success text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+                    <span>Pronto! Acesse <code class="bg-gray-200 px-1 rounded">nomedousuario.github.io</code></span>
+                  </li>
+                </ol>
+              </div>
+
+              <div class="bg-warning/10 border border-warning/20 rounded-xl p-4">
+                <h4 class="font-bold text-warning flex items-center gap-2">
+                  <i data-lucide="crown" class="w-5 h-5"></i> Quer domínio próprio?
+                </h4>
+                <p class="text-sm text-gray-600 mt-2">
+                  Se o cliente quiser um domínio como <strong>www.salaobeleza.com.br</strong>, você pode cobrar a mais pelo serviço. Registre em <a href="https://registro.br" target="_blank" rel="noopener" class="text-primary hover:underline">registro.br</a> (~R$40/ano).
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- DICAS DE VENDA -->
+          <section id="dicas" class="bg-white rounded-3xl p-8 shadow-lg">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-yellow-500/10 rounded-2xl flex items-center justify-center">
+                <span class="text-2xl">💡</span>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">10. Dicas de Venda</h2>
+                <p class="text-gray-500 text-sm">Como conseguir clientes</p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div class="step-card border border-gray-200 rounded-2xl p-6">
+                  <div class="text-3xl mb-3">📱</div>
+                  <h3 class="font-bold mb-2">Redes Sociais</h3>
+                  <p class="text-sm text-gray-600">Poste prints dos sites no Instagram e TikTok. Use hashtags como #sitepronto #websitedesign #empreendedorismo</p>
+                </div>
+
+                <div class="step-card border border-gray-200 rounded-2xl p-6">
+                  <div class="text-3xl mb-3">🚶</div>
+                  <h3 class="font-bold mb-2">Porta a Porta</h3>
+                  <p class="text-sm text-gray-600">Visite comércios locais (salões, barbearias, restaurantes) e mostre os sites no celular.</p>
+                </div>
+
+                <div class="step-card border border-gray-200 rounded-2xl p-6">
+                  <div class="text-3xl mb-3">👥</div>
+                  <h3 class="font-bold mb-2">Indicações</h3>
+                  <p class="text-sm text-gray-600">Ofereça desconto para clientes que indicarem outros. O boca a boca funciona muito!</p>
+                </div>
+
+                <div class="step-card border border-gray-200 rounded-2xl p-6">
+                  <div class="text-3xl mb-3">🎯</div>
+                  <h3 class="font-bold mb-2">Grupos de WhatsApp</h3>
+                  <p class="text-sm text-gray-600">Entre em grupos de empreendedores e ofereça seus serviços (sem spam!).</p>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-r from-primary to-accent rounded-2xl p-6 text-white">
+                <h4 class="font-bold text-xl mb-3">📢 Script de Abordagem</h4>
+                <p class="text-white/90 text-sm italic">
+                  "Oi! Tudo bem? Eu trabalho criando sites profissionais para [nicho]. Vi que você ainda não tem site e queria te mostrar um exemplo. Fica muito bonito no celular e já vem com botão do WhatsApp. Posso te mostrar rapidinho?"
+                </p>
+              </div>
+
+              <div class="bg-gray-50 rounded-xl p-6">
+                <h4 class="font-bold mb-3">💰 Tabela de Preços Sugerida</h4>
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="border-b">
+                      <th class="text-left py-2">Serviço</th>
+                      <th class="text-right py-2">Preço</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b">
+                      <td class="py-2">Site modelo pronto</td>
+                      <td class="text-right font-bold">R$ 299 - R$ 499</td>
+                    </tr>
+                    <tr class="border-b">
+                      <td class="py-2">Site + manutenção mensal</td>
+                      <td class="text-right font-bold">R$ 499 + R$ 99/mês</td>
+                    </tr>
+                    <tr class="border-b">
+                      <td class="py-2">Domínio próprio (.com.br)</td>
+                      <td class="text-right font-bold">+ R$ 100</td>
+                    </tr>
+                    <tr>
+                      <td class="py-2">Alterações extras</td>
+                      <td class="text-right font-bold">R$ 50 - R$ 150</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- SUPORTE -->
+          <section class="bg-gradient-to-br from-primary to-accent rounded-3xl p-8 text-white">
+            <div class="text-center">
+              <div class="text-4xl mb-4">🎓</div>
+              <h2 class="text-2xl font-bold mb-3">Parabéns! Você concluiu o manual!</h2>
+              <p class="text-white/80 mb-6">Agora você está pronto para personalizar e vender os sites. Boa sorte nos negócios!</p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index2.html" class="bg-white text-primary px-8 py-3 rounded-xl font-bold hover:shadow-xl transition inline-flex items-center justify-center gap-2">
+                  <i data-lucide="layout-grid" class="w-5 h-5"></i> Ver Catálogo de Sites
+                </a>
+              </div>
+            </div>
+          </section>
+
+        </main>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white py-8 mt-12">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-gray-400 text-sm">Manual WebStudio Premium © 2026</p>
+        <p class="text-gray-500 text-xs mt-2">Versão 1.0 - Atualizado em Janeiro/2026</p>
+      </div>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+      
+      // Highlight nav on scroll
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 150;
+          if (scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
