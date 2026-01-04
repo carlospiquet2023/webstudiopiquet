@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto Center Premium - Mecânica Automotiva</title>
+    <meta property="og:title" content="Auto Center Premium - Mecânica Automotiva">
+    <meta property="og:description" content="Oficina mecânica completa com profissionais especializados">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#dc2626",
+              secondary: "#fef2f2",
+              accent: "#b91c1c",
+              dark: "#1f2937",
+              light: "#f9fafb",
+              gold: "#f59e0b",
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Poppins"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      #page-loader {
+        position: fixed; inset: 0;
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        z-index: 99999; display: flex; align-items: center; justify-content: center; flex-direction: column;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-spin { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #dc2626, #f59e0b); z-index: 99999; transition: width 0.1s ease; }
+      .custom-cursor { width: 20px; height: 20px; border: 2px solid #dc2626; border-radius: 50%; position: fixed; pointer-events: none; z-index: 99998; transition: transform 0.15s ease, background 0.15s ease; mix-blend-mode: difference; }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(220, 38, 38, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+      #particles-container { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+      .sparkle { position: absolute; width: 4px; height: 4px; background: #dc2626; border-radius: 50%; animation: sparkle-float 8s linear infinite; opacity: 0; }
+      @keyframes sparkle-float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; } }
+      .glass-nav { background: rgba(255, 255, 255, 0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
+      .hero-gradient { background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #1f2937 100%); }
+      .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+      .card-hover:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.25); }
+      .shimmer-text { background: linear-gradient(90deg, #dc2626 0%, #f59e0b 50%, #dc2626 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s linear infinite; }
+      @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+      .floating { animation: floating 3s ease-in-out infinite; }
+      @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+      #back-to-top { position: fixed; bottom: 100px; right: 24px; width: 50px; height: 50px; background: linear-gradient(135deg, #dc2626, #b91c1c); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease; z-index: 50; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4); }
+      #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+      #back-to-top:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5); }
+      .counter-number { font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #dc2626, #f59e0b); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+      body.menu-open { overflow: hidden; }
+    </style>
+  </head>
+  <body class="font-sans text-dark bg-light">
+    <div id="page-loader">
+      <div class="loader-spin"></div>
+      <p class="text-white mt-6 font-serif text-2xl">Auto Center Premium</p>
+    </div>
+    <div id="scroll-progress"></div>
+    <div class="custom-cursor"></div>
+    <div id="particles-container"></div>
+
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl md:text-3xl font-serif font-bold text-primary">Auto<span class="text-dark">Center</span></a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-dark hover:text-primary transition font-medium">Início</a>
+          <a href="#sobre" class="text-dark hover:text-primary transition font-medium">Sobre</a>
+          <a href="#servicos" class="text-dark hover:text-primary transition font-medium">Serviços</a>
+          <a href="#contato" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-accent transition shadow-lg">Orçamento</a>
+        </nav>
+        <button id="menu-toggle" aria-label="Abrir menu" class="md:hidden text-primary"><i data-lucide="menu" class="w-7 h-7"></i></button>
+      </div>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 hidden md:hidden flex-col items-center justify-center">
+      <button onclick="closeMobileMenu()" aria-label="Fechar menu" class="absolute top-6 right-6 text-primary"><i data-lucide="x" class="w-8 h-8"></i></button>
+      <a href="#home" class="text-2xl text-dark hover:text-primary py-3" onclick="closeMobileMenu()">Início</a>
+      <a href="#sobre" class="text-2xl text-dark hover:text-primary py-3" onclick="closeMobileMenu()">Sobre</a>
+      <a href="#servicos" class="text-2xl text-dark hover:text-primary py-3" onclick="closeMobileMenu()">Serviços</a>
+      <a href="#contato" class="bg-primary text-white px-8 py-3 rounded-full mt-4" onclick="closeMobileMenu()">Orçamento</a>
+    </div>
+
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920" alt="Oficina Mecânica" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/60 to-dark/90"></div>
+      </div>
+      <div class="container mx-auto px-6 text-center text-white relative z-10">
+        <span class="inline-block px-6 py-2 bg-white/20 backdrop-blur rounded-full text-sm mb-6" data-aos="fade-up">🔧 Oficina Completa - Todas as Marcas</span>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-6" data-aos="fade-up" data-aos-delay="100">
+          Seu Carro em <span class="text-red-400">Boas Mãos</span>
+        </h1>
+        <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="200">
+          Mecânica especializada com profissionais qualificados. Diagnóstico preciso, peças de qualidade e garantia em todos os serviços.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="300">
+          <a href="#contato" class="bg-primary text-white px-8 py-4 rounded-full font-semibold hover:bg-accent transition shadow-xl">
+            <i data-lucide="calculator" class="inline w-5 h-5 mr-2"></i>Fazer Orçamento
+          </a>
+          <a href="#servicos" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition">Ver Serviços</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up"><p class="counter-number" data-target="20">0</p><p class="text-gray-600 font-medium">Anos de Experiência</p></div>
+          <div data-aos="fade-up" data-aos-delay="100"><p class="counter-number" data-target="15000">0</p><p class="text-gray-600 font-medium">Carros Atendidos</p></div>
+          <div data-aos="fade-up" data-aos-delay="200"><p class="counter-number" data-target="50">0</p><p class="text-gray-600 font-medium">Serviços Oferecidos</p></div>
+          <div data-aos="fade-up" data-aos-delay="300"><p class="counter-number" data-target="99">0</p><p class="text-gray-600 font-medium">% Satisfação</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="py-20 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="relative" data-aos="fade-right">
+            <div class="absolute -top-4 -left-4 w-full h-full border-4 border-primary rounded-2xl"></div>
+            <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=600" alt="Mecânico" class="relative rounded-2xl shadow-2xl w-full h-96 object-cover"/>
+            <div class="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-2xl shadow-xl floating">
+              <p class="text-3xl font-bold">20+</p><p class="text-sm">Anos no Mercado</p>
+            </div>
+          </div>
+          <div data-aos="fade-left">
+            <span class="text-primary font-semibold uppercase tracking-wider">Sobre Nós</span>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mt-2 mb-6">Qualidade e <span class="text-primary">Confiança</span></h2>
+            <p class="text-gray-600 mb-6 leading-relaxed">Com mais de 20 anos de experiência, nossa oficina é referência em mecânica automotiva. Contamos com equipamentos modernos, profissionais certificados e peças originais para garantir o melhor atendimento.</p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex items-center gap-3 p-4 bg-white rounded-xl shadow">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white"><i data-lucide="award" class="w-6 h-6"></i></div>
+                <span class="font-medium">Profissionais Certificados</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-white rounded-xl shadow">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+                <span class="font-medium">Garantia de Serviço</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-wider" data-aos="fade-up">Nossos Serviços</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-2" data-aos="fade-up">O Que <span class="shimmer-text">Oferecemos</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-light p-8 rounded-2xl card-hover" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6"><i data-lucide="gauge" class="w-8 h-8"></i></div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Revisão Completa</h3>
+            <p class="text-gray-600 mb-4">Check-up completo do seu veículo com verificação de todos os sistemas.</p>
+            <div class="flex justify-between items-center pt-4 border-t"><span class="text-sm text-gray-500">A partir de</span><span class="text-2xl font-bold text-primary">R$ 250</span></div>
+          </div>
+          <div class="bg-light p-8 rounded-2xl card-hover" data-aos="fade-up" data-aos-delay="150">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6"><i data-lucide="disc" class="w-8 h-8"></i></div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Sistema de Freios</h3>
+            <p class="text-gray-600 mb-4">Troca de pastilhas, discos, fluido e reparo completo do sistema.</p>
+            <div class="flex justify-between items-center pt-4 border-t"><span class="text-sm text-gray-500">A partir de</span><span class="text-2xl font-bold text-primary">R$ 180</span></div>
+          </div>
+          <div class="bg-light p-8 rounded-2xl card-hover" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6"><i data-lucide="cog" class="w-8 h-8"></i></div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Motor e Câmbio</h3>
+            <p class="text-gray-600 mb-4">Retífica, troca de óleo, correias e reparos gerais no motor.</p>
+            <div class="flex justify-between items-center pt-4 border-t"><span class="text-sm text-gray-500">Consulte</span><span class="text-2xl font-bold text-primary">Orçamento</span></div>
+          </div>
+          <div class="bg-light p-8 rounded-2xl card-hover" data-aos="fade-up" data-aos-delay="250">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6"><i data-lucide="thermometer" class="w-8 h-8"></i></div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Ar Condicionado</h3>
+            <p class="text-gray-600 mb-4">Recarga de gás, higienização e manutenção do sistema.</p>
+            <div class="flex justify-between items-center pt-4 border-t"><span class="text-sm text-gray-500">A partir de</span><span class="text-2xl font-bold text-primary">R$ 150</span></div>
+          </div>
+          <div class="bg-light p-8 rounded-2xl card-hover" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6"><i data-lucide="zap" class="w-8 h-8"></i></div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Parte Elétrica</h3>
+            <p class="text-gray-600 mb-4">Diagnóstico e reparo de todo sistema elétrico e eletrônico.</p>
+            <div class="flex justify-between items-center pt-4 border-t"><span class="text-sm text-gray-500">Consulte</span><span class="text-2xl font-bold text-primary">Orçamento</span></div>
+          </div>
+          <div class="bg-light p-8 rounded-2xl card-hover" data-aos="fade-up" data-aos-delay="350">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6"><i data-lucide="car" class="w-8 h-8"></i></div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Suspensão e Direção</h3>
+            <p class="text-gray-600 mb-4">Alinhamento, balanceamento, amortecedores e peças de direção.</p>
+            <div class="flex justify-between items-center pt-4 border-t"><span class="text-sm text-gray-500">A partir de</span><span class="text-2xl font-bold text-primary">R$ 80</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="py-20 hero-gradient text-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4" data-aos="fade-up">Solicite um Orçamento</h2>
+            <p class="text-xl text-white/80" data-aos="fade-up" data-aos-delay="100">Envie os dados do seu veículo e receba um orçamento! 🔧</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8" data-aos="fade-up" data-aos-delay="200">
+            <form id="orcamentoForm" class="space-y-6">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div><label class="block text-white/80 mb-2 font-medium">Nome Completo</label><input type="text" id="nome" required class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Seu nome"></div>
+                <div><label class="block text-white/80 mb-2 font-medium">WhatsApp</label><input type="tel" id="whatsapp" required class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="(00) 00000-0000"></div>
+              </div>
+              <div class="grid md:grid-cols-3 gap-6">
+                <div><label class="block text-white/80 mb-2 font-medium">Marca</label><input type="text" id="marca" required class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ex: Fiat"></div>
+                <div><label class="block text-white/80 mb-2 font-medium">Modelo</label><input type="text" id="modelo" required class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ex: Uno"></div>
+                <div><label class="block text-white/80 mb-2 font-medium">Ano</label><input type="text" id="ano" required class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ex: 2020"></div>
+              </div>
+              <div><label class="block text-white/80 mb-2 font-medium">Descreva o Problema</label><textarea id="problema" rows="3" required class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Descreva o que está acontecendo com o veículo..."></textarea></div>
+              <button type="submit" class="w-full py-5 bg-primary text-white rounded-2xl font-bold text-lg hover:bg-accent transition shadow-xl flex items-center justify-center gap-3"><i data-lucide="message-circle" class="w-6 h-6"></i> Enviar via WhatsApp</button>
+            </form>
+          </div>
+          <div class="grid md:grid-cols-3 gap-6 mt-12" data-aos="fade-up">
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl text-center"><i data-lucide="map-pin" class="w-8 h-8 mx-auto mb-3"></i><p>Rua das Oficinas, 500<br/>Centro - São Paulo</p></div>
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl text-center"><i data-lucide="clock" class="w-8 h-8 mx-auto mb-3"></i><p>Seg - Sex: 8h às 18h<br/>Sáb: 8h às 13h</p></div>
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl text-center"><i data-lucide="phone" class="w-8 h-8 mx-auto mb-3"></i><p>(21) 97743-4614</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-10">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-2xl font-serif font-bold mb-4">Auto<span class="text-primary">Center</span></p>
+        <p class="text-gray-400">© 2026 Auto Center Premium. Todos os direitos reservados.</p>
+        <div class="flex justify-center gap-4 mt-6">
+          <a href="#" aria-label="Instagram" class="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-accent transition"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+          <a href="#" aria-label="Facebook" class="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-accent transition"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <button id="back-to-top"><i data-lucide="chevron-up" class="w-6 h-6"></i></button>
+    <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition z-50 hover:scale-110"><i data-lucide="message-circle" class="w-7 h-7"></i></a>
+
+    <script>
+      window.addEventListener('load', () => { setTimeout(() => { document.getElementById('page-loader').classList.add('hidden'); }, 1200); });
+      lucide.createIcons();
+      AOS.init({ duration: 800, once: true });
+      window.addEventListener('scroll', () => { const progress = document.getElementById('scroll-progress'); const scrollTop = window.scrollY; const docHeight = document.documentElement.scrollHeight - window.innerHeight; progress.style.width = (scrollTop / docHeight) * 100 + '%'; });
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => { backToTop.classList.toggle('visible', window.scrollY > 500); });
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX - 10 + 'px'; cursor.style.top = e.clientY - 10 + 'px'; });
+      document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => cursor.classList.add('hover')); el.addEventListener('mouseleave', () => cursor.classList.remove('hover')); });
+      const particles = document.getElementById('particles-container');
+      for (let i = 0; i < 20; i++) { const p = document.createElement('div'); p.classList.add('sparkle'); p.style.left = Math.random() * 100 + '%'; p.style.animationDelay = Math.random() * 8 + 's'; particles.appendChild(p); }
+      document.getElementById('menu-toggle').addEventListener('click', () => { document.getElementById('mobile-menu').classList.remove('hidden'); document.getElementById('mobile-menu').classList.add('flex'); document.body.classList.add('menu-open'); });
+      function closeMobileMenu() { document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('mobile-menu').classList.remove('flex'); document.body.classList.remove('menu-open'); }
+      const counters = document.querySelectorAll('.counter-number');
+      const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { const counter = entry.target; const target = parseInt(counter.getAttribute('data-target')); let count = 0; const increment = target / 50; const updateCount = () => { if (count < target) { count += increment; counter.innerText = Math.ceil(count); requestAnimationFrame(updateCount); } else { counter.innerText = target; } }; updateCount(); observer.unobserve(counter); } }); }, { threshold: 0.5 });
+      counters.forEach(counter => observer.observe(counter));
+      document.getElementById('orcamentoForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nome = document.getElementById('nome').value;
+        const whatsapp = document.getElementById('whatsapp').value;
+        const marca = document.getElementById('marca').value;
+        const modelo = document.getElementById('modelo').value;
+        const ano = document.getElementById('ano').value;
+        const problema = document.getElementById('problema').value;
+        const message = `Olá! 🔧 Gostaria de solicitar um orçamento.%0A%0A*👤 Nome:* ${nome}%0A*📱 WhatsApp:* ${whatsapp}%0A*🚗 Veículo:* ${marca} ${modelo} ${ano}%0A*🔧 Problema:* ${problema}%0A%0AAguardo retorno!`;
+        window.open(`https://wa.me/5521977434614?text=${message}`, '_blank');
+      });
+    </script>
+  </body>
+</html>

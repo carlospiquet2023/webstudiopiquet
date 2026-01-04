@@ -313,6 +313,12 @@
       .niche-motorista { --niche-color: #1a365d; --niche-accent: #0f172a; }
       .niche-idiomas { --niche-color: #7c3aed; --niche-accent: #5b21b6; }
       .niche-cuidadores { --niche-color: #059669; --niche-accent: #047857; }
+      /* Novos nichos - serviços especializados */
+      .niche-corretor { --niche-color: #0891b2; --niche-accent: #0e7490; }
+      .niche-mecanico { --niche-color: #dc2626; --niche-accent: #b91c1c; }
+      .niche-professor { --niche-color: #4f46e5; --niche-accent: #4338ca; }
+      .niche-educacaofisica { --niche-color: #16a34a; --niche-accent: #15803d; }
+      .niche-personal { --niche-color: #ea580c; --niche-accent: #c2410c; }
 
       .niche-card {
         border-top: 4px solid var(--niche-color);
@@ -549,7 +555,7 @@
       <div class="container mx-auto px-6 relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div data-aos="fade-up">
-            <p class="counter-number" data-target="18">0</p>
+            <p class="counter-number" data-target="23">0</p>
             <p class="text-gray-400 mt-2 font-medium">Nichos Disponíveis</p>
           </div>
           <div data-aos="fade-up" data-aos-delay="100">
@@ -569,26 +575,13 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════
-         SEÇÃO CATÁLOGO - GRID DE CARDS DOS 11 NICHOS
+         SEÇÃO CATÁLOGO - ORGANIZADO POR CATEGORIAS
          ═══════════════════════════════════════════════════════════════════
-         Cada card contém:
-         - Ícone do nicho com cor personalizada
-         - Título e descrição
-         - Tags de funcionalidades
-         - Botão "Ver Demo" linkando para a página do nicho
-         
-         CARDS DISPONÍVEIS:
-         1. cilios.html - Designer de Cílios (Destaque)
-         2. salao.html - Salão de Beleza
-         3. barbearia.html - Barbearia
-         4. depilacao.html - Depilação
-         5. estetica-facial.html - Estética Facial
-         6. maquiagem.html - Maquiadora
-         7. nails.html - Nail Designer
-         8. podologia.html - Podologia
-         9. sobrancelhas.html - Sobrancelhas
-         10. spa.html - Spa & Estética
-         11. tattoo.html - Estúdio de Tattoo
+         CATEGORIAS:
+         💄 Beleza & Estética (15 nichos)
+         📚 Educação (3 nichos)
+         💪 Fitness & Saúde (3 nichos)
+         🔧 Serviços (2 nichos)
     -->
     <section id="catalogo" class="py-24 bg-gradient-to-b from-light to-white">
       <div class="container mx-auto px-6">
@@ -598,21 +591,30 @@
             Catálogo de <span class="shimmer-text">Sites Premium</span>
           </h2>
           <p class="text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-            Cada site foi cuidadosamente desenvolvido para atender as necessidades específicas de cada nicho. Clique em "Ver Demo" para explorar.
+            Explore nossos sites organizados por categoria. Clique em "Ver Demo" para conhecer cada modelo.
           </p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          
-          <!-- ===== CARD 1 - CÍLIOS ===== -->
-          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-cilios" data-aos="fade-up" data-aos-delay="100">
+        <!-- ═══════════════════════════════════════════════════════════════════
+             CATEGORIA: BELEZA & ESTÉTICA
+        ═══════════════════════════════════════════════════════════════════ -->
+        <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
+          <div class="w-14 h-14 bg-gradient-to-br from-rose to-pink-400 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">💄</div>
+          <div>
+            <h3 class="text-3xl font-serif font-bold text-dark">Beleza & Estética</h3>
+            <p class="text-gray-500">15 modelos para profissionais da beleza</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            
+          <!-- CÍLIOS -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-cilios" data-aos="fade-up">
             <div class="ribbon">Destaque</div>
             <div class="p-8">
-              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
-                <i data-lucide="eye" class="w-8 h-8"></i>
-              </div>
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="eye" class="w-8 h-8"></i></div>
               <h3 class="text-2xl font-serif font-bold mb-3">Designer de Cílios</h3>
-              <p class="text-gray-600 mb-6">Site premium para profissionais de alongamento de cílios. Design elegante com sistema de agendamento integrado.</p>
+              <p class="text-gray-600 mb-6">Site premium para profissionais de alongamento de cílios.</p>
               <div class="flex flex-wrap gap-2 mb-6">
                 <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Agendamento</span>
                 <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Galeria</span>
@@ -894,6 +896,20 @@
               </a>
             </div>
           </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             CATEGORIA: SERVIÇOS PROFISSIONAIS
+        ═══════════════════════════════════════════════════════════════════ -->
+        <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
+          <div class="w-14 h-14 bg-gradient-to-br from-gray-700 to-gray-900 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">🔧</div>
+          <div>
+            <h3 class="text-3xl font-serif font-bold text-dark">Serviços Profissionais</h3>
+            <p class="text-gray-500">2 modelos para prestadores de serviços</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
 
           <!-- ===== CARD 16 - MOTORISTA PARTICULAR ===== -->
           <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-motorista" data-aos="fade-up" data-aos-delay="100">
@@ -915,6 +931,36 @@
             </div>
           </div>
 
+          <!-- MECÂNICO AUTOMOTIVO -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-mecanico" data-aos="fade-up">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="wrench" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Mecânico Automotivo</h3>
+              <p class="text-gray-600 mb-6">Site robusto para oficinas mecânicas.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Revisão</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Freios</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Motor</span>
+              </div>
+              <a href="mecanico.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             CATEGORIA: EDUCAÇÃO
+        ═══════════════════════════════════════════════════════════════════ -->
+        <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
+          <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">📚</div>
+          <div>
+            <h3 class="text-3xl font-serif font-bold text-dark">Educação</h3>
+            <p class="text-gray-500">4 modelos para profissionais da educação</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+
           <!-- ===== CARD 17 - PROFESSORES DE IDIOMAS ===== -->
           <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-idiomas" data-aos="fade-up" data-aos-delay="200">
             <div class="ribbon">Novo</div>
@@ -935,23 +981,109 @@
             </div>
           </div>
 
-          <!-- ===== CARD 18 - CUIDADORES DE IDOSOS ===== -->
-          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-cuidadores" data-aos="fade-up" data-aos-delay="300">
+          <!-- ===== CARD 21 - PROFESSOR ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-professor" data-aos="fade-up" data-aos-delay="450">
             <div class="ribbon">Novo</div>
             <div class="p-8">
               <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
-                <i data-lucide="heart" class="w-8 h-8"></i>
+                <i data-lucide="graduation-cap" class="w-8 h-8"></i>
               </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Professor Particular</h3>
+              <p class="text-gray-600 mb-6">Site educativo para professores particulares e tutores.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Reforço</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Vestibular</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Concursos</span>
+              </div>
+              <a href="professor.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- ===== CARD 22 - PROFESSOR DE EDUCAÇÃO FÍSICA ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-educacaofisica" data-aos="fade-up" data-aos-delay="500">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="dumbbell" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Professor de Ed. Física</h3>
+              <p class="text-gray-600 mb-6">Site dinâmico para profissionais de educação física.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Escolas</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Esportes</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Recreação</span>
+              </div>
+              <a href="educacaofisica.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             CATEGORIA: FITNESS & SAÚDE
+        ═══════════════════════════════════════════════════════════════════ -->
+        <div class="flex items-center gap-4 mb-10" data-aos="fade-up">
+          <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">💪</div>
+          <div>
+            <h3 class="text-3xl font-serif font-bold text-dark">Fitness & Saúde</h3>
+            <p class="text-gray-500">3 modelos para profissionais de saúde e fitness</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <!-- ===== CARD 23 - PERSONAL TRAINER ===== -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-personal" data-aos="fade-up" data-aos-delay="550">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg">
+                <i data-lucide="heart-pulse" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Personal Trainer</h3>
+              <p class="text-gray-600 mb-6">Site motivador para personal trainers e coaches fitness.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Treinos</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Nutrição</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Online</span>
+              </div>
+              <a href="personal.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
+                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- CUIDADORES DE IDOSOS -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-cuidadores" data-aos="fade-up">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="heart" class="w-8 h-8"></i></div>
               <h3 class="text-2xl font-serif font-bold mb-3">Cuidadores de Idosos</h3>
-              <p class="text-gray-600 mb-6">Site acolhedor para cuidadores profissionais e serviços de home care.</p>
+              <p class="text-gray-600 mb-6">Site acolhedor para cuidadores e home care.</p>
               <div class="flex flex-wrap gap-2 mb-6">
                 <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Domiciliar</span>
                 <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Hospitalar</span>
                 <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Companhia</span>
               </div>
-              <a href="cuidadores.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all">
-                <i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo
-              </a>
+              <a href="cuidadores.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
+            </div>
+          </div>
+
+          <!-- CORRETOR DE PLANO DE SAÚDE -->
+          <div class="glass-card rounded-3xl overflow-hidden card-3d niche-card niche-corretor" data-aos="fade-up">
+            <div class="ribbon">Novo</div>
+            <div class="p-8">
+              <div class="niche-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="shield-check" class="w-8 h-8"></i></div>
+              <h3 class="text-2xl font-serif font-bold mb-3">Corretor de Plano de Saúde</h3>
+              <p class="text-gray-600 mb-6">Site para corretores de planos de saúde.</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Individual</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Familiar</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Empresarial</span>
+              </div>
+              <a href="corretor.html" class="niche-btn block text-center text-white py-3 rounded-xl font-semibold transition-all"><i data-lucide="external-link" class="inline w-4 h-4 mr-2"></i>Ver Demo</a>
             </div>
           </div>
 

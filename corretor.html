@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- ========================================
+         INFORMAÇÕES DO SITE
+         ======================================== -->
+    <title>Saúde & Proteção - Corretor de Planos de Saúde</title>
+
+    <!-- ========================================
+         META TAGS - SEO E COMPARTILHAMENTO
+         ======================================== -->
+    <meta property="og:title" content="Saúde & Proteção - Corretor de Planos de Saúde">
+    <meta property="og:description" content="Encontre o plano de saúde ideal para você e sua família">
+    <meta property="og:type" content="website">
+
+    <!-- ========================================
+         BIBLIOTECAS EXTERNAS
+         ======================================== -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- ========================================
+         CONFIGURAÇÃO DE CORES DO TAILWIND
+         - primary: Azul ciano (saúde/confiança)
+         - secondary: Azul claro
+         - accent: Azul escuro para hover
+         - dark: Azul marinho
+         - light: Branco azulado
+         - gold: Dourado para destaques
+         ======================================== -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0891b2",
+              secondary: "#e0f2fe",
+              accent: "#0e7490",
+              dark: "#0c4a6e",
+              light: "#f0f9ff",
+              gold: "#f59e0b",
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Poppins"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- ========================================
+         ESTILOS CSS CUSTOMIZADOS
+         ======================================== -->
+    <style>
+      html { scroll-behavior: smooth; }
+      
+      /* ===== LOADER ===== */
+      #page-loader {
+        position: fixed; inset: 0;
+        background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+        z-index: 99999; display: flex; align-items: center; justify-content: center; flex-direction: column;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+      #page-loader.hidden { opacity: 0; visibility: hidden; }
+      .loader-health {
+        width: 60px; height: 60px;
+        border: 4px solid rgba(255,255,255,0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      /* ===== BARRA DE PROGRESSO DO SCROLL ===== */
+      #scroll-progress {
+        position: fixed; top: 0; left: 0; height: 4px;
+        background: linear-gradient(90deg, #0891b2, #06b6d4, #f59e0b);
+        z-index: 99999; transition: width 0.1s ease;
+      }
+
+      /* ===== CURSOR PERSONALIZADO ===== */
+      .custom-cursor {
+        width: 20px; height: 20px; border: 2px solid #0891b2;
+        border-radius: 50%; position: fixed; pointer-events: none;
+        z-index: 99998; transition: transform 0.15s ease, background 0.15s ease;
+        mix-blend-mode: difference;
+      }
+      .custom-cursor.hover { transform: scale(1.5); background: rgba(8, 145, 178, 0.3); }
+      @media (max-width: 768px) { .custom-cursor { display: none; } }
+
+      /* ===== PARTÍCULAS FLUTUANTES ===== */
+      #particles-container {
+        position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;
+      }
+      .sparkle {
+        position: absolute; width: 4px; height: 4px;
+        background: #0891b2; border-radius: 50%;
+        animation: sparkle-float 8s linear infinite; opacity: 0;
+      }
+      @keyframes sparkle-float {
+        0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+        10% { opacity: 0.8; }
+        90% { opacity: 0.8; }
+        100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+      }
+
+      /* ===== NAVBAR ===== */
+      .glass-nav {
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* ===== HERO ===== */
+      .hero-gradient {
+        background: linear-gradient(135deg, #0891b2 0%, #0e7490 50%, #0c4a6e 100%);
+      }
+      
+      /* ===== CARDS ===== */
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px -12px rgba(8, 145, 178, 0.25);
+      }
+      
+      /* ===== TEXTO BRILHANTE ===== */
+      .shimmer-text {
+        background: linear-gradient(90deg, #0891b2 0%, #06b6d4 50%, #0891b2 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 3s linear infinite;
+      }
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      
+      /* ===== ANIMAÇÃO FLUTUANTE ===== */
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+      @keyframes floating {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      /* ===== BOTÃO VOLTAR AO TOPO ===== */
+      #back-to-top {
+        position: fixed; bottom: 100px; right: 24px;
+        width: 50px; height: 50px;
+        background: linear-gradient(135deg, #0891b2, #0e7490);
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        color: white; cursor: pointer; opacity: 0; visibility: hidden;
+        transform: translateY(20px); transition: all 0.3s ease; z-index: 50;
+        box-shadow: 0 4px 15px rgba(8, 145, 178, 0.4);
+      }
+      #back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+      #back-to-top:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(8, 145, 178, 0.5); }
+
+      /* ===== NÚMEROS/ESTATÍSTICAS ===== */
+      .counter-number {
+        font-size: 3rem; font-weight: 700;
+        background: linear-gradient(135deg, #0891b2, #f59e0b);
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* ===== EFEITO GLOW ===== */
+      .glow-effect { box-shadow: 0 0 30px rgba(8, 145, 178, 0.3), 0 0 60px rgba(8, 145, 178, 0.1); }
+
+      /* Menu mobile */
+      body.menu-open { overflow: hidden; }
+
+      /* ===== PLAN CARDS ===== */
+      .plan-card {
+        transition: all 0.4s ease;
+        border: 2px solid transparent;
+      }
+      .plan-card:hover {
+        border-color: #0891b2;
+        transform: translateY(-10px);
+      }
+      .plan-card.featured {
+        border: 2px solid #f59e0b;
+        position: relative;
+      }
+      .plan-card.featured::before {
+        content: '⭐ Mais Vendido';
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+        color: white;
+        padding: 4px 16px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+
+  <body class="font-sans text-dark bg-light">
+    
+    <!-- ========================================
+         LOADER
+         ======================================== -->
+    <div id="page-loader">
+      <div class="loader-health"></div>
+      <p class="text-white mt-6 font-serif text-2xl">Saúde & Proteção</p>
+    </div>
+
+    <!-- BARRA DE PROGRESSO -->
+    <div id="scroll-progress"></div>
+
+    <!-- CURSOR PERSONALIZADO -->
+    <div class="custom-cursor"></div>
+
+    <!-- PARTÍCULAS DECORATIVAS -->
+    <div id="particles-container"></div>
+
+    <!-- ========================================
+         NAVBAR
+         ======================================== -->
+    <header class="fixed w-full top-0 z-50 glass-nav">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl md:text-3xl font-serif font-bold text-primary">
+          Saúde<span class="text-accent">&Proteção</span>
+        </a>
+        <nav class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="text-dark hover:text-primary transition font-medium">Início</a>
+          <a href="#sobre" class="text-dark hover:text-primary transition font-medium">Sobre</a>
+          <a href="#planos" class="text-dark hover:text-primary transition font-medium">Planos</a>
+          <a href="#operadoras" class="text-dark hover:text-primary transition font-medium">Operadoras</a>
+          <a href="#contato" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-accent transition shadow-lg">Cotação Grátis</a>
+        </nav>
+        <button id="menu-toggle" aria-label="Abrir menu" class="md:hidden text-primary">
+          <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- MENU MOBILE -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 hidden md:hidden flex-col items-center justify-center">
+      <button onclick="closeMobileMenu()" aria-label="Fechar menu" class="absolute top-6 right-6 text-primary"><i data-lucide="x" class="w-8 h-8"></i></button>
+      <a href="#home" class="text-2xl text-dark hover:text-primary py-3" onclick="closeMobileMenu()">Início</a>
+      <a href="#sobre" class="text-2xl text-dark hover:text-primary py-3" onclick="closeMobileMenu()">Sobre</a>
+      <a href="#planos" class="text-2xl text-dark hover:text-primary py-3" onclick="closeMobileMenu()">Planos</a>
+      <a href="#operadoras" class="text-2xl text-dark hover:text-primary py-3" onclick="closeMobileMenu()">Operadoras</a>
+      <a href="#contato" class="bg-primary text-white px-8 py-3 rounded-full mt-4" onclick="closeMobileMenu()">Cotação Grátis</a>
+    </div>
+
+    <!-- ========================================
+         HERO
+         ======================================== -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1920" alt="Saúde e Proteção" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-accent/90"></div>
+      </div>
+      
+      <div class="container mx-auto px-6 text-center text-white relative z-10">
+        <span class="inline-block px-6 py-2 bg-white/20 backdrop-blur rounded-full text-sm mb-6" data-aos="fade-up">
+          🏥 Corretor Autorizado - Todas as Operadoras
+        </span>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-6" data-aos="fade-up" data-aos-delay="100">
+          O Melhor Plano de Saúde<br/>para <span class="text-cyan-200">Você</span>
+        </h1>
+        <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="200">
+          Compare planos das melhores operadoras e encontre a opção perfeita para você, sua família ou sua empresa. Cotação gratuita e sem compromisso!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="300">
+          <a href="#contato" class="bg-white text-primary px-8 py-4 rounded-full font-semibold hover:bg-cyan-100 transition shadow-xl">
+            <i data-lucide="calculator" class="inline w-5 h-5 mr-2"></i>Fazer Cotação Grátis
+          </a>
+          <a href="#planos" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition">
+            Ver Planos
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         ESTATÍSTICAS
+         ======================================== -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div data-aos="fade-up">
+            <p class="counter-number" data-target="15">0</p>
+            <p class="text-gray-600 font-medium">Anos de Experiência</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="100">
+            <p class="counter-number" data-target="5000">0</p>
+            <p class="text-gray-600 font-medium">Clientes Atendidos</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="200">
+            <p class="counter-number" data-target="20">0</p>
+            <p class="text-gray-600 font-medium">Operadoras Parceiras</p>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="300">
+            <p class="counter-number" data-target="98">0</p>
+            <p class="text-gray-600 font-medium">% Satisfação</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         SOBRE
+         ======================================== -->
+    <section id="sobre" class="py-20 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="relative" data-aos="fade-right">
+            <div class="absolute -top-4 -left-4 w-full h-full border-4 border-primary rounded-2xl"></div>
+            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600" alt="Corretor de Planos" class="relative rounded-2xl shadow-2xl w-full h-96 object-cover"/>
+            <div class="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-2xl shadow-xl floating">
+              <p class="text-3xl font-bold">15+</p>
+              <p class="text-sm">Anos de Mercado</p>
+            </div>
+          </div>
+          <div data-aos="fade-left">
+            <span class="text-primary font-semibold uppercase tracking-wider">Sobre Mim</span>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mt-2 mb-6">
+              Seu Consultor em <span class="text-primary">Planos de Saúde</span>
+            </h2>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Com mais de 15 anos de experiência no mercado de saúde suplementar, ofereço consultoria especializada para ajudá-lo a encontrar o plano ideal. Trabalho com as principais operadoras do mercado, garantindo as melhores condições e preços para você.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex items-center gap-3 p-4 bg-white rounded-xl shadow">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                  <i data-lucide="award" class="w-6 h-6"></i>
+                </div>
+                <span class="font-medium">Corretor Certificado</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 bg-white rounded-xl shadow">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                  <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <span class="font-medium">Todas Operadoras</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         TIPOS DE PLANOS
+         ======================================== -->
+    <section id="planos" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-wider" data-aos="fade-up">Nossos Planos</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-2" data-aos="fade-up">
+            Tipos de <span class="shimmer-text">Planos</span>
+          </h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Plano Individual -->
+          <div class="bg-light p-8 rounded-2xl card-hover plan-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="user" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Plano Individual</h3>
+            <p class="text-gray-600 mb-4">Proteção completa para você com as melhores coberturas do mercado.</p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Consultas ilimitadas
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Exames e procedimentos
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Internações
+              </li>
+            </ul>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-sm text-gray-500">A partir de</span>
+              <span class="text-2xl font-bold text-primary">R$ 150/mês</span>
+            </div>
+          </div>
+
+          <!-- Plano Familiar -->
+          <div class="bg-light p-8 rounded-2xl card-hover plan-card featured" data-aos="fade-up" data-aos-delay="150">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="users" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Plano Familiar</h3>
+            <p class="text-gray-600 mb-4">Proteção para toda sua família com preços especiais por dependente.</p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Até 5 dependentes
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Desconto progressivo
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Pediatria inclusa
+              </li>
+            </ul>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-sm text-gray-500">A partir de</span>
+              <span class="text-2xl font-bold text-primary">R$ 350/mês</span>
+            </div>
+          </div>
+
+          <!-- Plano Empresarial -->
+          <div class="bg-light p-8 rounded-2xl card-hover plan-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="building" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Plano Empresarial</h3>
+            <p class="text-gray-600 mb-4">Benefício para seus colaboradores com condições exclusivas.</p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                A partir de 2 vidas
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Sem carência
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Dedução no IR
+              </li>
+            </ul>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-sm text-gray-500">A partir de</span>
+              <span class="text-2xl font-bold text-primary">R$ 99/vida</span>
+            </div>
+          </div>
+
+          <!-- Plano PME -->
+          <div class="bg-light p-8 rounded-2xl card-hover plan-card" data-aos="fade-up" data-aos-delay="250">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="briefcase" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Plano PME</h3>
+            <p class="text-gray-600 mb-4">Ideal para pequenas e médias empresas com CNPJ ativo.</p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                MEI aceito
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Preços de grupo
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Carências reduzidas
+              </li>
+            </ul>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-sm text-gray-500">A partir de</span>
+              <span class="text-2xl font-bold text-primary">R$ 120/mês</span>
+            </div>
+          </div>
+
+          <!-- Plano Odontológico -->
+          <div class="bg-light p-8 rounded-2xl card-hover plan-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="smile" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Plano Odontológico</h3>
+            <p class="text-gray-600 mb-4">Cuide do seu sorriso com cobertura completa.</p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Limpeza e prevenção
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Restaurações
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Ortodontia opcional
+              </li>
+            </ul>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-sm text-gray-500">A partir de</span>
+              <span class="text-2xl font-bold text-primary">R$ 29/mês</span>
+            </div>
+          </div>
+
+          <!-- Plano Sênior -->
+          <div class="bg-light p-8 rounded-2xl card-hover plan-card" data-aos="fade-up" data-aos-delay="350">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white mb-6">
+              <i data-lucide="heart-handshake" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold mb-3">Plano Sênior</h3>
+            <p class="text-gray-600 mb-4">Cobertura especial para quem tem mais de 59 anos.</p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Sem limite de idade
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Home care
+              </li>
+              <li class="flex items-center gap-2 text-gray-600">
+                <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                Rede credenciada ampla
+              </li>
+            </ul>
+            <div class="flex justify-between items-center pt-4 border-t">
+              <span class="text-sm text-gray-500">A partir de</span>
+              <span class="text-2xl font-bold text-primary">R$ 450/mês</span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         OPERADORAS PARCEIRAS
+         ======================================== -->
+    <section id="operadoras" class="py-20 bg-secondary">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-wider" data-aos="fade-up">Parceiros</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-2" data-aos="fade-up">
+            Operadoras <span class="shimmer-text">Parceiras</span>
+          </h2>
+          <p class="text-gray-600 mt-4 max-w-2xl mx-auto" data-aos="fade-up">
+            Trabalho com as melhores operadoras do mercado para oferecer as melhores opções para você.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6" data-aos="fade-up">
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center h-24">
+            <span class="text-xl font-bold text-gray-700">Amil</span>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center h-24">
+            <span class="text-xl font-bold text-gray-700">Bradesco</span>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center h-24">
+            <span class="text-xl font-bold text-gray-700">SulAmérica</span>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center h-24">
+            <span class="text-xl font-bold text-gray-700">Unimed</span>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center h-24">
+            <span class="text-xl font-bold text-gray-700">NotreDame</span>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center h-24">
+            <span class="text-xl font-bold text-gray-700">Porto Seguro</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         VANTAGENS
+         ======================================== -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-primary font-semibold uppercase tracking-wider" data-aos="fade-up">Por que me escolher?</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold mt-2" data-aos="fade-up">
+            Suas <span class="shimmer-text">Vantagens</span>
+          </h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center p-6" data-aos="fade-up">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="calculator" class="w-8 h-8 text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Cotação Gratuita</h3>
+            <p class="text-gray-600">Compare preços de várias operadoras sem compromisso.</p>
+          </div>
+          <div class="text-center p-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="headphones" class="w-8 h-8 text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Suporte Exclusivo</h3>
+            <p class="text-gray-600">Atendimento personalizado antes e depois da contratação.</p>
+          </div>
+          <div class="text-center p-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="percent" class="w-8 h-8 text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Melhores Preços</h3>
+            <p class="text-gray-600">Condições exclusivas por ser corretor credenciado.</p>
+          </div>
+          <div class="text-center p-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="file-check" class="w-8 h-8 text-primary"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Sem Burocracia</h3>
+            <p class="text-gray-600">Cuido de toda documentação para você.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         CONTATO
+         ======================================== -->
+    <section id="contato" class="py-20 hero-gradient text-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4" data-aos="fade-up">Faça sua Cotação Grátis</h2>
+            <p class="text-xl text-white/80" data-aos="fade-up" data-aos-delay="100">Preencha o formulário e receba as melhores opções! 🏥</p>
+          </div>
+          
+          <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8" data-aos="fade-up" data-aos-delay="200">
+            <form id="cotacaoForm" class="space-y-6">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-white/80 mb-2 font-medium">Nome Completo</label>
+                  <input type="text" id="nome" required class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Seu nome">
+                </div>
+                <div>
+                  <label class="block text-white/80 mb-2 font-medium">WhatsApp</label>
+                  <input type="tel" id="whatsapp" required class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="(00) 00000-0000">
+                </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-white/80 mb-2 font-medium">Tipo de Plano</label>
+                  <select id="tipoPlano" title="Tipo de Plano" required class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-white/50">
+                    <option value="" class="text-gray-800">Selecione...</option>
+                    <option value="Individual" class="text-gray-800">Individual</option>
+                    <option value="Familiar" class="text-gray-800">Familiar</option>
+                    <option value="Empresarial" class="text-gray-800">Empresarial</option>
+                    <option value="PME/MEI" class="text-gray-800">PME/MEI</option>
+                    <option value="Odontológico" class="text-gray-800">Odontológico</option>
+                    <option value="Sênior" class="text-gray-800">Sênior (+59 anos)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-white/80 mb-2 font-medium">Quantidade de Vidas</label>
+                  <select id="vidas" title="Quantidade de Vidas" required class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-white/50">
+                    <option value="" class="text-gray-800">Selecione...</option>
+                    <option value="1" class="text-gray-800">1 pessoa</option>
+                    <option value="2" class="text-gray-800">2 pessoas</option>
+                    <option value="3-5" class="text-gray-800">3 a 5 pessoas</option>
+                    <option value="6-10" class="text-gray-800">6 a 10 pessoas</option>
+                    <option value="10+" class="text-gray-800">Mais de 10 pessoas</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block text-white/80 mb-2 font-medium">Observações (opcional)</label>
+                <textarea id="observacoes" rows="3" class="w-full p-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Alguma preferência de operadora, cobertura especial, etc."></textarea>
+              </div>
+              <button type="submit" class="w-full py-5 bg-white text-primary rounded-2xl font-bold text-lg hover:bg-cyan-100 transition shadow-xl flex items-center justify-center gap-3">
+                <i data-lucide="message-circle" class="w-6 h-6"></i> Solicitar Cotação via WhatsApp
+              </button>
+            </form>
+          </div>
+          
+          <div class="grid md:grid-cols-3 gap-6 mt-12" data-aos="fade-up">
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl text-center">
+              <i data-lucide="map-pin" class="w-8 h-8 mx-auto mb-3"></i>
+              <p>Atendimento em<br/>Todo Brasil</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl text-center">
+              <i data-lucide="clock" class="w-8 h-8 mx-auto mb-3"></i>
+              <p>Seg - Sex<br/>08h às 18h</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur p-6 rounded-2xl text-center">
+              <i data-lucide="phone" class="w-8 h-8 mx-auto mb-3"></i>
+              <p>(21) 97743-4614</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer class="bg-dark text-white py-10">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-2xl font-serif font-bold mb-4">Saúde<span class="text-primary">&Proteção</span></p>
+        <p class="text-gray-400">© 2026 Saúde & Proteção. Todos os direitos reservados.</p>
+        <p class="text-gray-500 text-sm mt-2">Corretor autorizado SUSEP</p>
+        <div class="flex justify-center gap-4 mt-6">
+          <a href="#" aria-label="Instagram" class="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-accent transition">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+          </a>
+          <a href="#" aria-label="Facebook" class="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-accent transition">
+            <i data-lucide="facebook" class="w-5 h-5"></i>
+          </a>
+          <a href="#" aria-label="LinkedIn" class="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-accent transition">
+            <i data-lucide="linkedin" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- BOTÃO VOLTAR AO TOPO -->
+    <button id="back-to-top"><i data-lucide="chevron-up" class="w-6 h-6"></i></button>
+
+    <!-- WHATSAPP FLUTUANTE -->
+    <a href="https://wa.me/5521977434614" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition z-50 hover:scale-110">
+      <i data-lucide="message-circle" class="w-7 h-7"></i>
+    </a>
+
+    <!-- ========================================
+         SCRIPTS
+         ======================================== -->
+    <script>
+      // Loader
+      window.addEventListener('load', () => {
+        setTimeout(() => { document.getElementById('page-loader').classList.add('hidden'); }, 1200);
+      });
+
+      // Inicialização
+      lucide.createIcons();
+      AOS.init({ duration: 800, once: true });
+
+      // Scroll Progress
+      window.addEventListener('scroll', () => {
+        const progress = document.getElementById('scroll-progress');
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = (scrollTop / docHeight) * 100 + '%';
+      });
+
+      // Back to Top
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 500);
+      });
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Cursor
+      const cursor = document.querySelector('.custom-cursor');
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+      });
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+
+      // Partículas
+      const particles = document.getElementById('particles-container');
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('div');
+        p.classList.add('sparkle');
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDelay = Math.random() * 8 + 's';
+        particles.appendChild(p);
+      }
+
+      // Menu Mobile
+      document.getElementById('menu-toggle').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.remove('hidden');
+        document.getElementById('mobile-menu').classList.add('flex');
+        document.body.classList.add('menu-open');
+      });
+      function closeMobileMenu() {
+        document.getElementById('mobile-menu').classList.add('hidden');
+        document.getElementById('mobile-menu').classList.remove('flex');
+        document.body.classList.remove('menu-open');
+      }
+
+      // Contadores
+      const counters = document.querySelectorAll('.counter-number');
+      const observerOptions = { threshold: 0.5 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = parseInt(counter.getAttribute('data-target'));
+            let count = 0;
+            const increment = target / 50;
+            const updateCount = () => {
+              if (count < target) {
+                count += increment;
+                counter.innerText = Math.ceil(count);
+                requestAnimationFrame(updateCount);
+              } else {
+                counter.innerText = target;
+              }
+            };
+            updateCount();
+            observer.unobserve(counter);
+          }
+        });
+      }, observerOptions);
+      counters.forEach(counter => observer.observe(counter));
+
+      // Formulário de Cotação
+      document.getElementById('cotacaoForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nome = document.getElementById('nome').value;
+        const whatsapp = document.getElementById('whatsapp').value;
+        const tipoPlano = document.getElementById('tipoPlano').value;
+        const vidas = document.getElementById('vidas').value;
+        const observacoes = document.getElementById('observacoes').value;
+        
+        const message = `Olá! 🏥 Gostaria de fazer uma cotação de plano de saúde.%0A%0A*👤 Nome:* ${nome}%0A*📱 WhatsApp:* ${whatsapp}%0A*📋 Tipo de Plano:* ${tipoPlano}%0A*👥 Quantidade:* ${vidas} vida(s)%0A*📝 Observações:* ${observacoes || 'Nenhuma'}%0A%0AAguardo retorno! 💙`;
+        
+        window.open(`https://wa.me/5521977434614?text=${message}`, '_blank');
+      });
+    </script>
+  </body>
+</html>
